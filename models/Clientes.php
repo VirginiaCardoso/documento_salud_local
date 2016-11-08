@@ -3,6 +3,9 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\db\Query;
+use yii\web\NotFoundHttpException;
+
 
 /**
  * This is the model class for table "clientes".
@@ -55,7 +58,8 @@ class Clientes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['CL_COD','CL_HC','CL_TIPDOC','CL_NUMDOC','CL_APENOM','CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI','CL_ESTCIV', 'CL_TEL','CL_SEXO'], 'required'],
+        //'CL_COD',
+            [['CL_HC','CL_TIPDOC','CL_NUMDOC','CL_APENOM','CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI','CL_ESTCIV', 'CL_TEL','CL_SEXO'], 'required'],
             [['CL_COD'],'unique'],
             [['CL_NUMDOC'],'unique'],
             [['CL_COD'], 'string','length' => [6], 'max' => 6, 'min' => 6, 'tooShort' => 'El código debe tener 6 caracteres. Ejemplo: "000001"'],
@@ -139,24 +143,21 @@ class Clientes extends \yii\db\ActiveRecord
         return $this->hasMany(Libretas::className(), ['LI_COCLI' => 'CL_COD']);
     }
 
-   /* public static function getLastId(){
+    public static function getLastCod(){
 
-    $connection = Yii::$app->dbdocsl;
-    Yii::$app->dbdocsl->open();
-    $last = $connection->lastInsertID;
-    //Yii::$app->db->getLastInsertID('revista');
-    return $last;
-   }*/
-
-   public function getLastCod()
-   {
-        //SELECT MAX(`CL_COD`) FROM `clientes` 
-        $max =Clientes::find() // AQ instance
-                ->select(["MAX(`CL_COD`) FROM `clientes`"]);
-        return $max;
+    try {
+          $data = Clientes::getDb()->createCommand('SELECT CL_COD FROM clientes order by CL_COD desc limit 1')->queryOne();
+                   // print_r($data['CL_COD']);
+                   // 
+                   return $data['CL_COD'];
+           
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
    }
 
-
+   
 
   
 

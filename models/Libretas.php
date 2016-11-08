@@ -17,7 +17,6 @@ use Yii;
  * @property integer $LI_IMPR
  * @property string $LI_FECRET
  * @property string $LI_IMPORTE
- * @property string $LI_FECIMP
  * @property string $LI_FECVTO
  * @property string $LI_COMP
  * @property integer $LI_ANULADA
@@ -59,7 +58,7 @@ class Libretas extends \yii\db\ActiveRecord
     {
         return [
             [['LI_NRO'], 'required'],
-            [['LI_FECPED', 'LI_FECRET', 'LI_FECIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
+            [['LI_FECPED', 'LI_FECRET', 'LI_FECVTO', 'LI_HORA'], 'safe'],
             [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
             [['LI_IMPORTE', 'LI_IMPADI'], 'number'],
             [['LI_NRO', 'LI_COMP'], 'string', 'max' => 12],
@@ -89,7 +88,6 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_IMPR' => 'Impr',
             'LI_FECRET' => 'Fecret',
             'LI_IMPORTE' => 'Importe',
-            'LI_FECIMP' => 'Fecimp',
             'LI_FECVTO' => 'Fecha Vencimiento',
             'LI_COMP' => 'Comp',
             'LI_ANULADA' => 'Anulada',

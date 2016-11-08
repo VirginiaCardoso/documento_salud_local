@@ -50,7 +50,7 @@ class Locali extends \yii\db\ActiveRecord
     {
         return [
             'LO_COD' => 'Lo  Cod',
-            'LO_DETALLE' => 'Lo  Detalle',
+            'LO_DETALLE' => 'Localidad',
         ];
     }
 
@@ -64,7 +64,7 @@ class Locali extends \yii\db\ActiveRecord
 
     public static function getListaLocalidades()
     {
-        $opciones = Locali::find()->asArray()->all();
+        $opciones = Locali::find()->orderBy(['LO_DETALLE' => SORT_ASC])->asArray()->all();
         return ArrayHelper::map($opciones, 'LO_COD', 'LO_DETALLE');
     }
 }

@@ -64,7 +64,7 @@ class Estciv extends \yii\db\ActiveRecord
 
     public static function getListaEstadoCivil()
     {
-        $opciones = Estciv::find()->asArray()->all();
+        $opciones = Estciv::find()->orderBy(['ES_NOM' => SORT_ASC])->asArray()->all();
         return ArrayHelper::map($opciones, 'ES_COD', 'ES_NOM');
     }
 }

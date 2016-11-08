@@ -67,8 +67,6 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'LI_IMPORTE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'LI_FECIMP')->textInput() ?>
-
     <?= $form->field($model, 'LI_FECVTO')->textInput() ?>
 
     <?= $form->field($model, 'LI_COMP')->textInput(['maxlength' => true]) ?>

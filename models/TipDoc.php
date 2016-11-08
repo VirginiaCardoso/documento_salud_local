@@ -49,8 +49,8 @@ class TipDoc extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'TI_COD' => 'Ti  Cod',
-            'TI_NOM' => 'Ti  Nom',
+            'TI_COD' => 'Código Tipo Documento',
+            'TI_NOM' => 'Tipo Documento',
         ];
     }
 

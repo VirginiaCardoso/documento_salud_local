@@ -19,7 +19,7 @@ use documento_salud\models\Locali;
 
 <div class="clientes-form">
 
-    <?php $form = ActiveForm::begin([   'id' => 'formDatosPersonales',
+<?php $form = ActiveForm::begin([   'id' => 'formDatosPersonales',
                                             'fieldConfig' => [  'horizontalCssClasses' => [
                                                                 'label' => 'col-md-2',
                                                                 'wrapper' => 'col-md-10']
@@ -27,7 +27,7 @@ use documento_salud\models\Locali;
                                             'layout' => 'horizontal']); ?>
 <div class="row">
     <div class="col-md-6">
-        <?= $form->field($model, 'CL_COD', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'CL_COD', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
     </div>
 </div>
 
@@ -41,29 +41,14 @@ use documento_salud\models\Locali;
     </div>
 </div>
 
-
-
-
-
-
-
 <?= $form->field($model, 'CL_APENOM')->textInput(['maxlength' => true]) ?>
 
 <div class="row">
     <div class="col-md-6">
-    <?= $form->field($model, 'CL_TIPDOC', 
+ 
+        <?= $form->field($model, 'CL_TIPDOC', 
             ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])
-            ->widget(Select2::classname(), [
-                        'data' =>  TipDoc::getListaTipoDoc(),
-                        'options' => [
-                            //'placeholder' => 'Buscar estado civil...',
-                             'multiple' => false,
-                        ],
-                        'showToggleAll' => false,
-                        'pluginOptions' => [
-                            'maximumInputLength' => 3,
-                        ],
-                    ]); ?>
+            ->dropDownList( TipDoc::getListaTipoDoc()); ?>
     </div>
     <div class="col-md-4">
 
@@ -84,7 +69,6 @@ use documento_salud\models\Locali;
             <?= $form->field($model, 'CL_FECNAC',   ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->widget(DateControl::classname(), [   'type' => DateControl::FORMAT_DATE, 'options' => [ 'removeButton' => false, 'pluginOptions' => [ 'todayHighlight' => true, 'endDate' => '0',]], ]); ?>
         </div>
         <div class="col-md-6">
-            <!--   <?= $form->field($model, 'CL_SEXO')->textInput(['maxlength' => true]) ?>-->
             <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'Femenino', 'M' => 'Masculino'], ['prompt' => 'Seleccione sexo']) ?>
         </div>
 </div>

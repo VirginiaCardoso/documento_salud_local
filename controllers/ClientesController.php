@@ -8,6 +8,7 @@ use documento_salud\models\ClientesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+//use yii\db\Query;
 
 /**
  * ClientesController implements the CRUD actions for Clientes model.
@@ -65,18 +66,46 @@ class ClientesController extends Controller
     {
         $model = new Clientes();
 
-      //  $ultId = Clientes::getLastCod();
+       
 
-      //  print_r($ultId);
+        if ($model->load(Yii::$app->request->post())) {
 
-      //  $model->CL_COD = $ultId;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->CL_COD]);
+            try {
+                    $connection = Yii::$app->dbdocsl;
+                    $transaction = $connection->beginTransaction();
+                    
+                    $ultId = Clientes::getLastCod();
+                
+                    $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+
+                   // $model->CL_TIPDOC = 'DNI';
+                   // 
+                    if ($model->save(false)){
+                         Yii::$app->getSession()->setFlash('exito', 'Cliente guardado   correctamente, código: '.$model->CL_COD);
+
+                        
+                    }
+            
+                    $transaction->commit();
+
+                      
+                    return $this->redirect(['view', 'id' => $model->CL_COD]);     
+                 }
+                catch (ErrorException $e) {
+                    $transaction->rollback();
+                    echo($e->getMessage());
+
+                }
+            
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+
+                $model->CL_TIPDOC = 'DNI';
+            
+                return $this->render('create', [
+                        'model' => $model,
+                    ]);     
+         
         }
     }
 
@@ -93,6 +122,11 @@ class ClientesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->CL_COD]);
         } else {
+
+
+
+
+
             return $this->render('update', [
                 'model' => $model,
             ]);
@@ -128,12 +162,8 @@ class ClientesController extends Controller
         }
     }
 
-    public static function getLastId(){
+   
 
-    $connection = Yii::$app->db;
-    $last = $connection->lastInsertID;
-    //Yii::$app->db->getLastInsertID('revista');
-    return $last;
-   }
+
 
 }
