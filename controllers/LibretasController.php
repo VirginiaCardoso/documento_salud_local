@@ -56,6 +56,8 @@ class LibretasController extends Controller
      */
     public function actionView($id)
     {
+        //$id='000000000003';
+       // $id = Yii::$app->request->post('fila');
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -138,23 +140,9 @@ class LibretasController extends Controller
     }
 
     public function actionVer() {
-        if (isset($_POST['expandRowKey'])) {
-            $model = Libretas::findOne($_POST['expandRowKey']);
-
-           /* 
-           if(!$model->TI_IDMENS) {
-                # setear ténico del turno por defecto si el usuario en sesión es un técnico
-                if(NULL!=($l=Legajos::getTecnico(Yii::$app->user->identity->LE_NUMLEGA))) {
-                    $model->TI_TECNICO=$l->LE_NUMLEGA;
-                }
-                else {
-                    # setear médico efector del turno por defecto si el usuario en sesión es un médico
-                    if(NULL!=($l=Legajos::getMedico(Yii::$app->user->identity->LE_NUMLEGA))) {
-                        $model->TI_MEDEFE=$l->LE_NUMLEGA;
-                    }
-                }
-            }
-            */
+        var_dump(Yii::$app->request->post());
+        if (isset($_POST['fila'])) {
+            $model = Libretas::findOne($_POST['fila']);
 
            // $model->practicas = $model->practicasTurno;
             return $this->renderAjax('_formLibretas', [

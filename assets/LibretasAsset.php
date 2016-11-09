@@ -26,7 +26,7 @@ class LibretasAsset extends AssetBundle
     public $js = [
         'js/bootstrap-toggle.min.js',
         'js/jquery.mask.js',
-       // 'js/libretas.js',
+        'js/libretas.js',
    
     ];
     public $depends = [

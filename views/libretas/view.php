@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'LI_IMPR',
             'LI_FECRET',
             'LI_IMPORTE',
-            'LI_FECIMP',
+     
             'LI_FECVTO',
             'LI_COMP',
             'LI_ANULADA',
