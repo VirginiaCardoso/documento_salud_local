@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use kartik\select2\Select2;
 use kartik\datecontrol\DateControl;
 
+
 use documento_salud\models\TipDoc;
 use documento_salud\models\Estciv;
 use documento_salud\models\Locali;
@@ -66,7 +67,28 @@ use documento_salud\models\Locali;
    <!-- <?= $form->field($model, 'CL_FECNAC')->textInput() ?> -->
 <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'CL_FECNAC',   ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->widget(DateControl::classname(), [   'type' => DateControl::FORMAT_DATE, 'options' => [ 'removeButton' => false, 'pluginOptions' => [ 'todayHighlight' => true, 'endDate' => '0',]], ]); ?>
+           <!-- <?= $form->field($model, 'CL_FECNAC',   ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->widget(DateControl::classname(), [   'type' => DateControl::FORMAT_DATE, 'options' => [ 'removeButton' => false, 'pluginOptions' => [ 'todayHighlight' => true, 'endDate' => '0',]], ]); ?>
+           -->
+
+        <?= $form->field($model, 'CL_FECNAC', 
+            ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])
+            ->widget(DateControl::classname(), [
+                'type'=>DateControl::FORMAT_DATE,
+                
+                'ajaxConversion'=>false,
+                'options' => [
+                    'removeButton' => false,
+                    'options' => ['placeholder' => 'Seleccione ...'],
+                    'pluginOptions' => [
+                        'autoclose' => true,
+                        'endDate' => '0',
+                    ],
+                  //  'pluginEvents' => [
+                   //     'changeDate' => 'function(e) { buscarPorDomicilioFechaNacimiento(); }'
+                  //  ]
+                ]
+            ]); ?>
+
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'Femenino', 'M' => 'Masculino'], ['prompt' => 'Seleccione sexo']) ?>
@@ -152,7 +174,7 @@ use documento_salud\models\Locali;
         ?>
     </div>
 </div>
-
+<!--
 <div id="cambox" >
     <div id="webcam"></div>
     <div id="tiktik">
@@ -169,7 +191,7 @@ use documento_salud\models\Locali;
         <span class="close"></span>
     </div>
 </div>
-
+-->
 
 
     <br>

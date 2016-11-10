@@ -64,7 +64,7 @@ class Clientes extends \yii\db\ActiveRecord
             [['CL_NUMDOC'],'unique'],
             [['CL_COD'], 'string','length' => [6], 'max' => 6, 'min' => 6, 'tooShort' => 'El código debe tener 6 caracteres. Ejemplo: "000001"'],
             [['CL_HC'], 'integer'],
-            [['CL_FECNAC'], 'safe'],
+            [['CL_FECNAC'], 'validarFechaNacimiento'],
             [['CL_COD'], 'string', 'max' => 6],
             [['CL_TIPDOC', 'CL_CODLOC'], 'string', 'max' => 3],
             [['CL_NUMDOC', 'CL_TEL'], 'string', 'max' => 14],
@@ -77,6 +77,14 @@ class Clientes extends \yii\db\ActiveRecord
             [['CL_ESTCIV'], 'exist', 'skipOnError' => true, 'targetClass' => Estciv::className(), 'targetAttribute' => ['CL_ESTCIV' => 'ES_COD']],
             [['CL_TIPDOC'], 'exist', 'skipOnError' => true, 'targetClass' => TipDoc::className(), 'targetAttribute' => ['CL_TIPDOC' => 'TI_COD']],
         ];
+    }
+
+    public function validarFechaNacimiento($attribute, $params) {
+        $date = new \DateTime();
+        $hoy = $date->format('Y-m-d');
+        if ($this->$attribute > $hoy) {
+            $this->addError($attribute, 'La fecha de nacimiento no puede ser posterior a hoy');
+        }
     }
 
     /**
