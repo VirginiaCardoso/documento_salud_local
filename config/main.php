@@ -45,6 +45,7 @@ return [
     'modules' => [
         'datecontrol' =>  [
             'class' => '\kartik\datecontrol\Module',
+            'autoWidget' => true,
         ],
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
@@ -56,5 +57,6 @@ return [
         ]
         
     ],
+
     'timeZone' => 'America/Argentina/Buenos_Aires'
 ];
