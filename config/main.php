@@ -1,6 +1,4 @@
 <?php
-use \kartik\datecontrol\Module;
-
 $params = array_merge(
     require(__DIR__ . '/../../common/config/params.php'),
     require(__DIR__ . '/../../common/config/params-local.php'),
@@ -41,11 +39,12 @@ return [
         ],
         */
     ],
-    'params' => $params,
+    
     'modules' => [
         'datecontrol' =>  [
             'class' => '\kartik\datecontrol\Module',
             'autoWidget' => true,
+            'ajaxConversion'=>false,
         ],
         'gridview' =>  [
             'class' => '\kartik\grid\Module',
@@ -58,5 +57,7 @@ return [
         
     ],
 
-    'timeZone' => 'America/Argentina/Buenos_Aires'
+    'timeZone' => 'America/Argentina/Buenos_Aires',
+
+    'params' => $params,
 ];

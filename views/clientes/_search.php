@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'CL_COD') ?>
 
-    <?= $form->field($model, 'CL_HC') ?>
+    <?= //$form->field($model, 'CL_HC') ?>
 
     <?= $form->field($model, 'CL_TIPDOC') ?>
 

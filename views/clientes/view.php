@@ -47,12 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-6">
-    <?= $form->field($model, 'CL_HC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-    </div>
-</div>
-
 <?= $form->field($model, 'CL_APENOM')->textInput(['readonly' => true,'maxlength' => true]) ?>
 
 <div class="row">

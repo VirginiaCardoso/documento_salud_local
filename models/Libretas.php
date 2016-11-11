@@ -58,14 +58,14 @@ class Libretas extends \yii\db\ActiveRecord
     {
         return [
             [['LI_NRO'], 'required'],
-            [['LI_FECPED', 'LI_FECRET', 'LI_FECVTO', 'LI_HORA'], 'safe'],
+            [['LI_FECPED', 'LI_FECRET','LI_FEIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
             [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
             [['LI_IMPORTE', 'LI_IMPADI'], 'number'],
             [['LI_NRO', 'LI_COMP'], 'string', 'max' => 12],
             [['LI_COCLI'], 'string', 'max' => 6],
             [['LI_TPOSER', 'LI_CONVEN'], 'string', 'max' => 2],
             [['LI_ADIC'], 'string', 'max' => 1],
-            [['LI_FHIMPOR'], 'string', 'max' => 13],
+           // [['LI_FHIMPOR'], 'string', 'max' => 13],
             [['LI_COCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['LI_COCLI' => 'CL_COD']],
             [['LI_CONVEN'], 'exist', 'skipOnError' => true, 'targetClass' => Convenios::className(), 'targetAttribute' => ['LI_CONVEN' => 'CO_COD']],
             [['LI_TPOSER'], 'exist', 'skipOnError' => true, 'targetClass' => TpoSer::className(), 'targetAttribute' => ['LI_TPOSER' => 'TS_COD']],
@@ -81,22 +81,24 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_NRO' => 'N° Doc. Salud Laboral',
             'LI_COCLI' => 'Cliente',
             'LI_FECPED' => 'Fecha',
-            'LI_TPOSER' => 'Tipo de trámite',
-            'LI_CONVEN' => 'Convenio',
-            'LI_CONSULT' => 'Consult',
-            'LI_ESTUD' => 'Estud',
-            'LI_IMPR' => 'Impr',
-            'LI_FECRET' => 'Fecret',
-            'LI_IMPORTE' => 'Importe',
-            'LI_FECVTO' => 'Fecha Vencimiento',
-            'LI_COMP' => 'Comp',
+            'LI_TPOSER' => 'Tipo de trámite', //tpo_ser
+            'LI_CONVEN' => 'Convenio',//convenio
+            'LI_CONSULT' => 'Consulta Médica', // si hizo la consulta médica
+            'LI_ESTUD' => 'Resultados Laboratorio',
+            'LI_IMPR' => 'Impresión Credencial',
+            'LI_FECRET' => 'Fecha de Retiro',
+            'LI_IMPORTE' => 'Importe',//importe recaudado en este trámite
+            'LI_FECIMP' => 'Fecha Impresión Credencial',
+            'LI_FECVTO' => 'Fecha Vencimiento',//se calcula suamndo 365
+            
+            'LI_COMP' => 'N° Comprobante Impresión',
             'LI_ANULADA' => 'Anulada',
-            'LI_ADIC' => 'Adic',
+            'LI_ADIC' => 'Adicional ',//determina si se cobra adicional
             'LI_IMPADI' => 'Importe Adicional',
-            'LI_REIMPR' => 'Reimpr',
-            'LI_SELECT' => 'Select',
+            'LI_REIMPR' => 'Reimpresión',
+            'LI_SELECT' => 'Seleccionado',
             'LI_HORA' => 'Hora',
-            'LI_FHIMPOR' => 'Fhimpor',
+            
         ];
     }
 

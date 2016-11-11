@@ -11,7 +11,6 @@ use yii\web\NotFoundHttpException;
  * This is the model class for table "clientes".
  *
  * @property string $CL_COD
- * @property integer $CL_HC
  * @property string $CL_TIPDOC
  * @property string $CL_NUMDOC
  * @property string $CL_APENOM
@@ -59,11 +58,10 @@ class Clientes extends \yii\db\ActiveRecord
     {
         return [
         //'CL_COD',
-            [['CL_HC','CL_TIPDOC','CL_NUMDOC','CL_APENOM','CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI','CL_ESTCIV', 'CL_TEL','CL_SEXO'], 'required'],
+            [['CL_TIPDOC','CL_NUMDOC','CL_APENOM','CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI','CL_ESTCIV', 'CL_TEL','CL_SEXO'], 'required'],
             [['CL_COD'],'unique'],
             [['CL_NUMDOC'],'unique'],
             [['CL_COD'], 'string','length' => [6], 'max' => 6, 'min' => 6, 'tooShort' => 'El código debe tener 6 caracteres. Ejemplo: "000001"'],
-            [['CL_HC'], 'integer'],
             [['CL_FECNAC'], 'validarFechaNacimiento'],
             [['CL_COD'], 'string', 'max' => 6],
             [['CL_TIPDOC', 'CL_CODLOC'], 'string', 'max' => 3],
@@ -94,7 +92,6 @@ class Clientes extends \yii\db\ActiveRecord
     {
         return [
             'CL_COD' => 'Código',
-            'CL_HC' => 'N° Historia Clínica',
             'CL_TIPDOC' => 'Tipo Documento',
             'CL_NUMDOC' => 'N° Documento',
             'CL_APENOM' => 'Apellido y nombre',
@@ -109,6 +106,14 @@ class Clientes extends \yii\db\ActiveRecord
             'CL_IMG' => 'Imagen',
            'CL_EMAIL' => 'Correo electrónico',
         ];
+    }
+
+    public function getEdad()
+    {
+        $date1 = new \DateTime($this->CL_FECNAC);
+        $date2 = new \DateTime();
+        $diff = date_diff($date1,$date2);
+        return $diff->format("%y años y %m meses");
     }
 
     /**

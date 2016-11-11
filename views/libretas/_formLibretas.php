@@ -6,7 +6,11 @@ use yii\bootstrap\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Libretas */
 /* @var $form yii\widgets\ActiveForm */
+
+LibretasAsset::register($this);
+
 ?>
+
 
 <div class="libretas-form">
 
@@ -67,7 +71,9 @@ use yii\bootstrap\ActiveForm;
 
     <?= $form->field($model, 'LI_IMPORTE')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'LI_FECVTO')->textInput() ?>
+    <?= $form->field($model, 'LI_FECIMP')->textInput() ?>
+
+     <?= $form->field($model, 'LI_FECVTO')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'LI_COMP')->textInput(['maxlength' => true]) ?>
 
@@ -83,7 +89,7 @@ use yii\bootstrap\ActiveForm;
 
     <!-- <?= $form->field($model, 'LI_HORA')->textInput() ?> -->
 
-    <?= $form->field($model, 'LI_FHIMPOR')->textInput(['maxlength' => true]) ?>
+   
 
     <!--<div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

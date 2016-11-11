@@ -18,8 +18,8 @@ class ClientesSearch extends Clientes
     public function rules()
     {
         return [
-            [['CL_COD', 'CL_HC', 'CL_TIPDOC', 'CL_NUMDOC', 'CL_APENOM', 'CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI', 'CL_TEL', 'CL_LUGTRA', 'CL_NROHAB', 'CL_SEXO', 'CL_ESTCIV', 'CL_IMG', 'CL_EMAIL'], 'safe'],
-             [['CL_HC'], 'integer'],
+            [['CL_COD', 'CL_TIPDOC', 'CL_NUMDOC', 'CL_APENOM', 'CL_FECNAC', 'CL_CODLOC', 'CL_DOMICI', 'CL_TEL', 'CL_LUGTRA', 'CL_NROHAB', 'CL_SEXO', 'CL_ESTCIV', 'CL_IMG', 'CL_EMAIL'], 'safe'],
+             
         ];
     }
 
@@ -59,7 +59,6 @@ class ClientesSearch extends Clientes
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'CL_HC' => $this->CL_HC,
             'CL_FECNAC' => $this->CL_FECNAC,
         ]);
 

@@ -35,13 +35,6 @@ use documento_salud\models\Locali;
 
 
 
-
-<div class="row">
-    <div class="col-md-6">
-    <?= $form->field($model, 'CL_HC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
-    </div>
-</div>
-
 <?= $form->field($model, 'CL_APENOM')->textInput(['maxlength' => true]) ?>
 
 <div class="row">
@@ -64,31 +57,20 @@ use documento_salud\models\Locali;
     </div>
 </div>
 -->
-   <!-- <?= $form->field($model, 'CL_FECNAC')->textInput() ?> -->
 <div class="row">
         <div class="col-md-6">
-           <!-- <?= $form->field($model, 'CL_FECNAC',   ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->widget(DateControl::classname(), [   'type' => DateControl::FORMAT_DATE, 'options' => [ 'removeButton' => false, 'pluginOptions' => [ 'todayHighlight' => true, 'endDate' => '0',]], ]); ?>
-           -->
-
-        <?= $form->field($model, 'CL_FECNAC', 
-            ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])
-            ->widget(DateControl::classname(), [
+           
+        <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
-                
                 'ajaxConversion'=>false,
                 'options' => [
                     'removeButton' => false,
-                    'options' => ['placeholder' => 'Seleccione ...'],
+                    'options' => ['placeholder' => 'Seleccione una fecha ...'],
                     'pluginOptions' => [
-                        'autoclose' => true,
-                        'endDate' => '0',
-                    ],
-                  //  'pluginEvents' => [
-                   //     'changeDate' => 'function(e) { buscarPorDomicilioFechaNacimiento(); }'
-                  //  ]
+                        'autoclose' => true
+                    ]
                 ]
-            ]); ?>
-
+            ]);?>
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'Femenino', 'M' => 'Masculino'], ['prompt' => 'Seleccione sexo']) ?>
@@ -167,7 +149,7 @@ use documento_salud\models\Locali;
           
         }
         else {
-            $src = Yii::$app->params['path_clientes'].'/'.$model->CL_COD.'/'.$model->CL_IMG;
+            $src = Yii::$app->params['path_clientes'].$model->CL_COD.'/'.$model->CL_IMG;
             echo Html::img( $src, $options = ['title' => $model->CL_IMG,
             'alt' => 'No se encontro la imágen', 'height'=>'200', 'width'=>'200'] );
             }

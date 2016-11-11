@@ -20,7 +20,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/documento_salud.css',
-        'css/camera.css',
+        //'css/camera.css',
        
     ];
     public $js = [

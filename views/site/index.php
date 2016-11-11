@@ -7,7 +7,7 @@ $this->title = 'Documento Salud Laboral';
 <div class="site-index">
     <div class="jumbotron">
         <?= Html::img('images/logo-2015.png');?>
-        <h1>Documento Salud Laboral probando</h1>
+        <h1>Documento Salud Laboral 2</h1>
         <?php 
            /* var_dump($_SESSION);
             var_dump($_COOKIE);*/

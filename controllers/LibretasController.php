@@ -79,12 +79,12 @@ class LibretasController extends Controller
             $model->LI_FECPED = date('Y-m-d');
             $model->LI_HORA=  date('H:i:s');
 
-            $clientes = new Clientes();
+            $cliente = new Clientes();
 
 
             return $this->render('create', [
                 'model' => $model,
-                'clientes' => $clientes,
+                'cliente' => $cliente,
             ]);
         }
         
