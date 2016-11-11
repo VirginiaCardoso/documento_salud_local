@@ -66,7 +66,7 @@ class LibretasSearch extends Libretas
             'LI_IMPR' => $this->LI_IMPR,
             'LI_FECRET' => $this->LI_FECRET,
             'LI_IMPORTE' => $this->LI_IMPORTE,
-            'LI_FECIMP' => $this->LI_FEIMP,
+            'LI_FECIMP' => $this->LI_FECIMP,
             'LI_FECVTO' => $this->LI_FECVTO,
             'LI_ANULADA' => $this->LI_ANULADA,
             'LI_IMPADI' => $this->LI_IMPADI,
