@@ -39,7 +39,7 @@ class TpoSer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['TS_COD'], 'required'],
+            [['TS_COD','TS_DESC','TS_CLASE'], 'required'],
             [['TS_COD'],'unique'],
             [['TS_COD'], 'string','length' => [2], 'max' => 2, 'min' => 2, 'tooShort' => 'El código debe tener 2 caracteres. Ejemplo: "01"'],
             [['TS_IMP'], 'number'],
@@ -77,4 +77,6 @@ class TpoSer extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Clases::className(), ['CL_COD' => 'TS_CLASE']);
     }
+
+   
 }

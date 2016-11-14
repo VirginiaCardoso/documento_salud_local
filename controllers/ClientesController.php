@@ -46,6 +46,21 @@ class ClientesController extends Controller
     }
 
     /**
+     * Lists all Clientes models.
+     * @return mixed
+     */
+    public function actionIndex2()
+    {
+        $searchModel = new ClientesSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->renderAjax('index2', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
      * Displays a single Clientes model.
      * @param string $id
      * @return mixed
@@ -62,14 +77,11 @@ class ClientesController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($origen)
     {
         $model = new Clientes();
 
-       
-
         if ($model->load(Yii::$app->request->post())) {
-
 
             try {
                     $connection = Yii::$app->dbdocsl;
@@ -81,16 +93,24 @@ class ClientesController extends Controller
 
                    // $model->CL_TIPDOC = 'DNI';
                    // 
-                    if ($model->save(false)){
+                    if ($model->save()){
                          Yii::$app->getSession()->setFlash('exito', 'Cliente guardado   correctamente, código: '.$model->CL_COD);
-
+                         
+                        //else
+                           // return $this->render('create', ['model' => $model]);
                         
                     }
+                  /*  else {
+                        
+                        return $this->render('create', ['model' => $model]);
+                    }*/
             
                     $transaction->commit();
 
-                      
-                    return $this->redirect(['view', 'id' => $model->CL_COD]);     
+                    if($origen==1)
+                            return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
+                    else   
+                        return $this->redirect(['view', 'id' => $model->CL_COD]);     
                  }
                 catch (ErrorException $e) {
                     $transaction->rollback();

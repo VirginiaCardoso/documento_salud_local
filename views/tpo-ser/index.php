@@ -27,7 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'TS_COD',
             'TS_DESC',
             'TS_IMP',
-            'TS_CLASE',
+            //'TS_CLASE',
+             [
+                'label' => 'Clase',
+                'value'=> function($model) {
+                    if ($model->tSCLASE!=null)
+                        return $model->tSCLASE->CL_DESC;
+                    else
+                        return "";
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

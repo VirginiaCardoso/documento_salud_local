@@ -34,8 +34,9 @@ class DiasNoLaborables extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['DI_FEC'], 'required'],
-            [['DI_FEC'], 'safe'],
+            [['DI_FEC', 'DI_DESCRI'], 'required'],
+            //[['DI_FEC'], 'safe'],
+             [['DI_FEC'],'unique'],
             [['DI_DESCRI'], 'string', 'max' => 60],
         ];
     }
@@ -46,8 +47,8 @@ class DiasNoLaborables extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'DI_FEC' => 'Di  Fec',
-            'DI_DESCRI' => 'Di  Descri',
+            'DI_FEC' => 'Fecha ',
+            'DI_DESCRI' => 'Descripción',
         ];
     }
 }

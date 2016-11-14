@@ -44,12 +44,29 @@ class ClientesSearch extends Clientes
         $query = Clientes::find();
 
         // add conditions that should always apply here
+         $pagina = 0;
+        if (isset($_POST['pagina']))
+            $pagina = $_POST['pagina'];
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => false,
+            'pagination' => [
+                'pageSize' => 10,
+                'page' => $pagina,
+            ]
         ]);
 
-        $this->load($params);
+        //$this->load($params);
+        
+        if (isset ($_POST['ClienteBuscar'])) {
+            $this->load(Yii::$app->request->post());
+        }
+        else {
+            // si no se reciben parámetros, no se retorna ningún resultado
+            //$query->where('0=1');
+            return $dataProvider;
+        }
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

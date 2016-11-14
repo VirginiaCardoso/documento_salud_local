@@ -15,7 +15,7 @@ $(function(){
         } 
         else {
             //if modal isn't open; open it and load content
-            $('#mmodalBuscarCliente').modal('show')
+            $('#modalBuscarCliente').modal('show')
                     .find('#modalContent')
                     .load($(this).attr('value'));
         }
@@ -30,15 +30,22 @@ function cerrarModal() {
     $('#modalContent').html("");
     $("#modalBuscarCliente").modal("hide");
 }
-/*
-function buscarPaciente(resetearPagina = true){
+
+function cambiarPagina(cant) {
+    var pagCampo = $("#paginaClientes");
+    var pagActual = pagCampo.val();
+    pagCampo.val(parseInt(pagActual) + cant);
+    buscarCliente(false);
+}
+
+function buscarCliente(resetearPagina = true){
     if (resetearPagina)
-        $("#paginaPacientes").val(0);
+        $("#paginaClientes").val(0);
     
-    var parametros = $("#formBuscarPaciente").serialize();
+    var parametros = $("#formBuscarCliente").serialize();
     $.ajax({
             data:  parametros,
-            url:   'index.php?r=paciente/index',
+            url:   'index.php?r=clientes/index2',
             type:  'POST',
             beforeSend: function () {
                     $('#modalContent').html("Procesando, espere por favor...");
@@ -75,7 +82,7 @@ function monthDiff(dt1, dt2) {
 
     return ret;
 }
-
+/*
 function cargarDatosPaciente(apenom,sexo,tipdoc,numdoc,fecnac,hiscli,nacion,direc,codloc,codpro,telef,codos,osdesc,osmje,nroafi,codpais){
 
     d1 = new Date(fecnac);

@@ -36,7 +36,7 @@ class Convenios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['CO_COD'], 'required'],
+            [['CO_COD','CO_DESC'], 'required'],
             [['CO_COD'],'unique'],
             [['CO_COD'], 'string','length' => [2], 'max' => 2, 'min' => 2, 'tooShort' => 'El código debe tener 2 caracteres. Ejemplo: "01"'],
             [['CO_DESC'], 'string', 'max' => 30],

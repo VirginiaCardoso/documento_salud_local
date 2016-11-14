@@ -3,6 +3,8 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\Url;
+
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\ClientesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -16,7 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Nuevo Cliente', ['create'], ['class' => 'btn btn-success']) ?>
+       <!-- <?= Html::a('Nuevo Cliente', ['create'], ['class' => 'btn btn-success']) ?> -->
+
+            <?= Html::a('Nuevo Cliente', Url::toRoute(['clientes/create', 'origen' => 2]), ['class' => 'btn btn-success']) ?>
+       
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,

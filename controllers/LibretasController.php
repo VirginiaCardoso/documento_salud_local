@@ -79,7 +79,14 @@ class LibretasController extends Controller
             $model->LI_FECPED = date('Y-m-d');
             $model->LI_HORA=  date('H:i:s');
 
-            $cliente = new Clientes();
+            if (isset($_GET['codcli'])) {
+                $cliente = Clientes::findOne($_GET['codcli']);
+                $model->LI_COCLI = $cliente->CL_COD;
+            }
+            else {    
+
+                $cliente = new Clientes();
+            }
 
 
             return $this->render('create', [
