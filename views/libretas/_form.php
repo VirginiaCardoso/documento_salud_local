@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
+use documento_salud\models\Clientes;
 use documento_salud\assets\LibretasAsset;
 
 /* @var $this yii\web\View */
@@ -63,12 +64,71 @@ LibretasAsset::register($this);
                     <?= $form->field($cliente, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
         </div>
-    <?php 
-    }
-    ?>
+        <div class="row">
+            <div class="col-md-2">
+                 <?='<label class=" control-label" for="edad">Edad</label>' ?>
+            </div>
+              
+            <div class="col-md-2">
+                <?= Html::activeHiddenInput($cliente, 'edad') ?> 
+                 <input type="text" class="form-control" id="edad" readonly="true" value = <?= "'".$cliente->getEdad()."'" ?>>
+           
+            </div>
+            <div class="col-md-4">
+            
+                <?= $form->field($cliente, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'value' => ($cliente->CL_SEXO=='F' ? 'Femenino': 'Masculino'), 'maxlength' => true]) ?>
+        
+            </div>
+            <div class="col-md-4">
+
+                    <?= $form->field($cliente->cLESTCIV, 'ES_NOM', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+            </div>
+        </div>
+
+<?= $form->field($cliente, 'CL_DOMICI')->textInput(['readonly' => true,'maxlength' => true]) ?>
+
+<?= $form->field($cliente->cLCODLOC, 'LO_DETALLE', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-10']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+
+<div class="row">
+    <div class="col-md-6">
+        <?= $form->field($cliente, 'CL_TEL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+    </div>
+</div>
+
+<?= $form->field($cliente, 'CL_LUGTRA')->textInput(['readonly' => true,'maxlength' => true]) ?>
+
+<?= $form->field($cliente, 'CL_EMAIL')->textInput(['readonly' => true,'maxlength' => true]) ?>
+
+<br>
+<div class="row">
+    <div class="col-md-2">
+        <?='<label class=" control-label" for="CL_IMG"> Imágen cliente </label>' ?>
+    </div>
+<div class="col-md-2">
+        <?php 
+        if ($cliente->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
+
+           
+          
+                echo "Cargar nueva  imagen";
+
+          
+        }
+        else {
+            $src = Yii::$app->params['path_clientes'].'/'.$cliente->CL_COD.'/'.$cliente->CL_IMG;
+            echo Html::img( $src, $options = ['title' => $cliente->CL_IMG,
+            'alt' => 'No se encontro la imágen', 'height'=>'200', 'width'=>'200'] );
+            }
+        ?>
+    </div>
+</div>
+
+    
     <hr />
 
-      <?= $form->field($model, 'LI_TPOSER')->textInput(['maxlength' => true]) ?>
+    <!--  campos nuevo tramite -->
+
+    <?= $form->field($model, 'LI_TPOSER')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'LI_CONVEN')->textInput(['maxlength' => true]) ?>
 
@@ -103,7 +163,9 @@ LibretasAsset::register($this);
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-
+<?php 
+    }
+    ?>
     <?php ActiveForm::end(); ?>
 
 </div>
