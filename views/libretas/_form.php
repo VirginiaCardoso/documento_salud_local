@@ -41,7 +41,7 @@ LibretasAsset::register($this);
             <?= Html::a('Nuevo Cliente', Url::toRoute(['clientes/create', 'origen' => 1]), ['class' => 'btn btn-success']) ?>
         </div>
         <div class="col-md-2 col-lg-offset-7 col-md-offset-6" <?= $model->LI_COCLI ? "" : "hidden";?>>
-            <?= Html::a('Modificar Cliente', Url::toRoute(['clientes/update', 'CL_COD' => $model->LI_COCLI]), 
+            <?= Html::a('Modificar Cliente', Url::toRoute(['clientes/update2', 'CL_COD' => $model->LI_COCLI]), 
             ['class' => 'btn btn-warning btn-modificar-cliente']) ?>
         </div>
     </div>

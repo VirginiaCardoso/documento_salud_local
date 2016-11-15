@@ -87,7 +87,7 @@ $pagTotales = $dataProvider->getPagination()->getPageCount();
             'id' => 'gridClientes',
             ],
         'rowOptions' => function ($model, $key, $index, $grid) {
-                $url = Url::to(['clientes/update', 'CL_COD' => $model['CL_COD']]);
+                $url = Url::to(['clientes/update2', 'CL_COD' => $model['CL_COD']]);
 
                 return [
                     'id' => $model->CL_COD,

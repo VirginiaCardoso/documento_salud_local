@@ -180,7 +180,13 @@ use documento_salud\models\Locali;
         <div class="form-group pull-right">
 
             <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-            <?= Html::a('Volver', ['index'], array('class'=>'btn btn-danger'));?>
+           <?php 
+            if ($model->isNewRecord)
+                $parametros = ['libretas/create'];
+            else
+                $parametros = ['libretas/create', 'codcli' => $model->CL_COD];
+        ?>
+        <?= Html::a($model->isNewRecord ? 'Volver' : 'Seguir sin modificar', $parametros, ['class'=>'btn btn-danger']);?>
         </div>
 
 

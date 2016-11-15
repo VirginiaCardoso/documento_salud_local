@@ -52,7 +52,7 @@ class ClientesController extends Controller
     public function actionIndex2()
     {
         $searchModel = new ClientesSearch();
-        
+
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if (!($searchModel->CL_TIPDOC || $searchModel->CL_NUMDOC || $searchModel->CL_APENOM))
@@ -153,6 +153,31 @@ class ClientesController extends Controller
 
 
             return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Clientes model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionUpdate2($CL_COD)
+    {
+        $model = $this->findModel($CL_COD);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            //return $this->redirect(['view', 'id' => $model->CL_COD]);
+             return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
+        } else {
+
+
+
+
+
+            return $this->render('update2', [
                 'model' => $model,
             ]);
         }
