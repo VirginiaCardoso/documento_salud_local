@@ -52,6 +52,7 @@ class ClientesController extends Controller
     public function actionIndex2()
     {
         $searchModel = new ClientesSearch();
+        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if (!($searchModel->CL_TIPDOC || $searchModel->CL_NUMDOC || $searchModel->CL_APENOM))
