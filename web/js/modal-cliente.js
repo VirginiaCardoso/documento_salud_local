@@ -43,6 +43,7 @@ function buscarCliente(resetearPagina = true){
         $("#paginaClientes").val(0);
     
     var parametros = $("#formBuscarCliente").serialize();
+    alert(parametros);
     $.ajax({
             data:  parametros,
             url:   'index.php?r=clientes/index2',
@@ -51,6 +52,7 @@ function buscarCliente(resetearPagina = true){
                     $('#modalContent').html("Procesando, espere por favor...");
             },
             success:  function (response) {
+                        alert(response);
                     $('#modalContent').html(response);
             },
             error: function (response) {

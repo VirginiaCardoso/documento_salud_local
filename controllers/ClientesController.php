@@ -54,6 +54,10 @@ class ClientesController extends Controller
         $searchModel = new ClientesSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        if (!($searchModel->CL_TIPDOC || $searchModel->CL_NUMDOC || $searchModel->CL_APENOM))
+             $searchModel->CL_TIPDOC = 'DNI';
+
+
         return $this->renderAjax('index2', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

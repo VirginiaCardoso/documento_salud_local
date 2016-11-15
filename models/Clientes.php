@@ -31,6 +31,7 @@ use yii\web\NotFoundHttpException;
  * @property Doclabau[] $doclabaus
  * @property Libretas[] $libretas
  */
+
 class Clientes extends \yii\db\ActiveRecord
 {
     public $edad;
