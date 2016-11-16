@@ -1,7 +1,7 @@
 function verLibreta(fila) {
   
 //var parametros = $("#formPool").serialize();
- alert(fila);
+// alert(fila);
 $.ajax({
     data:  fila,
     url:   'index.php?r=libretas/ver',

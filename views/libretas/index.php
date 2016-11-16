@@ -97,7 +97,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'LI_REIMPR',
             // 'LI_SELECT',
             
-            // ['class' => 'yii\grid\ActionColumn'],
+             ['class' => 'yii\grid\ActionColumn',
+              'template' => ' {view} ',],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
