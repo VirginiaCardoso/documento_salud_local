@@ -20,7 +20,7 @@ class LibretasAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'css/site.css',
-        //'css/archivos_hc.css',
+        'css/libretas.css',
        // 'css/eventos.css',
     ];
     public $js = [

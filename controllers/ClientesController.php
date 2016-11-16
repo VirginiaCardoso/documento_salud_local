@@ -56,7 +56,8 @@ class ClientesController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         if (!($searchModel->CL_TIPDOC || $searchModel->CL_NUMDOC || $searchModel->CL_APENOM))
-             $searchModel->CL_TIPDOC = 'DNI';
+            $searchModel->CL_TIPDOC = Yii::$app->params['TIPODOC_DEFAULT'];
+           
 
 
         return $this->renderAjax('index2', [
@@ -125,7 +126,10 @@ class ClientesController extends Controller
             
         } else {
 
-                $model->CL_TIPDOC = 'DNI';
+                $model->CL_TIPDOC = Yii::$app->params['TIPODOC_DEFAULT'];
+                $model->CL_TEL = Yii::$app->params['TELEFONO_DEFAULT'];
+                $model->CL_CODLOC = Yii::$app->params['LOCALIDAD_DEFAULT'];
+
             
                 return $this->render('create', [
                         'model' => $model,

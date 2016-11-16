@@ -62,7 +62,7 @@ class TipDoc extends \yii\db\ActiveRecord
         return $this->hasMany(Clientes::className(), ['CL_TIPDOC' => 'TI_COD']);
     }
 
-     public static function getListaTipoDoc()
+    public static function getListaTipoDoc()
     {
         $opciones = TipDoc::find()->asArray()->all();
         return ArrayHelper::map($opciones, 'TI_COD', 'TI_NOM');

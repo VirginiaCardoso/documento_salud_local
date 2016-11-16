@@ -84,4 +84,45 @@ class LibretasSearch extends Libretas
 
         return $dataProvider;
     }
+
+     /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+  /*  public function searchUltimoTramite($codcli)
+    {
+        $query = Libretas::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            //'sort' => ['attributes' => ['DE_HISCLI']],
+        ]);
+
+        //$this->load($params);
+
+       
+
+        // grid filtering conditions
+
+        
+        $query->andFilterWhere([
+            'LI_COCLI' => $codcli,
+        ]);
+
+        $query->andFilterWhere(['IS', 'LI_ANULADA', 0]); 
+         
+            
+        $query->orderBy([
+            'DE_FECHA' => SORT_DESC, 'DE_HORA' => SORT_DESC
+        ]);
+
+        var_dump($query);
+    return $dataProvider['LI_FECPED'];
+
+    }*/
 }

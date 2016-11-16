@@ -5,6 +5,9 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 
 use documento_salud\models\Clientes;
+use documento_salud\models\TpoSer;
+use documento_salud\models\Convenios;
+use documento_salud\controllers\LibretasController;
 use documento_salud\assets\LibretasAsset;
 
 /* @var $this yii\web\View */
@@ -56,6 +59,7 @@ LibretasAsset::register($this);
 
         <div class="row">
             <div class="col-md-6">
+            
      
                <?= $form->field($cliente->cLTIPDOC, 'TI_NOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
@@ -74,11 +78,30 @@ LibretasAsset::register($this);
                  <input type="text" class="form-control" id="edad" readonly="true" value = <?= "'".$cliente->getEdad()."'" ?>>
            
             </div>
-            <div class="col-md-4">
+          <!--  <div class="col-md-4">
             
                 <?= $form->field($cliente, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'value' => ($cliente->CL_SEXO=='F' ? 'Femenino': 'Masculino'), 'maxlength' => true]) ?>
         
             </div>
+            -->
+            <div class="col-md-2">
+                     <?='<label class=" control-label" for="sexo">Sexo</label>' ?>
+                </div>
+              
+                <div class="col-md-2">
+                        <?php 
+                        if ($cliente->CL_SEXO=='M') {
+                        ?>
+                            <input type="text" class="form-control" id="sexo" readonly="true" value = "Masculino">
+                        <?php
+                        }
+                        else {
+                            ?>
+                            <input type="text" class="form-control" id="sexo" readonly="true" value = "Femenino">
+                        <?php
+                        }
+                        ?>
+                </div>
             <div class="col-md-4">
 
                     <?= $form->field($cliente->cLESTCIV, 'ES_NOM', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
@@ -127,20 +150,126 @@ LibretasAsset::register($this);
     <hr />
 
     <!--  campos nuevo tramite -->
+    <?php 
+        $ultimotramite = LibretasController::findUltimoTramite($cliente->CL_COD);
+        if ($ultimotramite!= null) { 
+            ?>
+            <div class="row">
+                <div class="col-md-2">
+                     <?='<label class=" control-label" for="fecped2">Fecha último trámite</label>' ?>
+                </div>
+              
+                <div class="col-md-2">
+                    
+                        <input type="text" class="form-control" id="fecped2" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($ultimotramite->LI_FECPED, 'php:d-m-Y')."'" ?>>
 
-    <?= $form->field($model, 'LI_TPOSER')->textInput(['maxlength' => true]) ?>
+                </div>
 
-    <?= $form->field($model, 'LI_CONVEN')->textInput(['maxlength' => true]) ?>
+                <div class="col-md-2">
+                     <?='<label class=" control-label" for="fecvto2">Vencimiento</label>' ?>
+                </div>
+              
+                <div class="col-md-2">
+                    
+                        <input type="text" class="form-control" id="fecvto2" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($ultimotramite->LI_FECVTO, 'php:d-m-Y')."'" ?>>
 
-    <?= $form->field($model, 'LI_CONSULT')->textInput() ?>
+                </div>
+            </div>
+
+            <?php 
+            $fechaLab = LibretasController::vencimiento($ultimotramite->LI_FECVTO);
+
+            $hoy = date('Y-m-d');
+
+            $fechaLab=strtotime($fechaLab);
+            $hoy=strtotime($hoy);
+
+            $diastrasnc   = ($fechaLab-$hoy)/86400;
+            $diastrasnc   = abs($diastrasnc); 
+            $diastrasnc = floor($diastrasnc); 
+
+            if($fechaLab < $hoy){
+                echo "<label class='label_venc_no'>".$diastrasnc." días vencida </label>";
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+ 
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoRenovacionVencida()); ?>
+                     </div>
+                </div>
+
+            <?php
+                
+
+            }
+            else {
+           
+                echo "<label class='label_venc_ok'>".$diastrasnc." días para su vencimiento  </label>";
+
+            ?>
+                <div class="row">
+                    <div class="col-md-6">
+ 
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoRenovacionNormal()); ?>
+                     </div>
+                </div>
+
+            <?php
+            }
+
+
+
+            ?>
+            
+
+    <?php 
+        }
+        else {
+            ?>
+
+            <h3>Nuevo Documento laboral</h3>
+            
+            
+                <div class="row">
+                    <div class="col-md-6">
+ 
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoNueva()); ?>
+                     </div>
+                </div>
+           
+    <?php     
+         }
+    ?>
+            
+
+   
+
+    <!--<?= $form->field($model, 'LI_CONVEN')->textInput(['maxlength' => true]) ?> -->
+    <div class="row">
+        <div class="col-md-6">
+ 
+            <?= $form->field($model, 'LI_CONVEN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( Convenios::getListaConvenios()); ?>
+        </div>
+    </div>
+
+  <!--   <?= $form->field($model, 'LI_CONSULT')->textInput() ?>
 
     <?= $form->field($model, 'LI_ESTUD')->textInput() ?>
+     <?= $form->field($model, 'LI_IMPR')->textInput() ?>
+   
+<?= $form->field($model, 'LI_IMPORTE')->textInput(['maxlength' => true]) ?>
+    
+    -->
+    <div class="row">
+                    <div class="col-md-6">
+ 
+                        <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
+                     </div>
+                </div>
 
-    <?= $form->field($model, 'LI_IMPR')->textInput() ?>
+ <!--   <?= $form->field($model, 'LI_FECRET')->textInput() ?>
 
-    <?= $form->field($model, 'LI_FECRET')->textInput() ?>
-
-    <?= $form->field($model, 'LI_IMPORTE')->textInput(['maxlength' => true]) ?>
+    
 
     <?= $form->field($model, 'LI_FECIMP')->textInput() ?>
 
@@ -157,11 +286,12 @@ LibretasAsset::register($this);
     <?= $form->field($model, 'LI_REIMPR')->textInput() ?>
 
     <?= $form->field($model, 'LI_SELECT')->textInput() ?>
+    -->
 
 
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <div class="form-group pull-right">
+        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 <?php 
     }

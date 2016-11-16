@@ -121,4 +121,43 @@ class DiasNoLaborablesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function esDiaLaborable($fecha){
+
+        if (($model = DiasNoLaborables::findOne($fecha)) == null) {
+
+            $dia= date ('w', strtotime ($fecha));
+
+            if ((strcmp($dia, '0') == 0) || (strcmp($dia, '6') == 0))
+                return false;
+            else
+
+                return true;
+        } else {
+            return false;
+        }   
+    }
+
+    public function proximoLaborable($fechano){
+
+        $encontro = false;
+        $nuevafecha = strtotime ( '+1 day' , strtotime ( $fechano ) ) ;
+
+        while($encontro==false){
+            
+            $dia= date ('w', $nuevafecha);
+
+            $nuevafecha = date ('Y-m-j' , $nuevafecha );
+
+            if (((DiasNoLaborables::findOne($nuevafecha)) == null) && (strcmp($dia, '0') !== 0) && (strcmp($dia, '6') !== 0)){
+                $encontro = true;
+            }
+            else {
+                $nuevafecha = strtotime ( '+1 day' , strtotime ( $nuevafecha ) ) ;
+            }
+
+        }
+        return $nuevafecha;
+
+    }
 }

@@ -57,8 +57,8 @@ class Libretas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['LI_NRO'], 'required'],
-            [['LI_FECPED', 'LI_FECRET','LI_FEIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
+            [['LI_NRO'], 'unique'],
+            [['LI_FECPED', 'LI_FECRET','LI_FECIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
             [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
             [['LI_IMPORTE', 'LI_IMPADI'], 'number'],
             [['LI_NRO', 'LI_COMP'], 'string', 'max' => 12],
@@ -90,7 +90,6 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_IMPORTE' => 'Importe',//importe recaudado en este trámite
             'LI_FECIMP' => 'Fecha Impresión Credencial',
             'LI_FECVTO' => 'Fecha Vencimiento',//se calcula suamndo 365
-            
             'LI_COMP' => 'N° Comprobante Impresión',
             'LI_ANULADA' => 'Anulada',
             'LI_ADIC' => 'Adicional ',//determina si se cobra adicional
@@ -101,6 +100,20 @@ class Libretas extends \yii\db\ActiveRecord
             
         ];
     }
+
+    public static function getLastCod(){
+
+    try {
+          $data = Libretas::getDb()->createCommand('SELECT LI_NRO FROM libretas order by LI_NRO desc limit 1')->queryOne();
+                   // print_r($data['CL_COD']);
+                   // 
+                   return $data['LI_NRO'];
+           
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+   }
 
     /**
      * @return \yii\db\ActiveQuery
@@ -145,4 +158,17 @@ class Libretas extends \yii\db\ActiveRecord
     {
         return $this->hasOne(TpoSer::className(), ['TS_COD' => 'LI_TPOSER']);
     }
+
+ /*   public function getUltimoTramite(){
+
+    try {
+          $data = Libretas::getDb()->createCommand('SELECT * FROM libretas order by LI_COCLI desc limit 1')->queryOne();
+                   // print_r($data['CL_COD']);
+                   // 
+                   return $data;
+           
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }*/
 }

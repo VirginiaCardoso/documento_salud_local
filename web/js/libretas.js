@@ -12,3 +12,9 @@ $.ajax({
     });
 
 };
+
+function seleccionoTipo() {
+  seleccion = $("#servicio-se_codigo").val(); 
+ $('#prestamos-de_dest').val(seleccion);
+ // alert( $('#prestamos-de_dest').val());
+}

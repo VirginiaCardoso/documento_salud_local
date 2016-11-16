@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "convenio".
@@ -60,5 +61,11 @@ class Convenios extends \yii\db\ActiveRecord
     public function getLibretas()
     {
         return $this->hasMany(Libretas::className(), ['LI_CONVEN' => 'CO_COD']);
+    }
+
+    public static function getListaConvenios()
+    {
+        $opciones = Convenios::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'CO_COD', 'CO_DESC');
     }
 }

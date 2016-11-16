@@ -1,0 +1,14 @@
+.label_venc_ok {
+	
+	color: #449D44 !important; /*verde */
+   font-weight: bold;
+   font-size: 42px;
+	
+}
+.label_venc_no {
+	
+	color: #C9302C !important; /*naranja */
+   font-weight: bold;
+   font-size: 42px;
+	
+}
