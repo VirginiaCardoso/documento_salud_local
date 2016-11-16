@@ -7,8 +7,15 @@
 }
 .label_venc_no {
 	
-	color: #C9302C !important; /*naranja */
+	color: #C9302C !important; /*rojo */
    font-weight: bold;
    font-size: 42px;
+	
+}
+.label_proceso {
+	
+	color: #EC971F !important; /*naranja */
+   font-weight: bold;
+   font-size: 30px;
 	
 }

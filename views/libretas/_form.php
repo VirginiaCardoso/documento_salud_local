@@ -59,7 +59,7 @@ LibretasAsset::register($this);
 
         <div class="row">
             <div class="col-md-6">
-            
+
      
                <?= $form->field($cliente->cLTIPDOC, 'TI_NOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
@@ -151,6 +151,29 @@ LibretasAsset::register($this);
 
     <!--  campos nuevo tramite -->
     <?php 
+        $tramiteproceso = LibretasController::findtramiteProceso($cliente->CL_COD);
+
+    if ($tramiteproceso!=null) {
+        
+        ?>
+        <div class="row">
+            <div class="col-md-12 ">
+                <label class='label_proceso'> Trámite de nueva libreta en proceso. Nro:<?php echo $tramiteproceso->LI_NRO; ?></label>
+            </div>
+        </div>
+        
+
+        <div class="form-group pull-right ">
+                <?= Html::a('Ver Trámite', ['view', 'id' => $tramiteproceso->LI_NRO], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Volver' , ['libretas/index'], ['class'=>'btn btn-danger']);?>
+        </div>
+        
+        </div>
+
+        
+        <?php
+    }
+    else {
         $ultimotramite = LibretasController::findUltimoTramite($cliente->CL_COD);
         if ($ultimotramite!= null) { 
             ?>
@@ -222,7 +245,7 @@ LibretasAsset::register($this);
             ?>
             
 
-    <?php 
+        <?php 
         }
         else {
             ?>
@@ -237,63 +260,37 @@ LibretasAsset::register($this);
                      </div>
                 </div>
            
-    <?php     
-         }
-    ?>
+        <?php     
+        }
+        ?>
             
 
    
 
-    <!--<?= $form->field($model, 'LI_CONVEN')->textInput(['maxlength' => true]) ?> -->
-    <div class="row">
-        <div class="col-md-6">
- 
-            <?= $form->field($model, 'LI_CONVEN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( Convenios::getListaConvenios()); ?>
+        <!--<?= $form->field($model, 'LI_CONVEN')->textInput(['maxlength' => true]) ?> -->
+        <div class="row">
+            <div class="col-md-6">
+     
+                <?= $form->field($model, 'LI_CONVEN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( Convenios::getListaConvenios()); ?>
+            </div>
         </div>
-    </div>
 
-  <!--   <?= $form->field($model, 'LI_CONSULT')->textInput() ?>
+        <div class="row">
+                        <div class="col-md-6">
+     
+                            <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
+                         </div>
+                    </div>
 
-    <?= $form->field($model, 'LI_ESTUD')->textInput() ?>
-     <?= $form->field($model, 'LI_IMPR')->textInput() ?>
-   
-<?= $form->field($model, 'LI_IMPORTE')->textInput(['maxlength' => true]) ?>
-    
-    -->
-    <div class="row">
-                    <div class="col-md-6">
- 
-                        <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
-                     </div>
-                </div>
+     
 
- <!--   <?= $form->field($model, 'LI_FECRET')->textInput() ?>
+        <div class="form-group pull-right">
+            <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::a('Volver' , ['libretas/index'], ['class'=>'btn btn-danger']);?>
+        </div>
+        <?php 
+        }
 
-    
-
-    <?= $form->field($model, 'LI_FECIMP')->textInput() ?>
-
-    <?= $form->field($model, 'LI_FECVTO')->textInput() ?>
-
-    <?= $form->field($model, 'LI_COMP')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'LI_ANULADA')->textInput() ?>
-
-    <?= $form->field($model, 'LI_ADIC')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'LI_IMPADI')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'LI_REIMPR')->textInput() ?>
-
-    <?= $form->field($model, 'LI_SELECT')->textInput() ?>
-    -->
-
-
-
-    <div class="form-group pull-right">
-        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
-<?php 
     }
     ?>
     <?php ActiveForm::end(); ?>

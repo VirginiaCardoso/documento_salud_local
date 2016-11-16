@@ -191,6 +191,23 @@ class LibretasController extends Controller
      * @return Libretas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
+    public function findtramiteProceso($codcli)
+    {
+        $model = Libretas::find()
+                    ->where(['LI_COCLI' => $codcli])
+                    ->andWhere(['LI_FECVTO' => null])
+                    ->orderBy(['LI_FECPED' => SORT_DESC])
+                    ->one();
+       return $model;
+    }
+
+    /**
+     * Finds the Libretas model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param string $id
+     * @return Libretas the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
     public function findUltimoTramite($codcli)
     {
         $model = Libretas::find()
