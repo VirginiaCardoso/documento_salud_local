@@ -30,21 +30,60 @@ $this->params['breadcrumbs'][] = $this->title;
     <p > 
         <?= Html::a('Nuevo trámite', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+    <div class="row">
+        <div class="col-md-offset-2 pull-right">
+               <?php 
+                $content =  '<h5> Trámites Libretas:  </h5>
+                            <table>
+                                <tr style="background-color: '.LibretasController::ANULADOS.'">
+                                    <td class="label label-default"  >       Anulados       </td>
+                                </tr>
+                                <tr style="background-color: #F9F9F9">
+                                    <td class="label label-default"  >       No Anulados       </td>
+                                </tr>
+                                
+                            </table>';
+
+
+            ?>
+            
+
+            <!-- Referencia de colores -->
+            <?= PopoverX::widget([
+            'header' => 'Referencia de Colores',
+            'placement' => PopoverX::ALIGN_RIGHT_TOP,//ALIGN_RIGHT,
+           'content' => $content,
+            'toggleButton' => ['label'=>'Referencia de Colores', 'class'=>'btn btn-link'],
+        ]);
+         ?>
+        </div>
+    </div>
     
 <?php Pjax::begin(['id'=>'pjax-llamadas']) ?>    
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
         'rowOptions' => function ($model, $key, $index, $grid) {
+                     $url = Url::to(['libretas/view', 'id' => $model['LI_NRO']]);
                     if ($model->LI_ANULADA==1) {  //tramites anulados
-                        return [ 'style' =>'background-color:'.LibretasController::ANULADOS,'onclick' => 'verLibreta(' . $model->LI_NRO . ');'];
+                        return [ 
+                            'style' =>'cursor: pointer; background-color:'.LibretasController::ANULADOS,
+                            'id' => $model->LI_NRO,
+                            'onclick' => "window.location.href='{$url}'",
+                            ];
                     }
                     else {
-                        return [ 'onclick' => 'verLibreta(' . $model->LI_NRO . ');'];
+                        return [ 
+                            'id' => $model->LI_NRO,
+                            'style' =>'cursor: pointer; background-color: #F9F9F9',
+                            'onclick' => "window.location.href='{$url}'",
+                            ];
                     }
 
                     
                 },
+
+                            
         'columns' => [
            // ['class' => 'yii\grid\SerialColumn'],
        /*     [
@@ -97,8 +136,8 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'LI_REIMPR',
             // 'LI_SELECT',
             
-             ['class' => 'yii\grid\ActionColumn',
-              'template' => ' {view} ',],
+         //    ['class' => 'yii\grid\ActionColumn',
+          //    'template' => ' {view} ',],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
