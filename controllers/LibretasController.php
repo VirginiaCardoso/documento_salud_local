@@ -115,7 +115,7 @@ class LibretasController extends Controller
             $model->LI_IMPADI = 0;
             $model->LI_REIMPR = false;
             $model->LI_SELECT = false;
-            
+
 
             if (isset($_GET['codcli'])) {
                 $cliente = Clientes::findOne($_GET['codcli']);
@@ -195,6 +195,7 @@ class LibretasController extends Controller
     {
         $model = Libretas::find()
                     ->where(['LI_COCLI' => $codcli])
+                    ->andWhere(['not', ['LI_FECVTO' => null]])
                     ->orderBy(['LI_FECPED' => SORT_DESC])
                     ->one();
        /* if (( $model !== null) {
