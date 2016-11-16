@@ -48,6 +48,7 @@ class LibretasSearch extends Libretas
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['LI_NRO' => SORT_DESC]],
         ]);
 
         $this->load($params);
