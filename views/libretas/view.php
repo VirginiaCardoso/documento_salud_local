@@ -30,9 +30,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'LI_NRO',
             'LI_COCLI',
-            'LI_FECPED',
-            'LI_TPOSER',
-            'LI_CONVEN',
+            'LI_FECPED:date',
+            //'LI_TPOSER',
+            [
+                'attribute' => 'LI_TPOSER',
+                'format' => 'text',
+                'value' => $model->lITPOSER?$model->lITPOSER->TS_DESC:'',
+            ],
+            //'LI_CONVEN',
+            [
+                'attribute' => 'LI_CONVEN',
+                'format' => 'text',
+                'value' => $model->lICONVEN?$model->lICONVEN->CO_DESC:'',
+            ],
             'LI_CONSULT',
             'LI_ESTUD',
             'LI_IMPR',

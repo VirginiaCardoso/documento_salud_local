@@ -31,8 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'TS_COD',
             'TS_DESC',
             'TS_IMP',
-            'TS_CLASE',
-            'TS_TIPO'
+            //'TS_CLASE',
+              [
+                'attribute' => 'TS_CLASE',
+                'format' => 'text',
+                'value' => $model->tSCLASE?$model->tSCLASE->CL_DESC:'',
+            ],
+            //'TS_TIPO'
+              [
+                'attribute' => 'TS_TIPO',
+                'format' => 'text',
+                'value' => $model->tSTIPO?$model->tSTIPO->TP_DESC:'',
+            ],
         ],
     ]) ?>
 
