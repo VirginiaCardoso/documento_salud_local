@@ -56,6 +56,24 @@ class TpoSerController extends Controller
         ]);
     }
 
+    public function actionImporte(){
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+            $cod_selec = $post["selec"];
+
+            $serv = TpoSer::findOne(["TS_COD" => $cod_selec ]);
+
+            if($serv!=null)
+                return $serv->TS_IMP;
+            else
+                return 0;
+        }
+        else {
+            return 1;
+        }
+        
+    }
+
     /**
      * Creates a new TpoSer model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -123,18 +141,5 @@ class TpoSerController extends Controller
     }
 
 
-    public function importe(){
-        if (Yii::$app->request->isAjax) {
-            $post = Yii::$app->request->post();
-            $cod_selec = $post["selec"];
 
-            $serv = TpoSer::findOne(["TS_COD" => $cod_selec ]);
-
-            if($serv!=null)
-                return $serv->TS_IMP;
-            else
-                return 0;
-        }
-        return 0;
-    }
 }
