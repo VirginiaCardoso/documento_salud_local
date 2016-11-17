@@ -115,7 +115,7 @@ class LibretasController extends Controller
             $model->LI_IMPADI = 0;
             $model->LI_REIMPR = false;
             $model->LI_SELECT = false;
-            $model->LI_IMPORTE= 0;
+          //  $model->LI_IMPORTE= 0;
 
 
             if (isset($_GET['codcli'])) {
