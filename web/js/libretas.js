@@ -14,7 +14,20 @@ $.ajax({
 };
 
 function seleccionoTipo() {
-  seleccion = $("#servicio-se_codigo").val(); 
- $('#prestamos-de_dest').val(seleccion);
- // alert( $('#prestamos-de_dest').val());
+  seleccion = $("#libretas-li_tposer").val(); 
+ // alert(seleccion);
+  $.ajax({
+            url: 'index.php?r=tpo-ser/importe',
+            dataType: 'JSON',
+            method: 'POST',
+            data: {
+                selec: seleccion
+            },
+            success: function (importe) {
+              	$("#libretas-li_importe").val(importe);
+              
+              },
+           
+        });
+
 }

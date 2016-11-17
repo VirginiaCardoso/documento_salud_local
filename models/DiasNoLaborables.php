@@ -36,7 +36,7 @@ class DiasNoLaborables extends \yii\db\ActiveRecord
         return [
             [['DI_FEC', 'DI_DESCRI'], 'required'],
             //[['DI_FEC'], 'safe'],
-             [['DI_FEC'],'unique'],
+             [['DI_FEC'],'unique' , 'message' => 'Error. Ya existe un Día No Laborable definido para esa fecha.'],
             [['DI_DESCRI'], 'string', 'max' => 60],
         ];
     }

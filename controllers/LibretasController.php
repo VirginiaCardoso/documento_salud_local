@@ -115,6 +115,7 @@ class LibretasController extends Controller
             $model->LI_IMPADI = 0;
             $model->LI_REIMPR = false;
             $model->LI_SELECT = false;
+            $model->LI_IMPORTE= 0;
 
 
             if (isset($_GET['codcli'])) {
@@ -185,8 +186,7 @@ class LibretasController extends Controller
     }
 
     /**
-     * Finds the Libretas model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Busca la Libreta que corresponde a un trámite en proceso, si es que existe.
      * @param string $id
      * @return Libretas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -195,15 +195,14 @@ class LibretasController extends Controller
     {
         $model = Libretas::find()
                     ->where(['LI_COCLI' => $codcli])
-                    ->andWhere(['LI_FECVTO' => null])
+                    ->andWhere(['LI_FECVTO' => null]) //fecha vencimiento nulo, esta en trámite
                     ->orderBy(['LI_FECPED' => SORT_DESC])
                     ->one();
        return $model;
     }
 
     /**
-     * Finds the Libretas model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Busca la Libreta que corresponde al último trámite, si es que existe.
      * @param string $id
      * @return Libretas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
@@ -215,55 +214,30 @@ class LibretasController extends Controller
                     ->andWhere(['not', ['LI_FECVTO' => null]])
                     ->orderBy(['LI_FECPED' => SORT_DESC])
                     ->one();
-       /* if (( $model !== null) {
-            return $model;
-        } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
-        }*/
         return $model;
     }
 
+    /**
+     * Calcula la fecha del próximo día habil, en base al vencimiento más la tolerancia
+     * @param  date $fechavenc Fecha vencimiento del trámite
+     * @return date            Fecha del próximo día habil
+     */
     public function vencimiento($fechavenc){
 
         $nuevafecha = strtotime ( '+'.Yii::$app->params['TOLERANCIA_TRAMITE'].' day' , strtotime ( $fechavenc ) ) ;
         $dianuevo= date ('w', $nuevafecha);
         $nuevafecha = date ('Y-m-j' , $nuevafecha );
 
-
         if (DiasNoLaborablesController::esDiaLaborable($nuevafecha)){
-           // return $nuevafecha." Día Laborable";
            $fecha2 = $nuevafecha;
         }
         else {
-            //$proximo = DiasNoLaborablesController::proximoLaborable($nuevafecha);
-            //return $nuevafecha."  Día No Laborable - proximo: ".$proximo;
             $fecha2 = DiasNoLaborablesController::proximoLaborable($nuevafecha);
         }
 
         return $fecha2;
 
-      /*  $hoy = date('Y-m-d');
-
-        $fecha2=strtotime($fecha2);
-        $hoy=strtotime($hoy);
-
-        $diastrasnc   = ($fecha2-$hoy)/86400;
-        $diastrasnc   = abs($diastrasnc); 
-        $diastrasnc = floor($diastrasnc); 
-
-        if($fecha2 < $hoy){
-           // return "<label class='label_venc_no'>".$diastrasnc." días vencida </label>";
-           return 0;
-        }
-        else {
-           // return "<label class='label_venc_ok'>".$diastrasnc." días para su vencimiento  </label>";
-           return 1;
-
-        }*/
-
-
-       
-
+     
     }
 
     public function actionVer() {

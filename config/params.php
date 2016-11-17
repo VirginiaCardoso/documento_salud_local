@@ -9,4 +9,7 @@ return [
   'TIPODOC_DEFAULT' => 'DNI',
   'TELEFONO_DEFAULT' => '0291',
   'TOLERANCIA_TRAMITE' => 15,
+  'TR_NUEVO' => 1,
+  'TR_RENOVACION' => 2,
+  'TR_RENOVVENCIDO' => 3,
   ];

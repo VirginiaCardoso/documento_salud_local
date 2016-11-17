@@ -34,3 +34,4 @@ $this->params['breadcrumbs'][] = $this->title;
     echo "<div id='modalContent'>Por favor espere mientras se cargan los datos...</div>";
     Modal::end();
 ?>
+

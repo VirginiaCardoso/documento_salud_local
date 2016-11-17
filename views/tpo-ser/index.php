@@ -37,6 +37,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         return "";
                 },
             ],
+            [
+                'label' => 'Tipo',
+                'value'=> function($model) {
+                    if ($model->tSTIPO!=null)
+                        return $model->tSTIPO->TP_DESC;
+                    else
+                        return "";
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

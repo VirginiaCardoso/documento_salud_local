@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'TS_DESC',
             'TS_IMP',
             'TS_CLASE',
+            'TS_TIPO'
         ],
     ]) ?>
 

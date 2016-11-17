@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 use documento_salud\models\Clases;
+use documento_salud\models\TipoServicio;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\TpoSer */
@@ -27,15 +28,24 @@ use documento_salud\models\Clases;
 
    <!-- <?= $form->field($model, 'TS_CLASE')->textInput(['maxlength' => true]) ?>
 -->
-<div class="row">
+    <div class="row">
+        <div class="col-md-6">
+     
+            <?= $form->field($model, 'TS_CLASE', 
+                ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])
+                ->dropDownList( Clases::getLista()); ?>
+        </div>
+        
+    </div>
+    <div class="row">
     <div class="col-md-6">
  
-        <?= $form->field($model, 'TS_CLASE', 
+        <?= $form->field($model, 'TS_TIPO', 
             ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])
-            ->dropDownList( Clases::getLista()); ?>
+            ->dropDownList( TipoServicio::getLista()); ?>
     </div>
     
-</div>
+    </div>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
         <?= Html::a('Volver',['index'],array('class'=>'btn btn-danger'));?>

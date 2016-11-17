@@ -57,7 +57,8 @@ class Libretas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['LI_NRO'], 'unique'],
+            [['LI_CONVEN','LI_TPOSER','LI_IMPORTE','LI_FECPED','LI_HORA'], 'required'],
+            [['LI_NRO'], 'unique'], 
             [['LI_FECPED', 'LI_FECRET','LI_FECIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
             [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
             [['LI_IMPORTE', 'LI_IMPADI'], 'number'],

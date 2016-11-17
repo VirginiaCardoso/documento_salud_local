@@ -121,4 +121,20 @@ class TpoSerController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
+    public function importe(){
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+            $cod_selec = $post["selec"];
+
+            $serv = TpoSer::findOne(["TS_COD" => $cod_selec ]);
+
+            if($serv!=null)
+                return $serv->TS_IMP;
+            else
+                return 0;
+        }
+        return 0;
+    }
 }

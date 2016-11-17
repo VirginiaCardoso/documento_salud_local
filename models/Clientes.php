@@ -34,7 +34,7 @@ use yii\web\NotFoundHttpException;
 
 class Clientes extends \yii\db\ActiveRecord
 {
-    public $edad;
+   // public $edad;
     
     /**
      * @inheritdoc
@@ -71,7 +71,7 @@ class Clientes extends \yii\db\ActiveRecord
             [['CL_NROHAB'], 'string', 'max' => 10],
             [['CL_SEXO', 'CL_ESTCIV'], 'string', 'max' => 1],
             [['CL_IMG'], 'string', 'max' => 80],
-            [['CL_EMAIL'], 'string', 'max' => 75],
+            [['CL_EMAIL'], 'email'],
             [['CL_CODLOC'], 'exist', 'skipOnError' => true, 'targetClass' => Locali::className(), 'targetAttribute' => ['CL_CODLOC' => 'LO_COD']],
             [['CL_ESTCIV'], 'exist', 'skipOnError' => true, 'targetClass' => Estciv::className(), 'targetAttribute' => ['CL_ESTCIV' => 'ES_COD']],
             [['CL_TIPDOC'], 'exist', 'skipOnError' => true, 'targetClass' => TipDoc::className(), 'targetAttribute' => ['CL_TIPDOC' => 'TI_COD']],

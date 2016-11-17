@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 use documento_salud\models\Clientes;
 use documento_salud\models\TpoSer;
@@ -15,6 +16,8 @@ use documento_salud\assets\LibretasAsset;
 /* @var $form yii\widgets\ActiveForm */
 
 LibretasAsset::register($this);
+
+Pjax::begin(); 
 ?>
 
 <div class="libretas-form">
@@ -217,7 +220,7 @@ LibretasAsset::register($this);
                 <div class="row">
                     <div class="col-md-6">
  
-                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoRenovacionVencida()); ?>
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( TpoSer::getListaTipoRenovacionVencida(), ['prompt' => 'Seleccione un tipo servicio..', 'onchange'=>'javascript:seleccionoTipo();']); ?>
                      </div>
                 </div>
 
@@ -233,7 +236,7 @@ LibretasAsset::register($this);
                 <div class="row">
                     <div class="col-md-6">
  
-                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoRenovacionNormal()); ?>
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( TpoSer::getListaTipoRenovacionNormal(), ['prompt' => 'Seleccione un tipo servicio..', 'onchange'=>'javascript:seleccionoTipo();']); ?>
                      </div>
                 </div>
 
@@ -256,9 +259,11 @@ LibretasAsset::register($this);
                 <div class="row">
                     <div class="col-md-6">
  
-                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6', 'onchange'=>'javascript:seleccionoTipo();']])->dropDownList( TpoSer::getListaTipoNueva()); ?>
+                        <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( TpoSer::getListaTipoNueva(), ['prompt' => 'Seleccione un tipo servicio..', 'onchange'=>'javascript:seleccionoTipo();']); ?>
                      </div>
                 </div>
+                 <div class="row">
+            
            
         <?php     
         }
@@ -278,7 +283,7 @@ LibretasAsset::register($this);
         <div class="row">
                         <div class="col-md-6">
      
-                            <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
                          </div>
                     </div>
 
@@ -295,4 +300,5 @@ LibretasAsset::register($this);
     ?>
     <?php ActiveForm::end(); ?>
 
+<?php Pjax::end(); ?>
 </div>
