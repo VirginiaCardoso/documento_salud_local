@@ -182,7 +182,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::activeHiddenInput($model, 'LI_FECRET') ?>
                         <label class="control-label col-md-4" for="libretas-li_fecret">Fecha Retiro</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="libretas-li_fecret" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECRET, 'php:d-m-Y')."'" ?> />
+                            <?php if ($model->LI_FECIMP==null) { ?>
+                                <input type="text" class="form-control" id="libretas-li_fecret" readonly="true" value = " " >
+                             <?php   } 
+                             else {
+                                ?>
+                                <input type="text" class="form-control" id="libretas-li_fecret" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECRET, 'php:d-m-Y')."'" ?> />
+                                <?php 
+                                }
+                                ?>
                         </div>
 
                     </div>
@@ -227,7 +235,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= Html::activeHiddenInput($model, 'LI_FECVTO') ?>
                         <label class="control-label col-md-4" for="libretas-li_fecvto">Fecha Vencimiento</label>
                         <div class="col-md-4">
+                            <?php if ($model->LI_FECIMP==null) { ?>
+                                <input type="text" class="form-control" id="libretas-li_fecvto" readonly="true" value = " " >
+                             <?php   } 
+                             else {
+                                ?>
                             <input type="text" class="form-control" id="libretas-li_fecvto" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECVTO, 'php:d-m-Y')."'" ?> >
+                            <?php 
+                                }
+                                ?>
                         </div>
 
                     </div>
