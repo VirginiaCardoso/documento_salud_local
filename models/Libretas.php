@@ -85,8 +85,8 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_TPOSER' => 'Tipo de trámite', //tpo_ser
             'LI_CONVEN' => 'Convenio',//convenio
             'LI_CONSULT' => 'Consulta Médica', // si hizo la consulta médica
-            'LI_ESTUD' => 'Resultados Laboratorio',
-            'LI_IMPR' => 'Impresión Credencial',
+            'LI_ESTUD' => 'Resultados Laboratorio ',
+            'LI_IMPR' => 'Impresión Credencial ',
             'LI_FECRET' => 'Fecha de Retiro',
             'LI_IMPORTE' => 'Importe',//importe recaudado en este trámite
             'LI_FECIMP' => 'Fecha Impresión Credencial',
@@ -160,16 +160,5 @@ class Libretas extends \yii\db\ActiveRecord
         return $this->hasOne(TpoSer::className(), ['TS_COD' => 'LI_TPOSER']);
     }
 
- /*   public function getUltimoTramite(){
-
-    try {
-          $data = Libretas::getDb()->createCommand('SELECT * FROM libretas order by LI_COCLI desc limit 1')->queryOne();
-                   // print_r($data['CL_COD']);
-                   // 
-                   return $data;
-           
-        }
-        catch(Exception $e) {
-            echo $e->getMessage();
-        }*/
+ 
 }

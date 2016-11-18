@@ -60,8 +60,13 @@ class LibretasController extends Controller
     {
         //$id='000000000003';
        // $id = Yii::$app->request->post('fila');
+       // 
+        $model = $this->findModel($id);
+        $cliente = ClientesController::buscarCliente($model->LI_COCLI);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'cliente' => $cliente,
+
         ]);
     }
 
@@ -103,9 +108,9 @@ class LibretasController extends Controller
 
             $model->LI_FECPED = date('Y-m-d');
             $model->LI_HORA=  date('H:i:s');
-            $model->LI_CONSULT = false;
-            $model->LI_ESTUD = false;
-            $model->LI_IMPR = false;
+            $model->LI_CONSULT = 0;
+            $model->LI_ESTUD = 0;
+            $model->LI_IMPR = 0;
             $model->LI_FECRET = null;
             $model->LI_FECIMP = null;
             $model->LI_FECVTO = null;
@@ -113,8 +118,8 @@ class LibretasController extends Controller
             $model->LI_ANULADA =false;
             $model->LI_ADIC = null;
             $model->LI_IMPADI = 0;
-            $model->LI_REIMPR = false;
-            $model->LI_SELECT = false;
+            $model->LI_REIMPR = 0;
+            $model->LI_SELECT = 0;
           //  $model->LI_IMPORTE= 0;
 
 

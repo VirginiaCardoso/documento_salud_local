@@ -66,7 +66,7 @@ Pjax::begin();
      
                <?= $form->field($cliente->cLTIPDOC, 'TI_NOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
-        <div class="col-md-4">
+            <div class="col-md-4">
 
                     <?= $form->field($cliente, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
@@ -81,12 +81,6 @@ Pjax::begin();
                  <input type="text" class="form-control" id="edad" readonly="true" value = <?= "'".$cliente->getEdad()."'" ?>>
            
             </div>
-          <!--  <div class="col-md-4">
-            
-                <?= $form->field($cliente, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'value' => ($cliente->CL_SEXO=='F' ? 'Femenino': 'Masculino'), 'maxlength' => true]) ?>
-        
-            </div>
-            -->
             <div class="col-md-2">
                      <?='<label class=" control-label" for="sexo">Sexo</label>' ?>
                 </div>
@@ -128,7 +122,7 @@ Pjax::begin();
 <br>
 <div class="row">
     <div class="col-md-2">
-        <?='<label class=" control-label" for="CL_IMG"> Imágen cliente </label>' ?>
+        <?='<label class=" control-label" for="CL_IMG"> Foto </label>' ?>
     </div>
 <div class="col-md-2">
         <?php 

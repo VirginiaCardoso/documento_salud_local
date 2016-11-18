@@ -216,7 +216,9 @@ class ClientesController extends Controller
         }
     }
 
-   
+   public function buscarCliente($id){
+        return ClientesController::findModel($id);
+   }
 
 
 
