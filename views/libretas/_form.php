@@ -25,14 +25,18 @@ Pjax::begin();
     <?php $form = ActiveForm::begin([   'id' => 'formDatosPersonales', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
 
    <div class="row">
-        <div class="col-md-4"> 
-            <?= $form->field($model, 'LI_FECPED', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-        </div>
+         <div class="col-md-1">
+                 <?='<label class=" control-label col-md-4" for="fecha">Fecha</label>' ?>
+            </div>
+            <div class="col-md-2">
+                <?= Html::activeHiddenInput($model, 'LI_FECPED') ?> 
+                 <input type="text" class="form-control" id="fecha" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECPED, 'php:d-m-Y')."'" ?>>
+            </div>
         <div class="col-md-4"> 
             <?= $form->field($model, 'LI_HORA', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
         </div>
         <div class="col-md-4"> 
-            <?= $form->field($model, 'LI_NRO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+            <?= $form->field($model, 'LI_NRO', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
         </div>
     </div>
 

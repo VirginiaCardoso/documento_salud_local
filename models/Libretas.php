@@ -91,7 +91,7 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_IMPORTE' => 'Importe',//importe recaudado en este trámite
             'LI_FECIMP' => 'Fecha Impresión Credencial',
             'LI_FECVTO' => 'Fecha Vencimiento',//se calcula suamndo 365
-            'LI_COMP' => 'N° Comprobante Impresión',
+            'LI_COMP' => 'N° Comprobante Impr.',
             'LI_ANULADA' => 'Anulada',
             'LI_ADIC' => 'Adicional ',//determina si se cobra adicional
             'LI_IMPADI' => 'Importe Adicional',
