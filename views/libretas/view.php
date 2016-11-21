@@ -155,7 +155,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model->lICONVEN, 'CO_DESC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['readonly' => true,'maxlength' => true])->label("Convenio") ?>
+
+                        <?= $form->field($model->lICONVEN, 'CO_DESC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['readonly' => true,'maxlength' => true])->label("Convenio") ?>
                 </div>
             </div>
             <div class="row">

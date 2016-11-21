@@ -86,7 +86,7 @@ if (Yii::$app->session->hasFlash('error')) {
             ],
             ['label' => 'Tesorería',  'items' =>
                 [
-                    ['label' => 'Anular trámite', 'url' =>  '#'],
+                    ['label' => 'Anular trámite', 'url' =>  ['/libretas/anular/']],
                     ['label' => 'Devolución', 'url' => '#'],
                     ['label' => 'Reimpresión de comprobantes', 'url' => '#'],//['/prestamos/index']],
                     ['label' => 'Caja diaria', 'url' => '#'],//['/prestamos/devoluciones']],

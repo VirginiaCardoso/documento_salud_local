@@ -11,6 +11,8 @@ use documento_salud\controllers\DiasNoLaborablesController;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * LibretasController implements the CRUD actions for Libretas model.
@@ -161,6 +163,24 @@ class LibretasController extends Controller
         }
     }
 
+
+    /**
+     * Updates an existing Libretas model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionAnular()
+    {
+         $model = new Libretas();
+           
+            return $this->render('anular', [
+                'model' => $model,
+                
+            ]);
+     
+    }
+
     /**
      * Deletes an existing Libretas model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -245,17 +265,63 @@ class LibretasController extends Controller
      
     }
 
-    public function actionVer() {
-        var_dump(Yii::$app->request->post());
-        if (isset($_POST['fila'])) {
-            $model = Libretas::findOne($_POST['fila']);
+ /*
+    public function actionQuery($q = null) {
+        try {*/
 
-           // $model->practicas = $model->practicasTurno;
-            return $this->renderAjax('_formLibretas', [
-                'model' => $model,
-            ]);
-        } else {
-            return '<div class="alert alert-danger">No existe información!</div>';
+        /*   $query = new Query;
+           $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI', Clientes::tableName().'.CL_APENOM'] )
+                ->from(Libretas::tableName())
+                ->join(  'INNER JOIN',
+                    Clientes::tableName(),
+                    Clientes::tableName().'.CL_COD ='.Libretas::tableName().'.LI_COCLI'
+                ); 
+            $query->where('LI_NRO LIKE "%' . $q .'%"');
+         $query->orderBy('LI_NRO');
+            $command = $query->createCommand();
+            */
+           
+  /*          $connection = Yii::$app->getDb();
+            $command = $connection->createCommand(' SELECT 
+                FROM bets INNER JOIN users ON bets.user_id = users.id
+                WHERE users.user_status = 'verified'
+                AND bets.date_time > :start_date
+                GROUP BY bets.user_id
+                ORDER BY total_win DESC', [':start_date' => '1970-01-01']);
+
+$result = $command->queryAll();
+            var_dump($command);
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) {
+                $out[] = ['value' => $d['LI_NRO'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+            }
+            echo Json::encode($out);
+
+       /*     } catch(\Exception $e) {
+                $transaction->rollBack();
+                throw $e;
+            } */
+ /*       }
+        catch(Exception $e) {
+            echo $e->getMessage();
         }
     }
+
+    public function actionBuscar_libreta() {
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+
+            $p=Libretas::findOne(["LI_NRO" => $post["LI_NRO"]]);
+  */         /* $p->PA_DESC_ADEU = "error";
+            */
+           // $p->save(false);
+
+   /*        return \yii\helpers\Json::encode($p->attributes);
+        }
+    }
+
+*/
+    
+
 }
