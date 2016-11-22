@@ -172,9 +172,9 @@ class LibretasController extends Controller
      */
     public function actionAnular()
     {
-         $model = new Libretas();
+        $model = new Libretas();
            
-            return $this->render('anular', [
+        return $this->render('anular', [
                 'model' => $model,
                 
             ]);
