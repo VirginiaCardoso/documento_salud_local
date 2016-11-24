@@ -33,6 +33,8 @@ function seleccionoTipo() {
 }
 
 function cargarLibretas(e,datum) {
+       // $('#divbotonanular').hide();
+         $('#search-libreta').val('');
         $.ajax({
             url: 'index.php?r=libretas/buscar_libreta',
             dataType: 'JSON',
@@ -48,9 +50,18 @@ function cargarLibretas(e,datum) {
               $('#libretas-li_cocli').val(libreta.LI_COCLI);
               $('#fecha').val(libreta.LI_FECPED);
               $('#importe').val(libreta.LI_IMPORTE);
+
               ref =  document.getElementById('botonanular').href;
               document.getElementById('botonanular').href =  ref+'&LI_NRO='+libreta.LI_NRO;
-              //alert(document.getElementById('botonanular').href);
+             // alert(libreta.LI_ANULADA);
+              if ((libreta.LI_ANULADA==0)||(libreta.LI_ANULADA==null)){
+                $('#divbotonanular').show();
+                $('#labelanular').hide();
+              }
+              else {
+                $('#divbotonanular').hide();
+                $('#labelanular').show();
+              }
 
               $.ajax({
                 url: 'index.php?r=clientes/buscar_cliente',
@@ -76,14 +87,14 @@ function cargarLibretas(e,datum) {
                   $('#tposer').val(tipo.TS_DESC);
                 },
               });
-              
-              
-
-
-              
-
-
-        },
+     },
         });
         $('#search-libreta').val('');
 }
+
+
+$(document).ready(function(){
+    $('#divbotonanular').hide();
+    $('#labelanular').hide();
+
+});

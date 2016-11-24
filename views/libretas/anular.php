@@ -122,11 +122,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
             </div>
-            <div class="form-group pull-right " >
+            <div class="form-group pull-right " id="divbotonanular" >
                     <?= Html::a('Anular Trámite', Url::toRoute(['libretas/anular', 'LI_NRO' => null]), 
             ['class' => 'btn btn-success botonpanel', 'id' => 'botonanular']) ?>
-
-                 
+           
+                   
+            </div>
+            <div class="form-group pull-right " id="labelanular" >
+                    <label class="labelanulado col-md-14" >Trámite ya anulado.</label>         
                    
             </div>
         </div>
