@@ -16,6 +16,13 @@ use documento_salud\controllers\LibretasController;
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\LibretasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+$this->registerJs(
+   "$('document').ready(function(){ 
+        setInterval(function(){
+            $.pjax.reload({container:'#pjax_libretas'}); 
+        }, 10000);
+    });"
+);
 
 LibretasAsset::register($this);
 
@@ -59,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     
-<?php Pjax::begin(['id'=>'pjax-llamadas']) ?>    
+<?php Pjax::begin(['id'=>'pjax_libretas']) ?>    
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,

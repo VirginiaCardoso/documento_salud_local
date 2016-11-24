@@ -22,7 +22,7 @@ LibretasAsset::register($this);
 Pjax::begin(); 
 
 $this->title = 'Anular Trámite';
-$this->params['breadcrumbs'][] = ['label' => 'Libretas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Tesorería'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 

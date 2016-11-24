@@ -91,8 +91,22 @@ class LibretasController extends Controller
                 $ultId = Libretas::getLastCod();
                 
                 $model->LI_NRO = str_pad($ultId+1, 12, "0", STR_PAD_LEFT);
+                $model->LI_FECPED = date('Y-m-d');
+                $model->LI_HORA=  date('H:i:s');
+                $model->LI_CONSULT = 0;
+                $model->LI_ESTUD = 0;
+                $model->LI_IMPR = 0;
+                $model->LI_FECRET = null;
+                $model->LI_FECIMP = null;
+                $model->LI_FECVTO = null;
+                $model->LI_COMP = "000";//ver
+                $model->LI_ANULADA =0;
+                $model->LI_ADIC = 0;
+                $model->LI_IMPADI = 0;
+                $model->LI_REIMPR = 0;
+                $model->LI_SELECT = 0;
 
-                if ($model->save()){
+                if ($model->save(false)){
                     Yii::$app->getSession()->setFlash('exito', 'Libreta  guardada correctamente. Número: '.$model->LI_NRO);
                      
                 }
