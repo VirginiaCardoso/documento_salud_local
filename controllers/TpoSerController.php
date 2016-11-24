@@ -140,6 +140,19 @@ class TpoSerController extends Controller
         }
     }
 
+    public function actionBuscar_tipo() {
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+
+            $p=Tposer::findOne(["TS_COD" => $post["TS_COD"]]);
+           /* $p->PA_DESC_ADEU = "error";
+            */
+           // $p->save(false);
+
+           return \yii\helpers\Json::encode($p->attributes);
+        }
+    }
+
 
 
 }

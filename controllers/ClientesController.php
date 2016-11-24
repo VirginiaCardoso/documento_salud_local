@@ -220,6 +220,19 @@ class ClientesController extends Controller
         return ClientesController::findModel($id);
    }
 
+   public function actionBuscar_cliente() {
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+
+            $p=Clientes::findOne(["CL_COD" => $post["CL_COD"]]);
+           /* $p->PA_DESC_ADEU = "error";
+            */
+           // $p->save(false);
+
+           return \yii\helpers\Json::encode($p->attributes);
+        }
+    }
+
 
 
 }

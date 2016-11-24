@@ -6,6 +6,7 @@ use Yii;
 use documento_salud\models\Libretas;
 use documento_salud\models\LibretasSearch;
 use documento_salud\models\Clientes;
+use documento_salud\models\TpoSer;
 use documento_salud\controllers\DiasNoLaborablesController;
 
 use yii\web\Controller;
@@ -170,15 +171,52 @@ class LibretasController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionAnular()
+    public function actionVistaAnular()
     {
         $model = new Libretas();
-           
+
         return $this->render('anular', [
                 'model' => $model,
                 
             ]);
      
+    }
+
+    /**
+     * Updates an existing Clientes model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionAnular($LI_NRO=null)
+    {
+        if ($LI_NRO==null) {
+                Yii::$app->getSession()->setFlash('error', 'Seleccionar Nro. de Trámite que desea anular.');
+                return $this->redirect(['libretas/vista-anular']);
+            }
+            else {
+
+            $model = $this->findModel($LI_NRO);
+
+            if ($model!=null){
+
+                $model->LI_ANULADA=1;
+                $model->save(false);
+                //return $this->redirect(['view', 'id' => $model->CL_COD]);
+                Yii::$app->getSession()->setFlash('exito', 'Trámite Nro. '.$LI_NRO.' anulado.');
+                return $this->redirect(['libretas/vista-anular']);
+               // return $this->render('anular', [
+               //     'model' => $model,
+               // ]);
+            }else {
+
+                    return $this->redirect(['libretas/vista-anular']);
+                
+              //  return $this->render('anular', [
+               //     'model' => $model,
+               // ]);
+            }
+        }
     }
 
     /**
@@ -265,32 +303,29 @@ class LibretasController extends Controller
      
     }
 
- /*
+ 
     public function actionQuery($q = null) {
-        try {*/
+        try {
 
-        /*   $query = new Query;
-           $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI', Clientes::tableName().'.CL_APENOM'] )
-                ->from(Libretas::tableName())
+            $datab = Libretas::databaseName();
+
+          $query = new Query;
+            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM'] )
+                ->from($datab.'.'.Libretas::tableName())
                 ->join(  'INNER JOIN',
-                    Clientes::tableName(),
-                    Clientes::tableName().'.CL_COD ='.Libretas::tableName().'.LI_COCLI'
-                ); 
+                    $datab.'.'.Clientes::tableName(),
+                    $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
+                ->join(  'INNER JOIN',
+                    $datab.'.'.TpoSer::tableName(),
+                    $datab.'.'.TpoSer::tableName().'.TS_COD ='.$datab.'.'.Libretas::tableName().'.LI_TPOSER')
+                ; 
             $query->where('LI_NRO LIKE "%' . $q .'%"');
-         $query->orderBy('LI_NRO');
+            $query->orderBy('LI_NRO');
             $command = $query->createCommand();
-            */
+            
            
-  /*          $connection = Yii::$app->getDb();
-            $command = $connection->createCommand(' SELECT 
-                FROM bets INNER JOIN users ON bets.user_id = users.id
-                WHERE users.user_status = 'verified'
-                AND bets.date_time > :start_date
-                GROUP BY bets.user_id
-                ORDER BY total_win DESC', [':start_date' => '1970-01-01']);
-
-$result = $command->queryAll();
-            var_dump($command);
+       /*
+            var_dump($command);*/
             $data = $command->queryAll();
             $out = [];
             foreach ($data as $d) {
@@ -298,11 +333,7 @@ $result = $command->queryAll();
             }
             echo Json::encode($out);
 
-       /*     } catch(\Exception $e) {
-                $transaction->rollBack();
-                throw $e;
-            } */
- /*       }
+        }
         catch(Exception $e) {
             echo $e->getMessage();
         }
@@ -313,15 +344,15 @@ $result = $command->queryAll();
             $post = Yii::$app->request->post();
 
             $p=Libretas::findOne(["LI_NRO" => $post["LI_NRO"]]);
-  */         /* $p->PA_DESC_ADEU = "error";
+           /* $p->PA_DESC_ADEU = "error";
             */
            // $p->save(false);
 
-   /*        return \yii\helpers\Json::encode($p->attributes);
+           return \yii\helpers\Json::encode($p->attributes);
         }
     }
 
-*/
+
     
 
 }

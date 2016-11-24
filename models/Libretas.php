@@ -43,6 +43,11 @@ class Libretas extends \yii\db\ActiveRecord
         return 'libretas';
     }
 
+    public static function databaseName()
+    {
+        return 'docsl';
+    }
+
     /**
      * @return \yii\db\Connection the database connection used by this AR class.
      */
