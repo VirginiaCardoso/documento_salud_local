@@ -223,7 +223,8 @@ class LibretasController extends Controller
                 }
                 else
                 {
-                    Yii::$app->getSession()->setFlash('error', 'Trámite ya anulado.');   
+                    Yii::$app->getSession()->setFlash('error', 'Trámite ya se encuentra anulado.'); 
+                    return $this->redirect(['libretas/vista-anular']);  
                 }
                
             }else {
