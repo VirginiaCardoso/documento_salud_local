@@ -358,6 +358,43 @@ class LibretasController extends Controller
         }
     }
 
+        //búsqueda de trámites de libretas que no esten anulados
+        public function actionQuery2($q = null) {
+        try {
+
+            $datab = Libretas::databaseName();
+
+          $query = new Query;
+            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM'] )
+                ->from($datab.'.'.Libretas::tableName())
+                ->join(  'INNER JOIN',
+                    $datab.'.'.Clientes::tableName(),
+                    $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
+                ->join(  'INNER JOIN',
+                    $datab.'.'.TpoSer::tableName(),
+                    $datab.'.'.TpoSer::tableName().'.TS_COD ='.$datab.'.'.Libretas::tableName().'.LI_TPOSER')
+                ; 
+            $query->where($datab.'.'.Libretas::tableName().'.LI_NRO LIKE "%' . $q .'%"');//OR '.$datab.'.'.Clientes::tableName().'.CL_APENOM LIKE "%' . $q .'%'.$datab.'.'.Clientes::tableName().'CL_NUMDOC LIKE "%' . $q ."%'");
+            $query->andWhere($datab.'.'.Libretas::tableName().'.LI_ANULADA = 0');
+            $query->orderBy($datab.'.'.Libretas::tableName().'.LI_NRO');
+            $command = $query->createCommand();
+            
+           
+       /*
+            var_dump($command);*/
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) {
+                $out[] = ['value' => $d['LI_NRO'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+            }
+            echo Json::encode($out);
+
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function actionBuscar_libreta() {
         if (Yii::$app->request->isAjax) {
             $post = Yii::$app->request->post();

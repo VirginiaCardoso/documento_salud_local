@@ -61,6 +61,7 @@ function cargarLibretas(e,datum) {
               else {
                 $('#divbotonanular').hide();
                 $('#labelanular').show();
+                $('#search-libreta').val('');
               }
 
               $.ajax({

@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                             'display' => 'value',
                             'remote' => [
-                                'url' => Url::to(['libretas/query']) . '&q=%Q',
+                                'url' => Url::to(['libretas/query2']) . '&q=%Q',
                                 'wildcard' => '%Q'
                             ],
                             //'limit' => 20

@@ -74,7 +74,7 @@ if (Yii::$app->session->hasFlash('error')) {
         'items' => [
             ['label' => 'Administración', 'items' =>
                 [
-                    ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/']],//['/eventos/index']],
+                    ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],//['/eventos/index']],
                     ['label' => 'Resultado de estudios comentarios', 'url' => '#'],//['/prestamos/index']],
                     ['label' => 'Emisión virtual', 'url' => '#'],//['/prestamos/devoluciones']],
                 ]
@@ -87,7 +87,7 @@ if (Yii::$app->session->hasFlash('error')) {
             ['label' => 'Tesorería',  'items' =>
                 [
                     ['label' => 'Anular trámite', 'url' =>  ['/libretas/vista-anular/']],
-                    ['label' => 'Devolución', 'url' => '#'],
+                    ['label' => 'Devoluciones', 'url' => ['/devoluciones/']],
                     ['label' => 'Reimpresión de comprobantes', 'url' => '#'],//['/prestamos/index']],
                     ['label' => 'Caja diaria', 'url' => '#'],//['/prestamos/devoluciones']],
                      ['label' => 'Resumen', 'url' => '#'],//['/eventos/index']],
