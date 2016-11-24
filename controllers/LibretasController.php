@@ -125,7 +125,7 @@ class LibretasController extends Controller
 
             $model->LI_FECPED = date('Y-m-d');
             $model->LI_HORA=  date('H:i:s');
-            $model->LI_CONSULT = 0;
+          /*  $model->LI_CONSULT = 0;
             $model->LI_ESTUD = 0;
             $model->LI_IMPR = 0;
             $model->LI_FECRET = null;
@@ -136,7 +136,7 @@ class LibretasController extends Controller
             $model->LI_ADIC = null;
             $model->LI_IMPADI = 0;
             $model->LI_REIMPR = 0;
-            $model->LI_SELECT = 0;
+            $model->LI_SELECT = 0;*/
           //  $model->LI_IMPORTE= 0;
 
 
@@ -214,14 +214,18 @@ class LibretasController extends Controller
 
             if ($model!=null){
 
-                $model->LI_ANULADA=1;
-                $model->save(false);
-                //return $this->redirect(['view', 'id' => $model->CL_COD]);
-                Yii::$app->getSession()->setFlash('exito', 'Trámite Nro. '.$LI_NRO.' anulado.');
-                return $this->redirect(['libretas/vista-anular']);
-               // return $this->render('anular', [
-               //     'model' => $model,
-               // ]);
+                if($model->LI_ANULADA==0){
+
+                    $model->LI_ANULADA=1;
+                    $model->save(false);
+                    Yii::$app->getSession()->setFlash('exito', 'Trámite Nro. '.$LI_NRO.' anulado.');
+                    return $this->redirect(['libretas/vista-anular']);
+                }
+                else
+                {
+                    Yii::$app->getSession()->setFlash('error', 'Trámite ya anulado.');   
+                }
+               
             }else {
 
                     return $this->redirect(['libretas/vista-anular']);
