@@ -400,6 +400,8 @@ class LibretasController extends Controller
             $post = Yii::$app->request->post();
 
             $p=Libretas::findOne(["LI_NRO" => $post["LI_NRO"]]);
+            $fech = $p->LI_FECPED;
+            $p->LI_FECPED = Yii::$app->formatter->asDate($fech, 'php:d-m-Y');
            /* $p->PA_DESC_ADEU = "error";
             */
            // $p->save(false);

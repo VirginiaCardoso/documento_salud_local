@@ -91,9 +91,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="form-group ">
-                        <label class="control-label col-md-6" for="fecha">Fecha </label>
+                        <label class="control-label col-md-4" for="fecha">Fecha </label>
                         <div class="col-md-4">
                             <input id="fecha" class="form-control" name="fecha" readonly="" maxlength="12" type="text">
                         </div>
