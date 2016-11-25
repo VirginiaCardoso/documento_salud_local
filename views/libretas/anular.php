@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?=Typeahead::widget([
                     'id' => 'search-libreta',
                     'name' => 'search',
-                    'options' => ['placeholder' => 'Ingrese nro trámite ...'],
+                    'options' => ['placeholder' => 'Ingrese nro...'],
                     'scrollable' => true,
                     'pluginOptions' => ['highlight'=>true],
                     'dataset' => [

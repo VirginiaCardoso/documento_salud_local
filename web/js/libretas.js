@@ -99,3 +99,36 @@ $(document).ready(function(){
     $('#labelanular').hide();
 
 });
+
+function cargarLibretasDev(e,datum) {
+        $('#search-libreta').val('');
+        $.ajax({
+            url: 'index.php?r=libretas/buscar_libreta',
+            dataType: 'JSON',
+            method: 'POST',
+            data: {
+                LI_NRO: datum.cod
+            },
+            success: function (libreta) {
+             // alert(libreta);
+             //   $('#search-paciente').val('');
+
+              $('#devoluciones-de_nrotra').val(libreta.LI_NRO);
+              $('#clientenro').val(libreta.LI_COCLI);
+              $.ajax({
+                url: 'index.php?r=clientes/buscar_cliente',
+                dataType: 'JSON',
+                method: 'POST',
+                data: {
+                    CL_COD: libreta.LI_COCLI
+                },
+                success: function (cliente) {
+                  $('#apenom').val(cliente.CL_APENOM);
+                },
+              });
+
+              
+     },
+        });
+        $('#search-libreta').val('');
+}

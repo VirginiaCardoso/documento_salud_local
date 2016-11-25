@@ -68,6 +68,8 @@ class DevolucionesController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->DE_COD]);
         } else {
+            $model->DE_FECHA = date('Y-m-d');
+
             return $this->render('create', [
                 'model' => $model,
             ]);
