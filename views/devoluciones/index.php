@@ -5,6 +5,8 @@ use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\bootstrap\ActiveForm;
 
+use documento_salud\assets\LibretasAsset;
+
 
 //use archivos_hc\assets\DevolucionesAsset;
 
@@ -29,6 +31,8 @@ $this->registerJs(
     });"
 );
 
+
+LibretasAsset::register($this);
 
 $this->title = 'Devoluciones';
 $this->params['breadcrumbs'][] = $this->title;
@@ -63,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
      <div class="col-md-offset-10">
     
 
-        <button class="btn btn-primary pull-right" type="button" onclick="quitarDeCola();">Registrar Devolución</button>    
+        <button class="btn btn-primary pull-right" type="button" onclick="registrarDevolu();">Registrar Devolución</button>    
 
     </div>
 

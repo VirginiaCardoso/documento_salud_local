@@ -74,7 +74,8 @@ if (Yii::$app->session->hasFlash('error')) {
         'items' => [
             ['label' => 'Administración', 'items' =>
                 [
-                    ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],//['/eventos/index']],
+                    ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],
+                    ['label' => 'Estado Documento Laboral', 'url' =>  ['/libretas/consulta']],
                     ['label' => 'Resultado de estudios comentarios', 'url' => '#'],//['/prestamos/index']],
                     ['label' => 'Emisión virtual', 'url' => '#'],//['/prestamos/devoluciones']],
                 ]

@@ -132,3 +132,37 @@ function cargarLibretasDev(e,datum) {
         });
         $('#search-libreta').val('');
 }
+
+
+function registrarDevolu() {
+  var parametros = $("#formPool").serialize();
+  //alert(parametros);
+  $.ajax({
+    data:  parametros,
+    url:   'index.php?r=devoluciones/guardardev',
+   // dataType: 'JSON',
+   dataType:'html',
+    type:  'POST',
+    success: function (response) {
+     // location.reload();
+      //alert(response);
+     /* if (response=="ok"){
+        krajeeDialog2.alert("Devoluciones registradas correctamente.");
+        
+      }
+      else {
+        if (response=="cero")
+           krajeeDialog4.alert("Debe seleccionar algún prestamo para registrar la devolución.");
+         
+        // location.reload();
+      }
+*/
+
+   //  location.reload();
+    },
+   /* error:  function(response){
+      krajeeDialog4.alert("No se pudieron registrar las devoluciones.");
+    },*/
+   // dataType:'html'
+  });
+}

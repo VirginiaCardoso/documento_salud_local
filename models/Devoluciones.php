@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use documento_salud\models\Libretas;
 
 /**
  * This is the model class for table "devolu".
@@ -39,12 +40,24 @@ class Devoluciones extends \yii\db\ActiveRecord
     {
         return [
             [['DE_NROTRA', 'DE_IMPORT', 'DE_FECHA'], 'required'],
-            [['DE_IMPORT'], 'number'],
+            [['DE_IMPORT'], 'validarImporte'],
             [['DE_FECHA'], 'safe'],
             [['DE_NROTRA'], 'string', 'max' => 12],
             [['DE_NROTRA'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DE_NROTRA' => 'LI_NRO']],
         ];
     }
+
+    public function validarImporte($attribute,$params)
+{
+    $model = Libretas::findOne($this->DE_NROTRA);
+
+    if($model->LI_IMPORTE < $this->attribute){
+         $this->addError($attribute, 'El importe de la devolución no puede ser menor al importe de trámite');
+    }
+    else {
+        $this->addError($attribute, 'El importe de la devolución no puede ser menor al importe de trámite');
+    }
+}
 
     /**
      * @inheritdoc

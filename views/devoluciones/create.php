@@ -79,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'DE_NROTRA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
                 </div>
         </div>
-        <div class="row">
+    <!--    <div class="row">
             <div class="col-md-12">
                 <div class="form-group ">
                     <label class="control-label col-md-2" for="clientenro">Cliente </label>
@@ -87,13 +87,13 @@ $this->params['breadcrumbs'][] = $this->title;
                         <input id="clientenro" class="form-control" name="clientenro" readonly="" maxlength="12" type="text">
                     </div>
                     <div class="col-md-8">
-                    <input type="text" class="form-control" id="apenom" readonly="true" value ="" >
+                    <input type="text" class="form-control" id="apenom" readonly="true" value = >
                 </div>
                 </div>
             </div>
         </div>
 
-		<br>
+		<br>-->
         <!--   <?= $form->field($model, 'DE_FECHA')->textInput() ?>
 
 	    <?= $form->field($model, 'DE_IMPORT')->textInput(['maxlength' => true]) ?>
