@@ -61,16 +61,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'DE_FECHA:date',
 
            ['class' => 'yii\grid\ActionColumn'],
-           ['class' => 'yii\grid\CheckboxColumn'],
+      //     ['class' => 'yii\grid\CheckboxColumn'],
         ],
     ]); ?>
-     <div class="col-md-offset-10">
+<!--     <div class="col-md-offset-10">
     
 
         <button class="btn btn-primary pull-right" type="button" onclick="registrarDevolu();">Registrar Devolución</button>    
 
     </div>
-
+-->
 <?php Pjax::end(); ?>
 <?php ActiveForm::end(); ?>
 

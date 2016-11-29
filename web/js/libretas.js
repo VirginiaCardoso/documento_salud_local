@@ -132,7 +132,7 @@ function cargarLibretasDev(e,datum) {
         });
         $('#search-libreta').val('');
 }
-
+/*
 
 function registrarDevolu() {
   var parametros = $("#formPool").serialize();
@@ -159,10 +159,10 @@ function registrarDevolu() {
 */
 
    //  location.reload();
-    },
+/*    },*
    /* error:  function(response){
       krajeeDialog4.alert("No se pudieron registrar las devoluciones.");
     },*/
    // dataType:'html'
-  });
-}
+/*  });
+} */
