@@ -21,13 +21,13 @@
 }
 
 /* fondo popover referencia colores*/
-.popover-content {
+html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-content
+{
     background-color: #DBE4EE;
-    font-size: 14px;
+    font-size: 16px;
 }
 
-#w0.popover.popover-default.right.right-top.in div.popover-title, 
-.popover.popover-default.right.right-top.in div.popover-title {
+html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-title {
   background-color: #DBE4EE;
   font-size: 16px;
   font-weight: bold;
@@ -37,8 +37,7 @@
 /*html body.modal-open div.wrap div.container div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-title
 {  background-color: #DBE4EE;
 }*/
-
- .popover-content table {
+html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-content table{
     border-collapse: separate;
     border-spacing:  4px;
   }
