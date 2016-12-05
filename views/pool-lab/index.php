@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <td class="label "  >       Con Muestras       </td>
                                 </tr>
                                 <tr style="background-color: #F9F9F9">
-                                    <td class="label "  >       Listos       </td>
+                                    <td class="label"  >       Listos       </td>
                                 </tr>
                                 
                             </table>';
