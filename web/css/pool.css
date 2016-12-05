@@ -44,8 +44,7 @@
   }
 
 /* muestra colores */
-html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-content table tbody tr td.label.label-default, 
-.popover-content table tbody tr td.label.label-default {
+html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-md-offset-2.pull-right div#w0.popover.popover-default.right.right-top.in div.popover-content table tbody tr td.label.label-default {
   background: transparent;
   color: black;
   font-size: 16px;

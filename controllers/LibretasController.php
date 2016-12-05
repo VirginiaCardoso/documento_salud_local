@@ -14,6 +14,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
 use yii\helpers\Json;
+use dosamigos\qrcode\formats\vCard;
+use dosamigos\qrcode\QrCode;
 
 /**
  * LibretasController implements the CRUD actions for Libretas model.
@@ -409,6 +411,33 @@ class LibretasController extends Controller
            return \yii\helpers\Json::encode($p->attributes);
         }
     }
+
+        /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionEmision()
+    {
+        //$id='000000000003';
+       // $id = Yii::$app->request->post('fila');
+       $model = new Libretas();
+       $cliente = new Clientes();
+      //  $model = $this->findModel($id);
+      //  $cliente = ClientesController::buscarCliente($model->LI_COCLI);
+        return $this->render('emisionvirtual', [
+            'model' => $model,
+            'cliente' => $cliente,
+
+        ]);
+    }
+
+    public function actionQrcode() {
+    $vcard = new BookMark(['title' => 'nombre', 'url'  => 'http://localhost/www/intranet/modulos/documento_salud/web/index.php?r=libretas%2Fview&id=000000000252']);
+    return QrCode::png($vcard->getText());
+    // you could also use the following
+    // return return QrCode::png($mailTo);
+}
 
 
     

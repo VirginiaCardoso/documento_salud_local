@@ -76,8 +76,8 @@ if (Yii::$app->session->hasFlash('error')) {
                 [
                     ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],
                     ['label' => 'Estado Documento Laboral', 'url' =>  ['/libretas/consulta']],
-                    ['label' => 'Resultado de estudios comentarios', 'url' => '#'],//['/prestamos/index']],
-                    ['label' => 'Emisión virtual', 'url' => '#'],//['/prestamos/devoluciones']],
+                    ['label' => 'Resultado de estudios comentarios', 'url' =>  ['/pool-lab/index']],//['/prestamos/index']],
+                    ['label' => 'Emisión virtual', 'url' => ['/libretas/emision']],//['/prestamos/devoluciones']],
                 ]
             ],
             ['label' => 'Médico', 'items' =>
