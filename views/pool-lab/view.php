@@ -10,7 +10,7 @@ use documento_salud\assets\LibretasAsset;
 LibretasAsset::register($this);
 
 $this->title = $model->PO_NROLIB;
-$this->params['breadcrumbs'][] = ['label' => 'Pool Labs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Estudios Complementarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
