@@ -138,6 +138,7 @@ class PoolLabController extends Controller
 
     public function actionCargarDatos($id){
         $model = $this->findModel($id);
+        $model->scenario = 'cargarDatos';
         // echo '<pre>',print_r($model),'</pre>';
         if ($model->load(Yii::$app->request->post())){
             $model->PO_LISTO = 1;

@@ -46,6 +46,7 @@ class PoolLab extends \yii\db\ActiveRecord
             [['PO_MUESTRA', 'PO_LISTO'], 'integer'],
             [['PO_NROLIB'], 'string', 'max' => 12],
             [['PO_COLEST', 'PO_GLUCOSA'], 'string', 'max' => 10],
+            [['PO_COLEST', 'PO_GLUCOSA'], 'required', 'on' => 'cargarDatos'],
             [['PO_NROLIB'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['PO_NROLIB' => 'LI_NRO']],
         ];
     }

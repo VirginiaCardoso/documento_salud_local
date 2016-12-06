@@ -2,34 +2,53 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use documento_salud\assets\LibretasAsset;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\PoolLab */
 
-$this->title = 'Cargar datos muestras: ' . $model->PO_NROLIB;
-$this->params['breadcrumbs'][] = ['label' => 'Pool Labs', 'url' => ['index']];
+LibretasAsset::register($this);
+
+$this->title = 'Datos muestras ';
+$this->params['breadcrumbs'][] = ['label' => 'Estudios Complementarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->PO_NROLIB, 'url' => ['view', 'id' => $model->PO_NROLIB]];
-$this->params['breadcrumbs'][] = 'Update';
+/*$this->params['breadcrumbs'][] = 'Update';*/
 ?>
 <div class="pool-lab-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <div class="pool-lab-form">
+		<h1 ><?= Html::encode($this->title) ?></h1>
 
-     <?php $form = ActiveForm::begin([   'id' => 'formDatosMuestras', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
+     	<?php $form = ActiveForm::begin([   'id' => 'formDatosMuestras', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
 
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">Cargar Datos</h3>
+	        </div>
+	        <div class="panel-body">
+			    <div class="row">
+		        	<div class="col-md-6">
+		    			<?= $form->field($model, 'PO_NROLIB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true, 'readonly' => true]) ?>
+					</div>
+		    	</div>
 
-    <?= $form->field($model, 'PO_NROLIB')->textInput(['maxlength' => true, 'readonly' => true]) ?>
+			    <div class="row">
+			        <div class="col-md-6"> 
+			    		<?= $form->field($model, 'PO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+					</div>
+			    </div>
 
-    <?= $form->field($model, 'PO_COLEST')->textInput(['maxlength' => true]) ?>
+			    <div class="row">
+			        <div class="col-md-6"> 
+			    <?= $form->field($model, 'PO_GLUCOSA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+					</div>
+			    </div>
 
-    <?= $form->field($model, 'PO_GLUCOSA')->textInput(['maxlength' => true]) ?>
-
-
-    <div class="form-group">
-        <?= Html::submitButton('Guardar' , ['class' =>  'btn btn-success' ]) ?>
-    </div>
+			    <div class="form-group  pull-right">
+			        <?= Html::submitButton('Guardar' , ['class' =>  'btn btn-success botonpanel' ]) ?>
+			    </div>
+			</div>
+		</div>
 
     <?php ActiveForm::end(); ?>
 
