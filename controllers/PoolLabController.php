@@ -5,6 +5,8 @@ namespace documento_salud\controllers;
 use Yii;
 use documento_salud\models\PoolLab;
 use documento_salud\models\PoolLabSearch;
+use documento_salud\models\Libretas;
+use documento_salud\models\Doclabau;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -143,7 +145,12 @@ class PoolLabController extends Controller
         if ($model->load(Yii::$app->request->post())){
             $model->PO_LISTO = 1;
             if ($model->save(false)) {
-                Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras');
+
+                $lib = Libretas::findOne($id);
+                $lib->LI_ESTUD = 1;
+                 if ($lib->save(false)) {
+                    Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras');
+                }
             }
             else {
                  Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 

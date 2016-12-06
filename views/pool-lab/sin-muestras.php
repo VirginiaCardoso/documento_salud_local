@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
 
-                <div class="row">
+         <!--       <div class="row">
                     <div class="col-md-6"> 
                         <?= $form->field($model, 'PO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true, 'readonly' => true]) ?>
                     </div>
@@ -54,13 +54,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-md-6"> 
                 <?= $form->field($model, 'PO_GLUCOSA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true, 'readonly' => true]) ?>
                     </div>
-                </div>
+                </div>-->
                 <div class="row">
                     <div class="col-md-2">
-                        <?='<label class=" control-label col-md-4" for="fecha">Muestra</label>' ?>
+                        <?='<label class=" control-label col-md-4" for="muestra">Muestra</label>' ?>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" id="fecha" readonly="true" value = <?= "'".$model->PO_MUESTRA==1?"Si":"No"."'" ?>>
+                        <input type="text" class="form-control" id="muestra" readonly="true" value = <?= "'".$model->PO_MUESTRA==1?"Si":"No" ?>>
                     </div>
                     
                 </div>
