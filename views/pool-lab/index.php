@@ -61,22 +61,33 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
        'rowOptions' => function ($model, $key, $index, $grid) {
-                   //  $url = Url::to(['libretas/view', 'id' => $model['LI_NRO']]);
-                    if ($model->PO_MUESTRA==0) {  //no se hizo la muestra
-                        return [ 
-                            'style' =>'cursor: pointer; background-color:'.PoolLabController::SIN_EXTRACC,
-                           // 'id' => $model->LI_NRO,
-                           // 'onclick' => "window.location.href='{$url}'",
-                            ];
+                  
+                   if ($model->PO_LISTO==0) {
+                        if ($model->PO_MUESTRA==0) {  //no se hizo la muestra
+                            $url = Url::to(['pool-lab/sin-muestras', 'id' => $model['PO_NROLIB']]);
+                            return [ 
+                                'style' =>'cursor: pointer; background-color:'.PoolLabController::SIN_EXTRACC,
+                                'id' => $model->PO_NROLIB,
+                               'onclick' => "window.location.href='{$url}'",
+                                ];
+                        }
+                        else {
+                            $url = Url::to(['pool-lab/cargar-datos', 'id' => $model['PO_NROLIB']]);
+                            return [ 
+                                'id' => $model->PO_NROLIB,
+                                'style' =>'cursor: pointer; background-color:'.PoolLabController::CON_EXTRACC,
+                               'onclick' => "window.location.href='{$url}'",
+                                ];
+                        }
                     }
                     else {
-                        return [ 
-                           // 'id' => $model->LI_NRO,
-                            'style' =>'cursor: pointer; background-color:'.PoolLabController::CON_EXTRACC,
-                           // 'onclick' => "window.location.href='{$url}'",
-                            ];
+                        $url = Url::to(['pool-lab/view', 'id' => $model['PO_NROLIB']]);
+                         return [ 
+                                 'id' => $model->PO_NROLIB,
+                                'style' =>'cursor: pointer; background-color:#F9F9F9',
+                                'onclick' => "window.location.href='{$url}'",
+                                ];
                     }
-
                     
                 },
 
@@ -111,7 +122,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'PO_MUESTRA',
             // 'PO_LISTO',
 
-            ['class' => 'yii\grid\ActionColumn'],
+         //   ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

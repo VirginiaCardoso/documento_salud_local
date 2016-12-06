@@ -57,9 +57,48 @@ class PoolLabController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        
+    }
+
+    /**
+     * Displays a single Convenios model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionSinMuestras($id)
+    {
+        return $this->render('sin-muestras', [
+                'model' => $this->findModel($id),
+            ]);
+    }
+
+
+    public function actionConfirmarMuestra($id){
+        
+         $model = $this->findModel($id);
+
+            if ($model!=null){
+                $model->PO_MUESTRA=1;
+               if( $model->save(false)){
+                Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la toma de muestras');
+                }
+                else {
+                     Yii::$app->getSession()->setFlash('error', 'Error al registrar la toma de muestras'); 
+                }
+
+
+
+            }
+            else {
+                Yii::$app->getSession()->setFlash('error', 'Error al registrar la toma de muestras'); 
+        
+        }
+        return $this->redirect(['index']);
+
     }
 
     /**
@@ -93,11 +132,32 @@ class PoolLabController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->PO_NROLIB]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            
         }
     }
+
+    public function actionCargarDatos($id){
+        $model = $this->findModel($id);
+         echo '<pre>',print_r($model),'</pre>';
+        if ($model->load(Yii::$app->request->post())){
+            $model->PO_LISTO = 1;
+            if ($model->save(false)) {
+                Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras');
+            }
+            else {
+                 Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
+            }
+            return $this->redirect(['index']);
+        }
+            else {
+                 return $this->render('update', [
+                'model' => $model,
+                ]);
+            }
+        
+           
+    }
+
 
     /**
      * Deletes an existing PoolLab model.
