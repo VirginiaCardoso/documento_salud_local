@@ -59,15 +59,26 @@ class PoolLabSearch extends PoolLab
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'PO_FEC' => $this->PO_FEC,
-            'PO_HORA' => $this->PO_HORA,
+            //'PO_FEC' => $this->PO_FEC,
+           // 'PO_HORA' => $this->PO_HORA,
             'PO_MUESTRA' => $this->PO_MUESTRA,
             'PO_LISTO' => $this->PO_LISTO,
         ]);
 
+        if (isset($this->PO_FEC) && !$this->PO_FEC=='') {
+           //  $nueva_fin = \DateTime::createFromFormat('d-m-Y',  $this->PO_FEC);
+            // $fecha_fin_format = $nueva_fin->format('Y-m-d');
+           // $nuevohasta = $nueva_fin->format('Y-m-d'); 
+             $query->andFilterWhere(['<=', 'PO_FEC', $this->PO_FEC]);
+         }
+
         $query->andFilterWhere(['like', 'PO_NROLIB', $this->PO_NROLIB])
             ->andFilterWhere(['like', 'PO_COLEST', $this->PO_COLEST])
             ->andFilterWhere(['like', 'PO_GLUCOSA', $this->PO_GLUCOSA]);
+
+        $query->orderBy([
+            'PO_FEC' => SORT_DESC
+        ]);
 
         return $dataProvider;
     }

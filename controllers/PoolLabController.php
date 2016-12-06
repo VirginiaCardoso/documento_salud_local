@@ -147,9 +147,28 @@ class PoolLabController extends Controller
             if ($model->save(false)) {
 
                 $lib = Libretas::findOne($id);
-                $lib->LI_ESTUD = 1;
-                 if ($lib->save(false)) {
-                    Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras');
+                if ($lib!= null){
+                    $lib->LI_ESTUD = 1;
+                     if ($lib->save(false)) {
+
+                        $doc = Doclabau::findOne($id);
+                        if ($doc==null) {
+                            $doc = new Doclabau();
+                            $doc->DO_CODLIB = $id;
+                        }
+                        $doc->DO_COLEST = $model->PO_COLEST;
+                        $doc->DO_GLUCO = $model->PO_GLUCOSA;
+                        if ($doc->save(false)){
+                            Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras'); 
+                        }
+                        else {
+                             Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
+                            }
+                        
+                    }
+                }
+                else {
+                 Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
                 }
             }
             else {
