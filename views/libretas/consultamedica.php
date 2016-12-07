@@ -43,9 +43,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
      <?php  echo $this->render('_search3', ['model' => $searchModel]); ?>
-     
+
 <?php $form = ActiveForm::begin(['method' => 'post', 'id' => 'formPool']); ?>    
-    
+
+<div class="col-md-offset-10">
+    <button class="btn btn-primary pull-right" type="button" onclick="registrarAtencion();">Registrar Atención</button>    
+
+</div>
+<br>
 <?php Pjax::begin(['id'=>'pjax_consultas']) ?>    
 <?= GridView::widget([
         'id'=> 'gridCons',
@@ -79,12 +84,7 @@ $this->params['breadcrumbs'][] = $this->title;
            ['class' => 'yii\grid\CheckboxColumn'],
         ],
     ]); ?>
-        <div class="col-md-offset-10">
-    
-
-        <button class="btn btn-primary pull-right" type="button" onclick="registrarAtencion();">Registrar Atención</button>    
-
-    </div>
+        
 <?php Pjax::end(); ?>
 <?php ActiveForm::end(); ?>
 </div>
