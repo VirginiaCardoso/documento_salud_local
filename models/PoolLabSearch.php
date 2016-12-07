@@ -74,7 +74,8 @@ class PoolLabSearch extends PoolLab
 
         $query->andFilterWhere(['like', 'PO_NROLIB', $this->PO_NROLIB])
             ->andFilterWhere(['like', 'PO_COLEST', $this->PO_COLEST])
-            ->andFilterWhere(['like', 'PO_GLUCOSA', $this->PO_GLUCOSA]);
+            ->andFilterWhere(['like', 'PO_GLUCOSA', $this->PO_GLUCOSA])
+            ->andFilterWhere(['=', 'PO_LISTO', 0]);
 
         $query->orderBy([
             'PO_FEC' => SORT_DESC

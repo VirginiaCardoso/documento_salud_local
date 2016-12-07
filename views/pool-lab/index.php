@@ -35,16 +35,16 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <tr style="background-color: '.PoolLabController::CON_EXTRACC.'">
                                     <td class="label "  >       Con Muestras       </td>
                                 </tr>
-                                <tr style="background-color: #F9F9F9">
-                                    <td class="label"  >       Listos       </td>
-                                </tr>
+                                
                                 
                             </table>';
 
 
             ?>
             
-
+<!-- <tr style="background-color: #F9F9F9">
+                                    <td class="label"  >       Listos       </td>
+                                </tr>*/-->
             <!-- Referencia de colores -->
             <?= PopoverX::widget([
             'header' => 'Referencia de Colores',
