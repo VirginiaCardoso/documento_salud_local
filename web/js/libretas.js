@@ -132,14 +132,14 @@ function cargarLibretasDev(e,datum) {
         });
         $('#search-libreta').val('');
 }
-/*
 
-function registrarDevolu() {
+
+function registrarAtencion() {
   var parametros = $("#formPool").serialize();
   //alert(parametros);
   $.ajax({
     data:  parametros,
-    url:   'index.php?r=devoluciones/guardardev',
+    url:   'index.php?r=libretas/registraratenc',
    // dataType: 'JSON',
    dataType:'html',
     type:  'POST',
@@ -159,10 +159,10 @@ function registrarDevolu() {
 */
 
    //  location.reload();
-/*    },*
+  },
    /* error:  function(response){
       krajeeDialog4.alert("No se pudieron registrar las devoluciones.");
     },*/
    // dataType:'html'
-/*  });
-} */
+ });
+} 

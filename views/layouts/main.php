@@ -76,13 +76,14 @@ if (Yii::$app->session->hasFlash('error')) {
                 [
                     ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],
                     ['label' => 'Estado Documento Laboral', 'url' =>  ['/libretas/consulta']],
-                    ['label' => 'Resultado de estudios comentarios', 'url' =>  ['/pool-lab/index']],//['/prestamos/index']],
-                    ['label' => 'Emisión virtual', 'url' => ['/libretas/emision']],//['/prestamos/devoluciones']],
+                    ['label' => ' Registrar Atención Consulta Médica', 'url' => ['/libretas/consulta-medica']],
+                    ['label' => 'Resultado de estudios complementarios', 'url' =>  ['/pool-lab/index']],
+                    ['label' => 'Emisión virtual', 'url' => ['/libretas/emision']],
                 ]
             ],
             ['label' => 'Médico', 'items' =>
                 [
-                    ['label' => 'Consulta médica', 'url' => '#'],//['/reportes/pedidos/']],
+                    ['label' => 'Consulta médica', 'url' => '#'],
                 ]
             ],
             ['label' => 'Tesorería',  'items' =>

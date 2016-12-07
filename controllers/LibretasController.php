@@ -7,6 +7,7 @@ use documento_salud\models\Libretas;
 use documento_salud\models\LibretasSearch;
 use documento_salud\models\Clientes;
 use documento_salud\models\TpoSer;
+use documento_salud\models\PoolLab;
 use documento_salud\controllers\DiasNoLaborablesController;
 
 use yii\web\Controller;
@@ -55,6 +56,22 @@ class LibretasController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+    /**
+     * Lists all Libretas models.
+     * @return mixed
+     */
+    public function actionConsultaMedica()
+    {
+        $searchModel = new LibretasSearch();
+        $dataProvider = $searchModel->searchMenores(Yii::$app->request->queryParams);
+
+        return $this->render('consultamedica', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
 
     /**
      * Displays a single Libretas model.
@@ -437,6 +454,76 @@ class LibretasController extends Controller
     return QrCode::png($vcard->getText());
     // you could also use the following
     // return return QrCode::png($mailTo);
+}
+
+
+public function actionRegistraratenc() {
+      
+    $selection = (array)Yii::$app->request->post('selection');
+    //var_dump($selection);
+    if (count($selection)!=0) {
+        try {
+                $connection = Yii::$app->db;
+                $transaction = $connection->beginTransaction();
+
+                foreach($selection as $id){
+                    $lib = Libretas::findOne($id);
+                    if ($lib != null) {
+
+                        $lib->LI_CONSULT = 1;
+                        if ($lib->save(false)) {
+                        
+                            $pool = PoolLab::findOne($id);
+                            if ($pool == null) {
+                                $pool = new PoolLab();
+                                $pool->PO_NROLIB = $id;
+                            }
+                            $pool->PO_FEC = date('Y-m-d');
+                            $pool->PO_HORA =  date('H:i:s');
+                            $pool->PO_MUESTRA = 0;
+                            $pool->PO_LISTO = 0;
+                            if( $pool->save(false)){
+                               //  Yii::$app->getSession()->setFlash('exito', 'Atenciones registradas correctamente.');
+                            }
+                            else {
+                                Yii::$app->getSession()->setFlash('error', 'No se pudo registrar  la atención para la libreta N° '.$id.'.');  
+                        
+                            }
+             
+                        
+                        }
+                        else {
+                            Yii::$app->getSession()->setFlash('error', 'No se pudo registrar  la atención para la libreta N° '.$id.'.');  
+                            
+                        }
+
+                    }
+                    else {
+                        Yii::$app->getSession()->setFlash('error', 'No se pudo registrar la atención para la libreta N° '.$id.'.');  
+                        
+                    }
+                }
+
+                $transaction->commit();
+
+                Yii::$app->getSession()->setFlash('exito', 'Atenciones registradas correctamente.');
+
+               // return "ok";
+
+            }
+                catch (ErrorException $e) {
+                    $transaction->rollback();
+                    echo($e->getMessage());
+
+                }
+            }
+            else {
+                //return "cero";
+                Yii::$app->getSession()->setFlash('error', 'Debe selecionar alguna libreta para registrar su atención.');
+            }
+            return $this->redirect(['/libretas/consulta-medica']);
+
+    
 }
 
 
