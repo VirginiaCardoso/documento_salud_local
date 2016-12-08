@@ -6,6 +6,7 @@ use Yii;
 use documento_salud\models\Libretas;
 use documento_salud\models\LibretasSearch;
 use documento_salud\models\Clientes;
+use documento_salud\models\ClientesSearch;
 use documento_salud\models\TpoSer;
 use documento_salud\models\PoolLab;
 use documento_salud\controllers\DiasNoLaborablesController;
@@ -526,6 +527,45 @@ public function actionRegistraratenc() {
     
 }
 
+public function actionEstado(){
+
+  $model = new Libretas();
+ return $this->render('estado', [
+            
+            'model' => $model,
+       ]);
+}
+
+public function actionBuscar_estado() {
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+
+            $codcli = $post["CL_NUMDOC"];
+            var_dump($codcli);
+           // $model = $this->findModel($codclid);
+           $model = Libretas::find()
+                    ->where(['LI_COCLI' => $codcli])->one();
+
+          //  $ultimo = LibretasController::findUltimoTramite($codcli);
+
+          //  if ($model!=null) {
+              return \yii\helpers\Json::encode($model->attributes);
+
+         //   }
+          //  else {
+         //     return null;
+         //   }
+            
+
+           // $fech = $p->LI_FECPED;
+          //  $p->LI_FECPED = Yii::$app->formatter->asDate($fech, 'php:d-m-Y');
+           /* $p->PA_DESC_ADEU = "error";
+            */
+           // $p->save(false);
+
+           
+        }
+    }
 
     
 

@@ -75,7 +75,7 @@ if (Yii::$app->session->hasFlash('error')) {
             ['label' => 'Administración', 'items' =>
                 [
                     ['label' => 'Inicio de trámite', 'url' =>  ['/libretas/index']],
-                    ['label' => 'Estado Documento Laboral', 'url' =>  ['/libretas/consulta']],
+                    ['label' => 'Estado Documento Laboral', 'url' =>  ['/libretas/estado']],
                     ['label' => ' Registrar Atención Consulta Médica', 'url' => ['/libretas/consulta-medica']],
                     ['label' => 'Resultado de estudios complementarios', 'url' =>  ['/pool-lab/index']],
                     ['label' => 'Emisión virtual', 'url' => ['/libretas/emision']],

@@ -8,6 +8,8 @@ use documento_salud\models\ClientesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+use yii\helpers\Json;
 //use yii\db\Query;
 
 /**
@@ -230,6 +232,36 @@ class ClientesController extends Controller
            // $p->save(false);
 
            return \yii\helpers\Json::encode($p->attributes);
+        }
+    }
+
+    //búsqueda de trámites de libretas que no esten anulados
+    public function actionQuery2($q = null) {
+        try {
+
+            $datab = Clientes::databaseName();
+
+            $query = new Query;
+            $query->select([Clientes::tableName().'.CL_NUMDOC',  Clientes::tableName().'.CL_APENOM'] )
+                ->from($datab.'.'.Clientes::tableName()); 
+            $query->where($datab.'.'.Clientes::tableName().'.CL_NUMDOC LIKE "%' . $q .'%"');//OR '.$datab.'.'.Clientes::tableName().'.CL_APENOM LIKE "%' . $q .'%'.$datab.'.'.Clientes::tableName().'CL_NUMDOC LIKE "%' . $q ."%'");
+           // $query->andWhere($datab.'.'.Libretas::tableName().'.LI_ANULADA = 0');
+            $query->orderBy($datab.'.'.Clientes::tableName().'.CL_NUMDOC');
+            $command = $query->createCommand();
+            
+           
+       
+            //var_dump($query);
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) {
+                $out[] = ['value' => $d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['CL_NUMDOC']];
+            }
+            echo Json::encode($out);
+
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
         }
     }
 
