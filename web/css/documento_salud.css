@@ -243,3 +243,13 @@ a.glyphicon {
 .form-horizontal .control-label {
     text-align: left;
 }
+
+.has-success .control-label,
+.has-success .help-block,
+.has-success .form-control-feedback {
+    color: black;
+}
+
+.form-horizontal .control-label {
+    text-align: left;
+}

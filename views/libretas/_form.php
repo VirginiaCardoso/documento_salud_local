@@ -87,9 +87,9 @@ Pjax::begin();
             </div>
             <div class="col-md-2">
                      <?='<label class=" control-label" for="sexo">Sexo</label>' ?>
-                </div>
+            </div>
               
-                <div class="col-md-2">
+            <div class="col-md-2">
                         <?php 
                         if ($cliente->CL_SEXO=='M') {
                         ?>
@@ -102,7 +102,7 @@ Pjax::begin();
                         <?php
                         }
                         ?>
-                </div>
+            </div>
             <div class="col-md-4">
 
                     <?= $form->field($cliente->cLESTCIV, 'ES_NOM', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
@@ -128,7 +128,7 @@ Pjax::begin();
     <div class="col-md-2">
         <?='<label class=" control-label" for="CL_IMG"> Foto </label>' ?>
     </div>
-<div class="col-md-2">
+    <div class="col-md-2">
         <?php 
         if ($cliente->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
 
@@ -169,7 +169,7 @@ Pjax::begin();
                 <?= Html::a('Volver' , ['libretas/index'], ['class'=>'btn btn-danger']);?>
         </div>
         
-        </div>
+        
 
         
         <?php
@@ -260,8 +260,7 @@ Pjax::begin();
                         <?= $form->field($model, 'LI_TPOSER', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( TpoSer::getListaTipoNueva(), ['prompt' => 'Seleccione un tipo servicio..', 'onchange'=>'javascript:seleccionoTipo();']); ?>
                      </div>
                 </div>
-                 <div class="row">
-            
+               
            
         <?php     
         }
