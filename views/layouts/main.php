@@ -25,7 +25,7 @@ echo Dialog::widget([
     'libName' => 'krajeeDialogError',
     'options' => [
         'type' => Dialog::TYPE_WARNING,
-        'title' => 'Documento Salud Laboral'],
+        'title' => 'Advertencia'],
 ]);
 
 AppAsset::register($this);

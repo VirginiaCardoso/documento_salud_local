@@ -92,7 +92,7 @@ class DevolucionesController extends Controller
                     
                 }
                 else {
-                    Yii::$app->getSession()->setFlash('error', 'Error. El importe a devolver ('.$model->DE_IMPORT.'$) debe ser menor que el registrado para el trámite ('.$modelLib->LI_IMPORTE.'$).');
+                    Yii::$app->getSession()->setFlash('error', 'El importe a devolver ( $'.$model->DE_IMPORT.' ) debe ser menor que el registrado para el trámite ( $'.$modelLib->LI_IMPORTE.' ).');
                    return $this->render('create', [             'model' => $model,          ]);
 
                 }
