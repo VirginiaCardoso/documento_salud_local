@@ -11,7 +11,10 @@ use kartik\datecontrol\DateControl;
 use documento_salud\models\TipDoc;
 use documento_salud\models\Estciv;
 use documento_salud\models\Locali;
+use documento_salud\assets\CameraAsset;
 
+
+CameraAsset::register($this);
 
 
 /* @var $this yii\web\View */
@@ -145,8 +148,26 @@ use documento_salud\models\Locali;
 
            
           
-                echo "Cargar nueva  imagen";
+             //   echo "Cargar nueva  imagen";
                 
+//-------------------------------------------------------------------------------------------------------
+?>
+
+
+
+
+
+<?= Html::a('Sacar foto', ['clientes/camera'], ['class'=>'btn btn-danger']);?>
+
+
+
+
+
+
+<?php
+//-----------------------------------------------------------------------------------------------------
+
+
 
           
         }
