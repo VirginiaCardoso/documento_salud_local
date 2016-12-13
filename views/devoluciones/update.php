@@ -13,7 +13,7 @@ LibretasAsset::register($this);
 $this->title = '['.$model->DE_COD.'] Modificar Devolución';
 $this->params['breadcrumbs'][] = ['label' => 'Devoluciones', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->DE_COD, 'url' => ['view', 'id' => $model->DE_COD]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Modificar';
 ?>
 <div class="devoluciones-update">
 
@@ -61,5 +61,6 @@ $this->params['breadcrumbs'][] = 'Update';
             </div>
         </div>
     </div>
+    <?php ActiveForm::end(); ?>
 
 </div>
