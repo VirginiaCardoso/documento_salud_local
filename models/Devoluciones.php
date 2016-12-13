@@ -41,6 +41,8 @@ class Devoluciones extends \yii\db\ActiveRecord
         return [
             [['DE_NROTRA', 'DE_IMPORT', 'DE_FECHA'], 'required'],
             [['DE_IMPORT'], 'validarImporte'],
+           // ['DE_IMPORT', 'match', 'pattern'=>'/^[0-9]{1,0}(\.[0-9]{0,2})$/' 
+           // [['DE_IMPORT'], 'number', 'numberPattern' => '/^\s*[0-9]*[.,]?[0-9]+([eE][-+]?[0-9]+)?\s*$/','skipOnError' => true, 'message' => 'Your username can only contain alphanumeric characters, underscores and dashes.'],
             [['DE_FECHA'], 'safe'],
             [['DE_NROTRA'], 'string', 'max' => 12],
             [['DE_NROTRA'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DE_NROTRA' => 'LI_NRO']],
