@@ -11,10 +11,7 @@ use kartik\datecontrol\DateControl;
 use documento_salud\models\TipDoc;
 use documento_salud\models\Estciv;
 use documento_salud\models\Locali;
-use documento_salud\assets\CameraAsset;
 
-
-CameraAsset::register($this);
 
 
 /* @var $this yii\web\View */
