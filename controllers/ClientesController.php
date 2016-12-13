@@ -107,8 +107,8 @@ class ClientesController extends Controller
                         //else
                            // return $this->render('create', ['model' => $model]);
                         
-                    }
-                  /*  else {
+                    
+                  /* else {
                         
                         return $this->render('create', ['model' => $model]);
                     }*/
@@ -118,7 +118,13 @@ class ClientesController extends Controller
                     if($origen==1)
                             return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
                     else   
-                        return $this->redirect(['view', 'id' => $model->CL_COD]);     
+                        return $this->redirect(['view', 'id' => $model->CL_COD]);  
+                    } 
+                     else {
+                         $transaction->commit();
+                        return $this->render('create', ['model' => $model]);
+                    }  
+                   
                  }
                 catch (ErrorException $e) {
                     $transaction->rollback();

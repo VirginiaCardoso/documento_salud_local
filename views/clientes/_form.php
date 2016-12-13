@@ -146,6 +146,7 @@ use documento_salud\models\Locali;
            
           
                 echo "Cargar nueva  imagen";
+                
 
           
         }
