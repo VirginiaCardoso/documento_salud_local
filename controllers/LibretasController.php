@@ -424,14 +424,14 @@ class LibretasController extends Controller
 
           $query = new Query;
             $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM',  Clientes::tableName().'.CL_NUMDOC'] )
-                ->distinct()
+                //->distinct()
                 ->from($datab.'.'.Clientes::tableName())
                 ->join(  ' JOIN',
                     $datab.'.'.Libretas::tableName(),
                     $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
                 ; 
-                //.'%" OR LI_NRO LIKE "%' . $q 
-            $query->where('LI_COCLI LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+                //
+            $query->where('LI_COCLI LIKE "%' . $q ..'%" OR LI_NRO LIKE "%' . $q '%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
             $query->orderBy('LI_NRO');
             $command = $query->createCommand();
             
@@ -440,8 +440,8 @@ class LibretasController extends Controller
             var_dump($command);*/
             $data = $command->queryAll();
             $out = [];
-            foreach ($data as $d) { //DL: '.$d['LI_NRO'].' - 
-                $out[] = ['value' => 'DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+            foreach ($data as $d) { // 
+                $out[] = ['value' => 'DL: '.$d['LI_NRO'].' -DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
             }
             echo Json::encode($out);
 

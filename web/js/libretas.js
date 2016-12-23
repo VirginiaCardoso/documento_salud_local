@@ -189,6 +189,9 @@ function cargarEstado(e,datum) {
                 $('#libretas-li_nro').val(model.LI_NRO);
                 $('#libretas-li_cocli').val(model.LI_COCLI);
                 //if (model.LI_FECVTO!=null)
+                //
+                //
+
                   $('#fecha').val(model.LI_FECVTO);
               
      },
