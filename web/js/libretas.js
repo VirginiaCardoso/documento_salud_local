@@ -170,13 +170,13 @@ function registrarAtencion() {
 function cargarEstado(e,datum) {
        // $('#divbotonanular').hide();
          $('#search-estado').val('');
-
+        // alert(datum.cod);
         $.ajax({
             url: 'index.php?r=libretas/buscar_estado',
             dataType: 'JSON',
             method: 'POST',
             data: {
-                CL_NUMDOC: datum.cod
+                LI_NRO: datum.cod
             },
             success: function (model) {
              // if (ultimo==null) {
@@ -188,50 +188,12 @@ function cargarEstado(e,datum) {
 
                 $('#libretas-li_nro').val(model.LI_NRO);
                 $('#libretas-li_cocli').val(model.LI_COCLI);
-                $('#fecha').val(model.LI_FECVTO);
-               // $('#importe').val(libreta.LI_IMPORTE);
-
-              //  ref =  document.getElementById('botonanular').href;
-               // document.getElementById('botonanular').href =  ref+'&LI_NRO='+libreta.LI_NRO;
-               // alert(libreta.LI_ANULADA);
-             /*   if ((libreta.LI_ANULADA==0)||(libreta.LI_ANULADA==null)){
-                  $('#divbotonanular').show();
-                  $('#labelanular').hide();
-                }
-                else {
-                  $('#divbotonanular').hide();
-                  $('#labelanular').show();
-                  $('#search-libreta').val('');
-                }
-  */
-           /*     $.ajax({
-                  url: 'index.php?r=clientes/buscar_cliente',
-                  dataType: 'JSON',
-                  method: 'POST',
-                  data: {
-                      CL_COD: libreta.LI_COCLI
-                  },
-                  success: function (cliente) {
-                    $('#apenom').val(cliente.CL_APENOM);
-                  },
-                });
-*/
-                //$('#apenom').val(libreta.CL_APENOM);
-            /*    $.ajax({
-                  url: 'index.php?r=tpo-ser/buscar_tipo',
-                  dataType: 'JSON',
-                  method: 'POST',
-                  data: {
-                      TS_COD: libreta.LI_TPOSER
-                  },
-                  success: function (tipo) {
-                    $('#tposer').val(tipo.TS_DESC);
-                  },
-                });*/
-            //  }
+                //if (model.LI_FECVTO!=null)
+                  $('#fecha').val(model.LI_FECVTO);
+              
      },
         });
-        $('#search-libreta').val('');
+        $('#search-estado').val('');
 }
 
 

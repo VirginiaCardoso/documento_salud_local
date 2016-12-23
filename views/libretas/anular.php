@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php $form = ActiveForm::begin([   'id' => 'formAnular', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
 
 
-        <h3> Seleccionar N° Documento Laboral </h3>
+        <h3> Seleccionar N° Documento Laboral</h3>
         <div class="row">
             <div class="col-md-2">
                 <label class="control-label col-md-2">     </label>

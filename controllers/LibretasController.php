@@ -415,6 +415,42 @@ class LibretasController extends Controller
         }
     }
 
+   //búsqueda de trámites de libretas por nuemero de dni
+   
+   public function actionQuery3($q = null) {
+        try {
+
+            $datab = Libretas::databaseName();
+
+          $query = new Query;
+            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM',  Clientes::tableName().'.CL_NUMDOC'] )
+                ->distinct()
+                ->from($datab.'.'.Clientes::tableName())
+                ->join(  ' JOIN',
+                    $datab.'.'.Libretas::tableName(),
+                    $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
+                ; 
+                //.'%" OR LI_NRO LIKE "%' . $q 
+            $query->where('LI_COCLI LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->orderBy('LI_NRO');
+            $command = $query->createCommand();
+            
+           
+       /*
+            var_dump($command);*/
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) { //DL: '.$d['LI_NRO'].' - 
+                $out[] = ['value' => 'DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+            }
+            echo Json::encode($out);
+
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
     public function actionBuscar_libreta() {
         if (Yii::$app->request->isAjax) {
             $post = Yii::$app->request->post();
@@ -536,37 +572,23 @@ public function actionEstado(){
        ]);
 }
 
-public function actionBuscar_estado() {
+
+    public function actionBuscar_estado() {
         if (Yii::$app->request->isAjax) {
             $post = Yii::$app->request->post();
 
-            $codcli = $post["CL_NUMDOC"];
-            var_dump($codcli);
-           // $model = $this->findModel($codclid);
-           $model = Libretas::find()
-                    ->where(['LI_COCLI' => $codcli])->one();
-
-          //  $ultimo = LibretasController::findUltimoTramite($codcli);
-
-          //  if ($model!=null) {
-              return \yii\helpers\Json::encode($model->attributes);
-
-         //   }
-          //  else {
-         //     return null;
-         //   }
-            
-
-           // $fech = $p->LI_FECPED;
-          //  $p->LI_FECPED = Yii::$app->formatter->asDate($fech, 'php:d-m-Y');
+            $p=Libretas::findOne(["LI_NRO" => $post["LI_NRO"]]);
+            if ($p->LI_FECVTO!= null) {
+              $fech = $p->LI_FECVTO;
+              $p->LI_FECVTO = Yii::$app->formatter->asDate($fech, 'php:d-m-Y');
+            }
            /* $p->PA_DESC_ADEU = "error";
             */
            // $p->save(false);
 
-           
+           return \yii\helpers\Json::encode($p->attributes);
         }
     }
-
     
 
 }
