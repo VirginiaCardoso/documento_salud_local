@@ -431,7 +431,7 @@ class LibretasController extends Controller
                     $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
                 ; 
                 //
-            $query->where('LI_COCLI LIKE "%' . $q ..'%" OR LI_NRO LIKE "%' . $q '%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->where('LI_COCLI LIKE "%' . $q .'%" OR LI_NRO LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
             $query->orderBy('LI_NRO');
             $command = $query->createCommand();
             
