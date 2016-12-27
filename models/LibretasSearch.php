@@ -124,6 +124,55 @@ class LibretasSearch extends Libretas
 
         return $dataProvider;
     }
+    /**
+     * Creates data provider instance with search query applied
+     *
+     * @param array $params
+     *
+     * @return ActiveDataProvider
+     */
+    public function searchConsulta($params)
+    {
+        $query = Libretas::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'sort'=> ['defaultOrder' => [
+                'LI_FECPED' => SORT_DESC,
+                //related columns
+                  
+
+
+
+
+            ],
+        ]
+        ]);
+
+        
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        if (isset($this->LI_FECPED) && !$this->LI_FECPED=='') {
+           //  $nueva_fin = \DateTime::createFromFormat('d-m-Y',  $this->PO_FEC);
+            // $fecha_fin_format = $nueva_fin->format('Y-m-d');
+           // $nuevohasta = $nueva_fin->format('Y-m-d'); 
+             $query->andFilterWhere(['<=', 'LI_FECPED', $this->LI_FECPED]);
+        }
+
+        $query->andFilterWhere(['=', 'LI_CONSULT', 0])
+            ->andFilterWhere(['=', 'LI_ANULADA', 0]);
+
+        return $dataProvider;
+    }
 
      /**
      * Creates data provider instance with search query applied

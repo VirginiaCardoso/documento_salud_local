@@ -58,16 +58,31 @@ class LibretasController extends Controller
         ]);
     }
 
-    /**
+        /**
      * Lists all Libretas models.
      * @return mixed
      */
     public function actionConsultaMedica()
     {
         $searchModel = new LibretasSearch();
-        $dataProvider = $searchModel->searchMenores(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchConsulta(Yii::$app->request->queryParams);
 
         return $this->render('consultamedica', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * Lists all Libretas models.
+     * @return mixed
+     */
+    public function actionRegistrarConsultaMedica()
+    {
+        $searchModel = new LibretasSearch();
+        $dataProvider = $searchModel->searchMenores(Yii::$app->request->queryParams);
+
+        return $this->render('registrarconsultamedica', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

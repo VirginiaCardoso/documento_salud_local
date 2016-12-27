@@ -63,4 +63,15 @@ html body.modal-open div.wrap div.container div.pool-lab-index div.row div.col-m
   margin-right: 15px;
 }
 
+.botonAction{
+
+    background: transparent;
+    border: none !important;
+  /*  font-size:0;#577492;*/
+     
+     color: #337ab7;
+}
+
+.botonAction:hover, .botonAction:focus {
+    color: #23527c;
 }

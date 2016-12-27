@@ -46,43 +46,81 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php $form = ActiveForm::begin(['method' => 'post', 'id' => 'formPool']); ?>    
 
-<div class="col-md-offset-10">
-    <button class="btn btn-primary pull-right" type="button" onclick="registrarAtencion();">Registrar Atención</button>    
 
-</div>
 <br>
 <?php Pjax::begin(['id'=>'pjax_consultas']) ?>    
 <?= GridView::widget([
         'id'=> 'gridCons',
         'dataProvider' => $dataProvider,
-                     
         'columns' => [
            
             'LI_NRO',
-            'LI_FECPED:date',
-            //'LI_HORA',
-            //'LI_COCLI',
             [
-                'label' => 'Cliente',
-                'value'=> function($model) {
-                    if ($model->lICOCLI!=null)
-                        return $model->lICOCLI->CL_APENOM;
-                    else
-                        return "";
-                },
+                'attribute' => 'LI_COCLI',
+                'label' => 'Tipo Doc.',
+                'value' => 'lICOCLI.CL_TIPDOC'
             ],
-           // 'LI_TPOSER',
            [
-                'label' => 'Tipo de trámite',
-                'value'=> function($model) {
-                    if ($model->lITPOSER!=null)
-                        return $model->lITPOSER->TS_DESC;
-                    else
-                        return "";
-                },
+                'attribute' => 'LI_COCLI',
+                'label' => 'N° Doc.',
+                'value' => 'lICOCLI.CL_NUMDOC'
             ],
-           ['class' => 'yii\grid\CheckboxColumn'],
-        ],
+            [
+                'attribute' => 'LI_COCLI',
+                'label' => 'Apellido y Nombre',
+                'value' => 'lICOCLI.CL_APENOM'
+            ],
+            'LI_COCLI',
+            'LI_FECPED:date',
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => ' {form1} {form2} {form3}',
+                'buttons' => [
+                   'form1' => function ($url, $model) {
+                        return Html::button(
+                            '<span class="glyphicon glyphicon-pencil"></span>', 
+                            [
+                                'title' => 'Editar Documento Laboral',
+                                'class' => 'botonAction',
+                                'value' => Url::to([
+                                    'eventos/view', 
+                                    'id' => $model->LI_NRO
+                                    ]), 
+                                
+                            ]); 
+                    },
+                    'form2' => function ($url, $model) {
+                         return Html::button(
+                                '<span class="glyphicon glyphicon-eye-open"></span>',
+                                [
+                                    'title' => 'Ver Documento Laboral',
+                                    'class' => 'botonAction',
+                                    'value' => Url::to([
+                                        'eventos/registro-prestamo', 
+                                        'id' => $model->LI_NRO
+                                        ]), 
+                                
+                                ]);
+
+                        },
+                    'form3' => function ($url, $model) {
+                        return Html::button(
+                                '<span class="glyphicon glyphicon-folder-open"></span>',
+                                [
+                                    'title' => 'Ver Actuaciones previas / Editar Actuación',
+                                    'class' => 'botonAction',
+                                    'value' => Url::to([
+                                        'eventos/registro-prestamo', 
+                                        'id' => $model->LI_NRO
+                                        ]), 
+                                
+                                ]);
+
+                        },
+                                     
+                    ],
+                ],
+            ],
     ]); ?>
         
 <?php Pjax::end(); ?>
