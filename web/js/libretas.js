@@ -169,34 +169,77 @@ function registrarAtencion() {
 
 function cargarEstado(e,datum) {
        // $('#divbotonanular').hide();
-         $('#search-estado').val('');
+        //$('#search-estado').val('');
         // alert(datum.cod);
         $.ajax({
             url: 'index.php?r=libretas/buscar_estado',
             dataType: 'JSON',
             method: 'POST',
             data: {
-                LI_NRO: datum.cod
+                CL_COD: datum.cod
             },
             success: function (model) {
-             // if (ultimo==null) {
-               // $('#labelanular').show();
-            //  }
-             // else {
-               // alert(model.LI_COCLI);
-               //   $('#search-paciente').val('');
-
                 $('#libretas-li_nro').val(model.LI_NRO);
                 $('#libretas-li_cocli').val(model.LI_COCLI);
-                //if (model.LI_FECVTO!=null)
-                //
-                //
+                $.get("index.php?r=clientes/apellido", {cl_cod: model.LI_COCLI}, 
+                        function(data) {
+                            var data = $.parseJSON(data);
+                            // alert(data);
+                            if (data != null) {
+                             
+                              $('#apenom').val(data);
+                            }
+                            else {
+                                $('#apenom').val("");
+                            }
+                        }
 
-                  $('#fecha').val(model.LI_FECVTO);
+                  );
+                
+                if(model.LI_FECVTO==null) {
+
+                  $('#label-fecha').hide();
+                  $('#label_info').show();
+                   $('#label_info').text('Documento Laboral en proceso');
+                   $('#label_info').addClass("label_proceso");
+                }
+                else {
+                       $('#fecha').val(model.LI_FECVTO);
+                       $.get("index.php?r=libretas/verestado", {li_nro: model.LI_NRO}, 
+                        function(data) {
+                            var data = $.parseJSON(data);
+                            // alert(data);
+                            if (data != null) {
+                             
+                              $('#label-fecha').show();
+                              $('#label_info').show();
+                              $('#label_info').text(data['cartel']);
+                              $('#label_info').removeClass();
+                              $('#label_info').addClass(data["clase"]);
+                              $('#apenom').val(data['apenom']);
+                            }
+                            else {
+                              //alert(data);
+                              $('#label_info').hide();
+                              $('#label-fecha').show();
+                            }
+                           
+                        }
+                        );
+                }
+                
+                /*$('#tposer').val(model.LI_TPOSER);*/
+                
+                $('#search-estado').val('');
               
-     },
+        },
+        error:  function(response){
+          krajeeDialogError.alert("El cliente no tiene libreta asociada.");
+          $('#search-estado').val('');
+        },
         });
-        $('#search-estado').val('');
+        
+     
 }
 
 

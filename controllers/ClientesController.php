@@ -276,6 +276,24 @@ class ClientesController extends Controller
         }
     }
 
+    /**
+     * Ver si existe determinada historia clinica
+     * @param  [type] $hiscli [description]
+     * @return [type]         [description]
+     */
+     public function actionApellido($cl_cod)
+    {
+        $res = null;
+        $resultado = Clientes::findOne(["CL_COD" => $cl_cod]);
+        if ($resultado!= null){
+            $res =$resultado->CL_APENOM;
+        }
+        else {
+            $res = null;
+        }
+        echo Json::encode($res);
+    }
+
 
 
 }

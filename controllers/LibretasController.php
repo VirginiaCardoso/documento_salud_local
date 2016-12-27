@@ -420,19 +420,20 @@ class LibretasController extends Controller
    public function actionQuery3($q = null) {
         try {
 
-            $datab = Libretas::databaseName();
+            $datab = Clientes::databaseName();
 
           $query = new Query;
-            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM',  Clientes::tableName().'.CL_NUMDOC'] )
-                //->distinct()
+            $query->select([Clientes::tableName().'.CL_NUMDOC', Clientes::tableName().'.CL_COD',  Clientes::tableName().'.CL_APENOM'] )
+                //
                 ->from($datab.'.'.Clientes::tableName())
-                ->join(  ' JOIN',
+                ->join(  'INNER JOIN',
                     $datab.'.'.Libretas::tableName(),
                     $datab.'.'.Clientes::tableName().'.CL_COD ='.$datab.'.'.Libretas::tableName().'.LI_COCLI')
+                ->distinct()
                 ; 
                 //
-            $query->where('LI_COCLI LIKE "%' . $q .'%" OR LI_NRO LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
-            $query->orderBy('LI_NRO');
+            $query->where('CL_COD LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->orderBy('CL_COD');
             $command = $query->createCommand();
             
            
@@ -441,7 +442,7 @@ class LibretasController extends Controller
             $data = $command->queryAll();
             $out = [];
             foreach ($data as $d) { // 
-                $out[] = ['value' => 'DL: '.$d['LI_NRO'].' -DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+                $out[] = ['value' => 'COD: '.$d['CL_COD'].' - DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['CL_COD']];
             }
             echo Json::encode($out);
 
@@ -573,11 +574,17 @@ public function actionEstado(){
 }
 
 
-    public function actionBuscar_estado() {
+public function actionBuscar_estado() {
         if (Yii::$app->request->isAjax) {
             $post = Yii::$app->request->post();
 
-            $p=Libretas::findOne(["LI_NRO" => $post["LI_NRO"]]);
+            $p = Libretas::find()
+                    ->where(['LI_COCLI' => $post["CL_COD"]])
+                    //->andWhere(['not', ['LI_FECVTO' => null]])
+                    ->orderBy(['LI_FECPED' => SORT_DESC])
+                    ->one();
+         //   $p=Libretas::findOne(["LI_COCLI" => $post["CL_COD"]]);
+            
             if ($p->LI_FECVTO!= null) {
               $fech = $p->LI_FECVTO;
               $p->LI_FECVTO = Yii::$app->formatter->asDate($fech, 'php:d-m-Y');
@@ -588,7 +595,51 @@ public function actionEstado(){
 
            return \yii\helpers\Json::encode($p->attributes);
         }
+}
+
+/**
+     * Ver si existe determinada historia clinica
+     * @param  [type] $hiscli [description]
+     * @return [type]         [description]
+     */
+     public function actionVerestado($li_nro)
+    {
+        //$res = null;
+        $resultado = Libretas::findOne(["LI_NRO" => $li_nro]);
+        if ($resultado!= null){
+          $fechaLab = LibretasController::vencimiento($resultado->LI_FECVTO);
+          $hoy = date('Y-m-d');
+
+          $fechaLab=strtotime($fechaLab);
+          $hoy=strtotime($hoy);
+
+          $diastrasnc   = ($fechaLab-$hoy)/86400;
+          $diastrasnc   = abs($diastrasnc); 
+          $diastrasnc = floor($diastrasnc); 
+
+          $res = array();
+
+          if($fechaLab < $hoy){
+            $res['cartel'] = "Documento laboral vencido ".$diastrasnc." días";
+            $res['clase'] = "label_venc_no"; 
+          }
+          else{
+            $res['cartel'] = "Documento laboral válido, ".$diastrasnc." días para su vencimiento";
+            $res['clase'] = "label_venc_ok";  
+          } 
+
+          $cliente = Clientes::findOne(["CL_COD" => $resultado->LI_COCLI]);
+          if($cliente != null){
+            $res['apenom'] = $cliente->CL_APENOM;  
+          }            
+          
+        }
+        else {
+            $res = null;
+        }
+        echo Json::encode($res);
     }
+
     
 
 }

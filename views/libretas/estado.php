@@ -90,10 +90,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     <input type="text" class="form-control" id="apenom" readonly="true" value ="" >
                 </div>
             </div>
-            <div class="row">
+            <div class="row" id= "label-fecha">
                 <div class="col-md-6">
                     <div class="form-group ">
-                        <label class="control-label col-md-4" for="fecha">Fecha Vencimiento</label>
+                        <label  class="control-label col-md-4" for="fecha">Fecha Vencimiento</label>
                         <div class="col-md-4">
                             <input id="fecha" class="form-control" name="fecha" readonly="" maxlength="12" type="text">
                         </div>
@@ -101,21 +101,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <br>
+            
             <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group ">
-                        <label class="control-label col-md-4" for="tposer">Tipo </label>
-                        <div class="col-md-6">
-                            <input id="tposer" class="form-control" name="Tposer" readonly="" maxlength="12" type="text">
-                        </div>
-                    </div>
+                <div class="col-md-12 ">
+                    <label id='label_info'> </label>
                 </div>
-            </div>
-            <br>
-                        
-            <div class="form-group pull-right " id="labelanular" >
-                    <label class="labelanulado col-md-14" ></label>         
-                   
             </div>
         </div>
     </div>
