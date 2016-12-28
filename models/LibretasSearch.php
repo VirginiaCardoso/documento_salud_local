@@ -167,7 +167,7 @@ class LibretasSearch extends Libretas
             'LI_FECPED' => $this->LI_FECPED,
         ]);
 
-       $query->andFilterWhere(['=', 'LI_CONSULT', 0])
+       $query->andFilterWhere(['=', 'LI_CONSULT', 1])
             ->andFilterWhere(['=', 'LI_ANULADA', 0]);
 
 //var_dump($query);
