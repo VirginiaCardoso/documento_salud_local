@@ -142,16 +142,9 @@ class LibretasSearch extends Libretas
             'sort'=> ['defaultOrder' => [
                 'LI_FECPED' => SORT_DESC,
                 //related columns
-                  
-
-
-
-
-            ],
+             ],
         ]
         ]);
-
-        
 
         $this->load($params);
 
@@ -161,16 +154,23 @@ class LibretasSearch extends Libretas
             return $dataProvider;
         }
 
-        if (isset($this->LI_FECPED) && !$this->LI_FECPED=='') {
+      /*  if (isset($this->LI_FECPED) && !$this->LI_FECPED=='') {
            //  $nueva_fin = \DateTime::createFromFormat('d-m-Y',  $this->PO_FEC);
             // $fecha_fin_format = $nueva_fin->format('Y-m-d');
            // $nuevohasta = $nueva_fin->format('Y-m-d'); 
              $query->andFilterWhere(['<=', 'LI_FECPED', $this->LI_FECPED]);
         }
+*/      
+        $query->andFilterWhere([
+            'LI_NRO' => $this->LI_NRO,
+            'LI_COCLI' => $this->LI_COCLI,
+            'LI_FECPED' => $this->LI_FECPED,
+        ]);
 
-        $query->andFilterWhere(['=', 'LI_CONSULT', 0])
+       $query->andFilterWhere(['=', 'LI_CONSULT', 0])
             ->andFilterWhere(['=', 'LI_ANULADA', 0]);
 
+//var_dump($query);
         return $dataProvider;
     }
 

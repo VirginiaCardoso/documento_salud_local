@@ -5,6 +5,7 @@ use yii\bootstrap\ActiveForm;
 
 use documento_salud\assets\LibretasAsset;
 
+
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\LibretasSearch */
 /* @var $form yii\widgets\ActiveForm */
@@ -21,6 +22,7 @@ LibretasAsset::register($this);
                                                             ],
                                             'layout' => 'horizontal']); ?>
     
+   
     <div class="row">
         <div class="col-md-6">
             <?=  $form->field($model, 'LI_NRO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>

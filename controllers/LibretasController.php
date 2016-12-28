@@ -574,7 +574,7 @@ public function actionRegistraratenc() {
                 //return "cero";
                 Yii::$app->getSession()->setFlash('error', 'Debe selecionar alguna libreta para registrar su atención.');
             }
-            return $this->redirect(['/libretas/consulta-medica']);
+            return $this->redirect(['/libretas/registrar-consulta-medica']);
 
     
 }

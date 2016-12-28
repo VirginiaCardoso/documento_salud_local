@@ -12,7 +12,7 @@ use kartik\datecontrol\DateControl;
 <div class="libretas-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['/libretas/consulta-medica'],
+        'action' => ['/libretas/registrar-consulta-medica'],
         'method' => 'get',
          'layout' => 'horizontal',
     ]); ?>
@@ -36,7 +36,7 @@ use kartik\datecontrol\DateControl;
                 <div class="col-md-6">
                     <div class="form-group">
                         <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
-                        <?= Html::a('Limpiar',['/libretas/consulta-medica'], ['class' => 'btn btn-default']) ?>
+                        <?= Html::a('Limpiar',['/libretas/registrar-consulta-medica'], ['class' => 'btn btn-default']) ?>
                     </div>
                 </div>
             </div>

@@ -86,7 +86,7 @@ class Libretas extends \yii\db\ActiveRecord
         return [
             'LI_NRO' => 'N° Doc. Salud Laboral',
             'LI_COCLI' => 'Cliente',
-            'LI_FECPED' => 'Fecha',
+            'LI_FECPED' => 'Fecha Inicio',
             'LI_TPOSER' => 'Tipo de trámite', //tpo_ser
             'LI_CONVEN' => 'Convenio',//convenio
             'LI_CONSULT' => 'Consulta Médica', // si hizo la consulta médica

@@ -35,14 +35,14 @@ $this->registerJs(
 
 LibretasAsset::register($this);
 
-$this->title = 'Atención Consulta Médica';
+$this->title = 'Consulta Médico';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="libretas-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-     <?php  echo $this->render('_search3', ['model' => $searchModel]); ?>
+     <?php  echo $this->render('_searchconsulta', ['model' => $searchModel]); ?>
 
 <?php $form = ActiveForm::begin(['method' => 'post', 'id' => 'formPool']); ?>    
 
