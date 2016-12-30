@@ -6,6 +6,7 @@ use Yii;
 use documento_salud\models\PoolLab;
 use documento_salud\models\PoolLabSearch;
 use documento_salud\models\Libretas;
+use documento_salud\models\Doclab;
 use documento_salud\models\Doclabau;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -139,42 +140,66 @@ class PoolLabController extends Controller
     }
 
     public function actionCargarDatos($id){
+
         $model = $this->findModel($id);
         $model->scenario = 'cargarDatos';
         // echo '<pre>',print_r($model),'</pre>';
         if ($model->load(Yii::$app->request->post())){
-            $model->PO_LISTO = 1;
-            if ($model->save(false)) {
+            try {
+                $connection = Yii::$app->dbdocsl;
+                $transaction = $connection->beginTransaction();
 
-                $lib = Libretas::findOne($id);
-                if ($lib!= null){
-                    $lib->LI_ESTUD = 1;
-                     if ($lib->save(false)) {
+                $model->PO_LISTO = 1;
+                if ($model->save(false)) {
 
-                        $doc = Doclabau::findOne($id);
-                        if ($doc==null) {
-                            $doc = new Doclabau();
-                            $doc->DO_CODLIB = $id;
-                        }
-                        $doc->DO_COLEST = $model->PO_COLEST;
-                        $doc->DO_GLUCO = $model->PO_GLUCOSA;
-                        if ($doc->save(false)){
-                            Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras'); 
-                        }
-                        else {
-                             Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
+                    $lib = Libretas::findOne($id);
+                    if ($lib!= null){
+                        $lib->LI_ESTUD = 1;
+                         if ($lib->save(false)) {
+
+                            $doc = Doclabau::findOne($id);
+                            if ($doc==null) {
+                                $doc = new Doclabau();
+                                $doc->DO_CODLIB = $id;
+                                /// ver ----------------------------
+                                $dlab = Doclab::findOne($id);
+                                if ($dlab ==null) {
+                                    $dlb = new Doclab();
+                                    $dlb->DO_NRO = $id;
+                                    $dlb->DO_CODCLI = $model->LI_COCLI;
+                                    $dlb->save(false);
+                                }
+                                //-----------------------
+
+
                             }
-                        
+                            $doc->DO_COLEST = $model->PO_COLEST;
+                            $doc->DO_GLUCO = $model->PO_GLUCOSA;
+                            if ($doc->save(false)){
+                                Yii::$app->getSession()->setFlash('exito', 'Registrada correctamente la carga de datos de las muestras'); 
+                            }
+                            else {
+                                 Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
+                                }
+                            
+                        }
+                    }
+                    else {
+                     Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
                     }
                 }
                 else {
-                 Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
+                     Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
                 }
+
+                  $transaction->commit(); 
+                return $this->redirect(['index']);
+                }
+            catch (ErrorException $e) {
+                $transaction->rollback();
+                echo($e->getMessage());
+
             }
-            else {
-                 Yii::$app->getSession()->setFlash('error', 'Error al salvar los datos de las muestras'); 
-            }
-            return $this->redirect(['index']);
         }
             else {
                  return $this->render('update', [

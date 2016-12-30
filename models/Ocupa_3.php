@@ -55,4 +55,10 @@ class Ocupa_3 extends \yii\db\ActiveRecord
             'ID' => 'ID',
         ];
     }
+
+    public static function getListaOcupa3()
+    {
+        $opciones = Ocupa_3::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+    }
 }

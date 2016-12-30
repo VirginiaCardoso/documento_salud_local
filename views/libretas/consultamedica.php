@@ -11,6 +11,7 @@ use kartik\popover\PopoverX;
 
 use documento_salud\assets\LibretasAsset;
 use documento_salud\controllers\LibretasController;
+use documento_salud\models\Doclab;
 
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\LibretasSearch */
@@ -20,12 +21,12 @@ $this->registerJs(
         //actualiza la pagina si no hay filas seleccionadas
         setInterval(function(){
             if( ($('#gridCons').yiiGridView('getSelectedRows')).length==0) {
-               $.pjax.reload({container:'#pjax_consultas'}); 
+               $.pjax.reload({container:'#pjax_con'}); 
             }
             else {
                 //despues de que seleccionen algo, se refresca si pasan 10 min
                 setTimeout(function(){
-                     $.pjax.reload({container:'#pjax_consultas'}); 
+                     $.pjax.reload({container:'#pjax_con'}); 
                  },300000);
             }
             
@@ -48,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 <br>
-<?php Pjax::begin(['id'=>'pjax_consultas']) ?>    
+<?php Pjax::begin(['id'=>'pjax_con']) ?>    
 <?= GridView::widget([
         'id'=> 'gridCons',
         'dataProvider' => $dataProvider,
@@ -77,44 +78,34 @@ $this->params['breadcrumbs'][] = $this->title;
                 'template' => ' {form1} {form2} {form3}',
                 'buttons' => [
                    'form1' => function ($url, $model) {
-                        return Html::button(
-                            '<span class="glyphicon glyphicon-pencil"></span>', 
-                            [
-                                'title' => 'Editar Documento Laboral',
-                                'class' => 'botonAction',
-                                'value' => Url::to([
-                                    'eventos/view', 
-                                    'id' => $model->LI_NRO
-                                    ]), 
-                                
-                            ]); 
+                        return Html::a(
+                            '<span class="glyphicon glyphicon-pencil"></span>',
+                            ['/doclab/editar', 'id' => $model->LI_NRO], 
+                            ['title' => 'Editar Documento Laboral',
+                                'class' => 'botonAction']
+                                ); 
                     },
                     'form2' => function ($url, $model) {
-                         return Html::button(
+                        if (Doclab::findOne($model->LI_NRO)) {
+
+                            $clase= 'botonAction';
+                        }
+                        else {
+                            $clase= 'disabled botonAction'; 
+                        }
+                         return Html::a(
                                 '<span class="glyphicon glyphicon-eye-open"></span>',
-                                [
-                                    'title' => 'Ver Documento Laboral',
-                                    'class' => 'botonAction',
-                                    'value' => Url::to([
-                                        'eventos/registro-prestamo', 
-                                        'id' => $model->LI_NRO
-                                        ]), 
-                                
-                                ]);
+                                ['doclab/view', 'id' => $model->LI_NRO], 
+                                ['title' => 'Ver Documento Laboral',
+                                    'class' => $clase]);
 
                         },
                     'form3' => function ($url, $model) {
-                        return Html::button(
+                        return Html::a(
                                 '<span class="glyphicon glyphicon-folder-open"></span>',
-                                [
-                                    'title' => 'Ver Actuaciones previas / Editar Actuación',
-                                    'class' => 'botonAction',
-                                    'value' => Url::to([
-                                        'eventos/registro-prestamo', 
-                                        'id' => $model->LI_NRO
-                                        ]), 
-                                
-                                ]);
+                                ['doclab/view-edit-hist', 'id' => $model->LI_NRO], 
+                                ['title' => 'Ver Actuaciones previas / Editar Actuación',
+                                    'class' => 'botonAction']);
 
                         },
                                      

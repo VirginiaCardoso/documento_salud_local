@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ocupa_1".
@@ -52,5 +53,11 @@ class Ocupa_1 extends \yii\db\ActiveRecord
             'MAS_NIVEL' => 'Mas  Nivel',
             'ID' => 'ID',
         ];
+    }
+
+    public static function getListaOcupa1()
+    {
+        $opciones = Ocupa_1::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }

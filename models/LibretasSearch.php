@@ -167,7 +167,7 @@ class LibretasSearch extends Libretas
             'LI_FECPED' => $this->LI_FECPED,
         ]);
 
-       $query->andFilterWhere(['=', 'LI_CONSULT', 1])
+       $query->andFilterWhere(['=', 'LI_CONSULT', 1]) //ya fueron registrados para la consulta con el medico
             ->andFilterWhere(['=', 'LI_ANULADA', 0]);
 
 //var_dump($query);

@@ -7,6 +7,7 @@ use Yii;
 /**
  * This is the model class for table "doclab".
  *
+ * @property string $DO_NRO
  * @property string $DO_CODCLI
  * @property string $DO_OCU
  * @property string $DO_RUBRO
@@ -56,6 +57,8 @@ use Yii;
  * @property string $DO_TALLA
  * @property string $DO_DATOS
  * @property string $DO_DATINT
+ *
+ * @property Libretas $dONRO
  */
 class Doclab extends \yii\db\ActiveRecord
 {
@@ -81,7 +84,8 @@ class Doclab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['DO_CODCLI', 'DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_FASTAB', 'DO_ALCOH', 'DO_CAGE', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANTQUI', 'DO_ONCO', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA', 'DO_DATOS', 'DO_DATINT'], 'required'],
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_FASTAB', 'DO_ALCOH', 'DO_CAGE', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANTQUI', 'DO_ONCO', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA', 'DO_DATOS', 'DO_DATINT'], 'required'],
+            [['DO_NRO'], 'string', 'max' => 12],
             [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA'], 'string', 'max' => 6],
             [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB'], 'string', 'max' => 2],
             [['DO_INGRES'], 'string', 'max' => 1],
@@ -92,6 +96,7 @@ class Doclab extends \yii\db\ActiveRecord
             [['DO_MENOP'], 'string', 'max' => 5],
             [['DO_PAENOM', 'DO_MAENOM', 'DO_HEENON'], 'string', 'max' => 94],
             [['DO_DATOS', 'DO_DATINT'], 'string', 'max' => 254],
+            [['DO_NRO'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DO_NRO' => 'LI_NRO']],
         ];
     }
 
@@ -101,12 +106,13 @@ class Doclab extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'DO_CODCLI' => 'Código cliente',
+            'DO_NRO' => 'Nro Documento Laboral',
+            'DO_CODCLI' => 'Código Cliente',
             'DO_OCU' => 'Ocupación',
-            'DO_RUBRO' => 'Do  Rubro',
-            'DO_RUBTIP' => 'Do  Rubtip',
-            'DO_ESCOL' => 'Do  Escol',
-            'DO_INGRES' => 'Do  Ingres',
+            'DO_RUBRO' => 'Ocup. Especif.', //ocupacion más especifico
+            'DO_RUBTIP' => 'Ocup. Más Especif.', //ocupacion más especifico que rubro
+            'DO_ESCOL' => 'Escolaridad',
+            'DO_INGRES' => 'Nivel Ingresos',
             'DO_FUMA' => 'Do  Fuma',
             'DO_FASTAB' => 'Do  Fastab',
             'DO_ALCOH' => 'Do  Alcoh',
@@ -151,5 +157,13 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_DATOS' => 'Do  Datos',
             'DO_DATINT' => 'Do  Datint',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDONRO()
+    {
+        return $this->hasOne(Libretas::className(), ['LI_NRO' => 'DO_NRO']);
     }
 }

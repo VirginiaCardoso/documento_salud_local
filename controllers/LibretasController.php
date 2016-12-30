@@ -655,6 +655,22 @@ public function actionBuscar_estado() {
         echo Json::encode($res);
     }
 
-    
+    /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+  /*  public function actionEditar($id)
+    {
+        
+        $model = $this->findModel($id);
+        $cliente = ClientesController::buscarCliente($model->LI_COCLI);
+        return $this->render('editardocumento', [
+            'model' => $model,
+            'cliente' => $cliente,
+
+        ]);
+    }
+    */
 
 }
