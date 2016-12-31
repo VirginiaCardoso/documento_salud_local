@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ocupa_2".
@@ -59,6 +60,12 @@ class Ocupa_2 extends \yii\db\ActiveRecord
     public static function getListaOcupa2()
     {
         $opciones = Ocupa_2::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+    }
+
+    public static function getSuboculist($ocu_id)
+    {
+        $opciones = Ocupa_2::find()->where(['PADRE_ID' => $ocu_id])->asArray()->all();
         return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }

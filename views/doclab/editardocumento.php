@@ -4,15 +4,20 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
+use kartik\depdrop\DepDrop;
 
 use documento_salud\models\Clientes;
 use documento_salud\models\Ocupa_1;
+use documento_salud\models\Ocupa_2;
+use documento_salud\models\Ocupa_3;
 use documento_salud\models\Convenios;
 use documento_salud\controllers\LibretasController;
-use documento_salud\assets\LibretasAsset;
+use documento_salud\assets\DocumentoAsset;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Libretas */
+
+DocumentoAsset::register($this);
 
 $this->title = 'Editar Documento Laboral: '.$model->DO_NRO;
 $this->params['breadcrumbs'][] = ['label' => 'Documento Salud Laboral', 'url' => ['index']];
@@ -130,10 +135,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row">
                     <div class="col-md-6">
+                   <?= $form->field($model, 'DO_OCU', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Ocupa_1::getListaOcupa1(), ['id'=>'ocu-id']); ?>
  
-                        <?= $form->field($model, 'DO_OCU', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( Ocupa_1::getListaOcupa1(), ['prompt' => 'Seleccione una ocupación..', 'onchange'=>'javascript:seleccionoOcupa1();']); ?>
                      </div>
-                </div>
+            </div>
+            <div class="row" id="ocupa2">
+                    <div class="col-md-6">
+                    <?= $form->field($model, 'DO_RUBRO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
+    'options'=>['id'=>'subocu-id'],
+    'pluginOptions'=>[
+        'depends'=>['ocu-id'],
+        'placeholder'=>'Select...',
+        'url'=>Url::to(['/ocupa_2/subocu'])
+    ]
+]); ?> 
+ 
+                     </div>
+            </div>
+            <div class="row" id="ocupa3">
+                    <div class="col-md-6">
+ 
+                        <?= $form->field($model, 'DO_RUBTIP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList( Ocupa_2::getListaOcupa2(), ['prompt' => 'Seleccione una ocupación..', 'onchange'=>'javascript:seleccionoOcupa3();']); ?>
+                     </div>
+            </div>
+    
 
         </div>
         </div>

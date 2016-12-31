@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "ocupa_3".
