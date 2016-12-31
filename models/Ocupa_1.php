@@ -60,4 +60,15 @@ class Ocupa_1 extends \yii\db\ActiveRecord
         $opciones = Ocupa_1::find()->asArray()->all();
         return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
+
+    public static function masNivel($id){
+        $opc = Ocupa_1::find()->where(['ID' => $id])->one();
+        if ($opc!=null){
+            if($opc->MAS_NIVEL==1){
+                return true;
+            }
+
+        }
+        return false;
+    }
 }

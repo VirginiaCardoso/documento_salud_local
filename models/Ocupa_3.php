@@ -62,4 +62,17 @@ class Ocupa_3 extends \yii\db\ActiveRecord
         $opciones = Ocupa_3::find()->asArray()->all();
         return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
+
+    public static function getProdList($ocu_id)
+    {
+        $opciones = Ocupa_3::find()->where(['PADRE_ID' => $ocu_id])->asArray()->all();
+      // var_dump($opciones);
+        $out = [];
+        foreach ($opciones as $o) {
+             # code...
+                $out[] = ['id'=>$o['ID'], 'name'=>$o['TIPO']];
+            
+        }
+        return $out;//ArrayHelper::map($opciones, 'id', 'name');
+    }
 }

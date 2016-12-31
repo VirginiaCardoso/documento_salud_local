@@ -3,6 +3,7 @@
 namespace documento_salud\controllers;
 
 use Yii;
+use documento_salud\models\Ocupa_1;
 use documento_salud\models\Ocupa_2;
 use documento_salud\models\Ocupa_2Search;
 use yii\web\Controller;
@@ -130,6 +131,9 @@ class Ocupa_2Controller extends Controller
         $parents = $_POST['depdrop_parents'];
         if ($parents != null) {
             $ocu_id = $parents[0];
+            if (Ocupa_1::masNivel($ocu_id) ){
+
+
             $out = Ocupa_2::getSuboculist($ocu_id); 
             // the getSubCatList function will query the database based on the
             // cat_id and return an array like below:
@@ -139,6 +143,10 @@ class Ocupa_2Controller extends Controller
             // ]
             echo Json::encode(['output'=>$out, 'selected'=>'']);
             return;
+            }
+            else {
+                echo Json::encode(['output'=>'', 'selected'=>'']);
+            }
         }
     }
     echo Json::encode(['output'=>'', 'selected'=>'']);

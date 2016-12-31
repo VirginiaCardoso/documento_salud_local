@@ -66,6 +66,24 @@ class Ocupa_2 extends \yii\db\ActiveRecord
     public static function getSuboculist($ocu_id)
     {
         $opciones = Ocupa_2::find()->where(['PADRE_ID' => $ocu_id])->asArray()->all();
-        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+      // var_dump($opciones);
+        $out = [];
+        foreach ($opciones as $o) {
+             # code...
+                $out[] = ['id'=>$o['ID'], 'name'=>$o['TIPO']];
+            
+        }
+        return $out;//ArrayHelper::map($opciones, 'id', 'name');
+    }
+
+    public static function masNivel($id){
+        $opc = Ocupa_2::find()->where(['ID' => $id])->one();
+        if ($opc!=null){
+            if($opc->MAS_NIVEL==1){
+                return true;
+            }
+
+        }
+        return false;
     }
 }

@@ -3,11 +3,13 @@
 namespace documento_salud\controllers;
 
 use Yii;
+use documento_salud\models\Ocupa_2;
 use documento_salud\models\Ocupa_3;
 use documento_salud\models\Ocupa_3Search;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * Ocupa_3Controller implements the CRUD actions for Ocupa_3 model.
@@ -121,4 +123,32 @@ class Ocupa_3Controller extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionSubtip() {
+    $out = [];
+    if (isset($_POST['depdrop_parents'])) {
+        $parents = $_POST['depdrop_parents'];
+        if ($parents != null) {
+            $ocu_id = $parents[0];
+            if (Ocupa_2::masNivel($ocu_id) ){
+
+
+            $out = Ocupa_3::getprodlist($ocu_id); 
+            // the getSubCatList function will query the database based on the
+            // cat_id and return an array like below:
+            // [
+            //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
+            //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
+            // ]
+            echo Json::encode(['output'=>$out, 'selected'=>'']);
+            return;
+            }
+            else {
+                echo Json::encode(['output'=>'', 'selected'=>'']);
+            }
+        }
+    }
+    echo Json::encode(['output'=>'', 'selected'=>'']);
+}
+
 }
