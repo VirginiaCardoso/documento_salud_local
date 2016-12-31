@@ -3,7 +3,6 @@
 namespace documento_salud\models;
 
 use Yii;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "nivel_in".
@@ -51,11 +50,4 @@ class NivelIn extends \yii\db\ActiveRecord
             'NI_DETALLE' => 'Ni  Detalle',
         ];
     }
-
-        public static function getListaNiveles()
-    {
-        $opciones = NivelIn::find()->asArray()->all();
-        return ArrayHelper::map($opciones, 'NI_CODIGO', 'NI_DETALLE');
-    }
-
 }
