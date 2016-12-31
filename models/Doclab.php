@@ -88,7 +88,7 @@ class Doclab extends \yii\db\ActiveRecord
             [['DO_NRO'], 'string', 'max' => 12],
             [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA'], 'string', 'max' => 6],
             [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB'], 'string', 'max' => 2],
-            [['DO_INGRES'], 'string', 'max' => 1],
+            [['DO_INGRES'], 'string', 'max' => 2],
             [['DO_FUMA'], 'string', 'max' => 7],
             [['DO_CAGE'], 'string', 'max' => 8],
             [['DO_ANTQUI', 'DO_ONCO', 'DO_VENER'], 'string', 'max' => 102],
