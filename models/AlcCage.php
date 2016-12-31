@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "alc_cage".
@@ -49,5 +50,11 @@ class AlcCage extends \yii\db\ActiveRecord
             'TIPO' => 'Tipo',
             'ID' => 'Id',
         ];
+    }
+
+    public static function getListaCage()
+    {
+        $opciones = AlcCage::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }

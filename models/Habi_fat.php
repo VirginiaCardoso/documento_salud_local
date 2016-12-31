@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "habi_fat".
@@ -57,4 +58,11 @@ class Habi_fat extends \yii\db\ActiveRecord
             'ID' => 'ID',
         ];
     }
+
+    public static function getListaFaseTab()
+    {
+        $opciones = Habi_fat::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+    }
+
 }

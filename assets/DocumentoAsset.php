@@ -28,7 +28,7 @@ class DocumentoAsset extends AssetBundle
         'js/jquery.mask.js',
        // 'js/libretas.js',
      //   'js/modal-cliente.js',
-     //   'js/documento.js',
+       'js/documento.js',
    
     ];
     public $depends = [

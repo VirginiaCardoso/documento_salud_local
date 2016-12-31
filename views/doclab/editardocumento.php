@@ -13,6 +13,10 @@ use documento_salud\models\Ocupa_3;
 use documento_salud\models\Convenios;
 use documento_salud\models\Escolari;
 use documento_salud\models\NivelIn;
+use documento_salud\models\Habitos;
+use documento_salud\models\Habi_opc;
+use documento_salud\models\Habi_fat;
+use documento_salud\models\AlcCage;
 use documento_salud\controllers\LibretasController;
 use documento_salud\assets\DocumentoAsset;
 
@@ -150,8 +154,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'placeholder'=>'Seleccione especifico...',
                             'url'=>Url::to(['/ocupa_2/subocu']),
                             'loadingText' => 'Cargando ...',
-                        ]
-])->label(''); ?> 
+                        ]])->label(''); ?> 
  
                      </div>
             </div>
@@ -170,13 +173,13 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ESCOL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Escolari::getListaEscolari(), ['id'=>'ocu-id','prompt' => 'Seleccione escolaridad...']); ?>
+                   <?= $form->field($model, 'DO_ESCOL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Escolari::getListaEscolari(), ['prompt' => 'Seleccione escolaridad...']); ?>
  
                      </div>
             </div>
             <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_INGRES', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(NivelIn::getListaNiveles(), ['id'=>'ocu-id','prompt' => 'Seleccione nivel ingresos...']); ?>
+                   <?= $form->field($model, 'DO_INGRES', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(NivelIn::getListaNiveles(), ['prompt' => 'Seleccione nivel ingresos...']); ?>
  
                      </div>
             </div>
@@ -190,6 +193,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 <h3 class="panel-title">Hábitos</h3>
             </div>
             <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-6">
+                    <?= Html::activeHiddenInput($model, 'DO_FUMA') ?> 
+                   <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
+ 
+                     </div>
+                     <div class="col-md-4" id="campocuanto">
+                        <?= $form->field($model, 'cuanto')->textInput(['maxlength' => true]) ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_FASTAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_fat::getListaFaseTab(), ['prompt' => 'Seleccione fase tabaquismo..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..']); ?>
+ 
+                     </div>
+                     <div class="col-md-4">
+                   <?= $form->field($model, 'DO_CAGE', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->dropDownList(AlcCage::getListaCage(), ['prompt' => 'Seleccione..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_SEDAN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoSedantes()), ['prompt' => 'Seleccione hábito sedantes..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_DEPOR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoDeportes()), ['prompt' => 'Seleccione hábito deportes..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_SUENIO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoSueño()), ['prompt' => 'Seleccione hábito sueño..']); ?>
+ 
+                     </div>
+                </div>
 
 
 

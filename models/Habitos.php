@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "habitos".
@@ -49,5 +50,30 @@ class Habitos extends \yii\db\ActiveRecord
             'TIPO' => 'Tipo',
             'ID' => 'ID',
         ];
+    }
+
+    public function codigoFumador(){
+        $fum = Habitos::find()->where(['TIPO' => 'FUMADOR'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoAlcohol(){
+        $fum = Habitos::find()->where(['TIPO' => 'ALCOHOL'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoSedantes(){
+        $fum = Habitos::find()->where(['TIPO' => 'SEDANTES'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoDeportes(){
+        $fum = Habitos::find()->where(['TIPO' => 'DEPORTES'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoSueño(){
+        $fum = Habitos::find()->where(['TIPO' => 'TRASTOR. DEL SUEÑO'])->one();
+        return $fum->ID;
     }
 }

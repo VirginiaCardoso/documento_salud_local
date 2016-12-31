@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "habi_opc".
@@ -52,9 +53,15 @@ class Habi_opc extends \yii\db\ActiveRecord
         return [
             'TIPO' => 'Tipo',
             'TEXTO' => 'Texto',
-            'OPC_ID' => 'Opc  ID',
+            'OPC_ID' => 'ID Habito',
             'MENSAJE' => 'Mensaje',
             'ID' => 'ID',
         ];
+    }
+
+    public static function getListaHabitoOpc($codhab)
+    {
+        $opciones = Habi_opc::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }
