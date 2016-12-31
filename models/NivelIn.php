@@ -54,7 +54,7 @@ class NivelIn extends \yii\db\ActiveRecord
 
         public static function getListaNiveles()
     {
-        $opciones = Ocupa_1::find()->asArray()->all();
+        $opciones = NivelIn::find()->asArray()->all();
         return ArrayHelper::map($opciones, 'NI_CODIGO', 'NI_DETALLE');
     }
 
