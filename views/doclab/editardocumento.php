@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="form-group field-libretas-li_fecped required">
                         <?= Html::activeHiddenInput($lib, 'LI_FECPED') ?>
                         <label class="control-label col-md-4" for="libretas-li_fecped">Fecha Solic.</label>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <input type="text" class="form-control" id="libretas-li_fecped" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($lib->LI_FECPED, 'php:d-m-Y')."'" ?> >
                         </div>
 
