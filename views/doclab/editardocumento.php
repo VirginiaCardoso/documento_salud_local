@@ -17,6 +17,8 @@ use documento_salud\models\Habitos;
 use documento_salud\models\Habi_opc;
 use documento_salud\models\Habi_fat;
 use documento_salud\models\AlcCage;
+use documento_salud\models\Vacunaci;
+use documento_salud\models\Vacu_opc;
 use documento_salud\controllers\LibretasController;
 use documento_salud\assets\DocumentoAsset;
 
@@ -85,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                 <div class="col-md-4">
 
-                        <?= $form->field($client, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                        <?= $form->field($client, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true, 'value' => Yii::$app->formatter->asDate($client->CL_FECNAC, 'php:d-m-Y')]) ?>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group field-edad">
@@ -192,12 +194,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             <div class="row">
                     <div class="col-md-6">
+
                     <?= Html::activeHiddenInput($model, 'DO_FUMA') ?> 
-                   <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
+                    <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
  
                      </div>
                      <div class="col-md-4" id="campocuanto">
-                        <?= $form->field($model, 'cuanto')->textInput(['maxlength' => true]) ?>
+                        <?= $form->field($model, 'cuanto')->textInput(['maxlength' => true])->label(Habi_opc::labelEx()) ?>
                     </div>
                 </div>
                 <div class="row">
@@ -236,6 +239,59 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             <hr>
             <h3>Vacunación</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_RUBEO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoRubeola()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_TETANO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoTetanos()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_ANTIGR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoAntigripal()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                 <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_ANTIHE', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoAntihepatitis()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <br>
+                 <div class="row">
+                    <div class="col-md-6">
+                    <?= Html::activeHiddenInput($model, 'DO_VENER') ?> 
+                   <?= $form->field($model, 'vener', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoVenereas()), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_cual();'])->label('Venéreas'); ?>
+ 
+                     </div>
+                     <div class="col-md-4" id="campocual">
+                        <?= $form->field($model, 'cual')->textInput(['maxlength' => true])->label(Vacu_opc::labelVen()) ?>
+                    </div>
+ 
+                 </div>
+                
+                <br>
+                 <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_TRANSF', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoTransfusiones()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <br>
+                 <div class="row">
+                    <div class="col-md-6">
+                   <?= $form->field($model, 'DO_DOLLUM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoLumbar()), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                
+               
             <hr>
             <h3 >Patologías</h3>
             <hr>

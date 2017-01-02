@@ -51,29 +51,40 @@ class Vacunaci extends \yii\db\ActiveRecord
         ];
     }
 
-        public function codigoRubeola(){
-        $fum = Habitos::find()->where(['TIPO' => 'RUBEOLA'])->one();
+    public function codigoRubeola(){
+        $fum = Vacunaci::find()->where(['TIPO' => 'RUBEÓLA'])->one();
         return $fum->ID;
     }
 
     public function codigoTetanos(){
-        $fum = Habitos::find()->where(['TIPO' => 'TETANOS'])->one();
+        $fum = Vacunaci::find()->where(['TIPO' => 'TÉTANOS'])->one();
         return $fum->ID;
     }
 
     public function codigoAntigripal(){
-        $fum = Habitos::find()->where(['TIPO' => 'ANTIGRIPAL'])->one();
+        $fum = Vacunaci::find()->where(['TIPO' => 'ANTIGRIPAL'])->one();
         return $fum->ID;
     }
 
     public function codigoAntihepatitis(){
-        $fum = Habitos::find()->where(['TIPO' => 'ANTIHEPATITIS'])->one();
+        $fum = Vacunaci::find()->where(['TIPO' => 'ANTIHEPATITIS B'])->one();
         return $fum->ID;
     }
 
-    public function codigoSueño(){
-        $fum = Habitos::find()->where(['TIPO' => 'TRASTOR. DEL SUEÑO'])->one();
+    public function codigoTransfusiones(){
+        $fum = Vacunaci::find()->where(['TIPO' => 'TRANSFUSIONES'])->one();
         return $fum->ID;
     }
+
+    public function codigoVenereas(){
+        $fum = Vacunaci::find()->where(['TIPO' => 'VENÉREAS'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoLumbar(){
+        $fum = Vacunaci::find()->where(['TIPO' => 'DOLOR LUMBAR (OCASIONÓ FALTA AL TRABAJO)'])->one();
+        return $fum->ID;
+    }
+    
 
 }

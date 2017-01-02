@@ -64,6 +64,8 @@ class Doclab extends \yii\db\ActiveRecord
 {
     public $fumador;
     public $cuanto;
+    public $vener;
+    public $cual;
 
     /**
      * @inheritdoc
@@ -86,8 +88,8 @@ class Doclab extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH', 'DO_CAGE', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANTQUI', 'DO_ONCO', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA', 'DO_DATOS', 'DO_DATINT','Fumador'], 'required'],
+        return [ //'DO_CAGE',
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANTQUI', 'DO_ONCO', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA', 'DO_DATOS', 'DO_DATINT','fumador','vener'], 'required'],
             [['DO_NRO'], 'string', 'max' => 12],
             [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA'], 'string', 'max' => 6],
             [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB'], 'string', 'max' => 2],
@@ -138,13 +140,13 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_TRH' => 'Do  Trh',
             'DO_ASMAEP' => 'Do  Asmaep',
             'DO_PROSTA' => 'Do  Prosta',
-            'DO_RUBEO' => 'Do  Rubeo',
-            'DO_TETANO' => 'Do  Tetano',
-            'DO_ANTIGR' => 'Do  Antigr',
-            'DO_ANTIHE' => 'Do  Antihe',
-            'DO_TRANSF' => 'Do  Transf',
-            'DO_VENER' => 'Do  Vener',
-            'DO_DOLLUM' => 'Do  Dollum',
+            'DO_RUBEO' => 'Rubeóla',
+            'DO_TETANO' => 'Tétanos',
+            'DO_ANTIGR' => 'Antigripal',
+            'DO_ANTIHE' => 'Antihepatitis B',
+            'DO_TRANSF' =>  'Transfusiones',
+            'DO_VENER' => 'Enfermedades Venéreas',
+            'DO_DOLLUM' => 'Dolor Lumbar (ocasionó falta trab)',
             'DO_FADI' => 'Do  Fadi',
             'DO_FAHIPE' => 'Do  Fahipe',
             'DO_FACARD' => 'Do  Facard',

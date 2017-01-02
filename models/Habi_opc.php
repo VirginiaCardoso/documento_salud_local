@@ -64,4 +64,10 @@ class Habi_opc extends \yii\db\ActiveRecord
         $opciones = Habi_opc::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
         return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
+
+    public static function labelEx(){
+         $opciones = Habi_opc::find()->where(['ID'=>'07'])->one();
+         return $opciones->MENSAJE;
+
+    }
 }
