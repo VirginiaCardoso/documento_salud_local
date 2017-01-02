@@ -110,12 +110,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <?php 
                             if ($client->CL_SEXO=='M') {
                             ?>
-                                <input type="text" class="form-control" id="sexo" readonly="true" value = "Masculino">
+                                <input type="text" class="form-control" id="sexo" readonly="true" value = "MASCULINO">
                             <?php
                             }
                             else {
                                 ?>
-                                <input type="text" class="form-control" id="sexo" readonly="true" value = "Femenino">
+                                <input type="text" class="form-control" id="sexo" readonly="true" value = "FEMENINO">
                             <?php
                             }
                             ?>

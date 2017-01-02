@@ -65,7 +65,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'CL_FECNAC',  ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']]) ->textInput(['readonly' => 'true', 'value' => Yii::$app->formatter->asDate($model->CL_FECNAC, 'php:d-m-Y')])->label('Fecha') ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'value' => ($model->CL_SEXO=='F' ? 'Femenino': 'Masculino'), 'maxlength' => true]) ?>
+            <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'value' => ($model->CL_SEXO=='F' ? 'FEMENINO': 'MASCULINO'), 'maxlength' => true]) ?>
         </div>
 </div>
 
