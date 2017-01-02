@@ -185,15 +185,12 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
     
 
-        </div>
-        </div>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Hábitos</h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
+        
+        <hr>
+        
+        <h3>Hábitos</h3>
+                
+            <div class="row">
                     <div class="col-md-6">
                     <?= Html::activeHiddenInput($model, 'DO_FUMA') ?> 
                    <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
@@ -237,81 +234,20 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
                 </div>
-
-
-
-
+            <hr>
+            <h3>Vacunación</h3>
+            <hr>
+            <h3 >Patologías</h3>
+            <hr>
+            <h3 >Antecedentes Familiares Directos</h3>
+            <hr>
+            <h3 >Examen Físico</h3>
             
-
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Vacunación</h3>
-            </div>
-            <div class="panel-body">
-
-
-
-
-            
-
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Patologías</h3>
-            </div>
-            <div class="panel-body">
-
-
-
-
-            
-
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Antecedentes Familiares Directos</h3>
-            </div>
-            <div class="panel-body">
-
-
-
-
-            
-
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Examen Físico</h3>
-            </div>
-            <div class="panel-body">
-
-
-
-
-            
-
-            </div>
-        </div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Notas</h3>
-            </div>
-            <div class="panel-body">
-
-
-
-
-            
-
-            </div>
-        </div>
+            <hr>
+            <h3 >Notas</h3>
         
-
+        </div>
+        </div>
     <?php ActiveForm::end(); ?>
      <div class="form-group im-centered">
         <div class="row ">
@@ -327,6 +263,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
         </div>
+
 
        
 

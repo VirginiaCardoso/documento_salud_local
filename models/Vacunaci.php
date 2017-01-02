@@ -50,4 +50,30 @@ class Vacunaci extends \yii\db\ActiveRecord
             'ID' => 'ID',
         ];
     }
+
+        public function codigoRubeola(){
+        $fum = Habitos::find()->where(['TIPO' => 'RUBEOLA'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoTetanos(){
+        $fum = Habitos::find()->where(['TIPO' => 'TETANOS'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoAntigripal(){
+        $fum = Habitos::find()->where(['TIPO' => 'ANTIGRIPAL'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoAntihepatitis(){
+        $fum = Habitos::find()->where(['TIPO' => 'ANTIHEPATITIS'])->one();
+        return $fum->ID;
+    }
+
+    public function codigoSueño(){
+        $fum = Habitos::find()->where(['TIPO' => 'TRASTOR. DEL SUEÑO'])->one();
+        return $fum->ID;
+    }
+
 }
