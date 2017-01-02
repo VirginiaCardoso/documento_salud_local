@@ -74,7 +74,7 @@ use documento_salud\models\Locali;
             ]);?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'Femenino', 'M' => 'Masculino'], ['prompt' => 'Seleccione sexo']) ?>
+            <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'FEMENINO', 'M' => 'MASCULINO'], ['prompt' => 'Seleccione sexo']) ?>
         </div>
 </div>
 
