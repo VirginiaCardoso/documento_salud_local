@@ -19,7 +19,7 @@ function mostrar_cual() {
   	 $('#campocual').hide();	
   }
 }
-
+/* funciones fomrularios*/
 
 function mostrar_trat() {
   if( $('#trat-id').val()=='04'){
