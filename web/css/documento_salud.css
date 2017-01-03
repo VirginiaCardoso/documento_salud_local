@@ -254,7 +254,7 @@ a.glyphicon {
     text-align: left;
 }
 
-
+/**paneles expandibles */
 .panel-heading a:after {
     font-family:'Glyphicons Halflings';
     content:"\e114";
