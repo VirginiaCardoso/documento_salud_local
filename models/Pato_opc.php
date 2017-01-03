@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "pato_opc".
@@ -63,5 +64,21 @@ class Pato_opc extends \yii\db\ActiveRecord
             'ANCHO' => 'Ancho',
             'PA_MASNIV' => 'Pa  Masniv',
         ];
+    }
+        public static function getListaPatologiaOpc($codhab)
+    {
+        $opciones = Pato_opc::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+    }
+
+    public static function masNivel($id){
+        $opc = Pato_opc::find()->where(['ID' => $id])->one();
+        if ($opc!=null){
+            if($opc->PA_MASNIV==1){
+                return true;
+            }
+
+        }
+        return false;
     }
 }

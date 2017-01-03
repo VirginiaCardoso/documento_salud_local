@@ -19,6 +19,8 @@ use documento_salud\models\Habi_fat;
 use documento_salud\models\AlcCage;
 use documento_salud\models\Vacunaci;
 use documento_salud\models\Vacu_opc;
+use documento_salud\models\Pato_opc;
+use documento_salud\models\Pato_op2;
 use documento_salud\controllers\LibretasController;
 use documento_salud\assets\DocumentoAsset;
 
@@ -28,7 +30,7 @@ use documento_salud\assets\DocumentoAsset;
 DocumentoAsset::register($this);
 
 $this->title = 'Editar Documento Laboral: '.$model->DO_NRO;
-$this->params['breadcrumbs'][] = ['label' => 'Documento Salud Laboral', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Documento Salud Laboral', 'url' => ['/libretas/consulta-medica/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="libretas-view">
@@ -212,9 +214,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
  
                      </div>
-                     <div class="col-md-4" id="campocuanto">
-                        <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])->label(Habi_opc::labelEx()) ?>
-                    </div>
+                     <div class="col-md-6" id="campocuanto">
+                       
+                        <div class="form-group field-doclab-do_cage">
+                            <label class="control-label col-md-2" for="doclab-cuanto"><?=Habi_opc::labelEx() ?></label>
+                            <div class="col-md-4">
+                                <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true])->label(false)?>
+                                <div class="help-block help-block-error "></div>
+                            </div>
+                        </div>
+                   </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -295,7 +304,15 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
                      <div class="col-md-4" id="campocual">
-                        <?= $form->field($model, 'cual')->textInput(['maxlength' => true])->label(Vacu_opc::labelVen()) ?>
+                        <div class="form-group field-doclab-cual">
+                            <label class="control-label col-md-2" for="doclab-cual"><?=Vacu_opc::labelVen() ?></label>
+                            <div class="col-md-6">
+                                <?= $form->field($model, 'cual')->textInput(['maxlength' => true])->label(false) ?>
+                                <div class="help-block help-block-error "></div>
+                            </div>
+                        </div>
+
+                        
                     </div>
  
                  </div>
@@ -326,6 +343,127 @@ $this->params['breadcrumbs'][] = $this->title;
                 </label>
             </div>
             <div id="collapse-pato" class="panel-collapse collapse">
+                 <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_EAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('01'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_HIPERT', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('02'), ['id'=>'trat-id','onchange'=>'javascript:mostrar_trat();','prompt' => 'Seleccione ..']); ?>
+ 
+                    </div>
+                    <div class="col-md-6" id="campotrathi">
+                        <?= $form->field($model, 'DO_TRATHI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
+                        'options'=>['id'=>'subtrat-id'],
+                        'pluginOptions'=>[
+                            'depends'=>['trat-id'],
+                            'placeholder'=>'Seleccione tratamiento...',
+                            'url'=>Url::to(['/pato_op2/subpato']),
+                            'loadingText' => 'Cargando ...',
+                        ]]) ?> 
+                        
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('04'), ['id'=>'trat2-id','onchange'=>'javascript:mostrar_trat2();','prompt' => 'Seleccione ..']); ?>
+                    </div>
+                    <div class="col-md-6" id="campotrat2">
+                        <?= $form->field($model, 'DO_TRATCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
+                        'options'=>['id'=>'subtrat2-id'],
+                        'pluginOptions'=>[
+                            'depends'=>['trat2-id'],
+                            'placeholder'=>'Seleccione tratamiento...',
+                            'url'=>Url::to(['/pato_op2/subpato']),
+                            'loadingText' => 'Cargando ...',
+                        ]]) ?> 
+                        
+                    </div>
+                   
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_DIABET', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('06'), ['id'=>'trat3-id','onchange'=>'javascript:mostrar_trat3();','prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                     <div class="col-md-6" id="campotrat3">
+                        <?= $form->field($model, 'DO_TRATDI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
+                        'options'=>['id'=>'subtrat3-id'],
+                        'pluginOptions'=>[
+                            'depends'=>['trat3-id'],
+                            'placeholder'=>'Seleccione tratamiento...',
+                            'url'=>Url::to(['/pato_op2/subpato']),
+                            'loadingText' => 'Cargando ...',
+                        ]]) ?> 
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_ANTQUI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('08'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_ONCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('09'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <?php
+                if ($client->CL_SEXO=='F')
+                {
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_EMBARA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('10'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_ANOVU', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('11'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_MENOP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('12'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_TRH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('13'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <?php 
+                }
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_ASMAEP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('14'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                 <?php
+                if ($client->CL_SEXO=='M')
+                {
+                ?>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model, 'DO_PROSTA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('15'), ['prompt' => 'Seleccione ..']); ?>
+ 
+                     </div>
+                </div>
+                <?php 
+                }
+                ?>
 
             </div>
         </div>

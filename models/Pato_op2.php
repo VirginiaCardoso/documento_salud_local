@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "pato_op2".
@@ -64,4 +65,24 @@ class Pato_op2 extends \yii\db\ActiveRecord
             'PA_MASNIV' => 'Pa  Masniv',
         ];
     }
+
+    public static function getListaPatologiaOpc2($codhab)
+    {
+        $opciones = Pato_op2::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
+    }
+
+    public static function getSubpatolist($ocu_id)
+    {
+        $opciones = Pato_op2::find()->where(['OPC_ID' => $ocu_id])->asArray()->all();
+      // var_dump($opciones);
+        $out = [];
+        foreach ($opciones as $o) {
+             # code...
+                $out[] = ['id'=>$o['ID'], 'name'=>$o['TIPO']];
+            
+        }
+        return $out;//ArrayHelper::map($opciones, 'id', 'name');
+    }
+    
 }

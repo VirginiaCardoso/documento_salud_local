@@ -265,3 +265,8 @@ a.glyphicon {
 .panel-heading a.collapsed:after {
     content:"\e080";
 }
+
+.panel-collapse.collapse.in div div div label {
+    margin-left: 14px;
+
+}
