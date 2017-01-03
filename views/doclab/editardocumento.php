@@ -139,8 +139,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($client, 'CL_LUGTRA')->textInput(['readonly' => true,'maxlength' => true]) ?>
 
           
-            <hr>
-
+         <!--    <hr> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label class="panel-title">
+                <a data-toggle="collapse" href="#collapse-ocupacion" class="collapsed">Ocupación, Escolaridad, Nivel Ingresos</a>
+            </label>
+        </div>
+        <div id="collapse-ocupacion" class="panel-collapse collapse">
+            <br>
             <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_OCU', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Ocupa_1::getListaOcupa1(), ['id'=>'ocu-id','prompt' => 'Seleccione ocupación..']); ?>
@@ -185,13 +192,19 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
             </div>
-    
+        </div>
+    </div>
 
-        
-        <hr>
-        
-        <h3>Hábitos</h3>
-                
+    
+    <!--    <hr> -->
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <label class="panel-title">
+                <a data-toggle="collapse" href="#collapse-habitos" class="collapsed">Hábitos</a>
+            </label>
+        </div>
+        <div id="collapse-habitos" class="panel-collapse collapse">
+            <br>     
             <div class="row">
                     <div class="col-md-6">
 
@@ -200,7 +213,7 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
                      <div class="col-md-4" id="campocuanto">
-                        <?= $form->field($model, 'cuanto')->textInput(['maxlength' => true])->label(Habi_opc::labelEx()) ?>
+                        <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])->label(Habi_opc::labelEx()) ?>
                     </div>
                 </div>
                 <div class="row">
@@ -237,8 +250,19 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
                 </div>
-            <hr>
-            <h3>Vacunación</h3>
+            </div>
+            </div>
+
+          
+         <!--    <hr> -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-vacunacion" class="collapsed">Vacunación</a>
+                </label>
+            </div>
+            <div id="collapse-vacunacion" class="panel-collapse collapse">
+                <br>
                 <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_RUBEO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoRubeola()), ['prompt' => 'Seleccione ..']); ?>
@@ -290,17 +314,62 @@ $this->params['breadcrumbs'][] = $this->title;
  
                      </div>
                 </div>
-                
-               
-            <hr>
-            <h3 >Patologías</h3>
-            <hr>
-            <h3 >Antecedentes Familiares Directos</h3>
-            <hr>
-            <h3 >Examen Físico</h3>
+             </div>
+            </div>
+
+          
+         <!--    <hr> -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-pato" class="collapsed">Patologías</a>
+                </label>
+            </div>
+            <div id="collapse-pato" class="panel-collapse collapse">
+
+            </div>
+        </div>
+
+          
+         <!--    <hr> -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-antecedentes" class="collapsed">Antecedentes Familiares Directos</a>
+                </label>
+            </div>
+            <div id="collapse-antecedentes" class="panel-collapse collapse">
             
-            <hr>
-            <h3 >Notas</h3>
+            </div>
+        </div>
+
+          
+         <!--    <hr> -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-examen" class="collapsed">Examen Físico</a>
+                </label>
+            </div>
+            <div id="collapse-examen" class="panel-collapse collapse">
+
+            </div>
+        </div>
+
+          
+         <!--    <hr> -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <label class="panel-title">
+                    <a data-toggle="collapse" href="#collapse-notas" class="collapsed">Notas</a>
+                </label>
+            </div>
+            <div id="collapse-notas" class="panel-collapse collapse">
+
+            </div>
+        </div>
+
+
         
         </div>
         </div>

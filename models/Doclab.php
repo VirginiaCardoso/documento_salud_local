@@ -111,7 +111,7 @@ class Doclab extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'DO_NRO' => 'Nro Documento Laboral',
+            'DO_NRO' => 'N° Documento Laboral',
             'DO_CODCLI' => 'Código Cliente',
             'DO_OCU' => 'Ocupación',
             'DO_RUBRO' => 'Ocup. Especif.', //ocupacion más especifico
@@ -124,7 +124,7 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_CAGE' => 'CAGE',
             'DO_SEDAN' => 'Sedantes',
             'DO_DEPOR' => 'Deporte',
-            'DO_SUENIO' => 'Trastorno de sueño',
+            'DO_SUENIO' => 'Trastorno de Sueño',
             'DO_EAC' => 'Do  Eac',
             'DO_HIPERT' => 'Do  Hipert',
             'DO_TRATHI' => 'Do  Trathi',
