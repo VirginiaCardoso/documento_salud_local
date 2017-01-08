@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\db\Query;
 use yii\helpers\Json;
 //use yii\db\Query;
+//
 
 /**
  * ClientesController implements the CRUD actions for Clientes model.
@@ -107,6 +108,7 @@ class ClientesController extends Controller
                    // $model->CL_TIPDOC = 'DNI';
                    // 
                     if ($model->save()){
+                        
                          Yii::$app->getSession()->setFlash('exito', 'Cliente guardado   correctamente, código: '.$model->CL_COD);
                          
                         //else

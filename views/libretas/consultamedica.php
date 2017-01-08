@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    'form1' => function ($url, $model) {
                         return Html::a(
                             '<span class="glyphicon glyphicon-pencil"></span>',
-                            ['/doclab/editar', 'id' => $model->LI_NRO], 
+                            ['/doclab/create', 'id' => $model->LI_NRO], 
                             ['title' => 'Editar Documento Laboral',
                                 'class' => 'botonAction']
                                 ); 

@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "exfi_opc".
@@ -57,5 +58,11 @@ class Exfi_opc extends \yii\db\ActiveRecord
             'ID' => 'ID',
             'TITULO' => 'Titulo',
         ];
+    }
+
+    public static function getListaExfiOpc($codhab)
+    {
+        $opciones = Exfi_opc::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }

@@ -65,7 +65,8 @@ class Pato_opc extends \yii\db\ActiveRecord
             'PA_MASNIV' => 'Pa  Masniv',
         ];
     }
-        public static function getListaPatologiaOpc($codhab)
+       
+     public static function getListaPatologiaOpc($codhab)
     {
         $opciones = Pato_opc::find()->where(['OPC_ID'=>$codhab])->asArray()->all();
         return ArrayHelper::map($opciones, 'ID', 'TIPO');
@@ -81,4 +82,6 @@ class Pato_opc extends \yii\db\ActiveRecord
         }
         return false;
     }
+
+    
 }

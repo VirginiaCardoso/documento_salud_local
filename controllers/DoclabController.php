@@ -64,17 +64,192 @@ class DoclabController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new Doclab();
 
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->DO_NRO]);
-            } else {
-                return $this->render('editardocumento', [
+           /* try {
+                    $connection = Yii::$app->dbdocsl;
+                    $transaction = $connection->beginTransaction();
+                    */
+        $lib = Libretas::findOne($id);
+        $client = Clientes::findOne($lib->LI_COCLI);
+       //  print_r($lib);
+       // print_r($client);
+        
+        $model = Doclab::findOne($id);
+        if ( $model==null){
+            $model = new Doclab();
+            $model->DO_NRO = $id;
+            $model->DO_CODCLI = $lib->LI_COCLI;
+         //   $model->save(false);
+
+        }
+        else {
+            if(substr($model->DO_FUMA,0,2)=="07"){
+                 //$model->fumador="07";
+                 $model->cuanto=  substr($model->DO_FUMA, 2,2);  
+            }
+            $model->fumador= substr($model->DO_FUMA, 0,2);
+            if(substr($model->DO_VENER,0,2)=="16"){
+                $model->cual = substr($model->DO_VENER, 2); 
+            }
+            $model->vener= substr($model->DO_VENER, 0,2);
+            if(substr($model->DO_EMBARA,0,2)=="29"){
+                $model->cuantosemb = substr($model->DO_EMBARA, 2); 
+            }
+            $model->emb= substr($model->DO_EMBARA, 0,2);
+
+            if(substr($model->DO_MENOP,0,2)=="34"){
+                $model->edadmenop = substr($model->DO_MENOP, 2); 
+            }
+            $model->menop= substr($model->DO_MENOP, 0,2);
+
+            if ($model->DO_FADI == "00"){
+                $model->diabfam="02";    
+            }
+            else {
+                $model->diabfam="01";    
+            }
+
+            if ($model->DO_FAHIPE == "00"){
+                $model->hiperfam="02";    
+            }
+            else {
+                $model->hiperfam="01";    
+            }
+           
+           if ($model->DO_FACARD == "00"){
+                $model->cardfam="02";    
+            }
+            else {
+                $model->cardfam="01";    
+            }
+
+            if ($model->DO_FAONCO == "00"){
+                $model->oncofam="02";    
+            }
+            else {
+                $model->oncofam="01";    
+            }
+           
+           
+
+        }
+        $docaux = Doclabau::findOne($id);
+        if ( $docaux==null){
+            $docaux = new Doclabau();
+            $docaux->DO_CODLIB = $id;
+            $docaux->save(false);
+        }
+    //   $model = new Doclab();
+
+            if ($model->load(Yii::$app->request->post())){
+                if ($model->fumador=="07"){ //es exfumador
+                    $model->DO_FUMA=$model->fumador.$model->cuanto;
+               }
+                else {
+                     $model->DO_FUMA=$model->fumador;
+                }
+
+                if ($model->vener=="16") //si en venereas
+                    $model->DO_VENER=$model->vener.$model->cual;
+                else
+                    $model->DO_VENER=$model->vener;
+
+                if ($model->emb=="29") //si en embarazos*/
+                    $model->DO_EMBARA=$model->emb.$model->cuantosemb;
+                else
+                    $model->DO_EMBARA=$model->emb;
+
+                if ($model->menop=="34") //si en menopausia
+                    $model->DO_MENOP=$model->menop.$model->edadmenop;
+                else
+                    $model->DO_MENOP=$model->menop;
+
+
+                print_r($model->diabquienes);
+                if ($model->diabfam=="01") //si diabetes fam
+                    $model->DO_FADI= $model->diabquienes;//implode("",$model->diabquienes);
+                else
+                    $model->DO_FADI = "00";
+
+                if ($model->hiperfam=="01") //si diabetes fam
+                    $model->DO_FAHIPE= $model->hiperquienes;
+                else
+                    $model->DO_FAHIPE= "00";
+
+                if ($model->cardfam=="01") //si diabetes fam
+                    $model->DO_FACARD= $model->cardquienes;
+                else
+                    $model->DO_FACARD = "00";
+
+                if ($model->oncofam=="01") //si diabetes fam
+                    $model->DO_FAONCO= $model->oncoquienes;
+                else
+                    $model->DO_FAONCO= "00";
+
+                 if ($model->save(false)) {
+                   // return $this->redirect(['view', 'id' => $model->DO_NRO]);
+                    Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);
+
+                    return $this->redirect(['libretas/consulta-medica/']);
+                
+                } else {
+                return $this->render('create', [
                     'model' => $model,
+                    'lib'=> $lib,
+                    'client' =>$client,
+                    'docaux' => $docaux,
                 ]);
             }
+            
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                    'lib'=> $lib,
+                    'client' =>$client,
+                    'docaux' => $docaux,
+                ]);
+            }
+       /* }
+                catch (ErrorException $e) {
+                    $transaction->rollback();
+                    echo($e->getMessage());
+
+                }*/
+        /*
+       // print_r($lib);
+      //  print_r($client);
+
+        $model = Doclab::findOne($id);
+        if ( $model==null){
+            $model = new Doclab();
+            $model->DO_NRO = $id;
+            $model->DO_CODCLI = $lib->LI_COCLI;
+            $model->save(false);
+
+        }
+
+       $docaux = Doclabau::findOne($id);
+        if ( $docaux==null){
+            $docaux = new Doclabau();
+            $docaux->DO_CODLIB = $id;
+            $docaux->save(false);
+        }
+
+        if ($model->load(Yii::$app->request->post())) {
+                 if($model->save()){
+                    return $this->redirect(['view', 'id' => $model->DO_NRO]);
+                }
+            }
+            else {
+                return $this->render('editardocumento', [
+                    'model' => $model,
+                    'lib'=> $lib,
+                    'client' =>$client,
+                    'docaux' => $docaux,
+                ]);
+          }*/
     }
 
     /**
@@ -142,7 +317,7 @@ class DoclabController extends Controller
             $model = new Doclab();
             $model->DO_NRO = $id;
             $model->DO_CODCLI = $lib->LI_COCLI;
-            $model->save(false);
+         //   $model->save(false);
 
         }
 
@@ -154,7 +329,7 @@ class DoclabController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-                 if($model->save(false)){
+                 if($model->save()){
                     return $this->redirect(['view', 'id' => $model->DO_NRO]);
                 }
             }

@@ -3,6 +3,7 @@
 namespace documento_salud\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "fami_opc".
@@ -49,5 +50,11 @@ class Fami_opc extends \yii\db\ActiveRecord
             'TIPO' => 'Tipo',
             'ID' => 'ID',
         ];
+    }
+
+    public static function getListaFamOpc()
+    {
+        $opciones = Fami_opc::find()->asArray()->all();
+        return ArrayHelper::map($opciones, 'ID', 'TIPO');
     }
 }

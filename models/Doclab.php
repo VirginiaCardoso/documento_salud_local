@@ -66,6 +66,18 @@ class Doclab extends \yii\db\ActiveRecord
     public $cuanto;
     public $vener;
     public $cual;
+    public $emb;
+    public $cuantosemb;
+    public $menop;
+    public $edadmenop;
+    public $diabfam;
+    public $diabquienes;
+    public $hiperfam;
+    public $hiperquienes;
+    public $cardfam;
+    public $cardquienes;
+    public $oncofam;
+    public $oncoquienes;
 
     /**
      * @inheritdoc
@@ -88,23 +100,52 @@ class Doclab extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [ //'DO_CAGE',
-            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANTQUI', 'DO_ONCO', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA', 'DO_DATOS', 'DO_DATINT','fumador','vener'], 'required'],
+        return [ //
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH', 'DO_CAGE', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','fumador','vener','emb','menop','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
             [['DO_NRO'], 'string', 'max' => 12],
-            [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA'], 'string', 'max' => 6],
-            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB'], 'string', 'max' => 2],
+            [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA',], 'string', 'max' => 6], /*'hiperquienes','cardquienes','oncoquienes'*/
+            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','emb','cuantosemb','menop','diabfam','hiperfam','cardfam','oncofam'], 'string', 'max' => 2],
             [['DO_INGRES'], 'string', 'max' => 2],
             [['DO_FUMA'], 'string', 'max' => 7],
             [['DO_CAGE'], 'string', 'max' => 8],
-            [['DO_ANTQUI', 'DO_ONCO', 'DO_VENER'], 'string', 'max' => 102],
+            [['DO_ANTQUI', 'DO_ONCO', 'DO_VENER','cual'], 'string', 'max' => 102],
             [['DO_EMBARA'], 'string', 'max' => 4],
+            [['edadmenop'], 'string', 'max' => 3],
             [['DO_MENOP'], 'string', 'max' => 5],
             [['DO_PAENOM', 'DO_MAENOM', 'DO_HEENON'], 'string', 'max' => 94],
             [['DO_DATOS', 'DO_DATINT'], 'string', 'max' => 254],
             [['DO_NRO'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DO_NRO' => 'LI_NRO']],
+            // [['diabquienes'], 'validateDiabetes'],
         ];
     }
 
+  /*  public function validateDiabetes($attribute, $params)
+    {
+        $codigos  = [];
+        foreach($this->$attribute as $i) {
+            $codpra = $practica['PI_CODPRA'];
+
+            // verificar que la práctica no esté informada en un informe previo
+            if(NULL!=($p=PracticaTurno::find()
+                ->where(['PI_CODPRA' => $codpra])
+                ->andWhere(['PI_ID' => $this->IN_TURNO])
+                ->andWhere(['NOT', ['PI_IDINFORME' => NULL]])
+                ->andWhere(['NOT', ['PI_IDINFORME' => $this->IN_ID]])
+                ->one())) {
+
+                $key = $attribute . '[' . $index . '][PI_CODPRA]';
+                $this->addError($key, 'La práctica elegida ya fue informada');
+            }
+            elseif(in_array($codpra, $codigos_practicas)) {
+                $key = $attribute . '[' . $index . '][PI_CODPRA]';
+                $this->addError($key, 'La práctica elegida ya fue agregada al informe');
+            }
+            else{
+                $codigos_practicas[] = $codpra;
+            }
+        }
+    }
+*/
     /**
      * @inheritdoc
      */
@@ -119,6 +160,8 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_ESCOL' => 'Escolaridad',
             'DO_INGRES' => 'Nivel Ingresos',
             'DO_FUMA' => 'Fumador',
+            'fumador' =>'Fumador',
+            'cuanto'=> '¿Cuántos Años?',
             'DO_FASTAB' => 'Fase de Tabaquista',
             'DO_ALCOH' => 'Alcohol',
             'DO_CAGE' => 'CAGE',
@@ -131,12 +174,17 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_COLEST' => 'Colesterol',
             'DO_TRATCO' => 'Tratamiento Colesterol',
             'DO_DIABET' => 'Diabetes',
+
             'DO_TRATDI' => 'Tratamiento Diabetes',
             'DO_ANTQUI' => 'Antecedentes Quirúrgicos',
             'DO_ONCO' => 'Oncológicos',
             'DO_EMBARA' => 'Embarazos',
+            'emb' => 'Embarazos',
+            'cuantosemb' => '¿Cuántos?',
             'DO_ANOVU' => 'Anovulatorios',
             'DO_MENOP' => 'Menopausia',
+            'menop' => 'Menopausia',
+            'edadmenop' => '¿Edad?',
             'DO_TRH' => 'TRH',
             'DO_ASMAEP' => 'Asma/EPOC',
             'DO_PROSTA' => 'Prostatismo',
@@ -146,21 +194,32 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_ANTIHE' => 'Antihepatitis B',
             'DO_TRANSF' =>  'Transfusiones',
             'DO_VENER' => 'Enfermedades Venéreas',
+            'cual' => '¿Cuál?',
             'DO_DOLLUM' => 'Dolor Lumbar (ocasionó falta trab)',
-            'DO_FADI' => 'Do  Fadi',
-            'DO_FAHIPE' => 'Do  Fahipe',
-            'DO_FACARD' => 'Do  Facard',
-            'DO_FAONCO' => 'Do  Faonco',
-            'DO_PAENOM' => 'Do  Paenom',
-            'DO_MAENOM' => 'Do  Maenom',
-            'DO_HEENON' => 'Do  Heenon',
-            'DO_NEVOS' => 'Do  Nevos',
-            'DO_NODMAN' => 'Do  Nodman',
-            'DO_SOPLOS' => 'Do  Soplos',
-            'DO_TUMAB' => 'Do  Tumab',
-            'DO_TALLA' => 'Do  Talla',
-            'DO_DATOS' => 'Do  Datos',
-            'DO_DATINT' => 'Do  Datint',
+            //antecedentes familiares
+            'DO_FADI' => 'Diabetes',
+            'DO_FAHIPE' => 'Hipertensión',
+            'DO_FACARD' => 'Enfermedad Cardíaca',
+            'DO_FAONCO' => 'Oncológico',
+            'diabfam' => 'Diabetes',
+            'hiperfam' => 'Hipertensión',
+            'cardfam' => 'Enfermedad Cardíaca',
+            'oncofam' => 'Oncológico',
+            'diabquienes' => '¿Quienes?',
+            'hiperquienes' => '¿Quienes?',
+            'cardquienes' => '¿Quienes?',
+            'oncoquienes' => '¿Quienes?',
+
+            'DO_PAENOM' => '¿Enfermedad Padre?',
+            'DO_MAENOM' => '¿Enfermedad Madre?',
+            'DO_HEENON' => '¿Enfermedad Hermano?',
+            'DO_NEVOS' => 'Nevos',
+            'DO_NODMAN' => 'Nódulos de Mama',
+            'DO_SOPLOS' => 'Soplos',
+            'DO_TUMAB' => 'Tumor Abdominal',
+            'DO_TALLA' => 'Talla',
+            'DO_DATOS' => 'Otros Datos',
+            'DO_DATINT' => 'Notas',
         ];
     }
 
