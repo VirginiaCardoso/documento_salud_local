@@ -38,26 +38,28 @@ $pagTotales = $dataProvider->getPagination()->getPageCount();
     ]); ?>
         <div class="row">
             <input type="hidden" name="pagina" id="paginaClientes" value=<?php echo $pagActual; ?>>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <?php 
                     $tiposDeDocumento = TipDoc::getListaTipoDoc();
                 ?>
                 <?= $form->field($searchModel, 'CL_TIPDOC', 
-                    ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])
                     ->dropDownList($tiposDeDocumento, ['prompt' => '']); ?>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <?= $form->field($searchModel, 'CL_NUMDOC', 
-                    ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])
                 ->widget(MaskedInput::className(), ['mask' => 'A{0,2}9{1,12}']) ?>
             </div>
             
         </div>
 
-        <div class="row"><div class="col-md-12">
-            <?= $form->field($searchModel, 'CL_APENOM', 
+        <div class="row">
+            <div class="col-md-12">
+                <?= $form->field($searchModel, 'CL_APENOM', 
                 ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-9']]) ?>
-        </div></div>
+            </div>
+        </div>
 
 
         <div class="row"><div class="col-md-offset-10">
