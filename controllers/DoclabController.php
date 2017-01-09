@@ -167,7 +167,7 @@ class DoclabController extends Controller
                     $model->DO_MENOP=$model->menop;
 
 
-                print_r($model->diabquienes);
+              //  print_r($model->diabquienes);
                 if ($model->diabfam=="01") //si diabetes fam
                     $model->DO_FADI= $model->diabquienes;//implode("",$model->diabquienes);
                 else

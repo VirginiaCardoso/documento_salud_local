@@ -7,7 +7,7 @@ use Yii;
 /**
  * This is the model class for table "doclabau".
  *
- * @property string $DO_CODCLI
+ * 
  * @property string $DO_CODLIB
  * @property string $DO_VISITA
  * @property string $DO_PESO
@@ -28,6 +28,7 @@ use Yii;
  */
 class Doclabau extends \yii\db\ActiveRecord
 {
+    public $diferencia;
     /**
      * @inheritdoc
      */
@@ -69,20 +70,20 @@ class Doclabau extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'DO_CODLIB' => 'N° Libreta',
-            'DO_VISITA' => 'Do  Visita',
-            'DO_PESO' => 'Do  Peso',
-            'DO_TENAR1' => 'Do  Tenar1',
-            'DO_TENAR2' => 'Do  Tenar2',
+            'DO_CODLIB' => 'N° Documento Laboral',
+            'DO_VISITA' => 'Fecha',
+            'DO_PESO' => 'Peso',
+            'DO_TENAR1' => 'Tensión Arterial', //baja
+            'DO_TENAR2' => 'Tensión Arterial', //alta 
             'DO_COLEST' => 'Colesterol',
             'DO_GLUCO' => 'Glucosa',
-            'DO_PAP' => 'Do  Pap',
-            'DO_MAM' => 'Do  Mam',
-            'DO_OBS' => 'Do  Obs',
-            'DO_CINTURA' => 'Do  Cintura',
-            'DO_TRIPLI' => 'Do  Tripli',
-            'DO_HDL' => 'Do  Hdl',
-            'DO_IMC' => 'Do  Imc',
+            'DO_PAP' => 'Paps',
+            'DO_MAM' => 'Mamografía',
+            'DO_OBS' => 'Observaciones',
+            'DO_CINTURA' => 'Cintura',
+            'DO_TRIPLI' => 'Trigliceridos',
+            'DO_HDL' => 'HDL',
+            'DO_IMC' => 'IMC',
         ];
     }
 

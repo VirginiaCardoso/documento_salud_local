@@ -622,10 +622,10 @@ DocumentoAsset::register($this);
         <div class="row ">
             <div class="col-md-2"></div>
             <div class="col-md-3">
-                <?= Html::a('Historial Visitas' , ['libretas/index'], ['class'=>'btn btn-info']);?>
+                <?= Html::a('Historial Visitas' , ['doclabau/historial', 'id'=>$model->DO_NRO], ['class'=>'btn btn-info']);?>
             </div>
             <div class="col-md-3">
-                <?= Html::a('Nueva Visita' , ['libretas/index'], ['class'=>'btn btn-primary']);?>
+                <?= Html::a('Nueva Visita' , ['doclabau/create', 'id'=>$model->DO_NRO], ['class'=>'btn btn-primary']);?>
             </div>
             <div class="col-md-3">
             <!--     <?= Html::a('Guardar' , ['doclab/editar','id' => $model->DO_NRO], ['class'=>'btn btn-success']);?> -->

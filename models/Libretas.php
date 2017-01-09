@@ -84,7 +84,7 @@ class Libretas extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'LI_NRO' => 'N° Doc. Salud Laboral',
+            'LI_NRO' => 'N° Documento Laboral',
             'LI_COCLI' => 'Cliente',
             'LI_FECPED' => 'Fecha Inicio',
             'LI_TPOSER' => 'Tipo de trámite', //tpo_ser
