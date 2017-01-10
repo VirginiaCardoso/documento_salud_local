@@ -12,6 +12,7 @@ use kartik\popover\PopoverX;
 use documento_salud\assets\LibretasAsset;
 use documento_salud\controllers\LibretasController;
 use documento_salud\models\Doclab;
+use documento_salud\models\Doclabau;
 
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\LibretasSearch */
@@ -81,12 +82,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         return Html::a(
                             '<span class="glyphicon glyphicon-pencil"></span>',
                             ['/doclab/create', 'id' => $model->LI_NRO], 
-                            ['title' => 'Editar Documento Laboral',
+                            ['title' => 'Crear/Editar Documento Laboral',
                                 'class' => 'botonAction']
                                 ); 
                     },
                     'form2' => function ($url, $model) {
-                        if (Doclab::findOne($model->LI_NRO)) {
+                        if (Doclabau::findOne($model->LI_NRO)) {
 
                             $clase= 'botonAction';
                         }
@@ -95,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                          return Html::a(
                                 '<span class="glyphicon glyphicon-eye-open"></span>',
-                                ['doclab/view', 'id' => $model->LI_NRO], 
+                                ['doclabau/create', 'id' => $model->LI_NRO], 
                                 ['title' => 'Ver Documento Laboral',
                                     'class' => $clase]);
 
