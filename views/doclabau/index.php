@@ -12,15 +12,15 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doclabau-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>Historial visitas </h1>
+
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Doclabau', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+   
+
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+       // 'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
@@ -29,17 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_PESO',
             'DO_TENAR1',
             'DO_TENAR2',
-            // 'DO_COLEST',
-            // 'DO_GLUCO',
-            // 'DO_PAP',
-            // 'DO_MAM',
-            // 'DO_OBS',
-            // 'DO_CINTURA',
-            // 'DO_TRIPLI',
-            // 'DO_HDL',
-            // 'DO_IMC',
+             'DO_COLEST',
+             'DO_GLUCO',
+             'DO_PAP',
+             'DO_MAM',
+            'DO_OBS',
+             'DO_CINTURA',
+             'DO_TRIPLI',
+             'DO_HDL',
+             'DO_IMC',
 
-            ['class' => 'yii\grid\ActionColumn'],
+             [
+                'class' => 'yii\grid\ActionColumn',
+                'template' => ' {view}',],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

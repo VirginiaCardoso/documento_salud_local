@@ -125,7 +125,7 @@ class Ocupa_2Controller extends Controller
     }
 
 
-    public function actionSubocu() {
+    public function actionSubocu($id = null) {
     $out = [];
     if (isset($_POST['depdrop_parents'])) {
         $parents = $_POST['depdrop_parents'];
@@ -141,8 +141,16 @@ class Ocupa_2Controller extends Controller
             //    ['id'=>'<sub-cat-id-1>', 'name'=>'<sub-cat-name1>'],
             //    ['id'=>'<sub-cat_id_2>', 'name'=>'<sub-cat-name2>']
             // ]
-            echo Json::encode(['output'=>$out, 'selected'=>'']);
-            return;
+          //  echo Json::encode(['output'=>$out, 'selected'=>'']);
+           // return;
+                if ($id !== null) {
+                    echo Json::encode(['output'=>$out, 'selected'=>$id]);
+                }
+                else
+                {
+                    echo Json::encode(['output'=>$out, 'selected'=>'']);
+                }
+                return;
             }
             else {
                 echo Json::encode(['output'=>'', 'selected'=>'']);

@@ -166,7 +166,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'depends'=>['ocu-id'],
                             'placeholder'=>'Seleccione especifico...',
                             'url'=>Url::to(['/ocupa_2/subocu']),
-                            'loadingText' => 'Cargando ...',
+                            'loadingText' => '...',
                         ]])->label(''); ?> 
  
                      </div>
@@ -178,7 +178,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'depends'=>[ 'subocu-id'],
                                 'placeholder'=>'Seleccione más especifico...',
                                     'url'=>Url::to(['/ocupa_3/subtip']),
-                                    'loadingText' => 'Cargando ...',
+                                    'loadingText' => ' ...',
                             ]
                     ])->label(''); ?> 
  

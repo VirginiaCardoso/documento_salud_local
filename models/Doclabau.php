@@ -51,15 +51,16 @@ class Doclabau extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'DO_CODLIB', 'DO_VISITA', 'DO_PESO', 'DO_TENAR1', 'DO_TENAR2', 'DO_COLEST', 'DO_GLUCO', 'DO_PAP', 'DO_MAM', 'DO_OBS', 'DO_CINTURA', 'DO_TRIPLI', 'DO_HDL', 'DO_IMC'], 'required'],
+           [['DO_CODCLI', 'DO_CODLIB'], 'required'],
             [['DO_VISITA'], 'safe'],
-            [['DO_CODLIB'], 'string', 'max' => 12],
+            [['DO_CODCLI'], 'string', 'max' => 6],
+            [['DO_CODLIB', 'DO_OBS'], 'string', 'max' => 12],
             [['DO_PESO'], 'string', 'max' => 7],
             [['DO_TENAR1', 'DO_TENAR2', 'DO_COLEST', 'DO_GLUCO', 'DO_CINTURA'], 'string', 'max' => 3],
             [['DO_PAP', 'DO_MAM'], 'string', 'max' => 25],
-            [['DO_OBS'], 'string', 'max' => 120],
-            [['DO_TRIPLI', 'DO_HDL', 'DO_IMC'], 'string', 'max' => 4],
-            
+            [['DO_TRIGLI', 'DO_HDL', 'DO_IMC'], 'string', 'max' => 4],
+            [['DO_CODLIB'], 'unique'],
+            [['DO_CODCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['DO_CODCLI' => 'CL_COD']],
             [['DO_CODLIB'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DO_CODLIB' => 'LI_NRO']],
         ];
     }
@@ -71,6 +72,7 @@ class Doclabau extends \yii\db\ActiveRecord
     {
         return [
             'DO_CODLIB' => 'N° Documento Laboral',
+            'DO_CODCLI' => 'Código Cliente',
             'DO_VISITA' => 'Fecha',
             'DO_PESO' => 'Peso',
             'DO_TENAR1' => 'Tensión Arterial', //baja
@@ -81,7 +83,7 @@ class Doclabau extends \yii\db\ActiveRecord
             'DO_MAM' => 'Mamografía',
             'DO_OBS' => 'Observaciones',
             'DO_CINTURA' => 'Cintura',
-            'DO_TRIPLI' => 'Trigliceridos',
+            'DO_TRIGLI' => 'Trigliceridos',
             'DO_HDL' => 'HDL',
             'DO_IMC' => 'IMC',
         ];
@@ -89,12 +91,12 @@ class Doclabau extends \yii\db\ActiveRecord
 
     /**
      * @return \yii\db\ActiveQuery
-     
+     */
     public function getDOCODCLI()
     {
         return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
     }
-*/
+
     /**
      * @return \yii\db\ActiveQuery
      */

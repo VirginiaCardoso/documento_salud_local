@@ -5,10 +5,26 @@ function mostrar_cuanto() {
     $('#campocuanto').show();
   }
   else {
-  	 $('#campocuanto').hide();	
+  	$('#campocuanto').hide();	
+    if( $('#doclab-fumador').val()!='06'){
+        $('#campofase').show();
+    }
+    else {
+      $('#campocuanto').hide();
+    }
   }
 }
 
+
+function mostrar_cage() {
+  if( $('#doclab-do_alcoh').val()!='08'){
+    $('#campocage').show();
+  }
+
+  else {
+     $('#campocage').hide();  
+  }
+}
 
 function mostrar_cual() {
   if( $('#doclab-vener').val()=='16'){
@@ -160,8 +176,14 @@ $(document).ready(function(){
   if ($('#doclab-cuanto').val()==""){
     $('#campocuanto').hide();
   }
+  if ($('#doclab-do_fastab').val()==""){
+    $('#campofase').hide();
+  }
   if ($('#doclab-cual').val()==""){
      $('#campocual').hide();
+  }
+   if ($('#doclab-do_cage').val()==""){
+     $('#campocage').hide();
   }
   if ($('#trat-id').val()!="04"){
      $('#campotrathi').hide();

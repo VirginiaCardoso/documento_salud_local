@@ -57,12 +57,12 @@ if (Yii::$app->session->hasFlash('error')) {
 
     if (Yii::$app->user->isGuest) {
             Yii::$app->user->setReturnUrl($_SERVER["REQUEST_URI"]);
-            $user_item = ['label' => 'Login', 'url' => Yii::$app->user->loginUrl];
+            $user_item = ['label' => 'Iniciar Sesión', 'url' => Yii::$app->user->loginUrl];
         } else {
             $user_item = 
              Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->LE_APENOM . ')',
+                    'Cerrar Sesión (' . Yii::$app->user->identity->LE_APENOM . ')',
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm();

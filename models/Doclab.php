@@ -101,7 +101,7 @@ class Doclab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [ //
-            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH', 'DO_CAGE', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','fumador','vener','emb','menop','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','fumador','vener','emb','menop','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* 'DO_CAGE', , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
             [['DO_NRO'], 'string', 'max' => 12],
             [['DO_CODCLI', 'DO_FADI', 'DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'DO_TALLA',], 'string', 'max' => 6], /*'hiperquienes','cardquienes','oncoquienes'*/
             [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP', 'DO_PROSTA', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','emb','cuantosemb','menop','diabfam','hiperfam','cardfam','oncofam'], 'string', 'max' => 2],
@@ -115,6 +115,7 @@ class Doclab extends \yii\db\ActiveRecord
             [['DO_PAENOM', 'DO_MAENOM', 'DO_HEENON'], 'string', 'max' => 94],
             [['DO_DATOS', 'DO_DATINT'], 'string', 'max' => 254],
             [['DO_NRO'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DO_NRO' => 'LI_NRO']],
+             [['DO_CODCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['DO_CODCLI' => 'CL_COD']],
             // [['diabquienes'], 'validateDiabetes'],
         ];
     }
@@ -230,4 +231,13 @@ class Doclab extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Libretas::className(), ['LI_NRO' => 'DO_NRO']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOCODCLI()
+    {
+        return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
+    }
+    
 }

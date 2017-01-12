@@ -72,19 +72,21 @@ class DoclabController extends Controller
                     $transaction = $connection->beginTransaction();
                     */
         $lib = Libretas::findOne($id);
-        $client = Clientes::findOne($lib->LI_COCLI);
+        $codcli = $lib->LI_COCLI;
+        $client = Clientes::findOne($codcli);
        //  print_r($lib);
        // print_r($client);
         
-        $model = Doclab::findOne($id);
+        $model = Doclab::findOne($codcli);
         if ( $model==null){
             $model = new Doclab();
             $model->DO_NRO = $id;
-            $model->DO_CODCLI = $lib->LI_COCLI;
+            $model->DO_CODCLI = $codcli;
          //   $model->save(false);
 
         }
         else {
+            //var_dump($model);
             if(substr($model->DO_FUMA,0,2)=="07"){
                  //$model->fumador="07";
                  $model->cuanto=  substr($model->DO_FUMA, 2,2);  
@@ -139,6 +141,7 @@ class DoclabController extends Controller
         if ( $docaux==null){
             $docaux = new Doclabau();
             $docaux->DO_CODLIB = $id;
+            $docaux->DO_CODCLI = $codcli;
             $docaux->save(false);
         }
     //   $model = new Doclab();
@@ -168,7 +171,7 @@ class DoclabController extends Controller
 
 
               //  print_r($model->diabquienes);
-                if ($model->diabfam=="01") //si diabetes fam
+             /*   if ($model->diabfam=="01") //si diabetes fam
                     $model->DO_FADI= $model->diabquienes;//implode("",$model->diabquienes);
                 else
                     $model->DO_FADI = "00";
@@ -187,7 +190,16 @@ class DoclabController extends Controller
                     $model->DO_FAONCO= $model->oncoquienes;
                 else
                     $model->DO_FAONCO= "00";
-
+                */
+                // guardar enfermedaddes familiares
+                $model->DO_FADI="";
+               // print_r($model->diabquienes);
+                /* foreach ($model->diabquienes[] as $r) {
+                    $model->DO_FADI .= $r;
+       
+                 } 
+                
+*/
                  if ($model->save(false)) {
                    // return $this->redirect(['view', 'id' => $model->DO_NRO]);
                     Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);

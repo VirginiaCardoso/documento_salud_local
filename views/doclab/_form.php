@@ -163,8 +163,9 @@ DocumentoAsset::register($this);
                         'pluginOptions'=>[
                             'depends'=>['ocu-id'],
                             'placeholder'=>'Seleccione especifico...',
-                            'url'=>Url::to(['/ocupa_2/subocu']),
-                            'loadingText' => 'Cargando ...',
+                            'url'=>Url::to(['/ocupa_2/subocu','id' => $model->DO_RUBRO]),
+                            'loadingText' => '',
+                            'initialize'=> true,
                         ]])->label(''); ?> 
  
                      </div>
@@ -175,8 +176,9 @@ DocumentoAsset::register($this);
                             'pluginOptions'=>[
                                 'depends'=>[ 'subocu-id'],
                                 'placeholder'=>'Seleccione más especifico...',
-                                    'url'=>Url::to(['/ocupa_3/subtip']),
-                                    'loadingText' => 'Cargando ...',
+                                    'url'=>Url::to(['/ocupa_3/subtip','id' => $model->DO_RUBTIP]),
+                                    'loadingText' => '',
+                                    'initialize'=> true,
                             ]
                     ])->label(''); ?> 
  
@@ -219,18 +221,20 @@ DocumentoAsset::register($this);
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="campofase">
                    <?= $form->field($model, 'DO_FASTAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_fat::getListaFaseTab(), ['prompt' => 'Seleccione fase tabaquismo..']); ?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..']); ?>
+                   <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..','onchange'=>'javascript:mostrar_cage();']); ?>
  
                      </div>
-                     <div class="col-md-4">
-                   <?= $form->field($model, 'DO_CAGE', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->dropDownList(AlcCage::getListaCage(), ['prompt' => 'Seleccione..']); ?>
+                </div>
+                <div class="row">
+                     <div class="col-md-12" id="campocage">
+                   <?= $form->field($model, 'DO_CAGE', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->dropDownList(AlcCage::getListaCage(), ['prompt' => 'Seleccione..']); ?>
  
                      </div>
                 </div>

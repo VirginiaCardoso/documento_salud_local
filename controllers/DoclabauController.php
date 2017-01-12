@@ -33,10 +33,15 @@ class DoclabauController extends Controller
      * Lists all Doclabau models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($iddoclab)
     {
+
+        $lib = Libretas::findOne($iddoclab);
+
+        $idcli = $lib->LI_COCLI;
+
         $searchModel = new DoclabauSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->searchIndex(Yii::$app->request->queryParams, $idcli);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

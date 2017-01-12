@@ -155,18 +155,22 @@ class PoolLabController extends Controller
                     $lib = Libretas::findOne($id);
                     if ($lib!= null){
                         $lib->LI_ESTUD = 1;
+                        $codcli = $lib->LI_COCLI;
                          if ($lib->save(false)) {
+
 
                             $doc = Doclabau::findOne($id);
                             if ($doc==null) {
                                 $doc = new Doclabau();
                                 $doc->DO_CODLIB = $id;
+                                $doc->DO_CODCLI = $codcli;
                                 /// ver ----------------------------
-                                $dlab = Doclab::findOne($id);
+                                
+                                $dlab = Doclab::findOne($codcli);
                                 if ($dlab ==null) {
                                     $dlb = new Doclab();
                                     $dlb->DO_NRO = $id;
-                                    $dlb->DO_CODCLI = $model->LI_COCLI;
+                                    $dlb->DO_CODCLI = $codcli;
                                     $dlb->save(false);
                                 }
                                 //-----------------------

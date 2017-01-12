@@ -38,7 +38,7 @@ DoclabauAsset::register($this);
                     </div>
         </div>
          <div class="col-md-2 pull-right">
-                <?= Html::a('Historial Visitas' , ['doclabau/historial', 'id'=>$model->DO_CODLIB], ['class'=>'btn btn-info']);?>
+                <?= Html::a('Historial Visitas' , ['doclabau/index', 'id'=>$model->DO_CODLIB], ['class'=>'btn btn-info']);?>
             </div>   
     </div>
     <br>
@@ -123,7 +123,7 @@ DoclabauAsset::register($this);
             <div class="row">
                 <div class="col-md-6">
       
-                   <?= $form->field($model, 'DO_TRIPLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+                   <?= $form->field($model, 'DO_TRIGLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
                 </div>
             </div>
             <div class="row">
