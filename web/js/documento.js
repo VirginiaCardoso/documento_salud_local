@@ -11,6 +11,7 @@ function mostrar_cuanto() {
     }
     else {
       $('#campocuanto').hide();
+      $('#campofase').hide();
     }
   }
 }
