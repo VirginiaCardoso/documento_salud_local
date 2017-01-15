@@ -143,7 +143,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group pull-right " id="divbotonanular" >
 
                 <?=Html::a('Anular Trámite', Url::toRoute(['libretas/anular', 'LI_NRO' => null]),[
-                    'class' => 'btn btn-success',
+                    'class' => 'btn btn-success botonpanel',
                     'id' => 'botonanular',
                     'data' => [ 'confirm' => '¿Está seguro que desea eliminar el trámite?' ]
                 ]);
