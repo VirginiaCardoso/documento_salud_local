@@ -167,6 +167,12 @@ function registrarAtencion() {
  });
 }
 
+function cargarNro(e,datum) {
+
+//alert(datum.cod);
+ $('#libretassearch-li_cocli').val(datum.cod);
+}
+
 function cargarEstado(e,datum) {
        // $('#divbotonanular').hide();
         //$('#search-estado').val('');
