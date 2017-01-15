@@ -12,10 +12,28 @@ use documento_salud\models\TpoSer;
 use documento_salud\models\Convenios;
 use documento_salud\controllers\LibretasController;
 use documento_salud\assets\LibretasAsset;
+use kartik\dialog\DialogAsset;
+
+/*echo Dialog::widget(['libName' => 'krajeeDialog']);
+echo Dialog::widget([
+    'libName' => 'krajeeDialogConfirm',
+    'options' => [
+        'type' => Dialog::TDIALOG_CONFIRM,
+        'title' => 'Documento Salud Laboral'],
+]);
+
+$this->registerJs(" krajeeDialog.confirm('Are you really sure you want to do this?', function (result) {
+    if (result) { 
+        alert('ok');
+    } else { alert('not');
+    }
+}); ");*/
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Libretas */
 /* @var $form yii\widgets\ActiveForm */
+
+
 
 LibretasAsset::register($this);
 
@@ -123,10 +141,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="form-group pull-right " id="divbotonanular" >
-                    <?= Html::a('Anular Trámite', Url::toRoute(['libretas/anular', 'LI_NRO' => null]), 
+
+                <?=Html::a('Anular Trámite', Url::toRoute(['libretas/anular', 'LI_NRO' => null]),[
+                    'class' => 'btn btn-success',
+                    'id' => 'botonanular',
+                    'data' => [ 'confirm' => '¿Está seguro que desea eliminar el trámite?' ]
+                ]);
+            ?>
+                    <!-- <?= Html::a('Anular Trámite', Url::toRoute(['libretas/anular', 'LI_NRO' => null]), 
             ['class' => 'btn btn-success botonpanel', 'id' => 'botonanular']) ?>
-           
-                   
+           ,
+                                    
+                                    ['title' => 'Anular Trámite','data-confirm' => Yii::t('yii', '¿Está seguro que desea eliminar el trámite?'), 'data-method' => 'post', 'data-pjax' => '0']
+                    -->
             </div>
             <div class="form-group pull-right " id="labelanular" >
                     <label class="labelanulado col-md-14" >Trámite ya anulado.</label>         
