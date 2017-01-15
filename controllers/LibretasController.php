@@ -400,7 +400,7 @@ class LibretasController extends Controller
             $datab = Libretas::databaseName();
 
           $query = new Query;
-            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_APENOM'] )
+            $query->select([Libretas::tableName().'.LI_NRO', Libretas::tableName().'.LI_COCLI',  Clientes::tableName().'.CL_NUMDOC',  Clientes::tableName().'.CL_APENOM'] )
                 ->from($datab.'.'.Libretas::tableName())
                 ->join(  'INNER JOIN',
                     $datab.'.'.Clientes::tableName(),
@@ -409,7 +409,8 @@ class LibretasController extends Controller
                     $datab.'.'.TpoSer::tableName(),
                     $datab.'.'.TpoSer::tableName().'.TS_COD ='.$datab.'.'.Libretas::tableName().'.LI_TPOSER')
                 ; 
-            $query->where($datab.'.'.Libretas::tableName().'.LI_NRO LIKE "%' . $q .'%"');//OR '.$datab.'.'.Clientes::tableName().'.CL_APENOM LIKE "%' . $q .'%'.$datab.'.'.Clientes::tableName().'CL_NUMDOC LIKE "%' . $q ."%'");
+                 $query->where('CL_COD LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->where($datab.'.'.Libretas::tableName().'.LI_NRO LIKE "%'. $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');//OR '.$datab.'.'.Clientes::tableName().'.CL_APENOM LIKE "%' . $q .'%'.$datab.'.'.Clientes::tableName().'CL_NUMDOC LIKE "%' . $q ."%'");
             $query->andWhere($datab.'.'.Libretas::tableName().'.LI_ANULADA = 0');
             $query->orderBy($datab.'.'.Libretas::tableName().'.LI_NRO');
             $command = $query->createCommand();
@@ -420,7 +421,7 @@ class LibretasController extends Controller
             $data = $command->queryAll();
             $out = [];
             foreach ($data as $d) {
-                $out[] = ['value' => $d['LI_NRO'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
+                $out[] = ['value' => $d['LI_NRO'].' - '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['LI_NRO']];
             }
             echo Json::encode($out);
 
@@ -457,7 +458,7 @@ class LibretasController extends Controller
             $data = $command->queryAll();
             $out = [];
             foreach ($data as $d) { // 
-                $out[] = ['value' => 'COD: '.$d['CL_COD'].' - DNI: '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['CL_COD']];
+                $out[] = ['value' => $d['CL_COD'].' - '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['CL_COD']];
             }
             echo Json::encode($out);
 
@@ -622,31 +623,37 @@ public function actionBuscar_estado() {
         //$res = null;
         $resultado = Libretas::findOne(["LI_NRO" => $li_nro]);
         if ($resultado!= null){
-          $fechaLab = LibretasController::vencimiento($resultado->LI_FECVTO);
-          $hoy = date('Y-m-d');
-
-          $fechaLab=strtotime($fechaLab);
-          $hoy=strtotime($hoy);
-
-          $diastrasnc   = ($fechaLab-$hoy)/86400;
-          $diastrasnc   = abs($diastrasnc); 
-          $diastrasnc = floor($diastrasnc); 
-
-          $res = array();
-
-          if($fechaLab < $hoy){
-            $res['cartel'] = "Documento laboral vencido ".$diastrasnc." días";
+          if ($resultado->LI_ANULADA){
+            $res['cartel'] = "Trámite Documento laboral anulado";
             $res['clase'] = "label_venc_no"; 
-          }
-          else{
-            $res['cartel'] = "Documento laboral válido, ".$diastrasnc." días para su vencimiento";
-            $res['clase'] = "label_venc_ok";  
-          } 
 
-          $cliente = Clientes::findOne(["CL_COD" => $resultado->LI_COCLI]);
-          if($cliente != null){
-            $res['apenom'] = $cliente->CL_APENOM;  
-          }            
+          }
+          else {
+              $fechaLab = LibretasController::vencimiento($resultado->LI_FECVTO);
+              $hoy = date('Y-m-d');
+
+              $fechaLab=strtotime($fechaLab);
+              $hoy=strtotime($hoy);
+
+              $diastrasnc   = ($fechaLab-$hoy)/86400;
+              $diastrasnc   = abs($diastrasnc); 
+              $diastrasnc = floor($diastrasnc); 
+
+              $res = array();
+
+              if($fechaLab < $hoy){
+                $res['cartel'] = "Documento laboral vencido ".$diastrasnc." días";
+                $res['clase'] = "label_venc_no"; 
+              }
+              else{
+                $res['cartel'] = "Documento laboral válido, ".$diastrasnc." días para su vencimiento";
+                $res['clase'] = "label_venc_ok";  
+              } 
+            }
+            $cliente = Clientes::findOne(["CL_COD" => $resultado->LI_COCLI]);
+            if($cliente != null){
+              $res['apenom'] = $cliente->CL_APENOM;  
+            }            
           
         }
         else {
