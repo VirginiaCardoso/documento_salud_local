@@ -171,11 +171,20 @@ class DoclabController extends Controller
 
 
               //  print_r($model->diabquienes);
-             /*   if ($model->diabfam=="01") //si diabetes fam
-                    $model->DO_FADI= $model->diabquienes;//implode("",$model->diabquienes);
+                if ($model->diabfam=="01") {
+
+                 if($model->diabquienes)
+
+                    $model->DO_FADI = implode($model->diabquienes);
+                  else
+
+                  $model->DO_FADI = "04";
+
+                } //si diabetes fam
+                   // 
                 else
                     $model->DO_FADI = "00";
-
+/*
                 if ($model->hiperfam=="01") //si diabetes fam
                     $model->DO_FAHIPE= $model->hiperquienes;
                 else
@@ -192,8 +201,8 @@ class DoclabController extends Controller
                     $model->DO_FAONCO= "00";
                 */
                 // guardar enfermedaddes familiares
-                $model->DO_FADI="";
-               // print_r($model->diabquienes);
+              
+             
                 /* foreach ($model->diabquienes[] as $r) {
                     $model->DO_FADI .= $r;
        
@@ -317,7 +326,7 @@ class DoclabController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionEditar($id)
+  /*  public function actionEditar($id)
     {
         $lib = Libretas::findOne($id);
         $client = Clientes::findOne($lib->LI_COCLI);
@@ -354,5 +363,5 @@ class DoclabController extends Controller
                 ]);
           }
     }
-
+*/
 }

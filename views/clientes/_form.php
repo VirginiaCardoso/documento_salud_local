@@ -6,17 +6,23 @@ use yii\widgets\MaskedInput;
 use yii\helpers\Url;
 use kartik\select2\Select2;
 use kartik\datecontrol\DateControl;
+use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
 
 use documento_salud\models\TipDoc;
 use documento_salud\models\Estciv;
 use documento_salud\models\Locali;
-
+use documento_salud\assets\LibretasAsset;
 
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Clientes */
 /* @var $form yii\widgets\ActiveForm */
+
+LibretasAsset::register($this);
+
+Pjax::begin(); 
 ?>
 
 <div class="clientes-form">
@@ -150,13 +156,127 @@ use documento_salud\models\Locali;
 //-------------------------------------------------------------------------------------------------------
 ?>
 
+<!-- <?= Html::a('Sacar foto', ['clientes/camera'], ['class'=>'btn btn-danger', 'id' => 'botonfoto']);?>
+ -->
+<?=Html::button(
+                                '<span class="glyphicon glyphicon-camera"> </span> Sacar Foto',
+                                [
+                                    'title' => 'Sacar Foto',
+                                    'class' => 'verFoto btn btn-danger',
+                                    'value' => Url::to([
+                                        'clientes/camera', 
+                                        ]), 
+                                
+                                ]);?>
+
+<!-- <div id="sacarfotos">
+<?php $form = ActiveForm::begin([   'id' => 'formFoto',
+                                            'fieldConfig' => [  'horizontalCssClasses' => [
+                                                                'label' => 'col-md-2',
+                                                                'wrapper' => 'col-md-10']
+                                                            ],
+                                            'layout' => 'horizontal']); ?>
+    <div class="section categories">
+        <div class="container">
+            <h3 class="section-heading">Tomar foto</h3>
+
+            <div class="row">
+                <div class="one-half column category col-md-6">
+                    <video id="video" class="u-max-full-width"></video>
+                    <br>
+                    <button class="button button-primary" id="capture-pic" onclick="takepicture()">Tomar</button>
+                </div>
+                <div class="one-half column category col-md-6">
+                    <img class="u-max-full-width" id="photo" src="images/placeholder.png">
+                    <br>
+                    <a class="button button-primary" id="download-pic" href="#" download="myimage.png">Descargar</a>
+                    <button disabled="disabled" class="button button-primary" id="upload-pic">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var canvas = null;
+        var width = 380;
+        var height = 280;
+        var localstream = null;
+        (function () {
+            $('#upload-pic').prop("disabled", true);    //disable upload button on page load
+            var streaming = false,
+                    video = document.querySelector('#video'),
+                    photo = document.querySelector('#photo');
+
+            navigator.getMedia = ( navigator.getUserMedia ||        //get user media device support
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.msGetUserMedia);
+
+            if(navigator.getMedia)  {       //Prompts the user for permission to use a media device
+                navigator.getMedia(
+                        {                   // constraints
+                            video: true,
+                            audio: false
+                        },
+                        function (stream) {     // successCallback, function for handling users media stream
+                            localstream = stream;
+                            if (navigator.mozGetUserMedia) {        //get video stream on firefox
+                                video.mozSrcObject = stream;        //set video source to users camera stream
+                            } else {
+                                var vendorURL = window.URL || window.webkitURL;         //get video stream on other browsers
+                                video.src = vendorURL.createObjectURL(stream);           //set video source to users camera stream
+                            }
+                            video.play();
+                        },
+                        function (err) {
+                            alert("Sorry, we are not able to use your camera.");
+                        }
+                );
+
+                video.addEventListener('canplay', function (ev) {       //this event fire after video has been play. This sets the height and width of the video
+                    if (!streaming) {
+                        video.setAttribute('width', width);
+                        video.setAttribute('height', height);
+                        streaming = true;
+                    }
+                }, false);
+            }   else    {
+                alert("Sorry, your browser doesn't support HTML5 getUserMedia API, Please update your browser.");
+            }
 
 
+        })();
 
 
-<?= Html::a('Sacar foto', ['clientes/camera'], ['class'=>'btn btn-danger']);?>
+        function takepicture() {
+            canvas = document.createElement('canvas');      //create new canvas element
+            canvas.width = width;
+            canvas.height = height;
+            canvas.getContext('2d').drawImage(video, 0, 0, width, height);      //draw current video frame into canvas
+            var data = canvas.toDataURL('image/png');       //get drawing video frame from canvas to base64 image url
+            photo.setAttribute('src', data);                //change photo source url
+            document.querySelector('#download-pic').setAttribute("href", data);
+            $('#upload-pic').prop("disabled", false);
+        }
 
+        $("#upload-pic").click(function () {
+            var picdata = $("#photo").attr("src");
+            $.post("uploadpic.php", {picdata: picdata}, function (data) {       //
+                if (data.success == true) {
+                    alert("Pic uploaded successfully.")
+                } else {
+                    alert("Error occurred while uploading pic, Please try again later.");
+                }
+            }, 'json').fail(function () {
+                alert("Error occurred while uploading pic, Please try again later.")
+            });
+        });
 
+    </script>
+<?php ActiveForm::end(); ?>
+
+</div>
+
+ -->
 
 
 
@@ -212,4 +332,16 @@ use documento_salud\models\Locali;
 
     <?php ActiveForm::end(); ?>
 
+<?php Pjax::end(); ?>
 </div>
+
+<?php
+        Modal::begin([
+            'header' => 'Sacar Foto',
+            'id' => 'modalFoto',
+            'size' => 'modal-lg',
+            'clientOptions' => ['backdrop' => 'static']
+        ]);
+        echo "<div id='modalContent'>Por favor espere ...</div>";
+        Modal::end();
+    ?>

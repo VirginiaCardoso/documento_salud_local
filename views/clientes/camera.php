@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -10,7 +10,7 @@
     <script src="js/jquery.min.js"></script>
     <link rel="icon" type="image/png" href="images/favicon.png">
 </head>
-<body>
+<body> 
 <div class="section categories">
     <div class="container">
         <h3 class="section-heading">Tomar foto</h3>
@@ -107,5 +107,5 @@
     });
 
 </script>
-</body>
-</html>
+ </body>
+</html> 

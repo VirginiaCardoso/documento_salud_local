@@ -254,3 +254,22 @@ $(document).ready(function(){
     $('#labelanular').hide();
 
 }); 
+
+$(function(){
+   
+    $(document).on('click', '.verFoto', function(){
+        if ($('#modalFoto').data('bs.modal').isShown) {
+            $('#modalFoto').find('#modalContent').load($(this).attr('value'));
+        } 
+        else {
+            //if modal isn't open; open it and load content
+            $('#modalFoto').modal('show')
+                    .find('#modalContent')
+                    .load($(this).attr('value'));
+        }
+    });
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+    });
+});

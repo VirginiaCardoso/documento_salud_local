@@ -5,6 +5,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 use kartik\depdrop\DepDrop;
+use kartik\select2\Select2;
 
 use documento_salud\models\Clientes;
 use documento_salud\models\Ocupa_1;
@@ -487,7 +488,19 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam1">
                         
-                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>                    
+                        <!-- <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>  -->    
+
+                        <?= $form->field($model, 'diabquienes',
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
+                            'data' => Fami_opc::getListaFamOpc(),
+                            
+                          /*  'disabled' => !$filtro,*/
+                            'options' => ['placeholder' => '','multiple' => true],
+                            'pluginOptions' => [
+                            'allowClear' => true
+                            ],
+                    ]);
+                ?>               
                     </div>
                 </div>
                 <div class="row">
@@ -498,7 +511,19 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam2">
                         
-                        <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>                    
+                     <!--    <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>     -->   
+
+                      <?= $form->field($model, 'hiperquienes',
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
+                            'data' => Fami_opc::getListaFamOpc(),
+                            
+                          /*  'disabled' => !$filtro,*/
+                            'options' => ['placeholder' => '','multiple' => true],
+                            'pluginOptions' => [
+                            'allowClear' => true
+                            ],
+                    ]);
+                ?>                         
                     </div>
                 </div>
                 <div class="row">
@@ -508,7 +533,18 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam3">
                         
-                        <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>
+                       <!--  <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?> -->
+                        <?= $form->field($model, 'cardquienes',
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
+                            'data' => Fami_opc::getListaFamOpc(),
+                            
+                          /*  'disabled' => !$filtro,*/
+                            'options' => ['placeholder' => '','multiple' => true],
+                            'pluginOptions' => [
+                            'allowClear' => true
+                            ],
+                    ]);
+                ?>            
                     </div>
                 </div>
                 <div class="row">
@@ -518,7 +554,18 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam4">
                         
-                        <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?>
+                       <!--  <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?> -->
+                        <?= $form->field($model, 'oncoquienes',
+                    ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
+                            'data' => Fami_opc::getListaFamOpc(),
+                            
+                          /*  'disabled' => !$filtro,*/
+                            'options' => ['placeholder' => '','multiple' => true],
+                            'pluginOptions' => [
+                            'allowClear' => true
+                            ],
+                    ]);
+                ?>            
                     </div>
                 </div>
                 <div class="row ">
