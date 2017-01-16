@@ -249,6 +249,7 @@ function cargarEstado(e,datum) {
 }
 
 
+
 $(document).ready(function(){
     $('#divbotonanular').hide();
     $('#labelanular').hide();
