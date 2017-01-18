@@ -269,6 +269,7 @@ $(function(){
                     .load($(this).attr('value'));
         }
     });
+    
 
 $(document).ready(function(){
     $('[data-toggle="popover"]').popover();   

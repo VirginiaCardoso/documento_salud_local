@@ -83,7 +83,7 @@ class ClientesController extends Controller
 
     public function actionCamera()
     {
-        return $this->render('camera');
+        return $this->renderAjax('camera');
     }
 
     /**
