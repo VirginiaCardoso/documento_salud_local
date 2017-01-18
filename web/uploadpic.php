@@ -4,7 +4,7 @@
  * User: akshay
  * Date: 28/2/15
  * Time: 12:58 PM
- */
+ 
 
 if(!empty($_POST['picdata'])) {
     $success = false;
@@ -24,3 +24,4 @@ if(!empty($_POST['picdata'])) {
     header('Content-type: application/json');
     echo json_encode(array('success' => $success));
 }
+*/

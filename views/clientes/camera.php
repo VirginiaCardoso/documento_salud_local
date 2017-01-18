@@ -84,14 +84,14 @@ Pjax::begin();
 
     $('#upload-pic').click(function () {
         var picdata = $('#photo').attr('src');
-        $.post('uploadpic.php', {picdata: picdata}, function (data) {       //
+        $.post('index.php?r=clientes/uploadpic', {picdata: picdata}, function (data) {       //
             if (data.success == true) {
-                alert('Pic uploaded successfully.')
+                alert('Exito.')
             } else {
-                alert('Error occurred while uploading pic, Please try again later.');
+                alert('Error .');
             }
         }, 'json').fail(function () {
-            alert('Error occurred while uploading pic, Please try again later.')
+            alert('Error.')
         });
     });"
 );
