@@ -105,6 +105,8 @@ class ClientesController extends Controller
                 
                     $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
 
+                    $model->CL_IMG = $model->CL_COD.'.jpg';
+
                    // $model->CL_TIPDOC = 'DNI';
                    // 
                     if ($model->save()){
@@ -306,7 +308,7 @@ class ClientesController extends Controller
                 
         $nroCli = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
 
-        $filename = $nroCli.'.png';//md5(rand(1,20).time()).'.png';
+        $filename = $nroCli.'.jpg';//md5(rand(1,20).time()).'.png';
 
         $ruta = Yii::$app->params['path_clientes'].$nroCli.'/';
 
