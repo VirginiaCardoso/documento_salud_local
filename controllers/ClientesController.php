@@ -301,13 +301,22 @@ class ClientesController extends Controller
        if(!empty($_POST['picdata'])) {
         $success = false;
         $data = $_POST['picdata'];
-        $filename = md5(rand(1,20).time()).'.png';
+
+        $ultId = Clientes::getLastCod();
+                
+        $nroCli = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+
+        $filename = $nroCli.'.png';//md5(rand(1,20).time()).'.png';
+
+        $ruta = Yii::$app->params['path_clientes'].$nroCli.'/';
 
         list($type, $data) = explode(';', $data);
         list(, $data)      = explode(',', $data);
         $data = base64_decode($data);       //decode image
 
-        if(file_put_contents('uploads/'.$filename, $data))  {       //save image to upload folder
+        mkdir($ruta, 0700);
+
+        if(file_put_contents($ruta.$filename, $data))  {       //save image to upload folder
             $success = true;
         }
 
