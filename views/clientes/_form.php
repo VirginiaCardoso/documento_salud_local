@@ -159,7 +159,7 @@ Pjax::begin();
 <!-- <?= Html::a('Sacar foto', ['clientes/camera'], ['class'=>'btn btn-danger', 'id' => 'botonfoto']);?>
  -->
 <?=Html::button(
-                                '<span class="glyphicon glyphicon-camera"> </span> Sacar Foto',
+                                '<span class="glyphicon glyphicon-camera"> </span> Tomar Foto',
                                 [
                                     'title' => 'Sacar Foto',
                                     'class' => 'verFoto btn btn-danger',

@@ -79,6 +79,7 @@ Pjax::begin();
         photo.setAttribute('src', data);                //change photo source url
         document.querySelector('#download-pic').setAttribute('href', data);
         $('#upload-pic').prop('disabled', false);
+
     }
 
     $('#upload-pic').click(function () {
@@ -113,14 +114,15 @@ Pjax::begin();
             <div class="col-md-6">
 
                 <!-- <button class="button button-primary" id="capture-pic" onclick="takepicture()">Tomar</button> -->
-                <?= Html::button('Tomar', [ 'title' => 'Tomar Foto', 'class' => 'btn btn-primary', 'id' => 'capture-pic', 'onclick' =>'takepicture()']); ?>
+                <?= Html::button('<span class="glyphicon glyphicon-camera"> </span> Tomar Foto', [ 'title' => 'Tomar Foto', 'class' => 'btn btn-primary', 'id' => 'capture-pic', 'onclick' =>'takepicture()']); ?>
             </div>
             <div class="col-md-6">
+<!-- 
+                <a class="button button-primary" id="download-pic" href="#" download="myimage.png"><span class="glyphicon glyphicon-download-alt"></span></a> -->
+                 <?= Html::a(' <span class="glyphicon glyphicon-download-alt"></span> ', Url::toRoute(['#']), ['class' => 'btn btn-info', 'id'=> "download-pic", 'download'=>"myimage.png", 'title'=> 'Descargar' ]) ?>
+                <!-- <button disabled="disabled" class="button button-primary" id="upload-pic">Guardar</button> <span class="    glyphicon glyphicon-floppy-disk"></span> -->
 
-                <a class="button button-primary" id="download-pic" href="#" download="myimage.png">Descargar</a>
-                <!-- <button disabled="disabled" class="button button-primary" id="upload-pic">Guardar</button> -->
-
-                <?= Html::button('Guardar', [ 'title' => 'Guardar Foto', 'class' => 'btn btn-success', 'id' => 'upload-pic', 'disabled' =>'disabled']); ?>
+                <?= Html::button(' Guardar', [ 'title' => 'Guardar Foto', 'class' => 'btn btn-success', 'id' => 'upload-pic', 'disabled' =>'disabled']); ?>
 
             </div>
         </div>
