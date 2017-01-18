@@ -314,7 +314,8 @@ class ClientesController extends Controller
         list(, $data)      = explode(',', $data);
         $data = base64_decode($data);       //decode image
 
-        mkdir($ruta, 0700);
+       if (!file_exists($ruta))
+            mkdir($ruta, 0777);
 
         if(file_put_contents($ruta.$filename, $data))  {       //save image to upload folder
             $success = true;
