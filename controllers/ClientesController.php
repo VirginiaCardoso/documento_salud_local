@@ -40,7 +40,7 @@ class ClientesController extends Controller
     public function actionIndex()
     {
         $searchModel = new ClientesSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search2(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
