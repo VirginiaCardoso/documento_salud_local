@@ -150,6 +150,9 @@ class ClientesSearch extends Clientes
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'sort'=> ['defaultOrder' => ['CL_COD' => SORT_DESC]],
+            'pagination' => [
+                'pageSize' => 10,
+            ]
         ]);
 
         $this->load($params);

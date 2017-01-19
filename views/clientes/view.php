@@ -104,40 +104,15 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
     <div class="col-md-2">
         <?php 
-        if ($model->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
-
-           
-          
-                echo "Cargar nueva  imagen";
-
-          
-        }
-        else {
+        
             $src = Yii::$app->params['path_clientes'].'/'.$model->CL_COD.'/'.$model->CL_IMG;
             echo Html::img( $src, $options = ['title' => $model->CL_IMG,
-            'alt' => 'No se encontro la imágen', 'height'=>'200', 'width'=>'200'] );
-            }
+            'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic']] );
+            
         ?>
     </div>
 </div>
-<!--
-<div id="cambox" >
-    <div id="webcam"></div>
-    <div id="tiktik">
-        <span class="timer">3</span>
-        <span class="click"><img alt="take photo" src="img/camera_icon.png" onclick="capturePic()" /></span>
-    </div>
-    <div id="nocamera">
-        <div class="message">
-            Video has not detected any available cameras on your system. Please connect a camera and try again.
-        </div>
-    </div>
-    <div id="preview">
-        <img id="previewImg" alt="preview Image" height="240" width="320" src="img/preload.gif" />
-        <span class="close"></span>
-    </div>
-</div>
--->
+
 
 <?php ActiveForm::end(); ?>
 

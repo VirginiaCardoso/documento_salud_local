@@ -53,7 +53,7 @@ Pjax::begin();
     </div>
     <div class="col-md-4">
 
-    <?= $form->field($model, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6', ]])->textInput(['maxlength' => true, 'onchange'=> 'changeDoc()',]) ?>
     </div>
 </div>
 
@@ -141,180 +141,57 @@ Pjax::begin();
     <?= $form->field($model, 'CL_EMAIL')->textInput(['maxlength' => true]) ?>
 
 <br>
-<div class="row">
-    <div class="col-md-2">
-        <?='<label class=" control-label" for="CL_IMG"> Imágen cliente </label>' ?>
-    </div>
-    <div class="col-md-2">
+
         <?php 
-        if ($model->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
-
-           
-          
-             //   echo "Cargar nueva  imagen";
-                
-//-------------------------------------------------------------------------------------------------------
-?>
-
-<!-- <?= Html::a('Sacar foto', ['clientes/camera'], ['class'=>'btn btn-danger', 'id' => 'botonfoto']);?>
- -->
-<?=Html::button(
-                                '<span class="glyphicon glyphicon-camera"> </span> Tomar Foto',
-                                [
-                                    'title' => 'Sacar Foto',
-                                    'class' => 'verFoto btn btn-danger',
-                                    'value' => Url::to([
-                                        'clientes/camera', 
-                                        ]), 
-                                
-                                ]);?>
-
-<!-- <div id="sacarfotos">
-<?php $form = ActiveForm::begin([   'id' => 'formFoto',
-                                            'fieldConfig' => [  'horizontalCssClasses' => [
-                                                                'label' => 'col-md-2',
-                                                                'wrapper' => 'col-md-10']
-                                                            ],
-                                            'layout' => 'horizontal']); ?>
-    <div class="section categories">
-        <div class="container">
-            <h3 class="section-heading">Tomar foto</h3>
-
-            <div class="row">
-                <div class="one-half column category col-md-6">
-                    <video id="video" class="u-max-full-width"></video>
-                    <br>
-                    <button class="button button-primary" id="capture-pic" onclick="takepicture()">Tomar</button>
-                </div>
-                <div class="one-half column category col-md-6">
-                    <img class="u-max-full-width" id="photo" src="images/placeholder.png">
-                    <br>
-                    <a class="button button-primary" id="download-pic" href="#" download="myimage.png">Descargar</a>
-                    <button disabled="disabled" class="button button-primary" id="upload-pic">Guardar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="text/javascript">
-        var canvas = null;
-        var width = 380;
-        var height = 280;
-        var localstream = null;
-        (function () {
-            $('#upload-pic').prop("disabled", true);    //disable upload button on page load
-            var streaming = false,
-                    video = document.querySelector('#video'),
-                    photo = document.querySelector('#photo');
-
-            navigator.getMedia = ( navigator.getUserMedia ||        //get user media device support
-            navigator.webkitGetUserMedia ||
-            navigator.mozGetUserMedia ||
-            navigator.msGetUserMedia);
-
-            if(navigator.getMedia)  {       //Prompts the user for permission to use a media device
-                navigator.getMedia(
-                        {                   // constraints
-                            video: true,
-                            audio: false
-                        },
-                        function (stream) {     // successCallback, function for handling users media stream
-                            localstream = stream;
-                            if (navigator.mozGetUserMedia) {        //get video stream on firefox
-                                video.mozSrcObject = stream;        //set video source to users camera stream
-                            } else {
-                                var vendorURL = window.URL || window.webkitURL;         //get video stream on other browsers
-                                video.src = vendorURL.createObjectURL(stream);           //set video source to users camera stream
-                            }
-                            video.play();
-                        },
-                        function (err) {
-                            alert("Sorry, we are not able to use your camera.");
-                        }
-                );
-
-                video.addEventListener('canplay', function (ev) {       //this event fire after video has been play. This sets the height and width of the video
-                    if (!streaming) {
-                        video.setAttribute('width', width);
-                        video.setAttribute('height', height);
-                        streaming = true;
-                    }
-                }, false);
-            }   else    {
-                alert("Sorry, your browser doesn't support HTML5 getUserMedia API, Please update your browser.");
+        if ($model->isNewRecord) { 
+            $labelBoton = "Tomar Foto";
+            $cartel="Foto";
+            $deshabil= 'disabled';
+            $nrocli = null;
             }
+        else { 
 
+            $labelBoton = "Tomar Nueva Foto";
+            $cartel="";
+            $deshabil= false;
+            $nrocli = $model->CL_COD;
 
-        })();
-
-
-        function takepicture() {
-            canvas = document.createElement('canvas');      //create new canvas element
-            canvas.width = width;
-            canvas.height = height;
-            canvas.getContext('2d').drawImage(video, 0, 0, width, height);      //draw current video frame into canvas
-            var data = canvas.toDataURL('image/png');       //get drawing video frame from canvas to base64 image url
-            photo.setAttribute('src', data);                //change photo source url
-            document.querySelector('#download-pic').setAttribute("href", data);
-            $('#upload-pic').prop("disabled", false);
-        }
-
-        $("#upload-pic").click(function () {
-            var picdata = $("#photo").attr("src");
-            $.post("uploadpic.php", {picdata: picdata}, function (data) {       //
-                if (data.success == true) {
-                    alert("Pic uploaded successfully.")
-                } else {
-                    alert("Error occurred while uploading pic, Please try again later.");
-                }
-            }, 'json').fail(function () {
-                alert("Error occurred while uploading pic, Please try again later.")
-            });
-        });
-
-    </script>
-<?php ActiveForm::end(); ?>
-
-</div>
-
- -->
-
-
-
-
-<?php
-//-----------------------------------------------------------------------------------------------------
-
-
-
-          
-        }
-        else {
             $src = Yii::$app->params['path_clientes'].$model->CL_COD.'/'.$model->CL_IMG;
+            ?>
+            <div class="row">
+    <div class="col-md-2">
+        <?='<label class=" control-label" for="CL_IMG"> Foto </label>' ?>
+    </div>
+    <div class="col-md-2">
+            <?php
             echo Html::img( $src, $options = ['title' => $model->CL_IMG,
-            'alt' => 'No se encontro la imágen', 'height'=>'200', 'width'=>'200'] );
-            }
+            'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic']] );
+            
+        ?>
+
+      </div>
+</div>
+          
+    <?php    } ?>
+          
+<div class="row">
+<br>
+    <div class="col-md-2"> 
+        <?='<label class=" control-label" for=" ">'.$cartel.'    </label>' ?>
+    </div>
+    <div class="col-md-2"> 
+        <?php
+
+        echo Html::button('<span class="glyphicon glyphicon-camera"> </span> '.$labelBoton,['title' => $labelBoton,
+                            'id' => "botonTomar",
+                            'class' => 'verFoto btn btn-danger',
+                            'value' => Url::to(['clientes/camera','doc' => $model->CL_NUMDOC , 'cli' => $nrocli]), //index.php?r=clientes%2Fcamera&cli=000337&doc=111111
+                            'disabled'=>$deshabil,
+                            ]);
+    //   www/intranet/modulos/documento_salud/web/index.php?r=clientes%2Fcamera&doc=7774555
         ?>
     </div>
 </div>
-<!--
-<div id="cambox" >
-    <div id="webcam"></div>
-    <div id="tiktik">
-        <span class="timer">3</span>
-        <span class="click"><img alt="take photo" src="img/camera_icon.png" onclick="capturePic()" /></span>
-    </div>
-    <div id="nocamera">
-        <div class="message">
-            Video has not detected any available cameras on your system. Please connect a camera and try again.
-        </div>
-    </div>
-    <div id="preview">
-        <img id="previewImg" alt="preview Image" height="240" width="320" src="img/preload.gif" />
-        <span class="close"></span>
-    </div>
-</div>
--->
-
 
     <br>
         <div class="form-group pull-right">

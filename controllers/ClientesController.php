@@ -81,9 +81,25 @@ class ClientesController extends Controller
         ]);
     }
 
-    public function actionCamera()
+    public function actionCamera(  $cli= null, $doc)
     {
-        return $this->renderAjax('camera');
+        if ($cli==null) {
+            $ultId = Clientes::getLastCod();
+
+            $model = new Clientes();
+                
+            $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+            $model->CL_NUMDOC = $doc;
+
+            $model->save(false);
+
+
+        }
+        else {
+            $model = $this->findModel($id);
+        }
+
+        return $this->renderAjax('camera', ['model' => $model,]);
     }
 
     /**
@@ -101,9 +117,9 @@ class ClientesController extends Controller
                     $connection = Yii::$app->dbdocsl;
                     $transaction = $connection->beginTransaction();
                     
-                    $ultId = Clientes::getLastCod();
+                  //  $ultId = Clientes::getLastCod();
                 
-                    $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+                 //   $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
 
                     $model->CL_IMG = $model->CL_COD.'.jpg';
 
@@ -164,6 +180,12 @@ class ClientesController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $ruta = Yii::$app->params['path_clientes'].$model->CL_COD.'/';
+
+        if (!file_exists($ruta)) {
+            $model->CL_IMG = $model->CL_COD.'.jpg';
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->CL_COD]);

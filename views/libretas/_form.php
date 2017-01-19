@@ -130,19 +130,19 @@ Pjax::begin();
     </div>
     <div class="col-md-2">
         <?php 
-        if ($cliente->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
+        //if ($cliente->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
 
            
           
-                echo "Cargar nueva  imagen";
+           //     echo "Cargar nueva  imagen";
 
           
-        }
-        else {
+       // }
+      //  else {
             $src = Yii::$app->params['path_clientes'].'/'.$cliente->CL_COD.'/'.$cliente->CL_IMG;
             echo Html::img( $src, $options = ['title' => $cliente->CL_IMG,
-            'alt' => 'No se encontro la imágen', 'height'=>'200', 'width'=>'200'] );
-            }
+            'alt' => 'No se encontro la imágen', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic'] ]);
+        //    }
         ?>
     </div>
 </div>

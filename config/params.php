@@ -12,4 +12,6 @@ return [
   'TR_NUEVO' => 1,
   'TR_RENOVACION' => 2,
   'TR_RENOVVENCIDO' => 3,
+  'anchopic' =>'380',
+  'altopic' =>'280',
   ];
