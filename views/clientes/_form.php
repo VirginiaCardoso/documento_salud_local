@@ -57,17 +57,18 @@ Pjax::begin();
     </div>
 </div>
 
-<!-- 
+
 <div class="row">
-    <div class="col-md-6">
-        <?= $form->field($model, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
-    </div>
+    
 </div>
--->
+
 <div class="row">
-         <div class="col-md-6">
-           
-       <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+        <div class="col-md-6">
+
+     <!--      <?= $form->field($model, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
+  
+           -->
+      <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'options' => [
@@ -77,7 +78,7 @@ Pjax::begin();
                         'autoclose' => true
                     ]
                 ]
-            ]);?>
+            ]);?> 
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'FEMENINO', 'M' => 'MASCULINO'], ['prompt' => 'Seleccione sexo']) ?>

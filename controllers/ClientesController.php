@@ -123,10 +123,10 @@ class ClientesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            try {
+           /* try {
                     $connection = Yii::$app->dbdocsl;
                     $transaction = $connection->beginTransaction();
-                    
+                    */
                     if ($model->CL_COD){
                        // $model->CL_IMG = $model->CL_COD.'.jpg';
 
@@ -161,7 +161,7 @@ class ClientesController extends Controller
                         return $this->render('create', ['model' => $model]);
                     }*/
             
-                    $transaction->commit();
+               //     $transaction->commit();
 
                     if($origen==1){
                             return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);}
@@ -174,13 +174,13 @@ class ClientesController extends Controller
                     return $this->render('create', ['model' => $model]);
                 }  
                    
-                 }
+            /*     }
                 catch (ErrorException $e) {
                     $transaction->rollback();
                     echo($e->getMessage());
 
                 }
-            
+            */
         } else {
 
                 $model->CL_TIPDOC = Yii::$app->params['TIPODOC_DEFAULT'];
