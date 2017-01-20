@@ -1,14 +1,19 @@
  <?php
 
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\MaskedInput;
 use yii\helpers\Url;
+use kartik\select2\Select2;
+use kartik\datecontrol\DateControl;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
-use documento_salud\assets\CameraAsset;
+use documento_salud\assets\LibretasAsset;
 
 
-CameraAsset::register($this);
+LibretasAsset::register($this);
 
 Pjax::begin(); 
    /*<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,26 +89,37 @@ Pjax::begin();
 
     $('#upload-pic').click(function () {
         var picdata = $('#photo').attr('src');
-        $.post('index.php?r=clientes/uploadpic', {picdata: picdata}, function (data) {       //
+        var cod = $('#clientes-cl_cod').val();
+    
+        $.post('index.php?r=clientes/uploadpic', {picdata: picdata, cod: cod }, function (data) {       //
             if (data.success == true) {
-                alert('Exito.')
+                codcli = data.cli;
+                 $('#imgfoto').attr('src','".Yii::$app->params['path_clientes']."'+codcli+'/'+codcli+'.jpg?timestamp=' + new Date().getTime());
+                // $('#imgfoto').attr('src','".Yii::$app->params['path_clientes']."'+codcli+'/'+codcli+'.jpg);
+                krajeeDialogExito.alert('Foto guardada correctamente.');
+               // $('#divfoto').load();
+               //  $('#imgfoto').prop('src',cod);
+                 $('#modalFoto').modal('hide');
+
             } else {
-                alert('Error .');
+                krajeeDialogError.alert('Error al guardar la foto.');
             }
         }, 'json').fail(function () {
-            alert('Error.')
+            krajeeDialogError.alert('Error al guardar la foto.')
         });
     });"
 );
 ?>
+
 <div class="camera-form">
   <!--   <div class="container">
         <h3 class="section-heading">Tomar foto</h3>
- -->
+ 
  <?php 
 echo $model->CL_COD;
 
- ?>
+ ?>-->
+  <?= Html::activeHiddenInput($model, 'CL_COD') ?> 
         <div class="row">
             <div class=" col-md-6">
                 <video id="video" class="u-max-full-width"></video>

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
        <!-- <?= Html::a('Nuevo Cliente', ['create'], ['class' => 'btn btn-success']) ?> -->
 
-            <?= Html::a('Nuevo Cliente', Url::toRoute(['clientes/create', 'origen' => 2]), ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Nuevo Cliente', Url::to(['clientes/create', 'origen' => 2]), ['class' => 'btn btn-success']) ?>
        
     </p>
 <?php Pjax::begin(); ?>    <?= GridView::widget([

@@ -13,14 +13,14 @@ use yii\bootstrap\Modal;
 use documento_salud\models\TipDoc;
 use documento_salud\models\Estciv;
 use documento_salud\models\Locali;
-use documento_salud\assets\LibretasAsset;
+use documento_salud\assets\CameraAsset;
 
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Clientes */
 /* @var $form yii\widgets\ActiveForm */
 
-LibretasAsset::register($this);
+CameraAsset::register($this);
 
 Pjax::begin(); 
 ?>
@@ -57,17 +57,18 @@ Pjax::begin();
     </div>
 </div>
 
- 
-<!--<div class="row">
-    <div class="col-md-6">
-        <?= $form->field($model, 'CL_APENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
-    </div>
+
+<div class="row">
+    
 </div>
--->
+
 <div class="row">
         <div class="col-md-6">
-           
-        <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+
+     <!--      <?= $form->field($model, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
+  
+           -->
+      <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'options' => [
@@ -77,7 +78,7 @@ Pjax::begin();
                         'autoclose' => true
                     ]
                 ]
-            ]);?>
+            ]);?> 
         </div>
         <div class="col-md-6">
             <?= $form->field($model, 'CL_SEXO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->dropDownList([ 'F' => 'FEMENINO', 'M' => 'MASCULINO'], ['prompt' => 'Seleccione sexo']) ?>
@@ -145,7 +146,7 @@ Pjax::begin();
         <?php 
         if ($model->isNewRecord) { 
             $labelBoton = "Tomar Foto";
-            $cartel="Foto";
+            $cartel="";
             $deshabil= 'disabled';
             $nrocli = null;
             }
@@ -156,23 +157,25 @@ Pjax::begin();
             $deshabil= false;
             $nrocli = $model->CL_COD;
 
-            $src = Yii::$app->params['path_clientes'].$model->CL_COD.'/'.$model->CL_IMG;
+            
             ?>
+            <?php    } 
+            $src = Yii::$app->params['path_clientes'].$model->CL_COD.'/'.$model->CL_IMG;?>
             <div class="row">
     <div class="col-md-2">
         <?='<label class=" control-label" for="CL_IMG"> Foto </label>' ?>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-2" id="divfoto" >
             <?php
-            echo Html::img( $src, $options = ['title' => $model->CL_IMG,
-            'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic']] );
+            echo Html::img( $src, $options = ['id'=>'imgfoto','title' => $model->CL_IMG,
+            'alt' => $model->isNewRecord?"":'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic']] );
             
         ?>
 
       </div>
 </div>
           
-    <?php    } ?>
+    
           
 <div class="row">
 <br>

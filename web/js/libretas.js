@@ -13,64 +13,8 @@ $.ajax({
 
 };
 
-function changeDoc(){
-  $('#botonTomar').prop('disabled', false);  
- // alert($('#botonTomar').prop('value'));
- // 
-/* var kvp = $('#botonTomar').prop('value').substr(1).split('&');
-// alert (kvp);
 
-  key = encodeURI("doc"); 
-  value = encodeURI($('#clientes-cl_numdoc').val());
- // alert(value);
 
-  var i=kvp.length; var x; 
-  while(i--) 
-    {
-        x = kvp[i].split('=');
-
-        if (x[0]==key)
-        {
-            x[1] = value;
-            kvp[i] = x.join('=');
-            break;
-        }
-    }
-
-    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-    $('#botonTomar').prop('value', kvp.join('&'));*/
-     _url = $('#botonTomar').prop('value');
-     param = $('#clientes-cl_numdoc').val();
-   // _url += (_url.split('?')[1] ? '&doc':'?') + param;
-    $('#botonTomar').prop('value', _url+"&doc="+param);
-    alert($('#botonTomar').prop('value'));
-}
-/*
-function insertParam(key, value)
-{
-    key = encodeURI(key); value = encodeURI(value);
-
-    var kvp = document.location.search.substr(1).split('&');
-
-    var i=kvp.length; var x; while(i--) 
-    {
-        x = kvp[i].split('=');
-
-        if (x[0]==key)
-        {
-            x[1] = value;
-            kvp[i] = x.join('=');
-            break;
-        }
-    }
-
-    if(i<0) {kvp[kvp.length] = [key,value].join('=');}
-
-    //this will reload the page, it's likely better to store this until finished
-    document.location.search = kvp.join('&'); 
-}
-*/
 function seleccionoTipo() {
   seleccion = $("#libretas-li_tposer").val(); 
  // alert(seleccion);
@@ -149,6 +93,7 @@ function cargarLibretas(e,datum) {
      },
         });
         $('#search-libreta').val('');
+         
 }
 
 
@@ -306,30 +251,11 @@ function cargarEstado(e,datum) {
      
 }
 
-
+/*
 
 $(document).ready(function(){
     $('#divbotonanular').hide();
     $('#labelanular').hide();
 
 }); 
-
-$(function(){
-   
-    $(document).on('click', '.verFoto', function(){
-        if ($('#modalFoto').data('bs.modal').isShown) {
-            $('#modalFoto').find('#modalContent').load($(this).attr('value'));
-        } 
-        else {
-            //if modal isn't open; open it and load content
-            $('#modalFoto').modal('show')
-                    .find('#modalContent')
-                    .load($(this).attr('value'));
-        }
-    });
-    
-
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover();   
-    });
-});
+*/

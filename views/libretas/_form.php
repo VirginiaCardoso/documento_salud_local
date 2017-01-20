@@ -17,7 +17,7 @@ use documento_salud\assets\LibretasAsset;
 
 LibretasAsset::register($this);
 
-Pjax::begin(); 
+
 ?>
 
 <div class="libretas-form">
@@ -49,10 +49,10 @@ Pjax::begin();
             <?= Html::button('Buscar', ['value' => Url::to(['clientes/index2']), 'title' => 'Buscar Cliente', 'class' => 'showModalButton btn btn-primary']); ?>
         </div>
         <div class="col-md-2">
-            <?= Html::a('Nuevo Cliente', Url::toRoute(['clientes/create', 'origen' => 1]), ['class' => 'btn btn-success']) ?>
+            <?= Html::a('Nuevo Cliente', Url::to(['clientes/create', 'origen' => 1]), ['class' => 'btn btn-success']) ?>
         </div>
         <div class="col-md-2 col-lg-offset-7 col-md-offset-6" <?= $model->LI_COCLI ? "" : "hidden";?>>
-            <?= Html::a('Modificar Cliente', Url::toRoute(['clientes/update2', 'CL_COD' => $model->LI_COCLI]), 
+            <?= Html::a('Modificar Cliente', Url::to(['clientes/update2', 'CL_COD' => $model->LI_COCLI]), 
             ['class' => 'btn btn-warning btn-modificar-cliente']) ?>
         </div>
     </div>
@@ -297,5 +297,5 @@ Pjax::begin();
     ?>
     <?php ActiveForm::end(); ?>
 
-<?php Pjax::end(); ?>
+
 </div>

@@ -81,25 +81,35 @@ class ClientesController extends Controller
         ]);
     }
 
-    public function actionCamera(  $cli= null, $doc)
+    public function actionCamera( $doc, $cli= null)
     {
-        if ($cli==null) {
-            $ultId = Clientes::getLastCod();
+        try {
+            $connection = Yii::$app->dbdocsl;
+            $transaction = $connection->beginTransaction();
 
-            $model = new Clientes();
-                
-            $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
-            $model->CL_NUMDOC = $doc;
+            if ($cli==null) {
+                $ultId = Clientes::getLastCod();
 
-            $model->save(false);
+                $model = new Clientes();
+                    
+                $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+                $model->CL_NUMDOC = $doc;
+
+                $model->save(false);
 
 
-        }
-        else {
-            $model = $this->findModel($id);
-        }
+            }
+            else {
+                $model = $this->findModel($cli);
+            }
 
-        return $this->renderAjax('camera', ['model' => $model,]);
+            return $this->renderAjax('camera', ['model' => $model,]);
+            }
+                catch (ErrorException $e) {
+                    $transaction->rollback();
+                    echo($e->getMessage());
+
+                }
     }
 
     /**
@@ -113,51 +123,52 @@ class ClientesController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            try {
+           /* try {
                     $connection = Yii::$app->dbdocsl;
                     $transaction = $connection->beginTransaction();
-                    
-                  //  $ultId = Clientes::getLastCod();
+                    */
+                    if ($model->CL_COD){
+                        $model->CL_IMG = $model->CL_COD.'.jpg';
+
+                    }
+                    else {
+                        $ultId = Clientes::getLastCod();
                 
-                 //   $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+                        $model->CL_COD = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+                    }
+                   
 
+                    $model->CL_APENOM = strtoupper($model->CL_APENOM);
+                    $model->CL_DOMICI = strtoupper($model->CL_DOMICI);
+                  /*  if ($model->CL_LUGTRA) {
+                     $mdoel->CL_LUGTRA = strtoupper($model->CL_LUGTRA);
+                    }*/
                     $model->CL_IMG = $model->CL_COD.'.jpg';
-
-                   // $model->CL_TIPDOC = 'DNI';
-                   // 
+ 
                     if ($model->save()){
                         
                          Yii::$app->getSession()->setFlash('exito', 'Cliente guardado   correctamente, código: '.$model->CL_COD);
-                         
-                        //else
-                           // return $this->render('create', ['model' => $model]);
-                        
-                    
-                  /* else {
-                        
-                        return $this->render('create', ['model' => $model]);
-                    }*/
-            
-                    $transaction->commit();
-
-                    if($origen==1)
-                            return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
-                    else   
-                        return $this->redirect(['view', 'id' => $model->CL_COD]);  
-                    } 
-                     else {
-                         $transaction->commit();
+                        if ($origen==1){
+                             return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
+                         }
+                        else {   
+                            return $this->redirect(['view', 'id' => $model->CL_COD]);  
+                        } 
+                    }
+                    else {
+                         //$transaction->commit();
                         return $this->render('create', ['model' => $model]);
                     }  
-                   
-                 }
+                    
+            /*     }
                 catch (ErrorException $e) {
                     $transaction->rollback();
                     echo($e->getMessage());
 
                 }
-            
-        } else {
+            */
+        } 
+        else {
 
                 $model->CL_TIPDOC = Yii::$app->params['TIPODOC_DEFAULT'];
                 $model->CL_TEL = Yii::$app->params['TELEFONO_DEFAULT'];
@@ -183,11 +194,11 @@ class ClientesController extends Controller
 
         $ruta = Yii::$app->params['path_clientes'].$model->CL_COD.'/';
 
-        if (!file_exists($ruta)) {
+        if (file_exists($ruta)) {
             $model->CL_IMG = $model->CL_COD.'.jpg';
         }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->CL_COD]);
         } else {
 
@@ -211,7 +222,14 @@ class ClientesController extends Controller
     {
         $model = $this->findModel($CL_COD);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+
+        $ruta = Yii::$app->params['path_clientes'].$model->CL_COD.'/';
+
+        if (file_exists($ruta)) {
+            $model->CL_IMG = $model->CL_COD.'.jpg';
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             //return $this->redirect(['view', 'id' => $model->CL_COD]);
              return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
         } else {
@@ -326,9 +344,17 @@ class ClientesController extends Controller
         $success = false;
         $data = $_POST['picdata'];
 
-        $ultId = Clientes::getLastCod();
+        if(!empty($_POST['cod'])){
+            $nroCli = $_POST['cod'];
+        }
+        else {
+            $ultId = Clientes::getLastCod();
                 
-        $nroCli = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+            $nroCli = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
+        }
+     //   $ultId = Clientes::getLastCod();
+                
+       // $nroCli = str_pad($ultId+1, 6, "0", STR_PAD_LEFT);
 
         $filename = $nroCli.'.jpg';//md5(rand(1,20).time()).'.png';
 
@@ -345,10 +371,10 @@ class ClientesController extends Controller
             $success = true;
         }
 
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json');
-        echo json_encode(array('success' => $success));
+       // header('Cache-Control: no-cache, must-revalidate');
+       // header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+       // header('Content-type: application/json');
+        echo json_encode(array('success' => $success, 'cli' => $nroCli));
     }
 }
 
