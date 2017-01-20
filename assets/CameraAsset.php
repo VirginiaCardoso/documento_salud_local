@@ -25,10 +25,10 @@ class CameraAsset extends AssetBundle
     ];
     public $js = [
         'js/bootstrap-toggle.min.js',
-       // 'js/jquery.mask.js',
+        'js/jquery.mask.js',
+        'js/jquery.min.js',
         'js/libretas.js',
-       // 'js/modal-cliente.js',
-      // 'js/jquery.min.js',
+        //'js/jquery.min.js',
    
     ];
     public $depends = [

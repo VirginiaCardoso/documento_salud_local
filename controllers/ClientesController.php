@@ -141,8 +141,9 @@ class ClientesController extends Controller
                   //  $model->CL_IMG = $model->CL_COD.'.jpg';
                     $model->CL_APENOM = strtoupper($model->CL_APENOM);
                     $model->CL_DOMICI = strtoupper($model->CL_DOMICI);
-                    if ($model->CL_LUGTRA)
+                    if ($model->CL_LUGTRA) {
                      $mdoel->CL_LUGTRA = strtoupper($model->CL_LUGTRA);
+                    }
                     $model->CL_IMG = $model->CL_COD.'.jpg';
 
                    // $model->CL_TIPDOC = 'DNI';
@@ -162,15 +163,16 @@ class ClientesController extends Controller
             
                     $transaction->commit();
 
-                    if($origen==1)
-                            return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);
-                    else   
+                    if($origen==1){
+                            return $this->redirect(['libretas/create', 'codcli' => $model->CL_COD]);}
+                    else {   
                         return $this->redirect(['view', 'id' => $model->CL_COD]);  
                     } 
-                     else {
-                         $transaction->commit();
-                        return $this->render('create', ['model' => $model]);
-                    }  
+                }
+                else {
+                         //$transaction->commit();
+                    return $this->render('create', ['model' => $model]);
+                }  
                    
                  }
                 catch (ErrorException $e) {

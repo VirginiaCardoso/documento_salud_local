@@ -1,14 +1,19 @@
  <?php
 
+
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use yii\widgets\MaskedInput;
 use yii\helpers\Url;
+use kartik\select2\Select2;
+use kartik\datecontrol\DateControl;
 use yii\widgets\Pjax;
+use yii\bootstrap\Modal;
 
-use documento_salud\assets\CameraAsset;
+use documento_salud\assets\LibretasAsset;
 
 
-CameraAsset::register($this);
+LibretasAsset::register($this);
 
 Pjax::begin(); 
    /*<meta name="viewport" content="width=device-width, initial-scale=1">

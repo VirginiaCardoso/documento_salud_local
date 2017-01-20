@@ -57,17 +57,17 @@ Pjax::begin();
     </div>
 </div>
 
- 
-<!--<div class="row">
+<!-- 
+<div class="row">
     <div class="col-md-6">
-        <?= $form->field($model, 'CL_APENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
     </div>
 </div>
 -->
 <div class="row">
-        <div class="col-md-6">
+         <div class="col-md-6">
            
-        <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+       <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'options' => [
