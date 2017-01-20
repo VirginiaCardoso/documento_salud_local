@@ -13,8 +13,6 @@ $.ajax({
 
 };
 
-
-
 function seleccionoTipo() {
   seleccion = $("#libretas-li_tposer").val(); 
  // alert(seleccion);
@@ -26,7 +24,7 @@ function seleccionoTipo() {
                 selec: seleccion
             },
             success: function (importe) {
-              	$("#libretas-li_importe").val(importe);
+                $("#libretas-li_importe").val(importe);
               
               },
            
