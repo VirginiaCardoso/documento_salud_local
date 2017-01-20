@@ -21,15 +21,16 @@ class LibretasAsset extends AssetBundle
     public $css = [
         'css/site.css',
         'css/libretas.css',
-       // 'css/eventos.css',
+       
     ];
     public $js = [
-        'js/bootstrap-toggle.min.js',
-        'js/bootstrap.min.js',
         'js/jquery.min.js',
         'js/jquery.mask.js',
+        'js/bootstrap-toggle.min.js',
+        'js/bootstrap.min.js',
         'js/libretas.js',
         'js/modal-cliente.js',];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

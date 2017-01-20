@@ -17,7 +17,7 @@ use documento_salud\assets\LibretasAsset;
 
 LibretasAsset::register($this);
 
-Pjax::begin(); 
+
 ?>
 
 <div class="libretas-form">
@@ -297,5 +297,5 @@ Pjax::begin();
     ?>
     <?php ActiveForm::end(); ?>
 
-<?php Pjax::end(); ?>
+
 </div>
