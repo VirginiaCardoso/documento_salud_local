@@ -13,6 +13,13 @@ $.ajax({
 
 };
 
+$('#modalFoto').on('hidden.bs.modal', function () {
+  // $('#imgfoto').prop('src',);
+  //alert("hola");
+   //$('#divfoto').reload();
+   // window.location.reload(true);
+});
+
 function changeDoc(){
   $('#botonTomar').prop('disabled', false);  
  // alert($('#botonTomar').prop('value'));
@@ -44,7 +51,7 @@ function changeDoc(){
      param = $('#clientes-cl_numdoc').val();
    // _url += (_url.split('?')[1] ? '&doc':'?') + param;
     $('#botonTomar').prop('value', _url+"&doc="+param);
-    alert($('#botonTomar').prop('value'));
+  //  alert($('#botonTomar').prop('value'));
 }
 /*
 function insertParam(key, value)
@@ -149,6 +156,7 @@ function cargarLibretas(e,datum) {
      },
         });
         $('#search-libreta').val('');
+         
 }
 
 
