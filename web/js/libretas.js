@@ -250,6 +250,17 @@ function cargarEstado(e,datum) {
 }
 
 /*
+function changeDoc(){
+  $('#botonTomar').prop('disabled', false);  
+   _url = $('#botonTomar').prop('value');
+    param = $('#clientes-cl_numdoc').val();
+    $('#botonTomar').prop('value', _url+"&doc="+param);
+  
+}
+
+*/
+
+/*
 
 $(document).ready(function(){
     $('#divbotonanular').hide();

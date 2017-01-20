@@ -26,6 +26,7 @@ class CameraAsset extends AssetBundle
         'js/bootstrap-toggle.min.js',
         'js/jquery.mask.js',
         'js/modal-foto.js',
+        //cambio
 ];
     public $depends = [
         'yii\web\YiiAsset',
