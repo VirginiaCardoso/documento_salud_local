@@ -81,7 +81,7 @@ class ClientesController extends Controller
         ]);
     }
 
-    public function actionCamera(  $cli= null, $doc)
+    public function actionCamera( $doc, $cli= null)
     {
         try {
             $connection = Yii::$app->dbdocsl;
@@ -381,9 +381,9 @@ class ClientesController extends Controller
             $success = true;
         }
 
-        header('Cache-Control: no-cache, must-revalidate');
-        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-        header('Content-type: application/json');
+       // header('Cache-Control: no-cache, must-revalidate');
+       // header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+       // header('Content-type: application/json');
         echo json_encode(array('success' => $success, 'cli' => $nroCli));
     }
 }
