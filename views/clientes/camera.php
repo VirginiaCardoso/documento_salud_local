@@ -85,12 +85,12 @@ Pjax::begin();
     $('#upload-pic').click(function () {
         var picdata = $('#photo').attr('src');
         var cod = $('#clientes-cl_cod').val();
-    //  alert(cod);
-      // d = new Date();
+    
         $.post('index.php?r=clientes/uploadpic', {picdata: picdata, cod: cod }, function (data) {       //
             if (data.success == true) {
                 codcli = data.cli;
                  $('#imgfoto').attr('src','".Yii::$app->params['path_clientes']."'+codcli+'/'+codcli+'.jpg?timestamp=' + new Date().getTime());
+                // $('#imgfoto').attr('src','".Yii::$app->params['path_clientes']."'+codcli+'/'+codcli+'.jpg);
                 krajeeDialogExito.alert('Foto guardada correctamente.');
                // $('#divfoto').load();
                //  $('#imgfoto').prop('src',cod);

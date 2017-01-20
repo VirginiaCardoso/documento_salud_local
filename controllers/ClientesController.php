@@ -128,7 +128,7 @@ class ClientesController extends Controller
                     $transaction = $connection->beginTransaction();
                     
                     if ($model->CL_COD){
-                        $model->CL_IMG = $model->CL_COD.'.jpg';
+                       // $model->CL_IMG = $model->CL_COD.'.jpg';
 
                     }
                     else {
@@ -141,7 +141,8 @@ class ClientesController extends Controller
                   //  $model->CL_IMG = $model->CL_COD.'.jpg';
                     $model->CL_APENOM = strtoupper($model->CL_APENOM);
                     $model->CL_DOMICI = strtoupper($model->CL_DOMICI);
-                    $mdoel->CL_LUGTRA = strtoupper($model->CL_LUGTRA);
+                    if ($model->CL_LUGTRA)
+                     $mdoel->CL_LUGTRA = strtoupper($model->CL_LUGTRA);
                     $model->CL_IMG = $model->CL_COD.'.jpg';
 
                    // $model->CL_TIPDOC = 'DNI';
