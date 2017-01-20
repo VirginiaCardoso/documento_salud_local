@@ -25,8 +25,6 @@ class LibretasAsset extends AssetBundle
     ];
     public $js = [
         'js/bootstrap-toggle.min.js',
-       // 'js/bootstrap.min.js',
-        //'js/jquery.min.js',
         'js/jquery.mask.js', 
         'js/libretas.js',
         'js/modal-cliente.js',];
