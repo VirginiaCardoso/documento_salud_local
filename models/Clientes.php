@@ -111,7 +111,7 @@ class Clientes extends \yii\db\ActiveRecord
             'CL_SEXO' => 'Sexo',
             'CL_ESTCIV' => 'Estado Civil',
             'CL_IMG' => 'Imagen',
-           'CL_EMAIL' => 'Correo electrónico',
+           'CL_EMAIL' => 'Correo Electrónico',
         ];
     }
 
