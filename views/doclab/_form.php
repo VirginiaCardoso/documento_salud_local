@@ -294,7 +294,7 @@ DocumentoAsset::register($this);
  
                      </div>
                 </div>
-                <br>
+                
                  <div class="row">
                     <div class="col-md-6">
                     <?= Html::activeHiddenInput($model, 'DO_VENER') ?> 
@@ -307,14 +307,14 @@ DocumentoAsset::register($this);
  
                  </div>
                 
-                <br>
+            
                  <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_TRANSF', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoTransfusiones()), ['prompt' => 'Seleccione ..']); ?>
  
                      </div>
                 </div>
-                <br>
+               
                  <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_DOLLUM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoLumbar()), ['prompt' => 'Seleccione ..']); ?>
@@ -482,15 +482,13 @@ DocumentoAsset::register($this);
                 <br>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FADI') ?> 
+                        
                         <?= $form->field($model, 'diabfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam1();','prompt' => 'Seleccione ..']); ?>
  
                     </div>
                     <div class="col-md-6" id="campofam1">
-                        
-                        <!-- <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>  -->    
 
-                        <?= $form->field($model, 'diabquienes',
+                       <?= $form->field($model, 'DO_FADI',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
                             
@@ -505,7 +503,7 @@ DocumentoAsset::register($this);
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FAHIPE') ?> 
+                        
                         <?= $form->field($model, 'hiperfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam2();','prompt' => 'Seleccione ..']); ?>
  
                     </div>
@@ -513,7 +511,7 @@ DocumentoAsset::register($this);
                         
                      <!--    <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>     -->   
 
-                      <?= $form->field($model, 'hiperquienes',
+                      <?= $form->field($model, 'DO_FAHIPE',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
                             
@@ -528,13 +526,14 @@ DocumentoAsset::register($this);
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FACARD') ?> 
+                        
                         <?= $form->field($model, 'cardfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam3();','prompt' => 'Seleccione ..']); ?>
                     </div>
                     <div class="col-md-6" id="campofam3">
                         
                        <!--  <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?> -->
-                        <?= $form->field($model, 'cardquienes',
+
+                        <?= $form->field($model, 'DO_FACARD',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
                             
@@ -549,21 +548,24 @@ DocumentoAsset::register($this);
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FAONCO') ?> 
+                     
                         <?= $form->field($model, 'oncofam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam4();','prompt' => 'Seleccione ..']); ?>
                     </div>
                     <div class="col-md-6" id="campofam4">
                         
                        <!--  <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?> -->
-                        <?= $form->field($model, 'oncoquienes',
+                       
+                        <?= $form->field($model, 'DO_FAONCO',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
                             
                           /*  'disabled' => !$filtro,*/
                             'options' => ['placeholder' => '','multiple' => true],
                             'pluginOptions' => [
-                            'allowClear' => true
+                            'allowClear' => true,
+                            'onchange'=>'javascript:mostrar_onco();'
                             ],
+                            
                     ]);
                 ?>            
                     </div>

@@ -17,12 +17,13 @@ use documento_salud\models\Doclabau;
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\LibretasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+/*
 $this->registerJs(
    "$('document').ready(function(){ 
         //actualiza la pagina si no hay filas seleccionadas
         setInterval(function(){
             if( ($('#gridCons').yiiGridView('getSelectedRows')).length==0) {
-               $.pjax.reload({container:'#pjax_con'}); 
+              $.pjax.reload({container:'#pjax_con'}); 
             }
             else {
                 //despues de que seleccionen algo, se refresca si pasan 10 min
@@ -34,7 +35,7 @@ $this->registerJs(
         }, 20000);
     });"
 );
-
+*/
 LibretasAsset::register($this);
 
 $this->title = 'Consulta Médico';
@@ -87,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ); 
                     },
                     'form2' => function ($url, $model) {
-                        if (Doclabau::findOne($model->LI_NRO)) {
+                        if (Doclab::findOne($model->LI_COCLI)) {
 
                             $clase= 'botonAction';
                         }
@@ -96,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         }
                          return Html::a(
                                 '<span class="glyphicon glyphicon-eye-open"></span>',
-                                ['doclabau/create', 'id' => $model->LI_NRO], 
+                                ['doclab/view', 'id' => $model->LI_COCLI], 
                                 ['title' => 'Ver Documento Laboral',
                                     'class' => $clase]);
 

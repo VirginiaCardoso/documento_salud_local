@@ -59,6 +59,8 @@ class DoclabController extends Controller
         ]);
     }
 
+    
+
     /**
      * Creates a new Doclab model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -107,33 +109,47 @@ class DoclabController extends Controller
             $model->menop= substr($model->DO_MENOP, 0,2);
 
             if ($model->DO_FADI == "00"){
-                $model->diabfam="02";    
+                $model->diabfam="02"; 
+                $model->DO_FADI=[];   
             }
             else {
-                $model->diabfam="01";    
+                $model->diabfam="01";
+                $cadenacoma = chunk_split($model->DO_FADI,2,',');
+                $model->DO_FADI = explode(',', $cadenacoma);    
             }
 
             if ($model->DO_FAHIPE == "00"){
-                $model->hiperfam="02";    
+                $model->hiperfam="02";
+                $model->DO_FAHIPE=[]; 
+
             }
             else {
-                $model->hiperfam="01";    
+                $model->hiperfam="01";  
+                $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
+                $model->DO_FAHIPE = explode(',', $cadenacoma);   
             }
            
            if ($model->DO_FACARD == "00"){
-                $model->cardfam="02";    
+                $model->cardfam="02";
+                $model->DO_FACARD=[]; 
+
             }
             else {
-                $model->cardfam="01";    
+                $model->cardfam="01";  
+                $cadenacoma = chunk_split($model->DO_FACARD,2,',');
+                $model->DO_FACARD = explode(',', $cadenacoma);   
             }
 
             if ($model->DO_FAONCO == "00"){
-                $model->oncofam="02";    
+                $model->oncofam="02";
+                 $model->DO_FAONCO=[]; 
+
             }
             else {
-                $model->oncofam="01";    
+                $model->oncofam="01";  
+                $cadenacoma = chunk_split($model->DO_FAONCO,2,',');
+                $model->DO_FAONCO = explode(',', $cadenacoma);   
             }
-           
            
 
         }
@@ -172,44 +188,29 @@ class DoclabController extends Controller
 
               //  print_r($model->diabquienes);
                 if ($model->diabfam=="01") {
-
-                 if($model->diabquienes)
-
-                    $model->DO_FADI = implode($model->diabquienes);
-                  else
-
-                  $model->DO_FADI = "04";
-
+                  $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']); //convert the array into string
+                 
                 } //si diabetes fam
-                   // 
                 else
                     $model->DO_FADI = "00";
-/*
+//----------------------------------------------------------
                 if ($model->hiperfam=="01") //si diabetes fam
-                    $model->DO_FAHIPE= $model->hiperquienes;
+                    $model->DO_FAHIPE= implode(Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']);
                 else
                     $model->DO_FAHIPE= "00";
-
+//--------------------------------------------------
                 if ($model->cardfam=="01") //si diabetes fam
-                    $model->DO_FACARD= $model->cardquienes;
+                    $model->DO_FACARD= implode(Yii::$app->request->post( 'Doclab' )['DO_FACARD']);
                 else
                     $model->DO_FACARD = "00";
-
+//---------------------------------------------------
                 if ($model->oncofam=="01") //si diabetes fam
-                    $model->DO_FAONCO= $model->oncoquienes;
+                    $model->DO_FAONCO= implode(Yii::$app->request->post( 'Doclab' )['DO_FAONCO']);
                 else
                     $model->DO_FAONCO= "00";
-                */
-                // guardar enfermedaddes familiares
-              
-             
-                /* foreach ($model->diabquienes[] as $r) {
-                    $model->DO_FADI .= $r;
-       
-                 } 
-                
-*/
-                 if ($model->save(false)) {
+
+
+                 if ($model->save()) {
                    // return $this->redirect(['view', 'id' => $model->DO_NRO]);
                     Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);
 

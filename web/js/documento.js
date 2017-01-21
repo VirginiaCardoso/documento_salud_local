@@ -129,47 +129,11 @@ function mostrar_onco() {
 	$('#campopadreonco').hide();
    	$('#campomadreonco').hide();
    	$('#campohermanoonco').hide();
-  if( $('#doclab-oncoquienes').val()=='01'){
+    //esta padre
+  if ( $('#doclab-do_faonco').val().indexOf('01')!=-1){
     	$('#campopadreonco').show();
   }
-  else {
-  	 
-	  if( $('#doclab-oncoquienes').val()=='02'){
-	    	$('#campomadreonco').show();
-	  }
-	  else {
-		  	// $('#campomadreonco').hide();	
-		  
-		  if( $('#doclab-oncoquienes').val()=='03'){
-		    	$('#campohermanoonco').show();
-		  }
-		  else {
-			  if( $('#doclab-oncoquienes').val()=='01,02'){
-			    	$('#campopadreonco').show();
-			    	$('#campomadreonco').show();
-			  }
-			  else {
-				  if( $('#doclab-oncoquienes').val()=='01,03'){
-				    	$('#campopadreonco').show();
-				    	$('#campohermanoonco').show();
-				  }
-				  else {
-					    if( $('#doclab-oncoquienes').val()=='02,03'){
-					    	$('#campomadreonco').show();
-					    	$('#campohermanoonco').show();
-					  }
-					  else {
-					  	if( $('#doclab-oncoquienes').val()=='01,02,03'){
-					  		$('#campopadreonco').show();
-					    	$('#campomadreonco').show();
-					    	$('#campohermanoonco').show();
-					  }
-					  }
-					}
-				}
-			}
-		}
-	}
+  
  
 }
 
@@ -203,10 +167,19 @@ $(document).ready(function(){
     if ($('#doclab-menop').val()!="34"){
    	$('#campomenop').hide();	
    }
-   	$('#campofam1').hide();
-   	$('#campofam2').hide();
-   	$('#campofam3').hide();
-   	$('#campofam4').hide();
+    if($('#doclab-diabfam').val()=="02"){
+   	  $('#campofam1').hide();
+    }
+    if($('#doclab-hiperfam').val()=="02"){
+      $('#campofam2').hide();
+    }
+   	
+   	if($('#doclab-cardfam').val()=="02"){
+      $('#campofam3').hide();
+    }
+   	if($('#doclab-oncofam').val()=="02"){
+      $('#campofam4').hide();
+    }
    	$('#campopadreonco').hide();
    	$('#campomadreonco').hide();
    	$('#campohermanoonco').hide();
