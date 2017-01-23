@@ -10,7 +10,9 @@ use documento_salud\models\Doclabau;
 use documento_salud\models\Clientes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\base\ErrorException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * DoclabController implements the CRUD actions for Doclab model.
@@ -153,120 +155,104 @@ class DoclabController extends Controller
            
 
         }
-          $docaux = Doclabau::findOne($id);
-          if ( $docaux==null){
-              $docaux = new Doclabau();
-              $docaux->DO_CODLIB = $id;
-              $docaux->DO_CODCLI = $codcli;
-              $docaux->save(false);
-          }
-    //   $model = new Doclab();
-   
+        $docaux = Doclabau::findOne($id);
+        if ( $docaux==null){
+            $docaux = new Doclabau();
+            $docaux->DO_CODLIB = $id;
+            $docaux->DO_CODCLI = $codcli;
+            $docaux->save(false);
+        }
+        if ($model->load(Yii::$app->request->post())){
 
-            if ($model->load(Yii::$app->request->post())){
+          if ($model->validate() ){   
+              
+              
+            $connection = \Yii::$app->dbdocsl;
+            $transaction = $connection->beginTransaction();
 
-            //  if ($model->validate()) {
-                if ($model->fumador=="07"){ //es exfumador
-                    $model->DO_FUMA=$model->fumador.$model->cuanto;
-               }
-                else {
-                     $model->DO_FUMA=$model->fumador;
-                }
+              try {
+                  if ($model->diabfam=="01") {//diabetes
+                    if (Yii::$app->request->post( 'Doclab' )['DO_FADI']!="")
+                          $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']);
+                        else 
+                           $model->DO_FADI = Yii::$app->request->post( 'Doclab' )['DO_FADI'];
+                       
+                      } //si diabetes fam
+                      else
+                          $model->DO_FADI = "00";
+                    //----------------------------------------------------------
+                      if ($model->hiperfam=="01") { //hipertensión
+                        if (Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']!="")
+                          $model->DO_FAHIPE= implode(Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']);
+                        else 
+                             $model->DO_FAHIPE = Yii::$app->request->post( 'Doclab' )['DO_FAHIPE'];
+                      }
+                      else
+                          $model->DO_FAHIPE= "00";
+                      //--------------------------------------------------
+                      if ($model->cardfam=="01") { //cardio
+                        if (Yii::$app->request->post( 'Doclab' )['DO_FACARD']!="")
+                          $model->DO_FACARD = implode(Yii::$app->request->post( 'Doclab' )['DO_FACARD']);
+                        else
+                          $model->DO_FACARD = Yii::$app->request->post( 'Doclab' )['DO_FACARD'];
+                      }
+                      else
+                          $model->DO_FACARD = "00";
+                      //---------------------------------------------------
+                      if ($model->oncofam=="01") { //oncologicas
+                        if (Yii::$app->request->post( 'Doclab' )['DO_FAONCO']!="")
+                          $model->DO_FAONCO = implode(Yii::$app->request->post( 'Doclab' )['DO_FAONCO']);
+                          else 
+                            $model->DO_FAONCO = Yii::$app->request->post( 'Doclab' )['DO_FAONCO'];
+                        }
+                      else
+                          $model->DO_FAONCO= "00";
 
-                if ($model->vener=="16") //si en venereas
-                    $model->DO_VENER=$model->vener.$model->cual;
-                else
-                    $model->DO_VENER=$model->vener;
+                      if ($model->save()) {
+                        Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);
 
-                if ($model->emb=="29") //si en embarazos*/
-                    $model->DO_EMBARA=$model->emb.$model->cuantosemb;
-                else
-                    $model->DO_EMBARA=$model->emb;
-
-                if ($model->menop=="34") //si en menopausia
-                    $model->DO_MENOP=$model->menop.$model->edadmenop;
-                else
-                    $model->DO_MENOP=$model->menop;
-
-
-              //  print_r($model->diabquienes);
-                if ($model->diabfam=="01") {//diabetes
-                  if (Yii::$app->request->post( 'Doclab' )['DO_FADI']!="")
-                    $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']);
-                  else 
-                     $model->DO_FADI = Yii::$app->request->post( 'Doclab' )['DO_FADI'];
-                 
-                } //si diabetes fam
-                else
-                    $model->DO_FADI = "00";
-//----------------------------------------------------------
-                if ($model->hiperfam=="01") { //hipertensión
-                  if (Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']!="")
-                    $model->DO_FAHIPE= implode(Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']);
-                  else 
-                       $model->DO_FAHIPE = Yii::$app->request->post( 'Doclab' )['DO_FAHIPE'];
-                }
-                else
-                    $model->DO_FAHIPE= "00";
-//--------------------------------------------------
-                if ($model->cardfam=="01") { //cardio
-                  if (Yii::$app->request->post( 'Doclab' )['DO_FACARD']!="")
-                    $model->DO_FACARD = implode(Yii::$app->request->post( 'Doclab' )['DO_FACARD']);
-                  else
-                    $model->DO_FACARD = Yii::$app->request->post( 'Doclab' )['DO_FACARD'];
-                }
-                else
-                    $model->DO_FACARD = "00";
-//---------------------------------------------------
-                if ($model->oncofam=="01") { //oncologicas
-                  if (Yii::$app->request->post( 'Doclab' )['DO_FAONCO']!="")
-                    $model->DO_FAONCO = implode(Yii::$app->request->post( 'Doclab' )['DO_FAONCO']);
-                    else 
-                      $model->DO_FAONCO = Yii::$app->request->post( 'Doclab' )['DO_FAONCO'];
+                        return $this->redirect(['libretas/consulta-medica/']);
+                        
+                      } 
+                     else{
+                        
+                         $mensaje = ""; 
+                        foreach ($model->getFirstErrors() as $key => $value) {
+                          $mensaje .= "$value \\n\\r";
+                        }
+                        
+                        throw new ErrorException($mensaje);
+                      }
                   }
-                else
-                    $model->DO_FAONCO= "00";
+              catch (\Exception $e) {
+                  $transaction->rollBack();
+                  
+                  Yii::$app->getSession()->setFlash('error', $e->getMessage());
 
-
-
-                 if ($model->save()) {
-                   // return $this->redirect(['view', 'id' => $model->DO_NRO]);
-                    Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);
-
-                    return $this->redirect(['libretas/consulta-medica/']);
-                
-                } else {
-                  Yii::$app->getSession()->setFlash('exito', 'no salvo' );
-          
-                    return $this->render('create', [
-                        'model' => $model,
-                        'lib'=> $lib,
-                        'client' =>$client,
-                        'docaux' => $docaux,
-                    ]);
-                }
-             /* }
-              else {
-              //  Yii::$app->getSession()->setFlash('error', 'error validate1');
-                 return $this->render('create', [
+                  return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
                     'client' =>$client,
                     'docaux' => $docaux,
-                ]);
+                  ]);
               }
-            */
+           
             } else {
-              //Yii::$app->getSession()->setFlash('error', 'error validate2');
-                 
-                return $this->render('create', [
+              return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
                     'client' =>$client,
                     'docaux' => $docaux,
                 ]);
             }
-       
+          } else {
+            return $this->render('create', [
+                  'model' => $model,
+                  'lib'=> $lib,
+                  'client' =>$client,
+                  'docaux' => $docaux,
+              ]);
+          }
     }
 
     /**
