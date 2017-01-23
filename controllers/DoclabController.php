@@ -187,25 +187,40 @@ class DoclabController extends Controller
 
 
               //  print_r($model->diabquienes);
-                if ($model->diabfam=="01") {
-                  $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']); //convert the array into string
+                if ($model->diabfam=="01") {//diabetes
+                  if (Yii::$app->request->post( 'Doclab' )['DO_FADI']!="")
+                    $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']);
+                  else 
+                     $model->DO_FADI = Yii::$app->request->post( 'Doclab' )['DO_FADI'];
                  
                 } //si diabetes fam
                 else
                     $model->DO_FADI = "00";
 //----------------------------------------------------------
-                if ($model->hiperfam=="01") //si diabetes fam
+                if ($model->hiperfam=="01") { //hipertensión
+                  if (Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']!="")
                     $model->DO_FAHIPE= implode(Yii::$app->request->post( 'Doclab' )['DO_FAHIPE']);
+                  else 
+                       $model->DO_FAHIPE = Yii::$app->request->post( 'Doclab' )['DO_FAHIPE'];
+                }
                 else
                     $model->DO_FAHIPE= "00";
 //--------------------------------------------------
-                if ($model->cardfam=="01") //si diabetes fam
-                    $model->DO_FACARD= implode(Yii::$app->request->post( 'Doclab' )['DO_FACARD']);
+                if ($model->cardfam=="01") { //cardio
+                  if (Yii::$app->request->post( 'Doclab' )['DO_FACARD']!="")
+                    $model->DO_FACARD = implode(Yii::$app->request->post( 'Doclab' )['DO_FACARD']);
+                  else
+                    $model->DO_FACARD = Yii::$app->request->post( 'Doclab' )['DO_FACARD'];
+                }
                 else
                     $model->DO_FACARD = "00";
 //---------------------------------------------------
-                if ($model->oncofam=="01") //si diabetes fam
-                    $model->DO_FAONCO= implode(Yii::$app->request->post( 'Doclab' )['DO_FAONCO']);
+                if ($model->oncofam=="01") { //oncologicas
+                  if (Yii::$app->request->post( 'Doclab' )['DO_FAONCO']!="")
+                    $model->DO_FAONCO = implode(Yii::$app->request->post( 'Doclab' )['DO_FAONCO']);
+                    else 
+                      $model->DO_FAONCO = Yii::$app->request->post( 'Doclab' )['DO_FAONCO'];
+                  }
                 else
                     $model->DO_FAONCO= "00";
 
@@ -233,45 +248,7 @@ class DoclabController extends Controller
                     'docaux' => $docaux,
                 ]);
             }
-       /* }
-                catch (ErrorException $e) {
-                    $transaction->rollback();
-                    echo($e->getMessage());
-
-                }*/
-        /*
-       // print_r($lib);
-      //  print_r($client);
-
-        $model = Doclab::findOne($id);
-        if ( $model==null){
-            $model = new Doclab();
-            $model->DO_NRO = $id;
-            $model->DO_CODCLI = $lib->LI_COCLI;
-            $model->save(false);
-
-        }
-
-       $docaux = Doclabau::findOne($id);
-        if ( $docaux==null){
-            $docaux = new Doclabau();
-            $docaux->DO_CODLIB = $id;
-            $docaux->save(false);
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-                 if($model->save()){
-                    return $this->redirect(['view', 'id' => $model->DO_NRO]);
-                }
-            }
-            else {
-                return $this->render('editardocumento', [
-                    'model' => $model,
-                    'lib'=> $lib,
-                    'client' =>$client,
-                    'docaux' => $docaux,
-                ]);
-          }*/
+       
     }
 
     /**

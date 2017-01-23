@@ -491,12 +491,23 @@ DocumentoAsset::register($this);
                        <?= $form->field($model, 'DO_FADI',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
-                            
-                          /*  'disabled' => !$filtro,*/
-                            'options' => ['placeholder' => '','multiple' => true],
-                            'pluginOptions' => [
-                            'allowClear' => true
+                            'toggleAllSettings' => [
+                                'selectLabel' => '<i class="glyphicon glyphicon-unchecked"></i> Seleccionar todos.',
+                                'unselectLabel' => '<i class="glyphicon glyphicon-check"></i> Quitar selección todos.',
                             ],
+                            'options' => [
+                                'placeholder' => '',
+                                'multiple' => true,
+
+                            ],
+                            'pluginOptions' => [
+                                'allowClear' => true,
+                                
+                            ],
+                            
+
+                            
+
                     ]);
                 ?>               
                     </div>
@@ -514,8 +525,10 @@ DocumentoAsset::register($this);
                       <?= $form->field($model, 'DO_FAHIPE',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
-                            
-                          /*  'disabled' => !$filtro,*/
+                            'toggleAllSettings' => [
+                                'selectLabel' => '<i class="glyphicon glyphicon-unchecked"></i> Seleccionar todos.',
+                                'unselectLabel' => '<i class="glyphicon glyphicon-check"></i> Quitar selección todos.',
+                            ],
                             'options' => ['placeholder' => '','multiple' => true],
                             'pluginOptions' => [
                             'allowClear' => true
@@ -535,8 +548,10 @@ DocumentoAsset::register($this);
                         <?= $form->field($model, 'DO_FACARD',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
-                            
-                          /*  'disabled' => !$filtro,*/
+                            'toggleAllSettings' => [
+                                'selectLabel' => '<i class="glyphicon glyphicon-unchecked"></i> Seleccionar todos.',
+                                'unselectLabel' => '<i class="glyphicon glyphicon-check"></i> Quitar selección todos.',
+                            ],
                             'options' => ['placeholder' => '','multiple' => true],
                             'pluginOptions' => [
                             'allowClear' => true
@@ -552,13 +567,15 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam4">
                         
-                       <!--  <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?> -->
+                     
                        
                         <?= $form->field($model, 'DO_FAONCO',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
                             'data' => Fami_opc::getListaFamOpc(),
-                            
-                          /*  'disabled' => !$filtro,*/
+                            'toggleAllSettings' => [
+                                'selectLabel' => '<i class="glyphicon glyphicon-unchecked"></i> Seleccionar todos.',
+                                'unselectLabel' => '<i class="glyphicon glyphicon-check"></i> Quitar selección todos.',
+                            ],
                             'options' => [
                                 'placeholder' => '',
                                 'multiple' => true,
