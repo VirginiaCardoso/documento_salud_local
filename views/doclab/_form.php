@@ -509,7 +509,7 @@ DocumentoAsset::register($this);
                     </div>
                     <div class="col-md-6" id="campofam2">
                         
-                     <!--    <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>     -->   
+                     
 
                       <?= $form->field($model, 'DO_FAHIPE',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
@@ -530,8 +530,7 @@ DocumentoAsset::register($this);
                         <?= $form->field($model, 'cardfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam3();','prompt' => 'Seleccione ..']); ?>
                     </div>
                     <div class="col-md-6" id="campofam3">
-                        
-                       <!--  <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?> -->
+                     
 
                         <?= $form->field($model, 'DO_FACARD',
                     ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(Select2::classname(), [
@@ -560,10 +559,13 @@ DocumentoAsset::register($this);
                             'data' => Fami_opc::getListaFamOpc(),
                             
                           /*  'disabled' => !$filtro,*/
-                            'options' => ['placeholder' => '','multiple' => true],
+                            'options' => [
+                                'placeholder' => '',
+                                'multiple' => true,
+                                'onchange'=>'javascript:mostrar_onco();',
+                                ],
                             'pluginOptions' => [
-                            'allowClear' => true,
-                            'onchange'=>'javascript:mostrar_onco();'
+                                'allowClear' => true,
                             ],
                             
                     ]);

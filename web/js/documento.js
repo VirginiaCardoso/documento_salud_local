@@ -133,6 +133,12 @@ function mostrar_onco() {
   if ( $('#doclab-do_faonco').val().indexOf('01')!=-1){
     	$('#campopadreonco').show();
   }
+  if ( $('#doclab-do_faonco').val().indexOf('02')!=-1){
+      $('#campomadreonco').show();
+  }
+  if ( $('#doclab-do_faonco').val().indexOf('03')!=-1){
+      $('#campohermanoonco').show();
+  }
   
  
 }
@@ -180,7 +186,16 @@ $(document).ready(function(){
    	if($('#doclab-oncofam').val()=="02"){
       $('#campofam4').hide();
     }
-   	$('#campopadreonco').hide();
+    if ( $('#doclab-do_paenom').val()==""){
+      $('#campopadreonco').hide();
+  }
+  if ( $('#doclab-do_maenom').val()==""){
+      $('#campomadreonco').hide();
+  }
+  if ( $('#doclab-do_heenon').val()==""){
+      $('#campohermanoonco').hide();
+  }
+  /* 	$('#campopadreonco').hide();
    	$('#campomadreonco').hide();
-   	$('#campohermanoonco').hide();
+   	$('#campohermanoonco').hide();*/
 });
