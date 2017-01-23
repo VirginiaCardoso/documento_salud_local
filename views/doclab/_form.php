@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
 use kartik\depdrop\DepDrop;
 use kartik\select2\Select2;
@@ -40,6 +41,7 @@ DocumentoAsset::register($this);
 
    
      <?php $form = ActiveForm::begin([   'id' => 'formDocLab', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
+        <?= $form->errorSummary($model); ?>
         <div class="row">
             <div class="col-md-4"> 
                 <?= $form->field($model, 'DO_NRO', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>

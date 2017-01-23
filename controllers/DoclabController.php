@@ -153,16 +153,19 @@ class DoclabController extends Controller
            
 
         }
-        $docaux = Doclabau::findOne($id);
-        if ( $docaux==null){
-            $docaux = new Doclabau();
-            $docaux->DO_CODLIB = $id;
-            $docaux->DO_CODCLI = $codcli;
-            $docaux->save(false);
-        }
+          $docaux = Doclabau::findOne($id);
+          if ( $docaux==null){
+              $docaux = new Doclabau();
+              $docaux->DO_CODLIB = $id;
+              $docaux->DO_CODCLI = $codcli;
+              $docaux->save(false);
+          }
     //   $model = new Doclab();
+   
 
             if ($model->load(Yii::$app->request->post())){
+
+            //  if ($model->validate()) {
                 if ($model->fumador=="07"){ //es exfumador
                     $model->DO_FUMA=$model->fumador.$model->cuanto;
                }
@@ -225,6 +228,7 @@ class DoclabController extends Controller
                     $model->DO_FAONCO= "00";
 
 
+
                  if ($model->save()) {
                    // return $this->redirect(['view', 'id' => $model->DO_NRO]);
                     Yii::$app->getSession()->setFlash('exito', 'Consulta medica guardada   correctamente, Nro Doc Lab: '.$model->DO_NRO);
@@ -232,15 +236,29 @@ class DoclabController extends Controller
                     return $this->redirect(['libretas/consulta-medica/']);
                 
                 } else {
-                return $this->render('create', [
+                  Yii::$app->getSession()->setFlash('exito', 'no salvo' );
+          
+                    return $this->render('create', [
+                        'model' => $model,
+                        'lib'=> $lib,
+                        'client' =>$client,
+                        'docaux' => $docaux,
+                    ]);
+                }
+             /* }
+              else {
+              //  Yii::$app->getSession()->setFlash('error', 'error validate1');
+                 return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
                     'client' =>$client,
                     'docaux' => $docaux,
                 ]);
-            }
-            
+              }
+            */
             } else {
+              //Yii::$app->getSession()->setFlash('error', 'error validate2');
+                 
                 return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,

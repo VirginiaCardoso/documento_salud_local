@@ -247,5 +247,16 @@ class Doclab extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
     }
+
+    /*public function beforeValidate(){
+       if (isset($this->_errors['DO_OCU'])) {
+        Yii::$app->getSession()->setFlash('error', 'falta ocupacion');
+        return false;
+    }
+    else {
+        parent::beforeValidate();
+    }
+
+    }*/
     
 }
