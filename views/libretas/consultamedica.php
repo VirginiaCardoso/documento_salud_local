@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'form3' => function ($url, $model) {
                         return Html::a(
                                 '<span class="glyphicon glyphicon-folder-open"></span>',
-                                ['doclab/view-edit-hist', 'id' => $model->LI_NRO], 
+                                ['doclabau/index', 'codcli' => $model->LI_COCLI], 
                                 ['title' => 'Ver Actuaciones previas / Editar Actuación',
                                     'class' => 'botonAction']);
 

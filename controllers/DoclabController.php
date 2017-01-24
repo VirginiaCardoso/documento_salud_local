@@ -123,7 +123,6 @@ class DoclabController extends Controller
             if ($model->DO_FAHIPE == "00"){
                 $model->hiperfam="02";
                 $model->DO_FAHIPE=[]; 
-
             }
             else {
                 $model->hiperfam="01";  
@@ -134,7 +133,6 @@ class DoclabController extends Controller
            if ($model->DO_FACARD == "00"){
                 $model->cardfam="02";
                 $model->DO_FACARD=[]; 
-
             }
             else {
                 $model->cardfam="01";  
@@ -145,15 +143,12 @@ class DoclabController extends Controller
             if ($model->DO_FAONCO == "00"){
                 $model->oncofam="02";
                  $model->DO_FAONCO=[]; 
-
             }
             else {
                 $model->oncofam="01";  
                 $cadenacoma = chunk_split($model->DO_FAONCO,2,',');
                 $model->DO_FAONCO = explode(',', $cadenacoma);   
             }
-           
-
         }
         $docaux = Doclabau::findOne($id);
         if ( $docaux==null){
@@ -165,10 +160,8 @@ class DoclabController extends Controller
         if ($model->load(Yii::$app->request->post())){
 
           if ($model->validate() ){   
-              
-              
-            $connection = \Yii::$app->dbdocsl;
-            $transaction = $connection->beginTransaction();
+            $connection = Yii::$app->dbdocsl;
+           $transaction = $connection->beginTransaction();
 
               try {
                   if ($model->diabfam=="01") {//diabetes
@@ -221,9 +214,10 @@ class DoclabController extends Controller
                           $mensaje .= "$value \\n\\r";
                         }
                         
-                        throw new ErrorException($mensaje);
+                       // throw new ErrorException($mensaje);
+                        Yii::$app->getSession()->setFlash('error', 'error');
                       }
-                  }
+                  } //try
               catch (\Exception $e) {
                   $transaction->rollBack();
                   
@@ -237,7 +231,10 @@ class DoclabController extends Controller
                   ]);
               }
            
-            } else {
+            } 
+            else {
+
+              //Yii::$app->getSession()->setFlash('error', 'error validacion.'); 
               return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
@@ -245,7 +242,10 @@ class DoclabController extends Controller
                     'docaux' => $docaux,
                 ]);
             }
-          } else {
+          } 
+          else {
+
+          //   Yii::$app->getSession()->setFlash('error', '.'); 
             return $this->render('create', [
                   'model' => $model,
                   'lib'=> $lib,

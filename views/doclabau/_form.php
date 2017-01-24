@@ -19,7 +19,8 @@ DoclabauAsset::register($this);
 
     <div class="row">
             <div class="col-md-6"> 
-                <?= $form->field($model, 'DO_CODLIB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                <?= $form->field($model, 'DO_CODLIB', [
+                    'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
             </div>
     </div>
     
@@ -37,8 +38,8 @@ DoclabauAsset::register($this);
 
                     </div>
         </div>
-         <div class="col-md-2 pull-right">
-                <?= Html::a('Historial Visitas' , ['doclabau/index', 'id'=>$model->DO_CODLIB], ['class'=>'btn btn-info']);?>
+         <div class="col-md-2 pull-right"> 
+                <?= Html::a('Historial Visitas' , ['doclabau/index', 'codcli'=>$lib->LI_COCLI], ['class'=>'btn btn-info']);?>
             </div>   
     </div>
     <br>
@@ -49,18 +50,49 @@ DoclabauAsset::register($this);
         <div class="panel-body">
 
             <div class="row">
+         
                 <div class="col-md-4">
       
-                   <?= $form->field($model, 'DO_PESO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'onchange'=>'javascript:mostrar_diferencia();']) ?>
+                   <?= $form->field($model, 'DO_PESO', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        'selectors' => [
+                            'input' => '#model-do_peso',
+                            'container' => '#model-do_peso-container',
+                        ],
+                        'options' => ['id' => 'model-do_peso-container'],
+                        ])->textInput(
+                            [   
+                                'name'=> 'Doclabau[DO_PESO]', 
+                                'id'=>'model-do_peso',
+                                'maxlength' => true,
+                                'onchange'=>'javascript:mostrar_diferencia();'
+                            ]) ?>
                 </div>
-                <div class="col-md-4">
-      
-                   <?= $form->field($modelant, 'DO_PESO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'peso-ant'])->label("Anterior") ?>
-                </div>
-                <div class="col-md-4">
-      
-                   <?= $form->field($model, 'diferencia', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label("Diferencia") ?>
-                </div>
+                <?php 
+                if ($anterior!=null) {
+                ?>
+                    <div class="col-md-4">
+
+                       <?= $form->field($anterior, 'DO_PESO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                            'selectors' => [
+                                'input' => '#anterior-do_peso',
+                                'container' => '#anterior-do_peso-container',
+                            ],
+                            'options' => ['id' => 'anterior-do_peso-container'],
+                       ])->textInput([
+                            'name'=> 'Anterior[DO_PESO]', 
+                            'id'=>'anterior-do_peso',
+                            'readonly' => true,
+                            'maxlength' => true,
+                            ])->label("Anterior") ?>
+                    </div>
+                    <div class="col-md-4">
+          
+                       <?= $form->field($model, 'diferencia', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label("Diferencia") ?>
+                    </div>
+                <?php 
+                }
+                ?>
             </div>
             <div class="row">
                 <div class="col-md-4">
@@ -81,20 +113,32 @@ DoclabauAsset::register($this);
       
                    <?= $form->field($model, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
                 </div>
-                <div class="col-md-4">
-      
-                   <?= $form->field($modelant, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'colest-ant'])->label("Anterior") ?>
-                </div>
+                <?php 
+                if ($anterior!=null) {
+                ?>
+                    <div class="col-md-4">
+          
+                       <?= $form->field($anterior, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'colest-ant'])->label("Anterior") ?>
+                    </div>
+                <?php
+                }
+                ?>
             </div>
             <div class="row">
                 <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_GLUCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
                 </div>
-                <div class="col-md-6">
-      
-                   <?= $form->field($modelant, 'DO_GLUCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'gluco-ant'])->label("Anterior") ?>
-                </div>
+                <?php 
+                if ($anterior!=null) {
+                ?>
+                    <div class="col-md-6">
+          
+                       <?= $form->field($anterior, 'DO_GLUCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'gluco-ant'])->label("Anterior") ?>
+                    </div>
+                <?php
+                    }
+                    ?>
             </div>
             <div class="row">
                 <div class="col-md-6">

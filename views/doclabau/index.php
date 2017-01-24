@@ -7,12 +7,12 @@ use yii\widgets\Pjax;
 /* @var $searchModel documento_salud\models\DoclabauSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Doclabaus';
+$this->title = 'Historial Visitas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doclabau-index">
 
-    <h1>Historial visitas </h1>
+    <h1>Historial Visitas </h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -28,14 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_VISITA',
             'DO_PESO',
             'DO_TENAR1',
-            'DO_TENAR2',
+           // 'DO_TENAR2',
              'DO_COLEST',
              'DO_GLUCO',
              'DO_PAP',
              'DO_MAM',
-            'DO_OBS',
+            //'DO_OBS',
+            
              'DO_CINTURA',
-             'DO_TRIPLI',
+             'DO_TRIGLI',
              'DO_HDL',
              'DO_IMC',
 

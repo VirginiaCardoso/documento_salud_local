@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_MAM',
             'DO_OBS',
             'DO_CINTURA',
-            'DO_TRIPLI',
+            'DO_TRIGLI',
             'DO_HDL',
             'DO_IMC',
         ],

@@ -5,6 +5,7 @@ namespace documento_salud\controllers;
 use Yii;
 use documento_salud\models\Doclabau;
 use documento_salud\models\DoclabauSearch;
+use documento_salud\models\Libretas;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -33,15 +34,10 @@ class DoclabauController extends Controller
      * Lists all Doclabau models.
      * @return mixed
      */
-    public function actionIndex($iddoclab)
+    public function actionIndex($codcli)
     {
-
-        $lib = Libretas::findOne($iddoclab);
-
-        $idcli = $lib->LI_COCLI;
-
         $searchModel = new DoclabauSearch();
-        $dataProvider = $searchModel->searchIndex(Yii::$app->request->queryParams, $idcli);
+        $dataProvider = $searchModel->searchHistorial(Yii::$app->request->queryParams, $codcli);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -67,15 +63,18 @@ class DoclabauController extends Controller
      * @return mixed
      */
     public function actionCreate($id)
-    {
-       $modelant = Doclabau::findOne($id);
+    { //$id nro de libreta
+       $lib = Libretas::findOne($id);
+       $cli = $lib->LI_COCLI;
 
-      /* if ($modelant==null){
-        $modelant->peso = 0;
-       }*/
-       
-       $model = new Doclabau();
-       $model->DO_CODLIB = $id;
+       $anterior = Doclabau::getLastDoclabau($cli, $id);
+     // $anterior = null;
+       // if ($anterior)
+       $model = Doclabau::findOne($id);
+       if ( !$model){
+        $model = new Doclabau();
+        $model->DO_CODLIB = $id;
+    }
        $model->DO_VISITA = date('Y-m-d');
        $model->diferencia = 0;
 
@@ -84,7 +83,8 @@ class DoclabauController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'modelant' => $modelant
+                'lib' => $lib,
+                'anterior' => $anterior,
             ]);
         }
     }
