@@ -95,6 +95,13 @@ class Doclab extends \yii\db\ActiveRecord
         return Yii::$app->get('dbdocsl');
     }
 
+
+    public static function databaseName()
+    {
+        return 'docsl';
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -122,8 +129,13 @@ class Doclab extends \yii\db\ActiveRecord
             [['DO_MENOP'], 'string', 'max' => 5],
             [['DO_PAENOM', 'DO_MAENOM', 'DO_HEENON'], 'string', 'max' => 94],
             [['DO_DATOS', 'DO_DATINT'], 'string', 'max' => 254],
+            [['DO_CODCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['DO_CODCLI' => 'CL_COD']],
+            [['DO_ESCOL'], 'exist', 'skipOnError' => true, 'targetClass' => Escolari::className(), 'targetAttribute' => ['DO_ESCOL' => 'ID']],
+            [['DO_INGRES'], 'exist', 'skipOnError' => true, 'targetClass' => NivelIn::className(), 'targetAttribute' => ['DO_INGRES' => 'NI_CODIGO']],
             [['DO_NRO'], 'exist', 'skipOnError' => true, 'targetClass' => Libretas::className(), 'targetAttribute' => ['DO_NRO' => 'LI_NRO']],
-             [['DO_CODCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['DO_CODCLI' => 'CL_COD']],
+            [['DO_OCU'], 'exist', 'skipOnError' => true, 'targetClass' => Ocupa_1::className(), 'targetAttribute' => ['DO_OCU' => 'ID']],
+            [['DO_RUBRO'], 'exist', 'skipOnError' => true, 'targetClass' => Ocupa_2::className(), 'targetAttribute' => ['DO_RUBRO' => 'ID']],
+            [['DO_RUBTIP'], 'exist', 'skipOnError' => true, 'targetClass' => Ocupa_3::className(), 'targetAttribute' => ['DO_RUBTIP' => 'ID']],
             // [['diabquienes'], 'validateDiabetes'],
         ];
     }
@@ -235,6 +247,30 @@ class Doclab extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getDOCODCLI()
+    {
+        return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOESCOL()
+    {
+        return $this->hasOne(Escolari::className(), ['ID' => 'DO_ESCOL']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOINGRES()
+    {
+        return $this->hasOne(NivelIn::className(), ['NI_CODIGO' => 'DO_INGRES']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDONRO()
     {
         return $this->hasOne(Libretas::className(), ['LI_NRO' => 'DO_NRO']);
@@ -243,20 +279,25 @@ class Doclab extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDOCODCLI()
+    public function getDOOCU()
     {
-        return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
+        return $this->hasOne(Ocupa_1::className(), ['ID' => 'DO_OCU']);
     }
 
-    /*public function beforeValidate(){
-       if (isset($this->_errors['DO_OCU'])) {
-        Yii::$app->getSession()->setFlash('error', 'falta ocupacion');
-        return false;
-    }
-    else {
-        parent::beforeValidate();
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDORUBRO()
+    {
+        return $this->hasOne(Ocupa_2::className(), ['ID' => 'DO_RUBRO']);
     }
 
-    }*/
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDORUBTIP()
+    {
+        return $this->hasOne(Ocupa_3::className(), ['ID' => 'DO_RUBTIP']);
+    }
     
 }

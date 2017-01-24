@@ -32,7 +32,7 @@ use documento_salud\assets\DocumentoAsset;
 DocumentoAsset::register($this);
 
 $this->title = 'Editar Documento Laboral: '.$model->DO_NRO;
-$this->params['breadcrumbs'][] = ['label' => 'Documento Salud Laboral', 'url' => ['/libretas/consulta-medica/']];
+$this->params['breadcrumbs'][] = ['label' => 'Consulta Médica', 'url' => ['/libretas/consulta-medica/']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="libretas-view">

@@ -488,7 +488,7 @@ class LibretasController extends Controller
      * @param string $id
      * @return mixed
      */
-    public function actionEmision()
+ /*   public function actionEmision()
     {
         //$id='000000000003';
        // $id = Yii::$app->request->post('fila');
@@ -502,7 +502,7 @@ class LibretasController extends Controller
 
         ]);
     }
-
+*/
     public function actionQrcode() {
     $vcard = new BookMark(['title' => 'nombre', 'url'  => 'http://localhost/www/intranet/modulos/documento_salud/web/index.php?r=libretas%2Fview&id=000000000252']);
     return QrCode::png($vcard->getText());

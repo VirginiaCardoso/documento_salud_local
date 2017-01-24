@@ -8,11 +8,14 @@ use documento_salud\models\DoclabSearch;
 use documento_salud\models\Libretas;
 use documento_salud\models\Doclabau;
 use documento_salud\models\Clientes;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\base\ErrorException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\db\Query;
+use yii\helpers\Json;
 
 /**
  * DoclabController implements the CRUD actions for Doclab model.
@@ -56,8 +59,15 @@ class DoclabController extends Controller
      */
     public function actionView($id)
     {
+        
+        $model = $this->findModel($id);
+        $cliente = Clientes::findOne($model->DO_CODCLI);
+        $lib = Libretas::findOne($model->DO_NRO);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'client' => $cliente,
+            'lib' => $lib,
         ]);
     }
 
@@ -346,4 +356,62 @@ class DoclabController extends Controller
           }
     }
 */
+
+
+        /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionEmision()
+    {
+        //$id='000000000003';
+       // $id = Yii::$app->request->post('fila');
+       $model = new Libretas();
+       $cliente = new Clientes();
+      //  $model = $this->findModel($id);
+      //  $cliente = ClientesController::buscarCliente($model->LI_COCLI);
+        return $this->render('emisionvirtual', [
+            'model' => $model,
+            'cliente' => $cliente,
+
+        ]);
+    }
+
+
+public function actionQueryemision($q = null) {
+        try {
+
+          $datab = Doclab::databaseName();
+
+          $query = new Query;
+            $query->select([Doclab::tableName().'.DO_NRO', Doclab::tableName().'.DO_CODCLI',  Clientes::tableName().'.CL_COD',  Clientes::tableName().'.CL_NUMDOC',  Clientes::tableName().'.CL_APENOM'] )
+                //
+                ->from($datab.'.'.Doclab::tableName())
+                ->join(  'INNER JOIN',
+                    $datab.'.'.Clientes::tableName(),
+                    $datab.'.'.Doclab::tableName().'.DO_CODCLI ='.$datab.'.'.Clientes::tableName().'.CL_COD')
+                ->distinct()
+                ; 
+                //
+            $query->where('DO_NRO LIKE "%' . $q .'%" OR CL_COD LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->orderBy('DO_NRO');
+            $command = $query->createCommand();
+            
+           
+       /*
+            var_dump($command);*/
+            $data = $command->queryAll();
+            $out = [];
+            foreach ($data as $d) { // 
+                $out[] = ['value' => $d['DO_NRO'].' - '.$d['CL_COD'].' - '.$d['CL_NUMDOC'].' - '.$d['CL_APENOM'], 'cod' => $d['DO_NRO']];
+            }
+            echo Json::encode($out);
+
+        }
+        catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
