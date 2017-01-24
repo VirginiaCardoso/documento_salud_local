@@ -140,33 +140,7 @@ class Doclab extends \yii\db\ActiveRecord
         ];
     }
 
-  /*  public function validateDiabetes($attribute, $params)
-    {
-        $codigos  = [];
-        foreach($this->$attribute as $i) {
-            $codpra = $practica['PI_CODPRA'];
-
-            // verificar que la práctica no esté informada en un informe previo
-            if(NULL!=($p=PracticaTurno::find()
-                ->where(['PI_CODPRA' => $codpra])
-                ->andWhere(['PI_ID' => $this->IN_TURNO])
-                ->andWhere(['NOT', ['PI_IDINFORME' => NULL]])
-                ->andWhere(['NOT', ['PI_IDINFORME' => $this->IN_ID]])
-                ->one())) {
-
-                $key = $attribute . '[' . $index . '][PI_CODPRA]';
-                $this->addError($key, 'La práctica elegida ya fue informada');
-            }
-            elseif(in_array($codpra, $codigos_practicas)) {
-                $key = $attribute . '[' . $index . '][PI_CODPRA]';
-                $this->addError($key, 'La práctica elegida ya fue agregada al informe');
-            }
-            else{
-                $codigos_practicas[] = $codpra;
-            }
-        }
-    }
-*/
+ 
     /**
      * @inheritdoc
      */
@@ -299,5 +273,22 @@ class Doclab extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Ocupa_3::className(), ['ID' => 'DO_RUBTIP']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFUMADOR()
+    {
+        return $this->hasOne(Habi_opc::className(), ['ID' => 'fumador']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOFASTAB()
+    {
+        return $this->hasOne(Habi_fat::className(), ['ID' => 'DO_FASTAB']);
+    }
+    
     
 }

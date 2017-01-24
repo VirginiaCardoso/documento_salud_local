@@ -154,46 +154,39 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                     <div class="col-md-6">
                    
-                    <?= $form->field($model->dOOCU, 'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Ocupación') ?>
+                        <?= $form->field($model->dOOCU, 'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Ocupación') ?>
                     </div>
             </div>
-            <div class="row" >
+            <?php
+                if ($model->DO_RUBRO) { ?>
+                <div class="row" >
+                        <div class="col-md-6">
+
+                        <?= $form->field($model->dORUBRO, 'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('') ?>
+     
+                         </div>
+                </div>
+                <?php
+                if ($model->DO_RUBTIP) { ?>
+                    <div class="row" >
+                            <div class="col-md-6">
+                            <?= $form->field($model->dORUBTIP, 'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('') ?>
+         
+                             </div>
+                    </div>
+            <?php 
+                }
+            }
+            ?>
+            <div class="row">
                     <div class="col-md-6">
-                    <?php
-                        if ($model->DO_RUBRO) 
-                    <?= $form->field($model, 'DO_RUBRO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subocu-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['ocu-id'],
-                            'placeholder'=>'Seleccione especifico...',
-                            'url'=>Url::to(['/ocupa_2/subocu']),
-                            'loadingText' => '...',
-                        ]])->label(''); ?> 
- 
-                     </div>
-            </div>
-            <div class="row" >
-                    <div class="col-md-6">
-                    <?= $form->field($model, 'DO_RUBTIP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                            'pluginOptions'=>[
-                                'depends'=>[ 'subocu-id'],
-                                'placeholder'=>'Seleccione más especifico...',
-                                    'url'=>Url::to(['/ocupa_3/subtip']),
-                                    'loadingText' => ' ...',
-                            ]
-                    ])->label(''); ?> 
+                        <?= $form->field($model->dOESCOL, 'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Escolaridad') ?>
  
                      </div>
             </div>
             <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ESCOL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Escolari::getListaEscolari(), ['prompt' => 'Seleccione escolaridad...']); ?>
- 
-                     </div>
-            </div>
-            <div class="row">
-                    <div class="col-md-6">
-                   <?= $form->field($model, 'DO_INGRES', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(NivelIn::getListaNiveles(), ['prompt' => 'Seleccione nivel ingresos...']); ?>
+                        <?= $form->field($model->dOINGRES, 'NI_DETALLE', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Nivel Ingresos') ?>
  
                      </div>
             </div>
@@ -209,21 +202,34 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="row">
                     <div class="col-md-6">
 
-                    <?= Html::activeHiddenInput($model, 'DO_FUMA') ?> 
-                    <?= $form->field($model, 'fumador', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoFumador()), ['prompt' => 'Seleccione hábito fumador..','onchange'=>'javascript:mostrar_cuanto();']); ?>
+                    <?= $form->field($model->fUMADOR,'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Fumador') ?>
  
                      </div>
+                    <?php
+                if ($model->fumador=="07") { ?> 
                     <div class="col-md-6" id="campocuanto">
-                       <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
+                       <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])?>
                                 
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                   <?= $form->field($model, 'DO_FASTAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_fat::getListaFaseTab(), ['prompt' => 'Seleccione fase tabaquismo..']); ?>
- 
-                     </div>
-                </div>
+                <?php 
+                }
+                
+                ?>
+            </div>
+            <?php 
+                
+                 if (($model->fumador!="06")&&($model->DO_FASTAB)) {
+                ?>
+            <div class="row">
+                <div class="col-md-6">
+               <?= $form->field($model->dOFASTAB, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Fase de Tabaquista') ?>
+
+                 </div>
+            </div>
+            <?php 
+                }
+               
+                ?>
                 <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..']); ?>
