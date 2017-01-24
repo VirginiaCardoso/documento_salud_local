@@ -8,6 +8,7 @@ function mostrar_diferencia() {
       $('#doclabau-diferencia').val($('#anterior-do_peso').val() -$('#model-do_peso').val());
   }
 
+
   
  var cm = $('#doclabau-talla').val();
  var met = cm/100;
@@ -15,6 +16,7 @@ function mostrar_diferencia() {
  var imc = $('#model-do_peso').val()/cuad;
  var cut = imc.toString().substr(0,4);
  $('#doclabau-do_imc').val(cut);
+
 
    // }
 }
