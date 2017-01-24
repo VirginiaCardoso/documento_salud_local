@@ -29,6 +29,7 @@ use Yii;
 class Doclabau extends \yii\db\ActiveRecord
 {
     public $diferencia;
+    public $talla;
     /**
      * @inheritdoc
      */
@@ -107,27 +108,16 @@ class Doclabau extends \yii\db\ActiveRecord
 
     public static function getLastDoclabau($codcli, $id){
 
-    //try {
-       //   $data = Doclabau::getDb()->createCommand('SELECT DO_CODLIB FROM doclabau WHERE DO_CODCLI= '.$codcli.' order by DO_VISITA  desc limit 1')->queryOne();
-                   // print_r($data['CL_COD']);
-                   // 
-        $data = Doclabau::find()
-            ->where(['DO_CODCLI' => $codcli])
-            ->andWhere(['NOT LIKE', 'DO_CODCLI', $id])
-            ->orderBy(['DO_VISITA'=>SORT_DESC])
-            ->limit(1);
-        //    print_r($data);
-        if($data!=null){
-            return $data;
-        }
-        else
-        {
-            return null;
-        }
-           
-    /*    }
+    try {// 'SELECT CL_COD FROM clientes order by CL_COD desc limit 1
+          $data = Doclabau::getDb()->createCommand('SELECT DO_CODLIB FROM doclabau WHERE DO_CODCLI =:codcli AND DO_CODLIB !=:id order by DO_VISITA desc limit 1 ')
+          ->bindValue(':codcli', $codcli)
+          ->bindValue(':id', $id)
+          ->queryOne();
+        return $data['DO_CODLIB'];
+         }
         catch(Exception $e) {
             echo $e->getMessage();
-        }*/
+        }
    }
+
 }

@@ -226,7 +226,7 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_NODMAN' => 'Nódulos de Mama',
             'DO_SOPLOS' => 'Soplos',
             'DO_TUMAB' => 'Tumor Abdominal',
-            'DO_TALLA' => 'Talla',
+            'DO_TALLA' => 'Talla (cm.)',
             'DO_DATOS' => 'Otros Datos',
             'DO_DATINT' => 'Notas',
         ];

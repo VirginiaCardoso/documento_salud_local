@@ -3,6 +3,7 @@
 namespace documento_salud\controllers;
 
 use Yii;
+use documento_salud\models\Doclab;
 use documento_salud\models\Doclabau;
 use documento_salud\models\DoclabauSearch;
 use documento_salud\models\Libretas;
@@ -67,18 +68,49 @@ class DoclabauController extends Controller
        $lib = Libretas::findOne($id);
        $cli = $lib->LI_COCLI;
 
-       $anterior = Doclabau::getLastDoclabau($cli, $id);
-     // $anterior = null;
-       // if ($anterior)
        $model = Doclabau::findOne($id);
        if ( !$model){
         $model = new Doclabau();
         $model->DO_CODLIB = $id;
-    }
-       $model->DO_VISITA = date('Y-m-d');
-       $model->diferencia = 0;
+        //$model->DO_PESO = 0;
+        }
+
+        $model->DO_VISITA = date('Y-m-d');
+        $model->diferencia = 0;
+
+        $doc = Doclab::findOne($cli);
+        if ($doc){
+            $model->talla = $doc->DO_TALLA;
+        }
+       /* else {
+             $model->talla = 0;   
+        }
+*/
+       $codanterior = Doclabau::getLastDoclabau($cli, $id);
+       if ($codanterior){
+        $anterior = Doclabau::findOne($codanterior);
+       }
+       else {
+            $anterior = null;
+       }
+   
+        if ($model->DO_PESO){
+            if ($anterior) {
+                $model->diferencia = $model->DO_PESO - $anterior->DO_PESO;
+            }
+            if($model->talla){
+                $mt = $model->talla/100;
+                $mtcuad = $mt *$mt;
+                $imc = $model->DO_PESO/$mtcuad;
+                
+                $model->DO_IMC =  substr((string)$imc,0,4);
+            }
+        }
+
+        
 
        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->getSession()->setFlash('exito', 'Visita guardada correctamente, Nro Doc Lab: '.$model->DO_CODLIB);
             return $this->redirect(['view', 'id' => $model->DO_CODLIB]);
         } else {
             return $this->render('create', [

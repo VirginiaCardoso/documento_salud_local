@@ -67,13 +67,15 @@ DoclabauAsset::register($this);
                                 'maxlength' => true,
                                 'onchange'=>'javascript:mostrar_diferencia();'
                             ]) ?>
+                    <?= Html::activeHiddenInput($model, 'talla') ?>
                 </div>
                 <?php 
                 if ($anterior!=null) {
                 ?>
                     <div class="col-md-4">
 
-                       <?= $form->field($anterior, 'DO_PESO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                       <?= $form->field($anterior, 'DO_PESO', [
+                            'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
                             'selectors' => [
                                 'input' => '#anterior-do_peso',
                                 'container' => '#anterior-do_peso-container',
@@ -94,31 +96,111 @@ DoclabauAsset::register($this);
                 }
                 ?>
             </div>
+            
+
+
             <div class="row">
-                <div class="col-md-4">
-      
-                   <?= $form->field($model, 'DO_TENAR1', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?= $form->field($model, 'DO_TENAR1', [
+                                'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6'],
+                                'selectors' => [
+                                    'input' => '#model-do_tenar1',
+                                    'container' => '#model-do_tenar1-container',
+                                ],
+                                'options' => ['id' => 'model-do_tenar1-container'],
+                                ])->textInput(
+                                    [   
+                                'name'=> 'Doclabau[DO_TENAR1]', 
+                                'id'=>'model-do_tenar1',
+                                'maxlength' => true]) ?>
+                        </div>
+                
+                        <div class="col-md-4">   
+                            <?= $form->field($model, 'DO_TENAR2', [
+                            'horizontalCssClasses' => [ 'offset' => '', 'wrapper' => 'col-md-6'],
+                            'selectors' => [
+                                    'input' => '#model-do_tenar2',
+                                    'container' => '#model-do_tenar2-container',
+                                ],
+                                'options' => ['id' => 'model-do_tenar2-container'],
+                                ])->textInput(
+                                    [   
+                                'name'=> 'Doclabau[DO_TENAR2]', 
+                                'id'=>'model-do_tenar2',
+                            ])->textInput(['maxlength' => true])->label(false) ?>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-2">
-      
-                   /
-                </div>
-                <div class="col-md-4">
-      
-                   <?= $form->field($model, 'DO_TENAR2', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])->label(false) ?>
+                
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <?= $form->field($anterior, 'DO_TENAR1', [
+                            'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6'],
+                            'selectors' => [
+                                'input' => '#anterior-do_tenar1',
+                                'container' => '#anterior-do_tenar1-container',
+                            ],
+                            'options' => ['id' => 'anterior-do_tenar1-container'],
+                       ])->textInput([
+                            'name'=> 'Anterior[DO_TENAR1]', 
+                            'id'=>'anterior-do_tenar1',
+                            'readonly' => true,
+                            'maxlength' => true])->label('Tensión Arterial Anterior') ?>
+                        </div>
+                
+                        <div class="col-md-4">   
+                            <?= $form->field($anterior, 'DO_TENAR2', [
+                            'horizontalCssClasses' => [ 'offset' => '', 'wrapper' => 'col-md-6'],
+                            'selectors' => [
+                                'input' => '#anterior-do_tenar2',
+                                'container' => '#anterior-do_tenar2-container',
+                            ],
+                            'options' => ['id' => 'anterior-do_tenar2-container'],
+                       ])->textInput([
+                            'name'=> 'Anterior[DO_TENAR2]', 
+                            'id'=>'anterior-do_tenar2',
+                            'readonly' => true,
+                            'maxlength' => true])->label(false) ?>
+                        </div>
+                    </div>
                 </div>
             </div>
              <div class="row">
                 <div class="col-md-4">
       
-                   <?= $form->field($model, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+                   <?= $form->field($model, 'DO_COLEST', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        'selectors' => [
+                            'input' => '#model-do_colest',
+                            'container' => '#model-do_colest-container',
+                        ],
+                        'options' => ['id' => 'model-do_colest-container'],
+                        ])->textInput(
+                            [   
+                                'name'=> 'Doclabau[DO_COLEST]', 
+                                'id'=>'model-do_colest',
+                                'maxlength' => true]) ?>
                 </div>
                 <?php 
                 if ($anterior!=null) {
                 ?>
                     <div class="col-md-4">
           
-                       <?= $form->field($anterior, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'colest-ant'])->label("Anterior") ?>
+                       <?= $form->field($anterior, 'DO_COLEST', [
+                       'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                            'selectors' => [
+                                'input' => '#anterior-do_colest',
+                                'container' => '#anterior-do_colest-container',
+                            ],
+                            'options' => ['id' => 'anterior-do_colest-container'],
+                       ])->textInput([
+                            'name'=> 'Anterior[DO_COLEST]', 
+                            'id'=>'anterior-do_colest',
+                            'readonly' => true,
+                            'maxlength' => true])->label("Anterior") ?>
                     </div>
                 <?php
                 }
@@ -127,14 +209,36 @@ DoclabauAsset::register($this);
             <div class="row">
                 <div class="col-md-6">
       
-                   <?= $form->field($model, 'DO_GLUCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true]) ?>
+                   <?= $form->field($model, 'DO_GLUCO', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        'selectors' => [
+                            'input' => '#model-do_gluco',
+                            'container' => '#model-do_gluco-container',
+                        ],
+                        'options' => ['id' => 'model-do_gluco-container'],
+                        ])->textInput(
+                            [   
+                                'name'=> 'Doclabau[DO_GLUCO]', 
+                                'id'=>'model-do_gluco',
+                                'maxlength' => true]) ?>
                 </div>
                 <?php 
                 if ($anterior!=null) {
                 ?>
                     <div class="col-md-6">
           
-                       <?= $form->field($anterior, 'DO_GLUCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true,'id'=>'gluco-ant'])->label("Anterior") ?>
+                       <?= $form->field($anterior, 'DO_GLUCO', [
+                            'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                            'selectors' => [
+                                'input' => '#anterior-do_gluco',
+                                'container' => '#anterior-do_gluco-container',
+                            ],
+                            'options' => ['id' => 'anterior-do_gluco-container'],
+                       ])->textInput([
+                            'name'=> 'Anterior[DO_GLUCO]', 
+                            'id'=>'anterior-do_gluco',
+                            'readonly' => true,
+                            'maxlength' => true])->label("Anterior") ?>
                     </div>
                 <?php
                     }
@@ -194,7 +298,7 @@ DoclabauAsset::register($this);
         <div class="form-group">
             <div class="row">
                 <div class="col-md-2 pull-right">
-                    <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                    <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Guardar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
                 </div>
             </div>
         </div>
