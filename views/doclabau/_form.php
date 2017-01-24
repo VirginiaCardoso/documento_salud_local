@@ -133,7 +133,9 @@ DoclabauAsset::register($this);
                         </div>
                     </div>
                 </div>
-                
+                <?php 
+                if ($anterior!=null) {
+                ?>
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-md-4">
@@ -167,6 +169,9 @@ DoclabauAsset::register($this);
                         </div>
                     </div>
                 </div>
+                <?php
+                }
+                ?>
             </div>
              <div class="row">
                 <div class="col-md-4">
