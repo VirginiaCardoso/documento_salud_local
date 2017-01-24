@@ -71,6 +71,7 @@ class DoclabController extends Controller
                 $model->cual = substr($model->DO_VENER, 2); 
             }
             $model->vener= substr($model->DO_VENER, 0,2);
+
             if(substr($model->DO_EMBARA,0,2)=="29"){
                 $model->cuantosemb = substr($model->DO_EMBARA, 2); 
             }
@@ -81,45 +82,45 @@ class DoclabController extends Controller
             }
             $model->menop= substr($model->DO_MENOP, 0,2);
 
-          /*  if ($model->DO_FADI == "00"){
+            if ($model->DO_FADI == "00"){
                 $model->diabfam="02"; 
-                $model->DO_FADI=[];   
+                $model->diabquienes=[];   
             }
             else {
                 $model->diabfam="01";
                 $cadenacoma = chunk_split($model->DO_FADI,2,',');
-                $model->DO_FADI = explode(',', $cadenacoma);    
+                $model->diabquienes = explode(',', $cadenacoma);    
             }
 
             if ($model->DO_FAHIPE == "00"){
                 $model->hiperfam="02";
-                $model->DO_FAHIPE=[]; 
+                $model->hiperquienes=[]; 
             }
             else {
                 $model->hiperfam="01";  
                 $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
-                $model->DO_FAHIPE = explode(',', $cadenacoma);   
+                $model->hiperquienes = explode(',', $cadenacoma);   
             }
            
            if ($model->DO_FACARD == "00"){
                 $model->cardfam="02";
-                $model->DO_FACARD=[]; 
+                $model->cardquienes=[]; 
             }
             else {
                 $model->cardfam="01";  
                 $cadenacoma = chunk_split($model->DO_FACARD,2,',');
-                $model->DO_FACARD = explode(',', $cadenacoma);   
+                $model->cardquienes = explode(',', $cadenacoma);   
             }
 
             if ($model->DO_FAONCO == "00"){
                 $model->oncofam="02";
-                 $model->DO_FAONCO=[]; 
+                 $model->oncoquienes=[]; 
             }
             else {
                 $model->oncofam="01";  
                 $cadenacoma = chunk_split($model->DO_FAONCO,2,',');
-                $model->DO_FAONCO = explode(',', $cadenacoma);   
-            }*/
+                $model->oncoquienes = explode(',', $cadenacoma);   
+            }
 
         $cliente = Clientes::findOne($model->DO_CODCLI);
         $lib = Libretas::findOne($model->DO_NRO);

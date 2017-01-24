@@ -289,6 +289,222 @@ class Doclab extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Habi_fat::className(), ['ID' => 'DO_FASTAB']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOALCOH()
+    {
+        return $this->hasOne(Habi_opc::className(), ['ID' => 'DO_ALCOH']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOCAGE()
+    {
+        return $this->hasOne(AlcCage::className(), ['ID' => 'DO_CAGE']);
+    }
+
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOSEDAN()
+    {
+        return $this->hasOne(Habi_opc::className(), ['ID' => 'DO_SEDAN']);
+    }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDODEPOR()
+    {
+        return $this->hasOne(Habi_opc::className(), ['ID' => 'DO_DEPOR']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOSUENIO()
+    {
+        return $this->hasOne(Habi_opc::className(), ['ID' => 'DO_SUENIO']);
+    }
     
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDORUBEO()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_RUBEO']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTETANO()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_TETANO']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOANTIGR()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_ANTIGR']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOANTIHE()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_ANTIHE']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTRANSF()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_TRANSF']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDODOLLUM()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'DO_DOLLUM']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getVENER()
+    {
+        return $this->hasOne(Vacu_opc::className(), ['ID' => 'vener']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOEAC()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_EAC']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOHIPERT()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_HIPERT']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTRATHI()
+    {
+        return $this->hasOne(Pato_op2::className(), ['ID' => 'DO_TRATHI']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOCOLEST()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_COLEST']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTRATCO()
+    {
+        return $this->hasOne(Pato_op2::className(), ['ID' => 'DO_TRATCO']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDODIABET()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_DIABET']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTRATDI()
+    {
+        return $this->hasOne(Pato_op2::className(), ['ID' => 'DO_TRATDI']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOANTQUI()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_ANTQUI']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOONCO()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_ONCO']);
+    }
+
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEMB()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'emb']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOANOVU()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_ANOVU']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMENOP()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'menop']);
+    }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOTRH()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_TRH']);
+    }
+
+     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOASMAEP()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_ASMAEP']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getDOPROSTA()
+    {
+        return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_PROSTA']);
+    }
+
+
 }

@@ -232,31 +232,38 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..']); ?>
+                    <?= $form->field($model->dOALCOH, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Alcohol') ?>
+                  
  
                      </div>
-                     <div class="col-md-4">
-                   <?= $form->field($model, 'DO_CAGE', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->dropDownList(AlcCage::getListaCage(), ['prompt' => 'Seleccione..']); ?>
+                     <?php 
+                
+                        if ($model->DO_CAGE) {
+                        ?>
+                     <div class="col-md-6">
+                   <?= $form->field($model->dOCAGE,'TIPO',['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-10']])->textInput(['readonly' => true,'maxlength' => true])->label('CAGE') ?>
+ 
+                     </div>
+                     <?php 
+                }
+               
+                ?>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <?= $form->field($model->dOSEDAN, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Sedantes') ?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_SEDAN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoSedantes()), ['prompt' => 'Seleccione hábito sedantes..']); ?>
- 
-                     </div>
+                        <?= $form->field($model->dODEPOR, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Deportes') ?>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_DEPOR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoDeportes()), ['prompt' => 'Seleccione hábito deportes..']); ?>
- 
-                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                   <?= $form->field($model, 'DO_SUENIO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoSueño()), ['prompt' => 'Seleccione hábito sueño..']); ?>
- 
-                     </div>
+                        <?= $form->field($model->dOSUENIO, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Trastornos del Sueño') ?>  
+                    </div>
                 </div>
             </div>
             </div>
@@ -269,52 +276,55 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_RUBEO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoRubeola()), ['prompt' => 'Seleccione ..']); ?>
- 
+                     <?= $form->field($model->dORUBEO, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Rubeóla') ?> 
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_TETANO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoTetanos()), ['prompt' => 'Seleccione ..']); ?>
+                  <?= $form->field($model->dOTETANO, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Tétanos') ?> 
  
                      </div>
                 </div>
                  <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ANTIGR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoAntigripal()), ['prompt' => 'Seleccione ..']); ?>
+                   <?= $form->field($model->dOANTIGR, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Antigripal') ?> 
  
                      </div>
                 </div>
                  <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_ANTIHE', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoAntihepatitis()), ['prompt' => 'Seleccione ..']); ?>
- 
+                   <?= $form->field($model->dOANTIHE, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Antihepatitis B') ?> 
                      </div>
                 </div>
                 <br>
                  <div class="row">
                     <div class="col-md-6">
-                    <?= Html::activeHiddenInput($model, 'DO_VENER') ?> 
-                   <?= $form->field($model, 'vener', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoVenereas()), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_cual();'])->label('Venéreas'); ?>
+                        <?= $form->field($model->vENER,'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Venéreas') ?>
  
-                     </div>
-                     <div class="col-md-6" id="campocual">
-                        <?= $form->field($model, 'cual', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
                     </div>
- 
+                      <?php                 
+                        if ($model->cual) {
+                        ?>
+                             <div class="col-md-6" id="campocual">
+                                <?= $form->field($model, 'cual', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])?>
+                            </div>
+                        <?php 
+                        }
+                       
+                        ?>
                  </div>
                 
                 <br>
                  <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_TRANSF', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoTransfusiones()), ['prompt' => 'Seleccione ..']); ?>
+                    <?= $form->field($model->dOTRANSF, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Transfusiones') ?>
  
                      </div>
                 </div>
                 <br>
                  <div class="row">
                     <div class="col-md-6">
-                   <?= $form->field($model, 'DO_DOLLUM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoLumbar()), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model->dODOLLUM, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Dolor Lumbar (que ocasionó falta al trabajo)') ?>
  
                      </div>
                 </div>
@@ -329,71 +339,72 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_EAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('01'), ['prompt' => 'Seleccione ..']); ?>
+                         <?= $form->field($model->dOEAC, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('EAC') ?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_HIPERT', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('02'), ['id'=>'trat-id','onchange'=>'javascript:mostrar_trat();','prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model->dOHIPERT, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Hipertensión') ?>
  
                     </div>
+                    <?php                 
+                        if ($model->DO_TRATHI) {
+                        ?>
                     <div class="col-md-6" id="campotrathi">
-                        <?= $form->field($model, 'DO_TRATHI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?> 
+                         <?= $form->field($model->dOTRATHI, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Tratamiento') ?>
                         
                     </div>
+                    <?php 
+                        }
+                       
+                        ?>
                    
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('04'), ['id'=>'trat2-id','onchange'=>'javascript:mostrar_trat2();','prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model->dOCOLEST, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Colesterol') ?>
+ 
                     </div>
+                    <?php                 
+                        if ($model->DO_TRATCO) {
+                        ?>
                     <div class="col-md-6" id="campotrat2">
-                        <?= $form->field($model, 'DO_TRATCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat2-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat2-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?> 
+                         <?= $form->field($model->dOTRATCO, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Tratamiento') ?>
                         
                     </div>
+                    <?php 
+                        }
+                       
+                        ?>
                    
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_DIABET', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('06'), ['id'=>'trat3-id','onchange'=>'javascript:mostrar_trat3();','prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model->dODIABET, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Diabetes') ?>
  
-                     </div>
-                     <div class="col-md-6" id="campotrat3">
-                        <?= $form->field($model, 'DO_TRATDI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat3-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat3-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?> 
+                    </div>
+                    <?php                 
+                        if ($model->DO_TRATDI) {
+                        ?>
+                    <div class="col-md-6" id="campotrat3">
+                         <?= $form->field($model->dOTRATDI, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Tratamiento') ?>
                         
                     </div>
+                    <?php 
+                        }
+                       
+                        ?>
+                   
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_ANTQUI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('08'), ['prompt' => 'Seleccione ..']); ?>
- 
+                         <?= $form->field($model->dOANTQUI, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Antecedentes Quirúrgicos') ?>
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_ONCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('09'), ['prompt' => 'Seleccione ..']); ?>
+                         <?= $form->field($model->dOONCO, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Oncológicos') ?>
  
                      </div>
                 </div>
@@ -403,33 +414,47 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                         <?= Html::activeHiddenInput($model, 'DO_EMBARA') ?> 
-                        <?= $form->field($model, 'emb', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('10'), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_cuantosemb();']); ?>
+                        
+                        <?= $form->field($model->eMB,'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Embarazos') ?>
  
-                     </div>
+                    </div>
+                      <?php                 
+                        if ($model->cuantosemb) {
+                        ?>
                     <div class="col-md-6" id="campocuantosemb">
                         <?= $form->field($model, 'cuantosemb', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
                     </div>
+                    <?php 
+                        }
+                       
+                        ?>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_ANOVU', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('11'), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model->dOANOVU, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Anovulatorios') ?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_MENOP') ?> 
-                        <?= $form->field($model, 'menop', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('12'), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_menop();']); ?>
+                         
+                        <?= $form->field($model->mENOP,'TIPO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Menopausia') ?>
  
                     </div>
+                      <?php                 
+                        if ($model->edadmenop) {
+                        ?>
                     <div class="col-md-6" id="campomenop">
                         <?= $form->field($model, 'edadmenop', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
                     </div>
+                    <?php 
+                        }
+                       
+                        ?>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_TRH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('13'), ['prompt' => 'Seleccione ..']); ?>
+                         <?= $form->field($model->dOTRH, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('TRH') ?>
  
                      </div>
                 </div>
@@ -438,7 +463,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_ASMAEP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('14'), ['prompt' => 'Seleccione ..']); ?>
+                         <?= $form->field($model->dOASMAEP, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Asma/Epoc') ?>
  
                      </div>
                 </div>
@@ -448,7 +473,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_PROSTA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('15'), ['prompt' => 'Seleccione ..']); ?>
+                         <?= $form->field($model->dOPROSTA, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Anovulatorios') ?>
+ 
  
                      </div>
                 </div>
@@ -466,52 +492,80 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FADI') ?> 
-                        <?= $form->field($model, 'diabfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam1();','prompt' => 'Seleccione ..']); ?>
+                         
+                        <?= $form->field($model, 'diabfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam1();','prompt' => 'Seleccione ..']); ?>
  
                     </div>
+                    <?php
+                if ($model->diabquienes!=[])
+                {
+                ?>
                     <div class="col-md-6" id="campofam1">
-                        
-                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>                    
+                     
+                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>                    
                     </div>
+                    <?php 
+                }
+                ?>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FAHIPE') ?> 
-                        <?= $form->field($model, 'hiperfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam2();','prompt' => 'Seleccione ..']); ?>
+                       
+                        <?= $form->field($model, 'hiperfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam2();','prompt' => 'Seleccione ..']); ?>
  
                     </div>
+                    <?php
+                if ($model->hiperquienes!=[])
+                {
+                ?>
                     <div class="col-md-6" id="campofam2">
                         
-                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>                    
+                        <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>                    
                     </div>
+                <?php 
+                }
+                ?>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FACARD') ?> 
-                        <?= $form->field($model, 'cardfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam3();','prompt' => 'Seleccione ..']); ?>
+                       
+                        <?= $form->field($model, 'cardfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam3();','prompt' => 'Seleccione ..']); ?>
                     </div>
+                    <?php
+                if ($model->cardquienes!=[])
+                {
+                ?>
                     <div class="col-md-6" id="campofam3">
                         
-                        <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['multiple'=>'multiple']); ?>
+                        <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>
                     </div>
+                 <?php 
+                }
+                ?>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <?= Html::activeHiddenInput($model, 'DO_FAONCO') ?> 
-                        <?= $form->field($model, 'oncofam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ['onchange'=>'javascript:mostrar_fam4();','prompt' => 'Seleccione ..']); ?>
+                        
+                        <?= $form->field($model, 'oncofam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam4();','prompt' => 'Seleccione ..']); ?>
                     </div>
+                     <?php
+                if ($model->oncoquienes!=[])
+                {
+                ?>
                     <div class="col-md-6" id="campofam4">
                         
-                        <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?>
+                        <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['readonly' => true,'onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?>
                     </div>
+                <?php 
+                }
+                ?>
                 </div>
                 <div class="row ">
                     <div class="col-md-6">
                         
                     </div>
                     <div class="col-md-6" id="campopadreonco">
-                         <?= $form->field($model, 'DO_PAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
+                         <?= $form->field($model, 'DO_PAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
                     </div>
                 </div>
                 <div class="row ">
@@ -519,7 +573,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     </div>
                     <div class="col-md-6" id="campomadreonco">
-                         <?= $form->field($model, 'DO_MAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
+                         <?= $form->field($model, 'DO_MAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
                     </div>
                 </div>
                 <div class="row ">
@@ -527,7 +581,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         
                     </div>
                     <div class="col-md-6" id="campohermanoonco">
-                         <?= $form->field($model, 'DO_HEENON', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
+                         <?= $form->field($model, 'DO_HEENON', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
                     </div>
                 </div>
                 <br>
@@ -541,40 +595,40 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_NEVOS', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('01'), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model, 'DO_NEVOS', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('01'), ["disabled"=>"disabled",'prompt' => 'Seleccione ..']); ?>
  
                      </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_NODMAN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('02'), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model, 'DO_NODMAN', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('02'), ["disabled"=>"disabled",'prompt' => 'Seleccione ..']); ?>
  
                      </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_SOPLOS', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('03'), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model, 'DO_SOPLOS', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Exfi_opc::getListaExfiOpc('03'), ["disabled"=>"disabled",'prompt' => 'Seleccione ..']); ?>
  
                      </div>
                 </div>
                 
                 <div class="row">
                     <div class="col-md-6">
-                        <?= $form->field($model, 'DO_TUMAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('04'), ['prompt' => 'Seleccione ..']); ?>
+                        <?= $form->field($model, 'DO_TUMAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('04'), ["disabled"=>"disabled",'prompt' => 'Seleccione ..']); ?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                       <?= $form->field($model, 'DO_TALLA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['maxlength' => true])?>
+                       <?= $form->field($model, 'DO_TALLA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
  
                      </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                       <?= $form->field($model, 'DO_DATOS', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->textArea(['maxlength' => true])?>
+                       <?= $form->field($model, 'DO_DATOS', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->textArea(["disabled"=>"disabled",'maxlength' => true])?>
                      </div>
                 </div>
 
@@ -589,7 +643,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                       <?= $form->field($model, 'DO_DATINT', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->textArea(['maxlength' => true])?>
+                       <?= $form->field($model, 'DO_DATINT', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->textArea(["disabled"=>"disabled",'maxlength' => true])?>
                      </div>
                 </div>
             </div>
