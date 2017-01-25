@@ -120,7 +120,7 @@ class Doclab extends \yii\db\ActiveRecord
                     return $value;
                 }
            }],*/
-            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP',  'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','menop','diabfam','hiperfam','cardfam','oncofam'], 'string', 'max' => 2], //'emb','cuantosemb', 'DO_PROSTA',
+            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP',  'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','diabfam','hiperfam','cardfam','oncofam'], 'string', 'max' => 2], //'emb','cuantosemb', 'DO_PROSTA','menop',
             [['DO_INGRES'], 'string', 'max' => 2],
             [['DO_FUMA'], 'string', 'max' => 7],
             [['DO_CAGE'], 'string', 'max' => 8],
