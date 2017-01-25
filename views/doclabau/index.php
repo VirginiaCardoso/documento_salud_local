@@ -15,9 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>Historial Visitas </h1>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-   
-
+    <h3><?= $cli->CL_APENOM." (".$cli->CL_COD.")" ?> </h3> 
+    <br>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
@@ -27,6 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_CODLIB',
             'DO_VISITA:date',
             'DO_PESO',
+            [
+                'label' => 'Talla (cm.)',
+                'value'=> function($model) {
+                    if ($model->documento!=null)
+                        return $model->documento->DO_TALLA;
+                    else
+                        return "";
+                },
+            ],
+
             'DO_TENAR1',
            // 'DO_TENAR2',
              'DO_COLEST',

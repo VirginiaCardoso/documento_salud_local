@@ -7,6 +7,8 @@ use documento_salud\models\Doclab;
 use documento_salud\models\Doclabau;
 use documento_salud\models\DoclabauSearch;
 use documento_salud\models\Libretas;
+use documento_salud\models\Clientes;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -40,9 +42,11 @@ class DoclabauController extends Controller
         $searchModel = new DoclabauSearch();
         $dataProvider = $searchModel->searchHistorial(Yii::$app->request->queryParams, $codcli);
 
+        $cli = Clientes::findOne($codcli);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'cli' => $cli,
         ]);
     }
 

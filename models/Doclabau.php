@@ -120,4 +120,15 @@ class Doclabau extends \yii\db\ActiveRecord
         }
    }
 
+    public function getDocumento()
+    {
+        return $this->hasOne(Doclab::className(), ['DO_CODCLI' => 'DO_CODCLI']);
+    }
+
+    public function getCliente()
+    {
+        return $this->hasOne(Clientes::className(), ['CL_COD' => 'DO_CODCLI']);
+    }
+
+
 }
