@@ -14,8 +14,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1>Historial Visitas </h1>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-    <h3><?= $cli->CL_APENOM." (".$cli->CL_COD.")" ?> </h3> 
+    <?php // echo $this->render('_search', ['model' => $searchModel]);." (".$cli->CL_COD.")"  ?>
+    <h3><?= $cli->CL_APENOM ?> </h3> 
     <br>
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
