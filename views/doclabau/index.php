@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_CODLIB',
             'DO_VISITA:date',
             'DO_PESO',
-            [
+          /*  [
                 'label' => 'Talla (cm.)',
                 'value'=> function($model) {
                     if ($model->documento!=null)
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     else
                         return "";
                 },
-            ],
+            ],*/
 
             'DO_TENAR1',
            // 'DO_TENAR2',

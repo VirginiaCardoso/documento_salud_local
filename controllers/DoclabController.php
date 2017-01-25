@@ -230,11 +230,11 @@ class DoclabController extends Controller
         }
         if ($model->load(Yii::$app->request->post())){
 
-          if ($model->validate() ){   
-            $connection = Yii::$app->dbdocsl;
-           $transaction = $connection->beginTransaction();
+        //  if ($model->validate() ){   
+        //    $connection = Yii::$app->dbdocsl;
+         //  $transaction = $connection->beginTransaction();
 
-              try {
+           //   try {
                   if ($model->diabfam=="01") {//diabetes
                     if (Yii::$app->request->post( 'Doclab' )['DO_FADI']!="")
                           $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']);
@@ -288,7 +288,7 @@ class DoclabController extends Controller
                        // throw new ErrorException($mensaje);
                         Yii::$app->getSession()->setFlash('error', 'error');
                       }
-                  } //try
+              /*    } //try
               catch (\Exception $e) {
                   $transaction->rollBack();
                   
@@ -300,9 +300,9 @@ class DoclabController extends Controller
                     'client' =>$client,
                     'docaux' => $docaux,
                   ]);
-              }
+              }*/
            
-            } 
+         /*   } 
             else {
 
               //Yii::$app->getSession()->setFlash('error', 'error validacion.'); 
@@ -312,7 +312,7 @@ class DoclabController extends Controller
                     'client' =>$client,
                     'docaux' => $docaux,
                 ]);
-            }
+            }*/
           } 
           else {
 
