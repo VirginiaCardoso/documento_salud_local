@@ -108,7 +108,7 @@ class Doclab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [ //
-            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES', 'DO_FUMA', 'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_VENER', 'DO_DOLLUM',  'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* 'emb','menop','DO_FADI', 'DO_FAHIPE', 'fumador','vener','DO_FACARD', 'DO_FAONCO','DO_CAGE', , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES',  'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF',  'DO_DOLLUM',  'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* 'DO_VENER','emb','menop','DO_FADI', 'DO_FAHIPE', 'DO_FUMA','fumador','vener','DO_FACARD', 'DO_FAONCO','DO_CAGE', , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
             [['DO_NRO'], 'string', 'max' => 12],
 
             [['DO_CODCLI',  'DO_TALLA',], 'string', 'max' => 6], /*'DO_FADI','DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'hiperquienes','cardquienes','oncoquienes'*/
@@ -156,7 +156,7 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_ESCOL' => 'Escolaridad',
             'DO_INGRES' => 'Nivel Ingresos',
             'DO_FUMA' => 'Fumador',
-            'fumador' =>'Fumador',
+            'fumador' =>'Fumador ',
             'cuanto'=> '¿Cuántos Años?',
             'DO_FASTAB' => 'Fase de Tabaquista',
             'DO_ALCOH' => 'Alcohol',

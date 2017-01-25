@@ -157,7 +157,7 @@ class DoclabController extends Controller
             $model = new Doclab();
             $model->DO_NRO = $id;
             $model->DO_CODCLI = $codcli;
-         //   $model->save(false);
+                   //   $model->save(false);
 
         }
         else {
@@ -287,6 +287,12 @@ class DoclabController extends Controller
                         
                        // throw new ErrorException($mensaje);
                         Yii::$app->getSession()->setFlash('error', 'error');
+                        return $this->render('create', [
+                    'model' => $model,
+                    'lib'=> $lib,
+                    'client' =>$client,
+                    'docaux' => $docaux,
+                  ]);
                       }
               /*    } //try
               catch (\Exception $e) {
