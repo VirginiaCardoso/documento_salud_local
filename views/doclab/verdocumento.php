@@ -19,12 +19,15 @@ LibretasAsset::register($this);
 
 Pjax::begin(); 
 
-$this->title = 'Emisión Documento Laboral';
-$this->params['breadcrumbs'][] = ['label' => 'Administración'];
+$this->title = 'Ver Documento Laboral';
+$this->params['breadcrumbs'][] = ['label' => 'Inspector'];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="libretas-view">
- 
+
+    <!-- <h1>Libreta</h1>
+ -->
+   
      <?php $form = ActiveForm::begin([   'id' => 'formEmision', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
         <h3> Seleccionar Documento Laboral</h3>
         <div class="row">

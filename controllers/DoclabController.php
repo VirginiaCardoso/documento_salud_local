@@ -403,7 +403,7 @@ class DoclabController extends Controller
    
 
 
-        /**
+    /**
      * Displays a single Libretas model.
      * @param string $id
      * @return mixed
@@ -423,8 +423,31 @@ class DoclabController extends Controller
         ]);
     }
 
+       /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionVerDocumento()
+    {
+        //$id='000000000003';
+       // $id = Yii::$app->request->post('fila');
+       $lib = new Libretas();
+       $cliente = new Clientes();
+       $model = new Doclab();
+      //  $model = $this->findModel($id);
+      //  $cliente = ClientesController::buscarCliente($model->LI_COCLI);
+        return $this->render('verdocumento', [
+            'model' => $model,
+            'cliente' => $cliente,
+            'lib' =>$lib,
 
-public function actionQueryemision($q = null) {
+        ]);
+    }
+
+
+
+  public function actionQueryemision($q = null) {
         try {
 
           $datab = Doclab::databaseName();

@@ -25,12 +25,12 @@ use documento_salud\models\Pato_op2;
 use documento_salud\models\Fami_opc;
 use documento_salud\models\Exfi_opc;
 use documento_salud\controllers\LibretasController;
-use documento_salud\assets\Documento2Asset;
+use documento_salud\assets\VerDocumentoAsset;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Doclab */
 
-Documento2Asset::register($this);
+VerDocumentoAsset::register($this);
 
 $this->title =  'Ver Documento Laboral: '.$model->DO_NRO;
 $this->params['breadcrumbs'][] = ['label' => 'Consulta Médica', 'url' => ['/libretas/consulta-medica/']];
