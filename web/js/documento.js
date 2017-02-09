@@ -7,6 +7,7 @@ function mostrar_cuanto() {
   //si el cliente es exfumador muestra el campo para que se ingrese  hace cuantos años
   if( $('#doclab-fumador').val()=='07'){
     $('#campocuanto').show();
+   // $('#campofase').hide();
   }
   else {
 
@@ -182,6 +183,10 @@ $(document).ready(function(){
   if ($('#doclab-cual').val()==""){
      $('#campocual').hide();
   }
+  if ($('#doclab-vener').val()=="16"){
+     $('#campocual').show();
+  }
+
    if ($('#doclab-do_cage').val()==""){
      $('#campocage').hide();
   }

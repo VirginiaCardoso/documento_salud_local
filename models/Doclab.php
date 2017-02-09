@@ -62,6 +62,7 @@ use Yii;
  */
 class Doclab extends \yii\db\ActiveRecord
 {
+    public $sexo;
     public $fumador;
     public $cuanto;
     public $vener;
@@ -108,26 +109,34 @@ class Doclab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [ //
-            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES',  'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF',  'DO_DOLLUM',  'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','diabfam','hiperfam','cardfam','oncofam'], 'required'], /* 'DO_VENER','emb','menop','DO_FADI', 'DO_FAHIPE', 'DO_FUMA','fumador','vener','DO_FACARD', 'DO_FAONCO','DO_CAGE', , 'DO_DATOS', 'DO_DATINT', 'DO_TRATHI', 'DO_TRATCO', 'DO_TRATDI', 'DO_PROSTA', 'DO_EMBARA', 'DO_ANOVU', 'DO_MENOP', 'DO_PAENOM', 'DO_MAENOM', 'DO_HEENON','vener','emb','diabetesFam','menop','diabfam','hiperfam','cardfam','oncofam'*/
+            [['DO_NRO', 'DO_CODCLI', 'DO_OCU', 'DO_ESCOL', 'DO_INGRES',  'DO_ALCOH',  'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_COLEST', 'DO_DIABET', 'DO_ANTQUI', 'DO_ONCO', 'DO_TRH', 'DO_ASMAEP', 'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF',  'DO_DOLLUM',  'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB', 'DO_TALLA','diabfam','hiperfam','cardfam','oncofam', 'fumador','vener'], 'required'],
+             ['cuanto', 'required', 'when' => function($model) { return $model->fumador =="07";},'whenClient' => "function (attribute, value) { return $('#doclab-fumador').val() == '07';}", 'message' => 'Cuántos no puede estar vacío.' ],
+            ['DO_FASTAB', 'required', 'when' => function($model) { return ($model->fumador !="06"); },'whenClient' => "function (attribute, value) { return $('#doclab-fumador').val() != '06';}", 'message' => 'Fase de Tabaquista no puede estar vacío.'],
+            ['emb', 'required', 'when' => function($model) { return $model->sexo == 'F'; }, 'message' => 'Embarazos no puede estar vacío.'],
+            ['cuantosemb', 'required', 'when' => function($model) { return $model->emb == '29'; },'whenClient' => "function (attribute, value) { return $('#doclab-emb').val() == '29';}", 'message' => 'Cuántos no puede estar vacío.'],
+            ['DO_ANOVU', 'required', 'when' => function($model) { return $model->sexo == 'F'; }],
+            ['menop', 'required', 'when' => function($model) { return $model->sexo == 'F'; }],
+            ['edadmenop', 'required','when' => function($model) { return $model->DO_MENOP == '34'; },'whenClient' => "function (attribute, value) { return $('#doclab-menop').val() == '34';}"],
+            ['DO_PROSTA', 'required', 'when' => function($model) { return $model->sexo == 'M'; }],
+            ['cual', 'required', 'when' => function($model) { return $model->vener == '16'; },'whenClient' => "function (attribute, value) { return $('#doclab-vener').val() == '16';}"],
+            ['DO_TRATHI', 'required', 'when' => function($model) { return $model->DO_HIPERT == '04'; },'whenClient' => "function (attribute, value) { return $('#trat-id').val() == '04';}"],
+            ['DO_TRATCO', 'required', 'when' => function($model) { return $model->DO_COLEST == '10'; },'whenClient' => "function (attribute, value) { return $('#trat2-id').val() == '10';}"],
+            ['DO_TRATDI', 'required', 'when' => function($model) { return $model->DO_DIABET == '16'; },'whenClient' => "function (attribute, value) { return $('#trat3-id').val() == '16';}"],
             [['DO_NRO'], 'string', 'max' => 12],
 
-            [['DO_CODCLI',  'DO_TALLA',], 'string', 'max' => 6], /*'DO_FADI','DO_FAHIPE', 'DO_FACARD', 'DO_FAONCO', 'hiperquienes','cardquienes','oncoquienes'*/
-          //  ['DO_FADI', 'each', 'rule' => ['string']],
-          /*  [['DO_FADI'],'filter', 'filter' => function ($value) {
-              //  if (is_array($value))
-                    return serialize($value);
-                else {
-                    return $value;
-                }
-           }],*/
-            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP',  'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','diabfam','hiperfam','cardfam','oncofam'], 'string', 'max' => 2], //'emb','cuantosemb', 'DO_PROSTA','menop',
+            [['DO_CODCLI',  'DO_TALLA',], 'string', 'max' => 6],
+            [['DO_OCU', 'DO_RUBRO', 'DO_RUBTIP', 'DO_ESCOL', 'DO_FASTAB', 'DO_ALCOH', 'DO_SEDAN', 'DO_DEPOR', 'DO_SUENIO', 'DO_EAC', 'DO_HIPERT', 'DO_TRATHI', 'DO_COLEST', 'DO_TRATCO', 'DO_DIABET', 'DO_TRATDI', 'DO_ANOVU', 'DO_TRH', 'DO_ASMAEP',  'DO_RUBEO', 'DO_TETANO', 'DO_ANTIGR', 'DO_ANTIHE', 'DO_TRANSF', 'DO_DOLLUM', 'DO_NEVOS', 'DO_NODMAN', 'DO_SOPLOS', 'DO_TUMAB','fumador','cuanto','vener','diabfam','hiperfam','cardfam','oncofam','cuantosemb'], 'string', 'max' => 2],
+            
             [['DO_INGRES'], 'string', 'max' => 2],
+            [['emb','menop'], 'string', 'max' => 2 ,'when' => function($model) { return $model->sexo == 'F'; },'whenClient' => "function (attribute, value) { return $('#doclab-sexo').val() == 'F';}"],
+            [['DO_PROSTA'], 'string', 'max' => 2 ,'when' => function($model) { return $model->sexo == 'M'; },'whenClient' => "function (attribute, value) { return $('#doclab-sexo').val() == 'F';}"],
+
             [['DO_FUMA'], 'string', 'max' => 7],
             [['DO_CAGE'], 'string', 'max' => 8],
             [['DO_ANTQUI', 'DO_ONCO', 'DO_VENER','cual'], 'string', 'max' => 102],
-            [['DO_EMBARA'], 'string', 'max' => 4],
-            [['edadmenop'], 'string', 'max' => 3],
-            [['DO_MENOP'], 'string', 'max' => 5],
+            [['DO_EMBARA'], 'string', 'max' => 4,'when' => function($model) { return $model->sexo == 'F'; },'whenClient' => "function (attribute, value) { return $('#doclab-sexo').val() == 'F';}"],
+            [['edadmenop'], 'string', 'max' => 3,'when' => function($model) { return $model->DO_MENOP == '34'; },'whenClient' => "function (attribute, value) { return $('#doclab-menop').val() == '34';}"],
+            [['DO_MENOP'], 'string', 'max' => 5,'when' => function($model) { return $model->sexo == 'F'; },'whenClient' => "function (attribute, value) { return $('#doclab-sexo').val() == 'F';}"],
             [['DO_PAENOM', 'DO_MAENOM', 'DO_HEENON'], 'string', 'max' => 94],
             [['DO_DATOS', 'DO_DATINT'], 'string', 'max' => 254],
             [['DO_CODCLI'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['DO_CODCLI' => 'CL_COD']],
@@ -189,6 +198,7 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_ANTIGR' => 'Antigripal',
             'DO_ANTIHE' => 'Antihepatitis B',
             'DO_TRANSF' =>  'Transfusiones',
+            'vener' => 'Enfermedades Venéreas',
             'DO_VENER' => 'Enfermedades Venéreas',
             'cual' => '¿Cuál?',
             'DO_DOLLUM' => 'Dolor Lumbar (ocasionó falta trab)',
@@ -214,7 +224,7 @@ class Doclab extends \yii\db\ActiveRecord
             'DO_SOPLOS' => 'Soplos',
             'DO_TUMAB' => 'Tumor Abdominal',
             'DO_TALLA' => 'Talla (cm.)',
-            'DO_DATOS' => 'Otros Datos',
+            'DO_DATOS' => 'Otros Datos del Examen Físico',
             'DO_DATINT' => 'Notas',
         ];
     }
@@ -507,5 +517,32 @@ class Doclab extends \yii\db\ActiveRecord
         return $this->hasOne(Pato_opc::className(), ['ID' => 'DO_PROSTA']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getExfiopc($id)
+    {
+        $m = Exfi_opc::findOne(['ID' => $id]);
+        return $m->TIPO;
+    }
+
+    public function getPatoopc($id)
+    {
+        $m = Pato_opc::findOne(['ID' => $id]);
+        return $m->TIPO;
+    }
+
+    public function imprimirFamHiper(){
+        $cadena = "";
+        foreach ($this->hiperquienes as $valor) {
+            if ($valor=='01')
+                $cadena .= "padre";
+            if ($valor=='02')
+                $cadena .= "madre";
+            if ($valor=='03')
+                $cadena .= "hermano";
+        }
+        return $cadena;
+    }
 
 }

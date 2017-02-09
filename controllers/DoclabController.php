@@ -16,6 +16,8 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use yii\helpers\Json;
+use kartik\mpdf\Pdf;
+
 
 /**
  * DoclabController implements the CRUD actions for Doclab model.
@@ -149,22 +151,21 @@ class DoclabController extends Controller
         $lib = Libretas::findOne($id);
         $codcli = $lib->LI_COCLI;
         $client = Clientes::findOne($codcli);
-       //  print_r($lib);
-       // print_r($client);
-        
+
         $model = Doclab::findOne($codcli);
+
         if ( $model==null){
             $model = new Doclab();
             $model->DO_NRO = $id;
             $model->DO_CODCLI = $codcli;
-                   //   $model->save(false);
-
+            $model->sexo = $client->CL_SEXO;
         }
         else {
-            //var_dump($model);
+            $model->sexo = $client->CL_SEXO;
+
             if(substr($model->DO_FUMA,0,2)=="07"){
                  //$model->fumador="07";
-                 $model->cuanto=  substr($model->DO_FUMA, 2,2);  
+                $model->cuanto=  substr($model->DO_FUMA, 2,2);  
             }
             $model->fumador= substr($model->DO_FUMA, 0,2);
             if(substr($model->DO_VENER,0,2)=="16"){
@@ -230,12 +231,31 @@ class DoclabController extends Controller
         }
         if ($model->load(Yii::$app->request->post())){
 
-        //  if ($model->validate() ){   
+          if ($model->validate() ){   
         //    $connection = Yii::$app->dbdocsl;
          //  $transaction = $connection->beginTransaction();
 
            //   try {
-                  if ($model->diabfam=="01") {//diabetes
+           //   
+              if($model->fumador=="07"){
+                  $model->DO_FUMA=  $model->fumador.$model->cuanto;
+              }
+              else {
+                $model->DO_FUMA=  $model->fumador;
+              }
+              if($model->vener=="16"){
+                  $model->DO_VENER=  $model->vener.$model->cual;
+              }
+              else {
+                $model->DO_VENER=  $model->vener;
+              }
+              if($model->emb=="29"){
+                  $model->DO_EMBARA=  $model->emb.$model->cuantosemb;
+              }
+              else {
+                $model->DO_EMBARA=  $model->emb;
+              }
+              if ($model->diabfam=="01") {//diabetes
                     if (Yii::$app->request->post( 'Doclab' )['DO_FADI']!="")
                           $model->DO_FADI = implode(Yii::$app->request->post( 'Doclab' )['DO_FADI']);
                         else 
@@ -308,7 +328,7 @@ class DoclabController extends Controller
                   ]);
               }*/
            
-         /*   } 
+            } 
             else {
 
               //Yii::$app->getSession()->setFlash('error', 'error validacion.'); 
@@ -318,7 +338,7 @@ class DoclabController extends Controller
                     'client' =>$client,
                     'docaux' => $docaux,
                 ]);
-            }*/
+            }
           } 
           else {
 
@@ -380,49 +400,7 @@ class DoclabController extends Controller
         }
     }
 
-    /**
-     * Creates a new Doclab model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-  /*  public function actionEditar($id)
-    {
-        $lib = Libretas::findOne($id);
-        $client = Clientes::findOne($lib->LI_COCLI);
-       // print_r($lib);
-      //  print_r($client);
-
-        $model = Doclab::findOne($id);
-        if ( $model==null){
-            $model = new Doclab();
-            $model->DO_NRO = $id;
-            $model->DO_CODCLI = $lib->LI_COCLI;
-         //   $model->save(false);
-
-        }
-
-       $docaux = Doclabau::findOne($id);
-        if ( $docaux==null){
-            $docaux = new Doclabau();
-            $docaux->DO_CODLIB = $id;
-            $docaux->save(false);
-        }
-
-        if ($model->load(Yii::$app->request->post())) {
-                 if($model->save()){
-                    return $this->redirect(['view', 'id' => $model->DO_NRO]);
-                }
-            }
-            else {
-                return $this->render('editardocumento', [
-                    'model' => $model,
-                    'lib'=> $lib,
-                    'client' =>$client,
-                    'docaux' => $docaux,
-                ]);
-          }
-    }
-*/
+   
 
 
         /**
@@ -480,5 +458,169 @@ public function actionQueryemision($q = null) {
             echo $e->getMessage();
         }
     }
+
+     public function actionReport($codcli) {
+
+     $filename = "reporte_".$codcli.".pdf";
+      $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
+
+      if(file_exists($filepath))
+      {
+          // Set up PDF headers
+          header('Content-type: application/pdf');
+          header('Content-Disposition: inline; filename="' . $filename . '"');
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: ' . filesize($filepath));
+          header('Accept-Ranges: bytes');
+
+          // Render the file
+         readfile($filepath);
+      }
+      else
+      {
+         // PDF doesn't exist so throw an error or something
+        print_r("No existe el archivo PDF.");
+      }
+    }
+
+
+    public function actionImprimir($id) {
+
+      $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        
+        try {
+          $this->generarPdf($id);  
+          $transaction->commit();
+          
+          return \yii\helpers\Json::encode( $model->errors );
+
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
+            return \yii\helpers\Json::encode( $e->getMessage());
+        }
+      
+    }
+
+     private function generarPdf($id){
+      header('Content-Type: application/pdf');
+      //----------------------------------------------------
+      
+      $lib = Libretas::findOne($id);
+      $codcli = $lib->LI_COCLI;
+      $cliente = Clientes::findOne($codcli);
+
+      
+
+      $model = $this->findModel($lib->LI_COCLI);
+
+         if(substr($model->DO_FUMA,0,2)=="07"){
+                 //$model->fumador="07";
+                 $model->cuanto=  substr($model->DO_FUMA, 2,2);  
+            }
+            $model->fumador= substr($model->DO_FUMA, 0,2);
+            if(substr($model->DO_VENER,0,2)=="16"){
+                $model->cual = substr($model->DO_VENER, 2); 
+            }
+            $model->vener= substr($model->DO_VENER, 0,2);
+
+            if(substr($model->DO_EMBARA,0,2)=="29"){
+                $model->cuantosemb = substr($model->DO_EMBARA, 2); 
+            }
+            $model->emb= substr($model->DO_EMBARA, 0,2);
+
+            if(substr($model->DO_MENOP,0,2)=="34"){
+                $model->edadmenop = substr($model->DO_MENOP, 2); 
+            }
+            $model->menop= substr($model->DO_MENOP, 0,2);
+
+            if ($model->DO_FADI == "00"){
+                $model->diabfam="NO"; 
+                $model->diabquienes="";   
+            }
+            else {
+                $model->diabfam="SI";
+                $cadenacoma = chunk_split($model->DO_FADI,2,',');
+                 $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
+                $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $model->diabquienes = $cadenacoma;    
+            }
+
+            if ($model->DO_FAHIPE == "00"){
+                $model->hiperfam="NO";
+                $model->hiperquienes= ""; 
+            }
+            else {
+                $model->hiperfam="SI";  
+                $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
+                $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $model->hiperquienes =  $cadenacoma;   
+            }
+           
+           if ($model->DO_FACARD == "00"){
+                $model->cardfam="NO";
+                $model->cardquienes=""; 
+            }
+            else {
+                $model->cardfam="SI";  
+                $cadenacoma = chunk_split($model->DO_FACARD,2,',');
+                $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $model->cardquienes = $cadenacoma;   
+            }
+
+            if ($model->DO_FAONCO == "00"){
+                $model->oncofam="NO";
+                 $model->oncoquienes=""; 
+            }
+            else {
+                $model->oncofam="SI";  
+                $cadenacoma = chunk_split($model->DO_FAONCO,2,',');
+                $cadenacoma = str_replace("01","Padre",$cadenacoma);
+                $cadenacoma = str_replace("02"," Madre",$cadenacoma);
+                $cadenacoma = str_replace("03"," Hermano",$cadenacoma);
+                $model->oncoquienes = $cadenacoma;   
+            }
+
+        
+      //-----------------------------------------------
+     $content =$this->renderPartial('impresiondoc', ['model' => $model,
+            'client' => $cliente,
+            'lib' => $lib,]); //"DOCUMENTO DEL SALUD LABORAL".$codcli;//$this->renderPartial('impresion', ['model' => $model]);
+      
+      $filename = "reporte_".$codcli.".pdf";
+      $filepath = $ruta = Yii::$app->params['path_clientes'].$codcli.'/reporte';
+      if (!file_exists($filepath)) {
+          mkdir($filepath, 0777, true);
+      }
+      $nombre = $filepath."/".$filename;
+
+      $pdf = new Pdf([
+          'mode' => Pdf::MODE_UTF8,
+          'format' => Pdf::FORMAT_A4, 
+          'orientation' => Pdf::ORIENT_PORTRAIT, 
+          'filename' => $nombre,
+          'destination' => Pdf::DEST_FILE, 
+          'content' => $content,
+          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+          'cssInline' => ' .texto{font-size:14px}', 
+          'options' => ['title' => 'Documento Salud Laboral'],
+      ]);
+      
+     return $pdf->render();
+
+    }
+
+
+  
+  
 
 }

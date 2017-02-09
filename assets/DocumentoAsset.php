@@ -29,6 +29,7 @@ class DocumentoAsset extends AssetBundle
        // 'js/libretas.js',
      //   'js/modal-cliente.js',
        'js/documento.js',
+       'js/docview.js',
    
     ];
     public $depends = [

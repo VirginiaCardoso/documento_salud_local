@@ -222,13 +222,16 @@ DocumentoAsset::register($this);
                        <?= $form->field($model, 'cuanto', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
                                 
                     </div>
+
                 </div>
+               
                 <div class="row">
                     <div class="col-md-6" id="campofase">
                    <?= $form->field($model, 'DO_FASTAB', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_fat::getListaFaseTab(), ['prompt' => 'Seleccione fase tabaquismo..']); ?>
  
                      </div>
                 </div>
+                
                 <div class="row">
                     <div class="col-md-6">
                    <?= $form->field($model, 'DO_ALCOH', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Habi_opc::getListaHabitoOpc(Habitos::codigoAlcohol()), ['prompt' => 'Seleccione hábito alcohol..','onchange'=>'javascript:mostrar_cage();']); ?>
@@ -300,12 +303,14 @@ DocumentoAsset::register($this);
                  <div class="row">
                     <div class="col-md-6">
                     <?= Html::activeHiddenInput($model, 'DO_VENER') ?> 
-                   <?= $form->field($model, 'vener', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoVenereas()), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_cual();'])->label('Venéreas'); ?>
+                   <?= $form->field($model, 'vener', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Vacu_opc::getListaVacuOpc(Vacunaci::codigoVenereas()), ['prompt' => 'Seleccione ..','onchange'=>'javascript:mostrar_cual();'])->label('Enfermedades Venéreas'); ?>
  
                      </div>
+                     
                      <div class="col-md-6" id="campocual">
                         <?= $form->field($model, 'cual', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
                     </div>
+                     
  
                  </div>
                 
@@ -348,15 +353,7 @@ DocumentoAsset::register($this);
  
                     </div>
                     <div class="col-md-6" id="campotrathi">
-                       <!--  <?= $form->field($model, 'DO_TRATHI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?>  -->
-                         <?= $form->field($model, 'DO_TRATHI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_op2::getListaPatologiaOpc2('04'), ['prompt' => 'Seleccione ..']); ?>
+                      <?= $form->field($model, 'DO_TRATHI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_op2::getListaPatologiaOpc2('04'), ['prompt' => 'Seleccione ..']); ?>
                         
                     </div>
                    
@@ -366,14 +363,7 @@ DocumentoAsset::register($this);
                         <?= $form->field($model, 'DO_COLEST', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_opc::getListaPatologiaOpc('04'), ['id'=>'trat2-id','onchange'=>'javascript:mostrar_trat2();','prompt' => 'Seleccione ..']); ?>
                     </div>
                     <div class="col-md-6" id="campotrat2">
-                        <!-- <?= $form->field($model, 'DO_TRATCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat2-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat2-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?>  -->
+                        
                         <?= $form->field($model, 'DO_TRATCO', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_op2::getListaPatologiaOpc2('10'), ['prompt' => 'Seleccione ..']); ?>
                         
                     </div>
@@ -385,14 +375,7 @@ DocumentoAsset::register($this);
  
                      </div>
                      <div class="col-md-6" id="campotrat3">
-                       <!--  <?= $form->field($model, 'DO_TRATDI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DepDrop::classname(), [
-                        'options'=>['id'=>'subtrat3-id'],
-                        'pluginOptions'=>[
-                            'depends'=>['trat3-id'],
-                            'placeholder'=>'Seleccione tratamiento...',
-                            'url'=>Url::to(['/pato_op2/subpato']),
-                            'loadingText' => 'Cargando ...',
-                        ]]) ?>  -->
+                       
                         <?= $form->field($model, 'DO_TRATDI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Pato_op2::getListaPatologiaOpc2('16'), ['prompt' => 'Seleccione ..']); ?>
                         
                     </div>
@@ -692,7 +675,7 @@ DocumentoAsset::register($this);
         </div>
         </div>
     
-     <div class="form-group im-centered">
+    <div class="form-group im-centered">
         <div class="row ">
             <div class="col-md-2"></div>
             <div class="col-md-3">

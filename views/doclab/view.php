@@ -25,10 +25,12 @@ use documento_salud\models\Pato_op2;
 use documento_salud\models\Fami_opc;
 use documento_salud\models\Exfi_opc;
 use documento_salud\controllers\LibretasController;
-use documento_salud\assets\DocumentoAsset;
+use documento_salud\assets\Documento2Asset;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Doclab */
+
+Documento2Asset::register($this);
 
 $this->title =  'Ver Documento Laboral: '.$model->DO_NRO;
 $this->params['breadcrumbs'][] = ['label' => 'Consulta Médica', 'url' => ['/libretas/consulta-medica/']];
@@ -422,7 +424,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         if ($model->cuantosemb) {
                         ?>
                     <div class="col-md-6" id="campocuantosemb">
-                        <?= $form->field($model, 'cuantosemb', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true])?>
+                        <?= $form->field($model, 'cuantosemb', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])?>
                     </div>
                     <?php 
                         }
@@ -473,7 +475,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 ?>
                 <div class="row">
                     <div class="col-md-6">
-                         <?= $form->field($model->dOPROSTA, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Anovulatorios') ?>
+                         <?= $form->field($model->dOPROSTA, 'TIPO',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label('Prostatismo') ?>
  
  
                      </div>
@@ -560,30 +562,50 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ?>
                 </div>
-                <div class="row ">
-                    <div class="col-md-6">
-                        
+                 <?php 
+                
+                 if ($model->oncofam=="01") {
+                ?>
+                    <?php 
+                
+                     if ($model->DO_PAENOM!="") {
+                    ?>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                
+                            </div>
+                            <div class="col-md-6" id="campopadreonco">
+                                 <?= $form->field($model, 'DO_PAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
+                            </div>
+                        </div>
+                    <?php 
+                    }
+                    if ($model->DO_MAENOM!="") {
+                    ?>
+                        <div class="row ">
+                            <div class="col-md-6">
+                                
+                            </div>
+                            <div class="col-md-6" id="campomadreonco">
+                                 <?= $form->field($model, 'DO_MAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
+                            </div>
+                        </div>
+                    <?php 
+                    }
+                    if ($model->DO_HEENON!="") {
+                    ?>
+                    <div class="row ">
+                        <div class="col-md-6">
+                            
+                        </div>
+                        <div class="col-md-6" id="campohermanoonco">
+                             <?= $form->field($model, 'DO_HEENON', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
+                        </div>
                     </div>
-                    <div class="col-md-6" id="campopadreonco">
-                         <?= $form->field($model, 'DO_PAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-md-6">
-                        
-                    </div>
-                    <div class="col-md-6" id="campomadreonco">
-                         <?= $form->field($model, 'DO_MAENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="col-md-6">
-                        
-                    </div>
-                    <div class="col-md-6" id="campohermanoonco">
-                         <?= $form->field($model, 'DO_HEENON', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(["disabled"=>"disabled",'maxlength' => true])?>
-                    </div>
-                </div>
+                <?php 
+                    }
+                }
+                ?>
                 <br>
             </div>
         </div>          
@@ -647,14 +669,38 @@ $this->params['breadcrumbs'][] = $this->title;
                      </div>
                 </div>
             </div>
-        </div>
+    </div>
 
 
         
+    </div>
+    <?php
+        $filename = "reporte_".$lib->LI_COCLI.".pdf";
+        $filepath =  Yii::$app->params['path_clientes'].$lib->LI_COCLI.'/reporte/'.$filename; 
+    ?>
+    <div class="form-group im-centered">
+        <div class="row ">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['report', 'codcli' => $lib->LI_COCLI], [
+             'class'=>'btn btn-info',
+             'id' => 'btn_imprimir',
+             'target'=> '_blank',
+             'data-toggle'=>'tooltip',
+             'title'=> 'Imprimir']);?>
+
+               
+            </div>
+            <div class="col-md-4">
+                <?= Html::a('Volver' , ['libretas/consulta-medica'], ['class'=>'btn btn-primary']);?>
+            </div>
+            
+
         </div>
-        </div>
+</div>
+</div>
+
     
-       
 
             
 <?php ActiveForm::end(); ?>            
