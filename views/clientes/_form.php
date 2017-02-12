@@ -65,12 +65,10 @@ Pjax::begin();
 <div class="row">
         <div class="col-md-6">
 
-     <!--      <?= $form->field($model, 'CL_FECNAC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true]) ?>
-  
-           -->
-      <?= $form->field($model, 'CL_FECNAC',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+      <?= $form->field($model, 'CL_FECNAC',['addAriaAttributes' => false, 'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
+                'displayFormat' => 'dd/MM/yyyy',
                 'options' => [
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione una fecha ...'],

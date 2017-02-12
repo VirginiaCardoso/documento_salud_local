@@ -1,10 +1,13 @@
 $(document).ready(function(){
-    $('#resumen').hide();
+   //$('#btGenerar').hide();
+  //  $('#btGenerar').attr('style',"display: none;");
   
 }); 
 
 function cargarEmision(e,datum) {
-	 $('#resumen').show();
+	//$('#btGenerar').show();
+	// $('#resumen').show();
+	$('#resumen').attr('style',"");
         $.ajax({
             url: 'index.php?r=doclab/buscar_datos',
             dataType: 'JSON',
@@ -22,13 +25,19 @@ function cargarEmision(e,datum) {
                $('#clientes-cl_numdoc').val(data['cli'].CL_NUMDOC);
                $('#clientes-cl_apenom').val(data['cli'].CL_APENOM);
                orig = document.getElementById("pic").src
-               
-               	 document.getElementById("pic").src =orig+data['cli'].CL_COD+'/'+data['cli'].CL_IMG;
-               	 alert(document.getElementById("pic").src);
+               document.getElementById("pic").src =orig+data['cli'].CL_COD+'/'+data['cli'].CL_IMG;
+
+                ref = document.getElementById("btGenerar").href
+               document.getElementById("btGenerar").href =ref+'&nrodoc='+data['lib'].LI_NRO;
+            //   	 alert(document.getElementById("pic").src);
                 },
             error: function () {
                 
       }
         });
 }
-
+/*
+$("#btVolver").click(function(){
+    // $('#btGenerar').attr('style',"display: none;");
+ });
+*/

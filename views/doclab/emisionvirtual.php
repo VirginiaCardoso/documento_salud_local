@@ -60,8 +60,8 @@ $this->params['breadcrumbs'][] = $this->title;
              
         </div>
      <!--    <img src="<?= Url::to(['route/qrcode'])?>" /> -->
-
-    <div class="panel panel-default" id="resumen">
+    <div id="resumen" style="display: none;">
+    <div class="panel panel-default" >
         <div class="panel-heading">
             <h3 class="panel-title">Resumen Documento Laboral</h3>
         </div>
@@ -72,10 +72,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="col-md-4">
                         <div class="form-group field-libretas-li_fecped required">
-                            <?= Html::activeHiddenInput($lib, 'LI_FECPED') ?>
+                            
                             <label class="control-label col-md-4" for="libretas-li_fecped">Fecha Solic.</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" id="libretas-li_fecped" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($lib->LI_FECPED, 'php:d-m-Y')."'" ?> >
+                                <input type="text" class="form-control" id="libretas-li_fecped" readonly="true" value = "">
                             </div>
 
                         </div>
@@ -84,52 +84,66 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($lib, 'LI_HORA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label("Hora Solic.") ?>
                 </div>
             </div>
+            <hr>
             <div class="row">
-                <div class="col-md-6">
-                   <?= $form->field($lib, 'LI_COCLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])->label("Código Cliente")?>
-                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-8">
+                             <?= $form->field($lib, 'LI_COCLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label("Código Cliente")?>
+                        </div>
+                    </div>
+                    <div class="row">
                 
-                <div class="col-md-2">
-                    <?='<label class=" control-label" for="CL_IMG"> Imágen cliente </label>' ?>
+                        <div class="col-md-8">
+                            <?= $form->field($client, 'CL_APENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])?>
+                        </div>
+                    </div> 
+                   <div class="row">
+                        <div class="col-md-8">
+                            <?php 
+                              /*  if ($client->cLTIPDOC) {*/
+                            ?>
+                               <?= $form->field($client, 'CL_TIPDOC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                            <?php  /* }*/
+                            ?>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+
+                            <?= $form->field($client, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                        </div>
+                    </div>
+                    
                 </div>
+                 <!--    <div class="col-md-2">
+                    <?='<label class=" control-label" for="CL_IMG"> Imágen cliente </label>' ?>
+                </div> -->
                 <div class="col-md-2">
                     <?php 
                     
-                        $src = Yii::$app->params['path_clientes'].'/'.$client->CL_COD.'/'.$client->CL_IMG;
+                        $src = Yii::$app->params['path_clientes'];
                         echo Html::img( $src, $options = ['title' => $client->CL_IMG,
-                        'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic'] , 'id'=> 'pic'] );
+                        'alt' => 'No se encontro foto', 'width'=>Yii::$app->params['anchopic']-40 , 'id'=> 'pic'] );
                         
                     ?>
                 </div>
                 
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                <?php 
-                  /*  if ($client->cLTIPDOC) {*/
-                ?>
-                   <?= $form->field($client, 'CL_TIPDOC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-                <?php  /* }*/
-                ?>
-                </div>
-                <div class="col-md-4">
-
-                        <?= $form->field($client, 'CL_NUMDOC', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-                </div>
-            </div>
-            <div class="row">
                 
-                 <div class="col-md-6">
-                    <?= $form->field($client, 'CL_APENOM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['readonly' => true,'maxlength' => true])?>
-                </div>
-            </div> 
+            
+            </div>
+
         </div>
-    </div> 
+    </div>
+
+
+        <div class="form-group pull-right">
+            <?= Html::a('Emitir Documento Virtual' , ['reportevirtual', 'nrodoc' => $lib->LI_NRO], ['id' => 'btGenerar','class'=>'btn btn-info']);?>
+           <!--  ,'style'=>"display: none;" -->
+            <?= Html::a('Limpiar' , ['doclab/emision'], ['id' => 'btVolver','class'=>'btn btn-danger']);?>
+        </div>
+    </div>
 
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
-    <div class="form-group pull-right">
-            
-            <?= Html::a('Volver' , ['libretas/index'], ['class'=>'btn btn-danger']);?>
-        </div>
 </div>

@@ -402,25 +402,6 @@ class DoclabController extends Controller
 
    
 
-
-    /**
-     * Displays a single Libretas model.
-     * @param string $id
-     * @return mixed
-     */
-    public function actionEmision()
-    {
-        $lib = new Libretas();
-       $cliente = new Clientes();
-       $model = new Doclab();
-        return $this->render('emisionvirtual', [
-            'model' => $model,
-            'client' => $cliente,
-            'lib' =>$lib,
-
-        ]);
-    }
-
        /**
      * Displays a single Libretas model.
      * @param string $id
@@ -506,7 +487,7 @@ class DoclabController extends Controller
      public function actionReport($codcli) {
 
      $filename = "reporte_".$codcli.".pdf";
-      $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
+    $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
 
       if(file_exists($filepath))
       {
@@ -641,6 +622,118 @@ class DoclabController extends Controller
             'lib' => $lib,]); //"DOCUMENTO DEL SALUD LABORAL".$codcli;//$this->renderPartial('impresion', ['model' => $model]);
       
       $filename = "reporte_".$codcli.".pdf";
+      $filepath = $ruta = Yii::$app->params['path_clientes'].$codcli.'/reporte';
+      if (!file_exists($filepath)) {
+          mkdir($filepath, 0777, true);
+      }
+      $nombre = $filepath."/".$filename;
+
+      $pdf = new Pdf([
+          'mode' => Pdf::MODE_UTF8,
+          'format' => Pdf::FORMAT_A4, 
+          'orientation' => Pdf::ORIENT_PORTRAIT, 
+          'filename' => $nombre,
+          'destination' => Pdf::DEST_FILE, 
+          'content' => $content,
+          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+          'cssInline' => ' .texto{font-size:14px}', 
+          'options' => ['title' => 'Documento Salud Laboral'],
+      ]);
+      
+     return $pdf->render();
+
+    }
+
+
+
+
+
+    /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionEmision()
+    {
+      $lib = new Libretas();
+       $cliente = new Clientes();
+       $model = new Doclab();
+        return $this->render('emisionvirtual', [
+            'model' => $model,
+            'client' => $cliente,
+            'lib' =>$lib,
+
+        ]);
+    }
+
+    /**
+     * Displays a single Libretas model.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionReportevirtual($nrodoc)
+    {
+      
+      $filename = "virtual_".$nrodoc.".pdf";
+      $lib = Libretas::findOne($nrodoc);
+      $codcli = $lib->LI_COCLI;
+      $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
+
+      if(file_exists($filepath))
+      {
+          // Set up PDF headers
+          header('Content-type: application/pdf');
+          header('Content-Disposition: inline; filename="' . $filename . '"');
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: ' . filesize($filepath));
+          header('Accept-Ranges: bytes');
+
+          // Render the file
+         readfile($filepath);
+      }
+      else
+      {
+         // PDF doesn't exist so throw an error or something
+        print_r("No existe el archivo PDF.");
+      }
+    }
+
+     public function actionImprimirvirtual($id) {
+
+      $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        
+        try {
+          $this->generarPdfVirtual($id);  
+          $transaction->commit();
+          
+          return \yii\helpers\Json::encode( $model->errors );
+
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
+            return \yii\helpers\Json::encode( $e->getMessage());
+        }
+      
+    }
+
+     private function generarPdfVirtual($id){
+      header('Content-Type: application/pdf');
+      //----------------------------------------------------
+      
+      $lib = Libretas::findOne($id);
+      $codcli = $lib->LI_COCLI;
+      $cliente = Clientes::findOne($codcli);
+       $model = $this->findModel($lib->LI_COCLI);
+
+      //-----------------------------------------------
+     $content =$this->renderPartial('vistavirtual', [ 'model' => $model,
+            'client' => $cliente,
+            'lib' =>$lib,]); 
+      
+      $filename = "virtual_".$id.".pdf";
       $filepath = $ruta = Yii::$app->params['path_clientes'].$codcli.'/reporte';
       if (!file_exists($filepath)) {
           mkdir($filepath, 0777, true);

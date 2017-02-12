@@ -27,6 +27,7 @@ class EmisionAsset extends AssetBundle
         'js/bootstrap-toggle.min.js',
         'js/jquery.mask.js', 
         'js/emision.js',
+        'js/virtualview.js',
        ];
 
     public $depends = [
