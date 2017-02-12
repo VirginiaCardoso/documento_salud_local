@@ -21,8 +21,10 @@ function cargarEmision(e,datum) {
                $('#clientes-cl_tipdoc').val(data['cli'].CL_TIPDOC);
                $('#clientes-cl_numdoc').val(data['cli'].CL_NUMDOC);
                $('#clientes-cl_apenom').val(data['cli'].CL_APENOM);
-
-
+               orig = document.getElementById("pic").src
+               
+               	 document.getElementById("pic").src =orig+data['cli'].CL_COD+'/'+data['cli'].CL_IMG;
+               	 alert(document.getElementById("pic").src);
                 },
             error: function () {
                 

@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     
                         $src = Yii::$app->params['path_clientes'].'/'.$client->CL_COD.'/'.$client->CL_IMG;
                         echo Html::img( $src, $options = ['title' => $client->CL_IMG,
-                        'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic']] );
+                        'alt' => 'No se encontro foto', 'height'=>Yii::$app->params['altopic'], 'width'=>Yii::$app->params['anchopic'] , 'id'=> 'pic'] );
                         
                     ?>
                 </div>
