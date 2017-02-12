@@ -410,15 +410,13 @@ class DoclabController extends Controller
      */
     public function actionEmision()
     {
-        //$id='000000000003';
-       // $id = Yii::$app->request->post('fila');
-       $model = new Libretas();
+        $lib = new Libretas();
        $cliente = new Clientes();
-      //  $model = $this->findModel($id);
-      //  $cliente = ClientesController::buscarCliente($model->LI_COCLI);
+       $model = new Doclab();
         return $this->render('emisionvirtual', [
             'model' => $model,
-            'cliente' => $cliente,
+            'client' => $cliente,
+            'lib' =>$lib,
 
         ]);
     }
@@ -481,6 +479,29 @@ class DoclabController extends Controller
             echo $e->getMessage();
         }
     }
+
+      /**
+    * Buscar archivo correspoendiente a determinada historia clínica
+    * @return [type] [description]
+    */
+    public function actionBuscar_datos() {
+        if (Yii::$app->request->isAjax) {
+            $post = Yii::$app->request->post();
+            $doc=Doclab::findOne(["DO_NRO" => $post["doc"]]);
+            $lib=Libretas::findOne(["LI_NRO" => $post["doc"]]);
+            $cli=Clientes::findOne(["CL_COD" => $doc->DO_CODCLI]);
+            if (($doc !== null )&&($lib !== null)&&($cli!== null)) {
+              
+                return \yii\helpers\Json::encode([
+                     'lib' => $lib,
+                     'doc' => $doc,
+                     'cli' => $cli,
+            ]);
+            }
+              
+            }
+    }
+
 
      public function actionReport($codcli) {
 
