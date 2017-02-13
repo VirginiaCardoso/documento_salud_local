@@ -573,6 +573,7 @@ class DoclabController extends Controller
                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
                 $cadenacoma = str_replace("02","Madre ",$cadenacoma);
                 $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
                 $model->diabquienes = $cadenacoma;    
             }
 
@@ -588,6 +589,7 @@ class DoclabController extends Controller
                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
                 $cadenacoma = str_replace("02","Madre ",$cadenacoma);
                 $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
                 $model->hiperquienes =  $cadenacoma;   
             }
            
@@ -602,6 +604,7 @@ class DoclabController extends Controller
                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
                 $cadenacoma = str_replace("02","Madre ",$cadenacoma);
                 $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
                 $model->cardquienes = $cadenacoma;   
             }
 
@@ -616,6 +619,7 @@ class DoclabController extends Controller
                 $cadenacoma = str_replace("01","Padre",$cadenacoma);
                 $cadenacoma = str_replace("02"," Madre",$cadenacoma);
                 $cadenacoma = str_replace("03"," Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
                 $model->oncoquienes = $cadenacoma;   
             }
 
