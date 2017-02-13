@@ -77,14 +77,14 @@ $this->params['breadcrumbs'][] = $this->title;
         Bahía Blanca, <?= date('d/m/Y H:i:s'); ?>
     </div>
     <?php 
-        $link = Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
+        $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]);//Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
         $urlcode = Url::toRoute(['doclab/qrcode', 'link' => $link]);
     ?>
     <img src="<?= $urlcode?>" />
     <br>
     <?= $link ?>
     <br>
-    <?= $urlcode ?>
+    <?= //$urlcode ?>
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
 </div>
