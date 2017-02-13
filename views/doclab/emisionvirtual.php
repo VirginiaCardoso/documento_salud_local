@@ -135,7 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
     </div>
-
+   
 
         <div class="form-group pull-right">
             <?= Html::a('Emitir Documento Virtual' , ['reportevirtual', 'nrodoc' => $lib->LI_NRO], ['id' => 'btGenerar','class'=>'btn btn-info']);?>

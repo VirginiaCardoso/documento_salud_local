@@ -17,6 +17,8 @@ use yii\filters\AccessControl;
 use yii\db\Query;
 use yii\helpers\Json;
 use kartik\mpdf\Pdf;
+use dosamigos\qrcode\formats\BookMark;
+use dosamigos\qrcode\QrCode;
 
 
 /**
@@ -757,6 +759,16 @@ class DoclabController extends Controller
     }
 
 
+public function actionQrcode($link) {
+   // $lib = Libretas::findOne($nrodoc);
+  //  $codcli = $lib->LI_COCLI;
+  //  $urlcode = Yii::$app->homeUrl;//Url::toRoute(['view', 'id' => $codcli]);
+   // var_dump($urlcode);
+    $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $link]);
+    return QrCode::png($bookmark->url);
+    // you could also use the following
+    // return return QrCode::png($mailTo);
+}
   
   
 

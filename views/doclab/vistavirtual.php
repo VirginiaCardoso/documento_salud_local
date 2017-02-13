@@ -6,6 +6,8 @@ use yii\helpers\Url;
 use yii\widgets\Pjax;
 use kartik\typeahead\Typeahead;
 use kartik\typeahead\Bloodhound;
+/*use dosamigos\qrcode\formats\BookMark;
+use dosamigos\qrcode\QrCode;*/
 
 use documento_salud\models\Clientes;
 use documento_salud\models\TpoSer;
@@ -74,8 +76,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <div style="text-align:right">
         Bahía Blanca, <?= date('d/m/Y H:i:s'); ?>
     </div>
-    
-
+    <?php 
+        $link = Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
+        $urlcode = Url::toRoute(['doclab/qrcode', 'link' => $link]);
+    ?>
+    <img src="<?= $urlcode?>" />
+    <br>
+    <?= $link ?>
+    <br>
+    <?= $urlcode ?>
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
 </div>
