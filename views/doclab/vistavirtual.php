@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <br>
     <?php 
         $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]);//Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
-        $urlcode = Url::toRoute(['doclab/qrcode', 'link' => $link]);
+        $urlcode = Url::to(['doclab/qrcode', 'link' => $link]);
     ?>
     <img src="<?= $urlcode?>" />
     <br>
