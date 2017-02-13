@@ -570,7 +570,6 @@ class DoclabController extends Controller
             else {
                 $model->diabfam="SI";
                 $cadenacoma = chunk_split($model->DO_FADI,2,',');
-                 $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
                 $cadenacoma = str_replace("02","Madre ",$cadenacoma);
                 $cadenacoma = str_replace("03","Hermano",$cadenacoma);
