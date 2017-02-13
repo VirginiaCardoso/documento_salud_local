@@ -759,7 +759,7 @@ class DoclabController extends Controller
     }
 
 
-public function actionQrcode($link) {
+public function actionQrcode() {
     $link ='http://www.hmabb.gob.ar';
   // $u = 'http://'.$link;
   //  $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $u]);

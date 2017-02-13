@@ -80,8 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
     El presente certificado podrá ser validado en la siguiente web:
     <br>
     <?php 
-        $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]);//Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
-        $urlcode = Url::to(['doclab/qrcode', 'link' => $link]);
+        $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]); 
+        //Url::toRoute('http://www.hmabb.gob.ar');
+        //Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
+        $urlcode = Url::to(['doclab/qrcode']);
     ?>
     <img src="<?= $urlcode?>" />
     <br>
