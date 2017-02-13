@@ -82,9 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
     <img src="<?= $urlcode?>" />
     <br>
-    <?= $link ?>
-    <br>
-    <?= //$urlcode ?>
+    <?php echo $link; ?>
+  
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
 </div>
