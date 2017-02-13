@@ -83,12 +83,12 @@ $this->params['breadcrumbs'][] = $this->title;
         $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]); 
         //Url::toRoute('http://www.hmabb.gob.ar');
         //Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
-        $urlcode = Url::toRoute(['doclab/qrcode']);
+        $urlcode = Url::toRoute(['doclab/qrcode','codcli'=> $client->CL_COD]);
     ?>
     <img src="<?= $urlcode?>" />
     <br>
 
-    <a href=<?= $link ?> target="_blank" ><?= $link ?></a>
+     <a href=<?= $link ?> target="_blank" ><?= $link ?></a> 
   
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>

@@ -759,11 +759,14 @@ class DoclabController extends Controller
     }
 
 
-public function actionQrcode() {
-    $link ='http://www.hmabb.gob.ar';
+public function actionQrcode($codcli) {
+   $filename = "reporte_".$codcli.".pdf";
+    $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
+
+   // $link ='http://www.hmabb.gob.ar';
   // $u = 'http://'.$link;
   //  $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $u]);
-   return QrCode::jpg($link);
+   return QrCode::jpg($filepath);
    // return QrCode::png($bookmark->url);
     // you could also use the following
     // return return QrCode::png($mailTo);
