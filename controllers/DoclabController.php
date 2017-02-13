@@ -563,7 +563,7 @@ class DoclabController extends Controller
             $model->menop= substr($model->DO_MENOP, 0,2);
 
             //if ($model->DO_FADI == "00"){
-            if (strpos($model->DO_FADI, '00') != false){
+            if (strpos($model->DO_FADI, '00') !== false){
                 $model->diabfam="NO"; 
                 $model->diabquienes="";   
             }
@@ -579,7 +579,7 @@ class DoclabController extends Controller
 
           //   $model->diabquienes = $model->DO_FADI;
           //  if ($model->DO_FAHIPE == "00"){
-          if (strpos($model->DO_FAHIPE, '00') != false){
+          if (strpos($model->DO_FAHIPE, '00') !== false){
                 $model->hiperfam="NO";
                 $model->hiperquienes= ""; 
             }
@@ -593,7 +593,7 @@ class DoclabController extends Controller
             }
            
           // if ($model->DO_FACARD == "00"){
-          if (strpos($model->DO_FACARD, '00') != false){
+          if (strpos($model->DO_FACARD, '00') !== false){
                 $model->cardfam="NO";
                 $model->cardquienes=""; 
             }
@@ -607,7 +607,7 @@ class DoclabController extends Controller
             }
 
        //     if ($model->DO_FAONCO == "00"){
-       if (strpos($model->DO_FAONCO, '00') != false){
+       if (strpos($model->DO_FAONCO, '00') !== false){
                 $model->oncofam="NO";
                  $model->oncoquienes=""; 
             }
