@@ -76,13 +76,17 @@ $this->params['breadcrumbs'][] = $this->title;
     <div style="text-align:right">
         Bahía Blanca, <?= date('d/m/Y H:i:s'); ?>
     </div>
+    <br>
+    El presente certificado podrá ser validado en la siguiente web:
+    <br>
     <?php 
         $link = Yii::$app->urlManager->createAbsoluteUrl(['doclab/view', 'id' => $client->CL_COD]);//Url::toRoute(['doclab/view', 'id' => $client->CL_COD]);
         $urlcode = Url::toRoute(['doclab/qrcode', 'link' => $link]);
     ?>
     <img src="<?= $urlcode?>" />
     <br>
-    <?php echo $link; ?>
+
+    <a href=<?= $link ?> target="_blank" ><?= $link ?></a>
   
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>

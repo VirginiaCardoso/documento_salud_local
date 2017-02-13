@@ -760,16 +760,14 @@ class DoclabController extends Controller
 
 
 public function actionQrcode($link) {
-   // $lib = Libretas::findOne($nrodoc);
-  //  $codcli = $lib->LI_COCLI;
-  //  $urlcode = Yii::$app->homeUrl;//Url::toRoute(['view', 'id' => $codcli]);
-   // var_dump($urlcode);
-    $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $link]);
-    return QrCode::png($bookmark->url);
+   // $link ='http://www.hmabb.gob.ar';
+  // $u = 'http://'.$link;
+  //  $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $u]);
+   return QrCode::jpg($link);
+   // return QrCode::png($bookmark->url);
     // you could also use the following
     // return return QrCode::png($mailTo);
 }
-  
-  
+
 
 }

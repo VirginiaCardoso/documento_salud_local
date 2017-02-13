@@ -134,6 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
         </div>
+
     </div>
    
 
@@ -143,6 +144,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= Html::a('Limpiar' , ['doclab/emision'], ['id' => 'btVolver','class'=>'btn btn-danger']);?>
         </div>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 <?php Pjax::end(); ?>
