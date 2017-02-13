@@ -233,21 +233,18 @@ class DoclabController extends Controller
         }
         if ($model->load(Yii::$app->request->post())){
 
-          if ($model->validate() ){   
-        //    $connection = Yii::$app->dbdocsl;
-         //  $transaction = $connection->beginTransaction();
+          if ($model->validate()){
 
-           //   try {
-           //   
-              if($model->fumador=="07"){
-                  $model->DO_FUMA=  $model->fumador.$model->cuanto;
-              }
-              else {
-                $model->DO_FUMA=  $model->fumador;
-              }
-              if($model->vener=="16"){
-                  $model->DO_VENER=  $model->vener.$model->cual;
-              }
+            if($model->fumador=="07"){
+              $model->DO_FUMA=  $model->fumador.$model->cuanto;
+            }
+            else {
+              $model->DO_FUMA=  $model->fumador;
+            }
+
+            if($model->vener=="16"){
+              $model->DO_VENER=  $model->vener.$model->cual;            
+            }
               else {
                 $model->DO_VENER=  $model->vener;
               }
@@ -302,13 +299,14 @@ class DoclabController extends Controller
                       } 
                      else{
                         
-                         $mensaje = ""; 
+                        /*$mensaje = ""; 
                         foreach ($model->getFirstErrors() as $key => $value) {
                           $mensaje .= "$value \\n\\r";
                         }
-                        
+                        */
                        // throw new ErrorException($mensaje);
-                        Yii::$app->getSession()->setFlash('error', 'error');
+                       // 
+                       //  Yii::$app->getSession()->setFlash('exito', 'error');
                         return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
@@ -332,8 +330,8 @@ class DoclabController extends Controller
            
             } 
             else {
-
-              //Yii::$app->getSession()->setFlash('error', 'error validacion.'); 
+             
+            //  Yii::$app->getSession()->setFlash('error', 'error validacion.'); 
               return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
@@ -344,7 +342,7 @@ class DoclabController extends Controller
           } 
           else {
 
-          //   Yii::$app->getSession()->setFlash('error', '.'); 
+          // Yii::$app->getSession()->setFlash('error', '.'); 
             return $this->render('create', [
                   'model' => $model,
                   'lib'=> $lib,

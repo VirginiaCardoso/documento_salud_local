@@ -35,79 +35,81 @@ DocumentoAsset::register($this);
 
 ?>
 
-<div class="doclab-view">
+<div class="doclab-view2">
 
 <?php $form = ActiveForm::begin([   'id' => 'formDocLab', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-2','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
-    <h4> Documento Salud Laboral</h4>
+    <div style="text-align: center;">
+        <h4> Documento Salud Laboral</h4>
+    </div>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
      <table class="texto" style="width:100%" border="0">
         <tr >
-            <td><b>N° Documento Laboral </b> <?= $model->DO_NRO ?></td>
+            <td>N° Documento Laboral <b> <?= $model->DO_NRO ?></b></td>
         </tr>
         <tr>
-            <td><b>Fecha Solic. </b><?= Yii::$app->formatter->asDate($lib->LI_FECPED, 'php:d-m-Y') ?></td>
-            <td><b>Hora Solic. </b><?= $lib->LI_HORA ?></td>
+            <td>Fecha Solic. <b><?= Yii::$app->formatter->asDate($lib->LI_FECPED, 'php:d-m-Y') ?></b></td>
+            <td>Hora Solic. <b><?= $lib->LI_HORA ?></b></td>
             
         </tr>
     </table> 
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
     <table class="texto" style="width:100%" border="0">
         <tr>
-            <td><b>Código Cliente </b> <?= $lib->LI_COCLI ?></td>
+            <td>Código Cliente <b> <?= $lib->LI_COCLI ?></b></td>
         </tr>
         <tr>
-            <td><b>Apellido y Nombre </b> <?= $client->CL_APENOM ?></td>
+            <td>Apellido y Nombre <b> <?= $client->CL_APENOM ?></b></td>
         </tr>
         <tr>
-            <td><b>Fecha de Nacimiento </b><?= Yii::$app->formatter->asDate($client->CL_FECNAC, 'php:d-m-Y') ?></td>
-            <td><b>Edad </b> <?= $client->getEdad() ?></td>
+            <td>Fecha de Nacimiento <b><?= Yii::$app->formatter->asDate($client->CL_FECNAC, 'php:d-m-Y') ?></b></td>
+            <td>Edad <b> <?= $client->getEdad() ?></b></td>
         </tr>
         <tr>
-            <td><b>Tipo Documento </b><?= $client->cLTIPDOC->TI_NOM ?></td>
-            <td><b>N° Documento </b> <?= $client->CL_NUMDOC ?></td>
+            <td>Tipo Documento <b><?= $client->cLTIPDOC->TI_NOM ?></b></td>
+            <td>N° Documento <b> <?= $client->CL_NUMDOC ?></b></td>
         </tr>
         <tr>
             <?php 
                 if ($client->CL_SEXO=='M') {
                 ?>
-                    <td><b>Sexo </b>MASCULINO</td>
+                    <td>Sexo <b>MASCULINO</b></td>
                 <?php
                 }
                 else {
                     ?>
-                     <td><b>Sexo </b>FEMENINO</td>
+                     <td>Sexo <b>FEMENINO</b></td>
             <?php
             }
             ?>
-             <td><b>Estado Civil </b><?= $client->cLESTCIV->ES_NOM ?></td>
+             <td>Estado Civil <b><?= $client->cLESTCIV->ES_NOM ?></b></td>
         </tr>
         <tr>
-            <td><b>Domicilio </b><?= $client->CL_DOMICI ?></td>
-            <td><b>Localidad </b> <?= $client->cLCODLOC->LO_DETALLE ?></td>
+            <td>Domicilio <b><?= $client->CL_DOMICI ?></b></td>
+            <td>Localidad <b> <?= $client->cLCODLOC->LO_DETALLE ?></b></td>
         </tr>
         <tr>
-            <td><b>Telefono </b><?= $client->CL_TEL ?></td>
+            <td>Telefono <b><?= $client->CL_TEL ?></b></td>
         </tr>
         <tr>
-            <td><b>Lugar de Trabajo </b><?= $client->CL_LUGTRA ?></td>
+            <td>Lugar de Trabajo <b><?= $client->CL_LUGTRA ?></b></td>
         </tr>
 
     </table>
      <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
      <table class="texto" style="width:100%" border="0">
         <tr>
-            <td><b>Ocupación </b> <?= $model->dOOCU->TIPO ?> 
+            <td>Ocupación <b> <?= $model->dOOCU->TIPO ?> </b>
             <?php
                 if ($model->DO_RUBRO) { ?>
-                    - <?= $model->dORUBRO->TIPO ?> 
+                    - <b><?= $model->dORUBRO->TIPO ?> 
                     <?php
                     if ($model->DO_RUBTIP) { ?>
-                        - <?= $model->dORUBTIP->TIPO ?></td>
+                        - <b><?= $model->dORUBTIP->TIPO ?></b></td>
                     <?php
                     }
                     else {
                         ?>
-                        </td>
+                        </b></td>
                     <?php
                     }
                     ?>
@@ -115,28 +117,28 @@ DocumentoAsset::register($this);
             }
             else {
                         ?>
-                        </td>
+                        </b></td>
                     <?php
                     }                   ?>
-            ?>
+            
             
         </tr>
          <tr>
-            <td><b>Escolaridad </b><?= $model->dOESCOL->TIPO ?></td>
+            <td>Escolaridad <b><?= $model->dOESCOL->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Nivel Ingresos </b><?= $model->dOINGRES->NI_DETALLE ?></td>
+            <td>Nivel Ingresos <b><?= $model->dOINGRES->NI_DETALLE ?></b></td>
         </tr>
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Hábitos</h5>
+    <h5>HÁBITOS</h5>
      <table class="texto"  style="width:100%" border="0">
         <tr>
-            <td><b>Fumador </b> <?= $model->fUMADOR->TIPO ?></td>
+            <td>Fumador <b> <?= $model->fUMADOR->TIPO ?></b></td>
        
             <?php
             if ($model->fumador=="07") { ?> 
-                <td><b>¿Cuántos Años? </b><?= $model->cuanto ?></td>
+                <td>¿Cuántos Años? <b><?= $model->cuanto ?></b></td>
                    
             <?php 
             }
@@ -148,7 +150,7 @@ DocumentoAsset::register($this);
             if (($model->fumador!="06")&&($model->DO_FASTAB)) {
                 ?>
                 <tr>
-                    <td><b>Fase de Tabaquista </b> <?= $model->dOFASTAB->TIPO ?></td>
+                    <td>Fase de Tabaquista <b> <?= $model->dOFASTAB->TIPO ?></b></td>
                 </tr>
             
             <?php 
@@ -156,13 +158,13 @@ DocumentoAsset::register($this);
                
             ?>
             <tr>
-                <td><b>Alcohol </b><?= $model->dOALCOH->TIPO ?></td>
+                <td>Alcohol <b><?= $model->dOALCOH->TIPO ?></b></td>
             </tr>
             <?php 
             if ($model->DO_CAGE) {
             ?>
                 <tr>
-                    <td><b>CAGE </b><?= $model->dOCAGE->TIPO ?></td>
+                    <td>CAGE <b><?= $model->dOCAGE->TIPO ?></b></td>
                 </tr>
                     
             <?php 
@@ -170,37 +172,37 @@ DocumentoAsset::register($this);
                
             ?>
             <tr>
-                <td><b>Sedantes </b><?= $model->dOSEDAN->TIPO ?></td>
+                <td>Sedantes <b><?= $model->dOSEDAN->TIPO ?></b></td>
             </tr>
             <tr>
-                <td><b>Deportes </b><?= $model->dODEPOR->TIPO ?></td>
+                <td>Deportes <b><?= $model->dODEPOR->TIPO ?></b></td>
             </tr>
             <tr>
-                <td><b>Trastornos del Sueño </b><?= $model->dOSUENIO->TIPO ?></td>
+                <td>Trastornos del Sueño <b><?= $model->dOSUENIO->TIPO ?></b></td>
             </tr>
             
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Vacunación</h5>
+    <h5>VACUNACIÓN</h5>
      <table class="texto" style="width:100%" border="0">
         <tr>
-            <td><b>Rubeóla </b> <?= $model->dORUBEO->TIPO ?></td>
+            <td>Rubeóla <b> <?= $model->dORUBEO->TIPO ?></td>
         </tr>
         <tr>
-            <td><b>Tétanos </b><?= $model->dOTETANO->TIPO ?></td>
+            <td>Tétanos <b><?= $model->dOTETANO->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Antigripal </b><?= $model->dOANTIGR->TIPO ?></td>
+            <td>Antigripal <b><?= $model->dOANTIGR->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Antihepatitis B </b><?= $model->dOANTIHE->TIPO ?></td>
+            <td>Antihepatitis B <b><?= $model->dOANTIHE->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Enfermedades Venéreas </b><?= $model->vENER->TIPO ?></td>
+            <td>Enfermedades Venéreas <b><?= $model->vENER->TIPO ?></b></td>
             <?php                 
                         if ($model->cual) {
                         ?>
-                        <td><b>¿Cuál? </b><?= $model->cual ?></td>
+                        <td>¿Cuál? <b><?= $model->cual ?></b></td>
                          
                         <?php 
                         }
@@ -208,45 +210,45 @@ DocumentoAsset::register($this);
                         ?>
         </tr>
         <tr>
-            <td><b>Transfusiones </b><?= $model->dOTRANSF->TIPO ?></td>
+            <td>Transfusiones <b><?= $model->dOTRANSF->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Dolor Lumbar (que ocasionó falta al trabajo) </b><?= $model->dODOLLUM->TIPO ?></td>
+            <td>Dolor Lumbar (que ocasionó falta al trabajo) <b><?= $model->dODOLLUM->TIPO ?></b></td>
         </tr>
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Patologías</h5>
+    <h5>PATOLOGÍAS</h5>
     <table class="texto"  style="width:100%" border="0">
         <tr>
-            <td><b>EAC </b> <?= $model->dOEAC->TIPO ?></td>
+            <td>EAC <b> <?= $model->dOEAC->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Hipertensión </b><?= $model->dOHIPERT->TIPO ?></td>
+            <td>Hipertensión <b><?= $model->dOHIPERT->TIPO ?></b></td>
             <?php                 
                         if ($model->DO_TRATHI) {
                         ?>
-                        <td><b>Tratamiento </b><?= $model->dOTRATHI->TIPO ?></td>
+                        <td>Tratamiento <b><?= $model->dOTRATHI->TIPO ?></b></td>
                   
                     <?php 
                         }
         ?>
         </tr>
         <tr>
-            <td><b>Colesterol </b><?= $model->dOCOLEST->TIPO ?></td>
+            <td>Colesterol <b><?= $model->dOCOLEST->TIPO ?></td>
             <?php                 
                         if ($model->DO_TRATCO) {
                         ?>
-                        <td><b>Tratamiento </b><?= $model->dOTRATCO->TIPO ?></td>
+                        <td>Tratamiento <b><?= $model->dOTRATCO->TIPO ?></b></td>
             <?php 
                         }
             ?>
         </tr>
         <tr>
-            <td><b>Diabetes </b><?= $model->dODIABET->TIPO ?></td>
+            <td>Diabetes <b><?= $model->dODIABET->TIPO ?></td>
             <?php                 
                         if ($model->DO_TRATDI) {
                         ?>
-                        <td><b>Tratamiento </b><?= $model->dOTRATDI->TIPO ?></td>
+                        <td>Tratamiento <b><?= $model->dOTRATDI->TIPO ?></b></td>
                   
                     <?php 
                         }
@@ -254,21 +256,21 @@ DocumentoAsset::register($this);
                         ?>
         </tr>
         <tr>
-            <td><b>Antecedentes Quirúrgicos </b> <?= $model->dOANTQUI->TIPO ?></td>
+            <td>Antecedentes Quirúrgicos <b> <?= $model->dOANTQUI->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Oncológicos </b> <?= $model->dOONCO->TIPO ?></td>
+            <td>Oncológicos <b> <?= $model->dOONCO->TIPO ?></b></td>
         </tr>
         <?php
             if ($client->CL_SEXO=='F')
             {
             ?>
             <tr>
-                <td><b>Embarazos </b> <?= $model->eMB->TIPO ?></td>
+                <td>Embarazos <b> <?= $model->eMB->TIPO ?></td>
                 <?php                 
                     if ($model->cuantosemb) {
                     ?>
-                        <td><b>¿Cuántos? </b> <?= $model->cuantosemb ?></td>
+                        <td>¿Cuántos? <b> <?= $model->cuantosemb ?></b></td>
                 
                 <?php 
                     }
@@ -276,15 +278,15 @@ DocumentoAsset::register($this);
                     ?>
             </tr>
             <tr>
-                <td><b>Anovulatorios </b> <?= $model->dOANOVU->TIPO ?></td>
+                <td>Anovulatorios <b> <?= $model->dOANOVU->TIPO ?></b></td>
                  
             </tr>
             <tr>
-                <td><b>Menopausia </b> <?= $model->mENOP->TIPO ?></td>
+                <td>Menopausia <b> <?= $model->mENOP->TIPO ?></b></td>
                 <?php                 
                     if ($model->edadmenop) {
                     ?>
-                    <td><b>Edad </b> <?= $model->edadmenop ?></td>
+                    <td>Edad <b> <?= $model->edadmenop ?></b></td>
                     
                 <?php 
                     }
@@ -296,10 +298,10 @@ DocumentoAsset::register($this);
             }
             ?>
         <tr>
-            <td><b>TRH </b> <?= $model->dOTRH->TIPO ?></td>
+            <td>TRH <b> <?= $model->dOTRH->TIPO ?></b></td>
         </tr>
         <tr>
-            <td><b>Asma/Epoc </b> <?= $model->dOASMAEP->TIPO ?></td>
+            <td>Asma/Epoc <b> <?= $model->dOASMAEP->TIPO ?></b></td>
         </tr>
 
         <?php
@@ -308,7 +310,7 @@ DocumentoAsset::register($this);
         ?>
         <tr>
             <td>
-                 <b>  Prostatismo </b> <?= $model->dOPROSTA->TIPO  ?>
+                   Prostatismo <b> <?= $model->dOPROSTA->TIPO  ?></b>
 
 
              </td>
@@ -319,61 +321,61 @@ DocumentoAsset::register($this);
        
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Antecedentes Familiares Directos</h5>
+    <h5>ANTECEDENTES FAMILIARES DIRECTOS</h5>
     <table class="texto"  style="width:100%" border="0">
         <tr>
-            <td><b>Diabetes </b> <?= $model->diabfam ?>  </td>
+            <td>Diabetes <b> <?= $model->diabfam ?> </b> </td>
             <?php
                 if ($model->diabquienes!="") {
                 ?>
-                    <td><b>¿Quienes? </b> <?= $model->diabquienes ?>
+                    <td>¿Quienes? <b> <?= $model->diabquienes ?></b>
                     </td>
                 <?php  } ?>
         </tr>
         <tr>
-            <td><b>Hipertensión </b> <?=  $model->hiperfam ?>  </td>
+            <td>Hipertensión <b> <?=  $model->hiperfam ?> </b> </td>
              <?php
                 if ($model->hiperquienes!="")
                 {  ?>
-                    <td><b>¿Quienes? </b> <?=  $model->hiperquienes ?>
+                    <td>¿Quienes? <b> <?=  $model->hiperquienes ?></b>
                     </td>
                     <?php }  ?>
         </tr>
         <tr>
-            <td><b>Enfermedad Cardíaca </b> <?=  $model->cardfam ?>  </td>
+            <td>Enfermedad Cardíaca <b> <?=  $model->cardfam ?> </b> </td>
              <?php
                 if ($model->cardquienes!="")
                 {  ?>
-                    <td><b>¿Quienes? </b> <?=  $model->cardquienes ?>
-                    </td>
+                    <td>¿Quienes? <b> <?=  $model->cardquienes ?>
+                    </b></td>
                     <?php }  ?>
         </tr>
         <tr>
-            <td><b>Oncológico </b> <?=  $model->oncofam ?>  </td>
+            <td>Oncológico <b> <?=  $model->oncofam ?>  </td>
              <?php
                 if ($model->oncoquienes!="")
                 {  ?>
-                    <td><b>¿Quienes? </b> </td>
+                    <td>¿Quienes?  </td>
                         </tr>
                         <?php 
                             if (strpos($model->oncoquienes, 'Padre') !== false) { ?>
                             <tr>
                                 <td> </td>
-                                <td><b>Padre </b><?=  $model->DO_PAENOM ?> </td>
+                                <td>Padre <b><?=  $model->DO_PAENOM ?> </b></td>
                             </tr>
                         <?php } ?>
                         <?php 
                             if (strpos($model->oncoquienes, 'Madre') !== false) { ?>
                             <tr>
                                 <td> </td>
-                                <td><b>Madre </b><?=  $model->DO_MAENOM ?> </td>
+                                <td>Madre <b><?=  $model->DO_MAENOM ?></b> </td>
                             </tr>
                         <?php } ?>
                         <?php 
                             if (strpos($model->oncoquienes, 'Hermano') !== false) { ?>
                             <tr>
                                 <td> </td>
-                                <td><b>Hermano </b><?=  $model->DO_HEENON ?> </td>
+                                <td>Hermano <b><?=  $model->DO_HEENON ?> </b></td>
                             </tr>
                         <?php }
                     }
@@ -390,31 +392,36 @@ DocumentoAsset::register($this);
 
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Examen Físico</h5>
+    <h5>EXAMEN FÍSICO</h5>
     <table class="texto"  style="width:100%" border="0">
         <tr>
-            <td><b>Nevos </b> <?= DocLab::getExfiopc($model->DO_NEVOS); ?></td>
+            <td>Nevos <b> <?= DocLab::getExfiopc($model->DO_NEVOS); ?></b></td>
         </tr>
         <tr>
-            <td><b>Nódulos de Mama </b> <?= DocLab::getExfiopc($model->DO_NODMAN); ?></td>
+            <td>Nódulos de Mama <b> <?= DocLab::getExfiopc($model->DO_NODMAN); ?></b></td>
         </tr>
         <tr>
-            <td><b>Soplos </b> <?= DocLab::getExfiopc($model->DO_SOPLOS); ?></td>
+            <td>Soplos <b> <?= DocLab::getExfiopc($model->DO_SOPLOS); ?></b></td>
         </tr>
         <tr>
-            <td><b>Tumor Abdominal </b> <?= DocLab::getPatoopc($model->DO_TUMAB); ?></td>
+            <td>Tumor Abdominal <b> <?= DocLab::getPatoopc($model->DO_TUMAB); ?></b></td>
         </tr>
         <tr>
-            <td><b>Talla (cm.) </b> <?= $model->DO_TALLA ?></td>
+            <td>Talla (cm.) <b> <?= $model->DO_TALLA ?></b></td>
         </tr>
         <tr>
-            <td><b>Otros Datos del Examen Físico</b> <?= $model->DO_DATOS ?></td>
+            <td>Otros Datos del Examen Físico<b> <?= $model->DO_DATOS ?></b></td>
         </tr>
     </table>
     <hr style='margin-top:0.5em;  margin-bottom:0.5em'>
-    <h5>Otros Datos de Interés</h5>
+    <h5>OTROS DATOS DE INTERÉS</h5>
     <table class="texto"  style="width:100%" border="0">
         <tr>
-            <td><b>Notas </b> <?= $model->DO_DATINT ?></td>
+            <td>Notas <b> <?= $model->DO_DATINT ?></b></td>
         </tr>
     </table>
+       
+
+            
+<?php ActiveForm::end(); ?>            
+    </div>

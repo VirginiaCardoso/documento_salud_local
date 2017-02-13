@@ -171,9 +171,9 @@ function mostrar_onco() {
  
 }
 
-
 //inicio del formularia
 $(document).ready(function(){
+ 
   if ($('#doclab-cuanto').val()==""){
     $('#campocuanto').hide();
   }
@@ -233,3 +233,4 @@ $(document).ready(function(){
    	$('#campomadreonco').hide();
    	$('#campohermanoonco').hide();*/
 });
+
