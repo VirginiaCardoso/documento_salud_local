@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use documento_salud\models\Libretas;
+use documento_salud\models\Clientes;
 
 /**
  * LibretasSearch represents the model behind the search form about `documento_salud\models\Libretas`.
@@ -44,7 +45,8 @@ class LibretasSearch extends Libretas
     {
       /*  var_dump($params);
         echo "<br>------------<br>";*/
-        $query = Libretas::find();
+        $query = Libretas::find()
+            ->joinWith('clientes');
 
         // add conditions that should always apply here
 
@@ -84,6 +86,8 @@ class LibretasSearch extends Libretas
             ->andFilterWhere(['like', 'LI_CONVEN', $this->LI_CONVEN])
             ->andFilterWhere(['like', 'LI_COMP', $this->LI_COMP])
             ->andFilterWhere(['like', 'LI_ADIC', $this->LI_ADIC]);*/
+        $query->orFilterWhere(['like', 'CL_APENOM', $this->LI_COCLI]);
+        $query->orFilterWhere(['like', 'CL_NUMDOC', $this->LI_COCLI]);
 
      /*   var_dump($query);*/
 

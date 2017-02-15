@@ -121,6 +121,11 @@ class Libretas extends \yii\db\ActiveRecord
         }
    }
 
+   public function getClientes()
+    {
+        return $this->hasOne(Clientes::className(), ['CL_COD' => 'LI_COCLI']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

@@ -27,7 +27,7 @@ LibretasAsset::register($this);
     </div>
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model, 'LI_COCLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true])->label('N° Cliente') ?>
+            <?= $form->field($model, 'LI_COCLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->textInput(['maxlength' => true])->label('Cliente') ?>
         </div>
         <div class="col-md-6 form-group">
             <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
