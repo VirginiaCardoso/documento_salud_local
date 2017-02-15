@@ -42,6 +42,8 @@ class LibretasSearch extends Libretas
      */
     public function search($params)
     {
+      /*  var_dump($params);
+        echo "<br>------------<br>";*/
         $query = Libretas::find();
 
         // add conditions that should always apply here
@@ -53,14 +55,14 @@ class LibretasSearch extends Libretas
 
         $this->load($params);
 
-        if (!$this->validate()) {
+       if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails
             // $query->where('0=1');
             return $dataProvider;
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
+    /*    $query->andFilterWhere([
             'LI_FECPED' => $this->LI_FECPED,
             'LI_CONSULT' => $this->LI_CONSULT,
             'LI_ESTUD' => $this->LI_ESTUD,
@@ -74,14 +76,16 @@ class LibretasSearch extends Libretas
             'LI_REIMPR' => $this->LI_REIMPR,
             'LI_SELECT' => $this->LI_SELECT,
             'LI_HORA' => $this->LI_HORA,
-        ]);
+        ]);*/
 
         $query->andFilterWhere(['like', 'LI_NRO', $this->LI_NRO])
-            ->andFilterWhere(['like', 'LI_COCLI', $this->LI_COCLI])
-            ->andFilterWhere(['like', 'LI_TPOSER', $this->LI_TPOSER])
+            ->andFilterWhere(['like', 'LI_COCLI', $this->LI_COCLI]);
+           /* ->andFilterWhere(['like', 'LI_TPOSER', $this->LI_TPOSER])
             ->andFilterWhere(['like', 'LI_CONVEN', $this->LI_CONVEN])
             ->andFilterWhere(['like', 'LI_COMP', $this->LI_COMP])
-            ->andFilterWhere(['like', 'LI_ADIC', $this->LI_ADIC]);
+            ->andFilterWhere(['like', 'LI_ADIC', $this->LI_ADIC]);*/
+
+     /*   var_dump($query);*/
 
         return $dataProvider;
     }

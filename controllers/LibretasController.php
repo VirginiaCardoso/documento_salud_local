@@ -16,8 +16,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\Query;
 use yii\helpers\Json;
-use dosamigos\qrcode\formats\vCard;
-use dosamigos\qrcode\QrCode;
+
 
 /**
  * LibretasController implements the CRUD actions for Libretas model.

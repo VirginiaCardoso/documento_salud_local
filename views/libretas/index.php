@@ -16,12 +16,14 @@ use documento_salud\controllers\LibretasController;
 /* @var $this yii\web\View */
 /* @var $searchModel documento_salud\models\LibretasSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 $this->registerJs(
    "$('document').ready(function(){ 
         setInterval(function(){
             $.pjax.reload({container:'#pjax_libretas'}); 
         }, 10000);
     });"
+    
 );
 
 LibretasAsset::register($this);
