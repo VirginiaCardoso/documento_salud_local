@@ -126,6 +126,11 @@ class Libretas extends \yii\db\ActiveRecord
         return $this->hasOne(Clientes::className(), ['CL_COD' => 'LI_COCLI']);
     }
 
+    public function getDevolu()
+    {
+        return $this->hasOne(Devoluciones::className(), ['DE_NROTRA' => 'LI_NRO']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

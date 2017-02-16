@@ -97,7 +97,7 @@ if (Yii::$app->session->hasFlash('error')) {
                     ['label' => 'Anular trámite', 'url' =>  ['/libretas/vista-anular/']],
                     ['label' => 'Devoluciones', 'url' => ['/devoluciones/']],
                     ['label' => 'Reimpresión de comprobantes', 'url' => '#'],//['/prestamos/index']],
-                    ['label' => 'Caja diaria', 'url' => '#'],//['/prestamos/devoluciones']],
+                    ['label' => 'Caja diaria', 'url' => ['/reporte/cajadiaria/']],//['/prestamos/devoluciones']],
                      ['label' => 'Resumen', 'url' => '#'],//['/eventos/index']],
                     ['label' => 'Planilla mensual', 'url' => '#'],//['/prestamos/index']],
                     
