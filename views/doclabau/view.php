@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <hr>
             <div class="row">
          
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_PESO', [
                         'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
@@ -60,14 +60,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             </div>                           
             <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
                
       
                    <?= $form->field($model, 'talla', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label('Talla (cms)') ?>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <?= $form->field($model, 'DO_TENAR1', [
                         'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
                         ])->textInput(
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <?= $form->field($model, 'DO_TENAR2', [
                         'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
                         ])->textInput(
@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             </div>
              <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_COLEST', [
                         'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
@@ -100,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_GLUCO', [
                         'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
@@ -113,43 +113,43 @@ $this->params['breadcrumbs'][] = $this->title;
                            
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_PAP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
                 </div>
             </div>
         <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_MAM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
                 </div>
             </div>
             <div class="row">
-                    <div class="col-md-8">
-                       <?= $form->field($model, 'DO_OBS', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-10']])->textArea(['maxlength' => true,'readonly' => true])?>
+                    <div class="col-md-12">
+                       <?= $form->field($model, 'DO_OBS', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-8']])->textArea(['maxlength' => true,'readonly' => true])?>
                      </div>
                 </div>
             
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_CINTURA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_TRIGLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
       
                    <?= $form->field($model, 'DO_HDL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <br>
                     <br>
                     <br>
