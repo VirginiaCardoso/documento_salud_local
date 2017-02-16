@@ -163,6 +163,8 @@ class DoclabController extends Controller
             $model->sexo = $client->CL_SEXO;
         }
         else {
+            $model->DO_NRO = $id;
+            
             $model->sexo = $client->CL_SEXO;
 
             if(substr($model->DO_FUMA,0,2)=="07"){
@@ -777,6 +779,10 @@ public function actionQrcode($codcli) {
     // you could also use the following
     // return return QrCode::png($mailTo);
 }
+
+
+
+
 
 
 }

@@ -2,47 +2,176 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Doclabau */
 
-$this->title = $model->DO_CODLIB;
-$this->params['breadcrumbs'][] = ['label' => 'Doclabaus', 'url' => ['index']];
+$this->title = "Visita Médico";
+$this->params['breadcrumbs'][] = ['label' => 'Historial Visitas', 'url' => ['doclabau/index', 'codcli'=>$client->CL_COD]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="doclabau-view">
 
-    <h1>Este no queda asi</h1>
+    <h2>Visita Médico</h2>
+    <h3> <?= $client->CL_APENOM ?> </h3>
+    <?php $form = ActiveForm::begin([   'id' => 'formviewdoclab', 'fieldConfig' => [  'horizontalCssClasses' => ['label' => 'col-md-4','wrapper' => 'col-md-10'] ],'layout' => 'horizontal']); ?>
 
-    <p>
-    <!--   <?= Html::encode($this->title) ?><  <?= Html::a('Update', ['update', 'id' => $model->DO_CODLIB], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->DO_CODLIB], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?> -->
-    </p>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Información</h3>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6"> 
+                    <?= $form->field($model, 'DO_CODLIB', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                </div>
+            </div>
+    
+            <div class="row">
+               
+                <div class="col-md-6">
+                            <div class="form-group field-libretas-li_fecped required">
+                                <label class="control-label col-md-4" for="doclabau-fecha">Fecha</label>
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control" id="doclabau-fecha" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->DO_VISITA, 'php:d-m-Y')."'" ?> >
+                                </div>
 
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'DO_CODLIB',
-            'DO_VISITA',
-            'DO_PESO',
-            'DO_TENAR1',
-            'DO_TENAR2',
-            'DO_COLEST',
-            'DO_GLUCO',
-            'DO_PAP',
-            'DO_MAM',
-            'DO_OBS',
-            'DO_CINTURA',
-            'DO_TRIGLI',
-            'DO_HDL',
-            'DO_IMC',
-        ],
-    ]) ?>
-
+                            </div>
+                </div>
+                 
+            </div>
+            <hr>
+            <div class="row">
+         
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_PESO', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        
+                        ])->textInput(
+                            [                               
+                                'maxlength' => true,
+                                'readonly' => true,
+                            ])->label('Peso (kgs)') ?>
+                    
+                </div>
+                
+            </div>                           
+            <div class="row">
+          <div class="col-md-4">
+               
+      
+                   <?= $form->field($model, 'talla', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true])->label('Talla (cms)') ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <?= $form->field($model, 'DO_TENAR1', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        ])->textInput(
+                            [
+                        'maxlength' => true,'readonly' => true])?>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <?= $form->field($model, 'DO_TENAR2', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        ])->textInput(
+                            [
+                        'maxlength' => true,'readonly' => true])?>
+                </div>
+                
+            </div>
+             <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_COLEST', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                       
+                        ])->textInput(
+                            [   
+                               'readonly' => true,
+                                'maxlength' => true]) ?>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_GLUCO', [
+                        'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4'],
+                        
+                        ])->textInput(
+                            [   
+                                
+                                'maxlength' => true,'readonly' => true]) ?>
+                </div>
+                           
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_PAP', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
+                </div>
+            </div>
+        <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_MAM', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col-md-8">
+                       <?= $form->field($model, 'DO_OBS', ['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-10']])->textArea(['maxlength' => true,'readonly' => true])?>
+                     </div>
+                </div>
+            
+            <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_CINTURA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_TRIGLI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+      
+                   <?= $form->field($model, 'DO_HDL', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['maxlength' => true,'readonly' => true]) ?>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                   <?= $form->field($model, 'DO_IMC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
+                </div>
+                <img src="<?php echo Yii::$app->request->baseUrl; ?>/images/graf_imc.jpg" witdh="" height="">
+            </div>
+            
+        
+        
+    </div>
+    </div>
+    <?php ActiveForm::end(); ?>
+    <div class="form-group">
+            <div class="row">
+                <div class="col-md-2 pull-right">
+                    <?= Html::a('Volver' , ['doclabau/index', 'codcli'=>$client->CL_COD], ['class'=>'btn btn-primary']);?>
+                </div>
+            </div>
+        </div>
 </div>

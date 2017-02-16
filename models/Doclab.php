@@ -545,4 +545,13 @@ class Doclab extends \yii\db\ActiveRecord
         return $cadena;
     }
 
+    public function findDocLab($codcli,$nrodoc)
+    {
+        $model = Doclab::find()
+                    ->where(['DO_CODCLI' => $codcli])
+                    ->andWhere(['DO_NRO' =>$nrodoc]) 
+                    ->one();
+       return $model;
+    }
+
 }

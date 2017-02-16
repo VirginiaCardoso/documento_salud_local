@@ -30,6 +30,8 @@ class Doclabau extends \yii\db\ActiveRecord
 {
     public $diferencia;
     public $talla;
+    public $tension;
+    
     /**
      * @inheritdoc
      */
@@ -52,11 +54,13 @@ class Doclabau extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-           [['DO_CODCLI', 'DO_CODLIB'], 'required'],
+           [['DO_CODCLI', 'DO_CODLIB','tension','DO_PESO', 'DO_COLEST', 'DO_GLUCO', 'DO_PAP', 'DO_CINTURA', 'DO_TRIGLI', 'DO_HDL'], 'required'],
             [['DO_VISITA'], 'safe'],
             [['DO_CODCLI'], 'string', 'max' => 6],
             [['DO_CODLIB', 'DO_OBS'], 'string', 'max' => 12],
             [['DO_PESO'], 'string', 'max' => 7],
+            [['tension'],'match', 'pattern' => '/[0-9]+\/[0-9]+/',
+            'message' => 'Ingrese Tensión Arterial Baja/Alta'],
             [['DO_TENAR1', 'DO_TENAR2', 'DO_COLEST', 'DO_GLUCO', 'DO_CINTURA'], 'string', 'max' => 3],
             [['DO_PAP', 'DO_MAM'], 'string', 'max' => 25],
             [['DO_TRIGLI', 'DO_HDL', 'DO_IMC'], 'string', 'max' => 4],
@@ -67,6 +71,9 @@ class Doclabau extends \yii\db\ActiveRecord
     }
 
     /**
+     * 
+
+---------------------------------------------------------------
      * @inheritdoc
      */
     public function attributeLabels()
@@ -76,8 +83,8 @@ class Doclabau extends \yii\db\ActiveRecord
             'DO_CODCLI' => 'Código Cliente',
             'DO_VISITA' => 'Fecha',
             'DO_PESO' => 'Peso',
-            'DO_TENAR1' => 'Tensión Arterial', //baja
-            'DO_TENAR2' => 'Tensión Arterial', //alta 
+            'DO_TENAR1' => 'Tensión Arterial Baja', //baja
+            'DO_TENAR2' => 'Tensión Arterial Alta', //alta 
             'DO_COLEST' => 'Colesterol',
             'DO_GLUCO' => 'Glucosa',
             'DO_PAP' => 'Paps',

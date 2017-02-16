@@ -88,7 +88,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ); 
                     },
                     'form2' => function ($url, $model) {
-                        if (Doclab::findOne($model->LI_COCLI)) {
+                       // if (Doclab::findOne($model->LI_COCLI)) {
+                       if (Doclab::findDocLab($model->LI_COCLI, $model->LI_NRO)) {
 
                             $clase= 'botonAction';
                         }

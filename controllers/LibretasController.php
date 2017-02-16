@@ -311,7 +311,7 @@ class LibretasController extends Controller
     {
         $model = Libretas::find()
                     ->where(['LI_COCLI' => $codcli])
-                    ->andWhere(['LI_FECVTO' => null]) //fecha vencimiento nulo, esta en trámite
+                    ->andWhere(['LI_FECVTO' => null, 'LI_ANULADA' => 0]) //fecha vencimiento nulo, esta en trámite
                     ->orderBy(['LI_FECPED' => SORT_DESC])
                     ->one();
        return $model;

@@ -57,8 +57,18 @@ class DoclabauController extends Controller
      */
     public function actionView($id)
     {
+        $lib = Libretas::findOne($id);
+        $cocli = $lib->LI_COCLI;
+        $client = Clientes::findOne($cocli);
+        $model = Doclabau::findOne($id);
+        $doc = Doclab::findOne($cocli);
+        if ($doc){
+            $model->talla = $doc->DO_TALLA;
+        }
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
+            'client' => $client,
         ]);
     }
 
@@ -70,9 +80,12 @@ class DoclabauController extends Controller
     public function actionCreate($id)
     { //$id nro de libreta
        $lib = Libretas::findOne($id);
-       $cli = $lib->LI_COCLI;
+       $cocli = $lib->LI_COCLI;
+
+       $client = Clientes::findOne($cocli);
 
        $model = Doclabau::findOne($id);
+
        if ( !$model){
         $model = new Doclabau();
         $model->DO_CODLIB = $id;
@@ -82,7 +95,8 @@ class DoclabauController extends Controller
         $model->DO_VISITA = date('Y-m-d');
         $model->diferencia = 0;
 
-        $doc = Doclab::findOne($cli);
+        $doc = Doclab::findOne($cocli);
+
         if ($doc){
             $model->talla = $doc->DO_TALLA;
         }
@@ -90,9 +104,10 @@ class DoclabauController extends Controller
              $model->talla = 0;   
         }
 */
-       $codanterior = Doclabau::getLastDoclabau($cli, $id);
+       $codanterior = Doclabau::getLastDoclabau($cocli, $id);
        if ($codanterior){
         $anterior = Doclabau::findOne($codanterior);
+        $anterior->tension=$anterior->DO_TENAR1."/".$anterior->DO_TENAR2;
        }
        else {
             $anterior = null;
@@ -110,17 +125,46 @@ class DoclabauController extends Controller
                 $model->DO_IMC =  substr((string)$imc,0,4);
             }
         }
-
         
 
-       if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            Yii::$app->getSession()->setFlash('exito', 'Visita guardada correctamente, Nro Doc Lab: '.$model->DO_CODLIB);
-            return $this->redirect(['view', 'id' => $model->DO_CODLIB]);
-        } else {
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()){
+                $ten = explode("/", $model->tension);
+                $model->DO_TENAR1 = $ten[0];
+                $model->DO_TENAR2 = $ten[1];
+
+                if ($model->save()) {
+                    Yii::$app->getSession()->setFlash('exito', 'Visita guardada correctamente, Nro Doc Lab: '.$model->DO_CODLIB);
+                    return $this->redirect(['view', 'id' => $model->DO_CODLIB]);
+                }
+                else {
+                    return $this->render('create', [
+                        'model' => $model,
+                        'lib' => $lib,
+                        'anterior' => $anterior,
+                        'doc' => $doc,
+                        'client' => $client,
+                    ]);
+                }
+            }//validate
+             else {
+                 Yii::$app->getSession()->setFlash('error', 'Error validación'.$model->DO_CODLIB);
+                return $this->render('create', [
+                    'model' => $model,
+                    'lib' => $lib,
+                    'anterior' => $anterior,
+                    'doc' => $doc,
+                    'client' => $client,
+                ]);
+            }
+        }//load
+        else {
             return $this->render('create', [
                 'model' => $model,
                 'lib' => $lib,
                 'anterior' => $anterior,
+                'doc' => $doc,
+                'client' => $client,
             ]);
         }
     }

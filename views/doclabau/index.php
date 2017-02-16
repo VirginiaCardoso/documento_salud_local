@@ -26,17 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'DO_CODLIB',
             'DO_VISITA:date',
             'DO_PESO',
-          /*  [
-                'label' => 'Talla (cm.)',
+           [
+                'label' => 'Tensión Art. (Baja/Alta)',
                 'value'=> function($model) {
-                    if ($model->documento!=null)
-                        return $model->documento->DO_TALLA;
-                    else
-                        return "";
+                    if (($model->DO_TENAR1!=null)&&($model->DO_TENAR2!=null))
+                        return $model->DO_TENAR1."/".$model->DO_TENAR2;
+                    
                 },
-            ],*/
+            ],
 
-            'DO_TENAR1',
+           // 'DO_TENAR1',
            // 'DO_TENAR2',
              'DO_COLEST',
              'DO_GLUCO',
