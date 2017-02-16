@@ -26,9 +26,7 @@ DoclabauAsset::register($this);
     </div>
     
     <div class="row">
-       <!--  <div class="col-md-6"> 
-            <?= $form->field($model, 'DO_VISITA', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-4']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-        </div> -->
+       
         <div class="col-md-6">
                     <div class="form-group field-libretas-li_fecped required">
                         <?= Html::activeHiddenInput($model, 'DO_VISITA') ?>

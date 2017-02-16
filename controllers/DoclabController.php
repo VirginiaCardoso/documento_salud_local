@@ -85,45 +85,61 @@ class DoclabController extends Controller
                 $model->edadmenop = substr($model->DO_MENOP, 2); 
             }
             $model->menop= substr($model->DO_MENOP, 0,2);
-
+           
             if ($model->DO_FADI == "00"){
                 $model->diabfam="02"; 
-                $model->diabquienes=[];   
+                $model->diabquienes="";   
             }
             else {
                 $model->diabfam="01";
                 $cadenacoma = chunk_split($model->DO_FADI,2,',');
-                $model->diabquienes = explode(',', $cadenacoma);    
+                $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
+                $model->diabquienes = $cadenacoma;   
             }
 
             if ($model->DO_FAHIPE == "00"){
                 $model->hiperfam="02";
-                $model->hiperquienes=[]; 
+                $model->hiperquienes=""; 
             }
             else {
                 $model->hiperfam="01";  
                 $cadenacoma = chunk_split($model->DO_FAHIPE,2,',');
-                $model->hiperquienes = explode(',', $cadenacoma);   
+                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
+                $model->hiperquienes = $cadenacoma;   
             }
            
            if ($model->DO_FACARD == "00"){
                 $model->cardfam="02";
-                $model->cardquienes=[]; 
+                $model->cardquienes=""; 
             }
             else {
                 $model->cardfam="01";  
                 $cadenacoma = chunk_split($model->DO_FACARD,2,',');
-                $model->cardquienes = explode(',', $cadenacoma);   
+                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
+                $model->cardquienes = $cadenacoma;   
             }
 
             if ($model->DO_FAONCO == "00"){
                 $model->oncofam="02";
-                 $model->oncoquienes=[]; 
+                 $model->oncoquienes=""; 
             }
             else {
                 $model->oncofam="01";  
                 $cadenacoma = chunk_split($model->DO_FAONCO,2,',');
-                $model->oncoquienes = explode(',', $cadenacoma);   
+                 $cadenacoma = str_replace("01","Padre ",$cadenacoma);
+                $cadenacoma = str_replace("02","Madre ",$cadenacoma);
+                $cadenacoma = str_replace("03","Hermano",$cadenacoma);
+                $cadenacoma = substr($cadenacoma, 0, -1);
+                $model->oncoquienes = $cadenacoma;   
             }
 
         $cliente = Clientes::findOne($model->DO_CODCLI);

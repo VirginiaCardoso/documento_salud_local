@@ -499,12 +499,12 @@ $this->params['breadcrumbs'][] = $this->title;
  
                     </div>
                     <?php
-                if ($model->diabquienes!=[])
+                if ($model->diabquienes!="")
                 {
                 ?>
                     <div class="col-md-6" id="campofam1">
                      
-                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>                    
+                        <?= $form->field($model, 'diabquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])?>                    
                     </div>
                     <?php 
                 }
@@ -517,12 +517,12 @@ $this->params['breadcrumbs'][] = $this->title;
  
                     </div>
                     <?php
-                if ($model->hiperquienes!=[])
+                if ($model->hiperquienes!="")
                 {
                 ?>
                     <div class="col-md-6" id="campofam2">
                         
-                        <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>                    
+                        <?= $form->field($model, 'hiperquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])?>                              
                     </div>
                 <?php 
                 }
@@ -534,12 +534,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'cardfam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam3();','prompt' => 'Seleccione ..']); ?>
                     </div>
                     <?php
-                if ($model->cardquienes!=[])
+                if ($model->cardquienes!="")
                 {
                 ?>
                     <div class="col-md-6" id="campofam3">
                         
-                        <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ["disabled"=>"disabled",'multiple'=>'multiple']); ?>
+                        <?= $form->field($model, 'cardquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])?>          
                     </div>
                  <?php 
                 }
@@ -551,12 +551,12 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= $form->field($model, 'oncofam', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList([ '01' => 'SI', '02' => 'NO'], ["disabled"=>"disabled",'onchange'=>'javascript:mostrar_fam4();','prompt' => 'Seleccione ..']); ?>
                     </div>
                      <?php
-                if ($model->oncoquienes!=[])
+                if ($model->oncoquienes!="")
                 {
                 ?>
                     <div class="col-md-6" id="campofam4">
                         
-                        <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->dropDownList(Fami_opc::getListaFamOpc(), ['readonly' => true,'onchange'=>'javascript:mostrar_onco();','multiple'=>'multiple']); ?>
+                        <?= $form->field($model, 'oncoquienes', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true])?>          
                     </div>
                 <?php 
                 }
