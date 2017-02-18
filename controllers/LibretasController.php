@@ -129,15 +129,8 @@ class LibretasController extends Controller
                 $model->LI_HORA=  date('H:i:s');
                 $model->LI_CONSULT = 0;
                 $model->LI_ESTUD = 0;
-                $model->LI_IMPR = 0;
-                $model->LI_FECRET = null;
-                $model->LI_FECIMP = null;
-                $model->LI_FECVTO = null;
-                $model->LI_COMP = "000";//ver
+                $model->LI_FECVTO = null;               
                 $model->LI_ANULADA =0;
-                $model->LI_ADIC = 0;
-                $model->LI_IMPADI = 0;
-                $model->LI_REIMPR = 0;
                 $model->LI_SELECT = 0;
 
                 if ($model->save(false)){
@@ -159,21 +152,7 @@ class LibretasController extends Controller
 
             $model->LI_FECPED = date('Y-m-d');
             $model->LI_HORA=  date('H:i:s');
-          /*  $model->LI_CONSULT = 0;
-            $model->LI_ESTUD = 0;
-            $model->LI_IMPR = 0;
-            $model->LI_FECRET = null;
-            $model->LI_FECIMP = null;
-            $model->LI_FECVTO = null;
-            $model->LI_COMP = "000";//ver
-            $model->LI_ANULADA =false;
-            $model->LI_ADIC = null;
-            $model->LI_IMPADI = 0;
-            $model->LI_REIMPR = 0;
-            $model->LI_SELECT = 0;*/
-          //  $model->LI_IMPORTE= 0;
-
-
+         
             if (isset($_GET['codcli'])) {
                 $cliente = Clientes::findOne($_GET['codcli']);
                 $model->LI_COCLI = $cliente->CL_COD;

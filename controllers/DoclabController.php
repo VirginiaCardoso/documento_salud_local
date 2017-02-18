@@ -450,16 +450,23 @@ class DoclabController extends Controller
           $datab = Doclab::databaseName();
 
           $query = new Query;
-            $query->select([Doclab::tableName().'.DO_NRO', Doclab::tableName().'.DO_CODCLI',  Clientes::tableName().'.CL_COD',  Clientes::tableName().'.CL_NUMDOC',  Clientes::tableName().'.CL_APENOM'] )
+            $query->select([Doclab::tableName().'.DO_NRO', Doclab::tableName().'.DO_CODCLI',  Clientes::tableName().'.CL_COD',  Clientes::tableName().'.CL_NUMDOC',  Clientes::tableName().'.CL_APENOM',  Libretas::tableName().'.LI_NRO',  Libretas::tableName().'.LI_ANULADA',  Libretas::tableName().'.LI_CONSULT',  Libretas::tableName().'.LI_ESTUD',  Libretas::tableName().'.LI_FECVTO'] )
                 //
                 ->from($datab.'.'.Doclab::tableName())
                 ->join(  'INNER JOIN',
                     $datab.'.'.Clientes::tableName(),
                     $datab.'.'.Doclab::tableName().'.DO_CODCLI ='.$datab.'.'.Clientes::tableName().'.CL_COD')
+                ->join(  'INNER JOIN',
+                    $datab.'.'.Libretas::tableName(),
+                    $datab.'.'.Doclab::tableName().'.DO_NRO ='.$datab.'.'.Libretas::tableName().'.LI_NRO')
                 ->distinct()
                 ; 
                 //
             $query->where('DO_NRO LIKE "%' . $q .'%" OR CL_COD LIKE "%' . $q .'%" OR CL_NUMDOC LIKE "%' . $q .'%" OR CL_APENOM LIKE "%' . $q .'%"');
+            $query->andFilterWhere(['=', 'LI_ANULADA', 0])
+                  ->andFilterWhere(['=', 'LI_CONSULT', 1])
+                  ->andFilterWhere(['=', 'LI_ESTUD', 1]); //controlo no esten anulados, esten los estudios y este la consulta para permitir emitir
+            $query->andWhere(['IS', 'LI_FECVTO',null]);
             $query->orderBy('DO_NRO');
             $command = $query->createCommand();
             
@@ -705,23 +712,25 @@ class DoclabController extends Controller
       $codcli = $lib->LI_COCLI;
       $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
 
-      if(file_exists($filepath))
-      {
-          // Set up PDF headers
-          header('Content-type: application/pdf');
-          header('Content-Disposition: inline; filename="' . $filename . '"');
-          header('Content-Transfer-Encoding: binary');
-          header('Content-Length: ' . filesize($filepath));
-          header('Accept-Ranges: bytes');
+     
+        if(file_exists($filepath))
+        {
+            // Set up PDF headers
+            header('Content-type: application/pdf');
+            header('Content-Disposition: inline; filename="' . $filename . '"');
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Length: ' . filesize($filepath));
+            header('Accept-Ranges: bytes');
 
-          // Render the file
-         readfile($filepath);
-      }
-      else
-      {
-         // PDF doesn't exist so throw an error or something
-        print_r("No existe el archivo PDF.");
-      }
+            // Render the file
+           readfile($filepath);
+        }
+        else
+        {
+           // PDF doesn't exist so throw an error or something
+          print_r("No existe el archivo PDF.");
+        }
+      
     }
 
      public function actionImprimirvirtual($id) {
@@ -754,31 +763,48 @@ class DoclabController extends Controller
       $cliente = Clientes::findOne($codcli);
        $model = $this->findModel($lib->LI_COCLI);
 
-      //-----------------------------------------------
-     $content =$this->renderPartial('vistavirtual', [ 'model' => $model,
-            'client' => $cliente,
-            'lib' =>$lib,]); 
-      
-      $filename = "virtual_".$id.".pdf";
-      $filepath = $ruta = Yii::$app->params['path_clientes'].$codcli.'/reporte';
-      if (!file_exists($filepath)) {
-          mkdir($filepath, 0777, true);
-      }
-      $nombre = $filepath."/".$filename;
+        //Además de generar el reporte va a asignar la fecha de vencimiento al tramite
+      $fecha = date('Y-m-j');
+      $nuevafecha = strtotime ( '+'.Yii::$app->params['DIASVENCIMIENTO'].' day' , strtotime ( $fecha ) ) ;
+      $nuevafecha = date ( 'Y-m-j' , $nuevafecha );
+ 
+      $nuevodiahabil = LibretasController::vencimiento($nuevafecha);
+      $lib->LI_FECVTO = $nuevodiahabil;
 
-      $pdf = new Pdf([
-          'mode' => Pdf::MODE_UTF8,
-          'format' => Pdf::FORMAT_A4, 
-          'orientation' => Pdf::ORIENT_PORTRAIT, 
-          'filename' => $nombre,
-          'destination' => Pdf::DEST_FILE, 
-          'content' => $content,
-          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-          'cssInline' => ' .texto{font-size:14px}', 
-          'options' => ['title' => 'Documento Salud Laboral'],
-      ]);
+
       
-     return $pdf->render();
+      if (!$lib->save(false)){
+        Yii::$app->getSession()->setFlash('error', "Error al querer emitir Docuemnto y generar fecha de vencimiento del trámite");
+      }
+      else { 
+
+
+        //-----------------------------------------------
+       $content =$this->renderPartial('vistavirtual', [ 'model' => $model,
+              'client' => $cliente,
+              'lib' =>$lib,]); 
+        
+        $filename = "virtual_".$id.".pdf";
+        $filepath = $ruta = Yii::$app->params['path_clientes'].$codcli.'/reporte';
+        if (!file_exists($filepath)) {
+            mkdir($filepath, 0777, true);
+        }
+        $nombre = $filepath."/".$filename;
+
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8,
+            'format' => Pdf::FORMAT_A4, 
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            'filename' => $nombre,
+            'destination' => Pdf::DEST_FILE, 
+            'content' => $content,
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            'cssInline' => ' .texto{font-size:14px}', 
+            'options' => ['title' => 'Documento Salud Laboral'],
+        ]);
+        
+       return $pdf->render();
+     }
 
     }
 

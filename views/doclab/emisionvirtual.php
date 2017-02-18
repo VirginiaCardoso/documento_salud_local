@@ -59,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
              </div>
              
         </div>
-     <!--    <img src="<?= Url::to(['route/qrcode'])?>" /> -->
     <div id="resumen" style="display: none;">
     <div class="panel panel-default" >
         <div class="panel-heading">

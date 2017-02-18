@@ -19,9 +19,9 @@ class LibretasSearch extends Libretas
     public function rules()
     {
         return [
-            [['LI_NRO', 'LI_COCLI', 'LI_FECPED', 'LI_TPOSER', 'LI_CONVEN', 'LI_FECRET','LI_FECIMP', 'LI_FECVTO', 'LI_COMP', 'LI_ADIC', 'LI_HORA'], 'safe'],
-            [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
-            [['LI_IMPORTE', 'LI_IMPADI'], 'number'],
+            [['LI_NRO', 'LI_COCLI', 'LI_FECPED', 'LI_TPOSER', 'LI_CONVEN', 'LI_FECVTO', 'LI_HORA'], 'safe'],
+            [['LI_CONSULT', 'LI_ESTUD',  'LI_ANULADA', 'LI_SELECT'], 'integer'],
+            [['LI_IMPORTE', ], 'number'],
         ];
     }
 

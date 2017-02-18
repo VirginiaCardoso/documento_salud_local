@@ -122,13 +122,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="col-md-2">
                     <?php 
-                    if ($cliente->isNewRecord) { // echo $form->field($model, 'CL_IMG')->textInput(['maxlength' => true]);
-
-                       
-                      
-                            echo "Cargar nueva  imagen";
-
-                      
+                    if ($cliente->isNewRecord) {
+                        echo "Cargar nueva  imagen";
                     }
                     else {
                         $src = Yii::$app->params['path_clientes'].'/'.$cliente->CL_COD.'/'.$cliente->CL_IMG;
@@ -173,70 +168,17 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <?= $form->field($model, 'LI_IMPR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->inline()->radioList(['0' => 'Pendiente','1' => 'Realizada'], ['itemOptions' => ['disabled' => true]])->label('Impresión'); ?> 
-                   
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group field-libretas-li_fecret required">
-                        <?= Html::activeHiddenInput($model, 'LI_FECRET') ?>
-                        <label class="control-label col-md-4" for="libretas-li_fecret">Fecha Retiro</label>
-                        <div class="col-md-4">
-                            <?php if ($model->LI_FECIMP==null) { ?>
-                                <input type="text" class="form-control" id="libretas-li_fecret" readonly="true" value = " " >
-                             <?php   } 
-                             else {
-                                ?>
-                                <input type="text" class="form-control" id="libretas-li_fecret" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECRET, 'php:d-m-Y')."'" ?> />
-                                <?php 
-                                }
-                                ?>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
 
                     <?= $form->field($model, 'LI_IMPORTE', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
                  </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group field-libretas-li_fecimp required">
-                        <?= Html::activeHiddenInput($model, 'LI_FECIMP') ?>
-                        <label class="control-label col-md-4" for="libretas-li_fecimp">Fecha Impresión </label>
-                        <div class="col-md-4">
-                            <?php if ($model->LI_FECIMP==null) { ?>
-                                <input type="text" class="form-control" id="libretas-li_fecimp" readonly="true" value = " " >
-                             <?php   } 
-                             else {
-                                ?>
-                            <input type="text" class="form-control" id="libretas-li_fecimp" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->LI_FECIMP, 'php:d-m-Y')."'" ?> >
-                            <?php 
-                                }
-                                ?>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="col-md-4">
-
-                        <?= $form->field($model, 'LI_COMP', ['horizontalCssClasses' => ['label' => 'col-md-6', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-6">
                     <div class="form-group field-libretas-li_fecvto required">
                         <?= Html::activeHiddenInput($model, 'LI_FECVTO') ?>
                         <label class="control-label col-md-4" for="libretas-li_fecvto">Fecha Vencimiento</label>
                         <div class="col-md-4">
-                            <?php if ($model->LI_FECIMP==null) { ?>
+                            <?php if ($model->LI_FECVTO==null) { ?>
                                 <input type="text" class="form-control" id="libretas-li_fecvto" readonly="true" value = " " >
                              <?php   } 
                              else {
@@ -257,29 +199,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'LI_ADIC', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->inline()->radioList(['1' => 'Si','0' => 'No'], ['itemOptions' => ['disabled' => true]])->label('¿Adicional?'); ?> 
-                   
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-
-                    <?= $form->field($model, 'LI_IMPADI', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->textInput(['readonly' => true,'maxlength' => true]) ?>
-                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <?= $form->field($model, 'LI_REIMPR', ['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-8']])->inline()->radioList(['1' => 'Si','0' => 'No'], ['itemOptions' => ['disabled' => true]])->label('Reimpresión'); ?> 
-                   
-                </div>
-            </div>
-
-
-
             
-
         </div>
         </div>
 

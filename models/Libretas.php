@@ -14,15 +14,9 @@ use Yii;
  * @property string $LI_CONVEN
  * @property integer $LI_CONSULT
  * @property integer $LI_ESTUD
- * @property integer $LI_IMPR
- * @property string $LI_FECRET
  * @property string $LI_IMPORTE
  * @property string $LI_FECVTO
- * @property string $LI_COMP
  * @property integer $LI_ANULADA
- * @property string $LI_ADIC
- * @property string $LI_IMPADI
- * @property integer $LI_REIMPR
  * @property integer $LI_SELECT
  * @property string $LI_HORA
  * @property string $LI_FHIMPOR
@@ -64,9 +58,9 @@ class Libretas extends \yii\db\ActiveRecord
         return [
             [['LI_CONVEN','LI_TPOSER','LI_IMPORTE','LI_FECPED','LI_HORA'], 'required'],
             [['LI_NRO'], 'unique'], 
-            [['LI_FECPED', 'LI_FECRET','LI_FECIMP', 'LI_FECVTO', 'LI_HORA'], 'safe'],
-            [['LI_CONSULT', 'LI_ESTUD', 'LI_IMPR', 'LI_ANULADA', 'LI_REIMPR', 'LI_SELECT'], 'integer'],
-            [['LI_IMPORTE', 'LI_IMPADI'], 'number'],
+            [['LI_FECPED',  'LI_FECVTO', 'LI_HORA'], 'safe'],
+            [['LI_CONSULT', 'LI_ESTUD',  'LI_ANULADA',  'LI_SELECT'], 'integer'],
+            [['LI_IMPORTE'], 'number'],
             [['LI_NRO', 'LI_COMP'], 'string', 'max' => 12],
             [['LI_COCLI'], 'string', 'max' => 6],
             [['LI_TPOSER', 'LI_CONVEN'], 'string', 'max' => 2],
@@ -91,16 +85,10 @@ class Libretas extends \yii\db\ActiveRecord
             'LI_CONVEN' => 'Convenio',//convenio
             'LI_CONSULT' => 'Consulta Médica', // si hizo la consulta médica
             'LI_ESTUD' => 'Resultados Laboratorio ',
-            'LI_IMPR' => 'Impresión Credencial ',
-            'LI_FECRET' => 'Fecha de Retiro',
             'LI_IMPORTE' => 'Importe',//importe recaudado en este trámite
-            'LI_FECIMP' => 'Fecha Impresión Credencial',
             'LI_FECVTO' => 'Fecha Vencimiento',//se calcula suamndo 365
-            'LI_COMP' => 'N° Comprobante Impr.',
             'LI_ANULADA' => 'Anulada',
             'LI_ADIC' => 'Adicional ',//determina si se cobra adicional
-            'LI_IMPADI' => 'Importe Adicional',
-            'LI_REIMPR' => 'Reimpresión',
             'LI_SELECT' => 'Seleccionado',
             'LI_HORA' => 'Hora',
             
