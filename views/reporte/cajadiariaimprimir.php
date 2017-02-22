@@ -52,13 +52,14 @@ $this->params['breadcrumbs'][] = $this->title;
     </table>
 
 <?php  Pjax::begin(); 
-
+$dataProvider->sort = false;
  ?>
-
+<br>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
-       // 'filterModel' => $searchModel,
-                     
+       'emptyText' => '',
+            'summary'=>"",
+           
         'columns' => [
             [
                 'label' => 'Anulada',
@@ -116,15 +117,47 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 <?php Pjax::end();  
-
-$subvalores = $searchModel->calcularImporte($searchModel->dia);
-echo "<b>Sub- Totales </b><br>";
-echo "Importes: ".$subvalores['subimporte']." $ <br>";
-echo "Devoluciones: ".$subvalores['subdevol']." $ <br>";
-echo "<br>";
-$resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
-echo "<b> Total: ".$resta." $<b>";
-
 ?>
-
 </div>
+<table class="pie" style="width:100%" border="0" cellspacing="0">
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="right"  >
+            <?php
+            $subvalores = $searchModel->calcularImporte($searchModel->dia);
+            echo "<b>Sub- Totales </b><br>";
+            echo "Importes: ".$subvalores['subimporte']." $ <br>";
+            echo "Devoluciones: ".$subvalores['subdevol']." $ <br><br>";
+            $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
+            echo "<b> Total: ".$resta." $<b>";
+
+            ?>
+        </td>
+    </tr>
+    <tr >
+        <td style="width:20%"> 
+            Recibo Tesorería N° 
+        </td>
+        <td align="left" >
+         
+                <p style="font-size:8px;">
+                    <br><br><br><br>
+                   -------------------------------------------------------------
+                   <br>
+                </p>
+             
+        </td>
+        <td>
+            <center>
+                <p style="font-size:8px; text-align:center;">
+                    <br><br><br><br>
+                   --------------------------------------------------------------------------------------- <br>
+                   FIRMA TESORERIA 
+                </p>
+            </center>
+        </td>
+    </tr>
+</table>

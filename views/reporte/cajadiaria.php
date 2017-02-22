@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row">
                 <div class="col-md-6"> 
-<!--  'addAriaAttributes' => false, -->
-                    <?= $form->field($searchModel, 'dia',[ 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+<!--   -->
+                    <?= $form->field($searchModel, 'dia',[ 'addAriaAttributes' => false,'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'dd/MM/yyyy',
@@ -139,21 +139,26 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
 <?php Pjax::end();  
-
-$subvalores = $searchModel->calcularImporte($searchModel->dia);
-echo "Sub- Totales <br>";
-echo "Importes: ".$subvalores['subimporte']."<br>";
-echo "Devoluciones: ".$subvalores['subdevol']."<br>";
-echo "<br>";
-$resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
-echo "<b> Total: ".$resta."<b>";
-
 ?>
+<div class="pull-right">
+    <div class="row ">
+        <div >
+            <?php
+            $subvalores = $searchModel->calcularImporte($searchModel->dia);
+            echo "<b>Sub- Totales </b><br>";
+            echo "Importes: ".$subvalores['subimporte']." $ <br>";
+            echo "Devoluciones: ".$subvalores['subdevol']." $ <br><br>";
+            
+            $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
+            echo "<b> Total: ".$resta." $<b><br><br>";
 
-<div class="form-group im-centered">
+            ?>
+        </div>
+    </div>
+
         <div class="row ">
-            <div class="col-md-3"></div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-3"></div> -->
+            <div class="col-md-10">
                 <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportcajadiaria', 'nombre' => $searchModel->dia], [
              'class'=>'btn btn-info',
              'id' => 'btn_imprimir',

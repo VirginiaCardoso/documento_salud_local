@@ -171,9 +171,9 @@ class ReporteController extends Controller
           'destination' => Pdf::DEST_FILE, 
           'content' => $content,
           'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-          'cssInline' => ' .texto{font-size:14px}', 
+          'cssInline' => ' .kv-grid-table tr th {font-size:11px}, .kv-grid-table tr td {font-size:12px}', 
           'options' => ['title' => 'Documento Salud Laboral'],
-      ]);
+      ]);//.kv-grid-table  thead tr th
       
      return $pdf->render();
 
