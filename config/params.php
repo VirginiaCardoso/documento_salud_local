@@ -2,6 +2,7 @@
 return [
     'adminEmail' => 'admin@example.com',
     'path_clientes' => '../../../../intranet/datos/clientes/',
+    'path_documento_salud' => '../../../../intranet/datos/documento_salud/',
   //  'pathImages' => '/www/intranet/modulos/archivos_hc/web/pdfs/',//local
   //	'cod_servicio' => '014',
   

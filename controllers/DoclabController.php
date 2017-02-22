@@ -317,14 +317,6 @@ class DoclabController extends Controller
                       } 
                      else{
                         
-                        /*$mensaje = ""; 
-                        foreach ($model->getFirstErrors() as $key => $value) {
-                          $mensaje .= "$value \\n\\r";
-                        }
-                        */
-                       // throw new ErrorException($mensaje);
-                       // 
-                       //  Yii::$app->getSession()->setFlash('exito', 'error');
                         return $this->render('create', [
                     'model' => $model,
                     'lib'=> $lib,
@@ -332,19 +324,7 @@ class DoclabController extends Controller
                     'docaux' => $docaux,
                   ]);
                       }
-              /*    } //try
-              catch (\Exception $e) {
-                  $transaction->rollBack();
-                  
-                  Yii::$app->getSession()->setFlash('error', $e->getMessage());
-
-                  return $this->render('create', [
-                    'model' => $model,
-                    'lib'=> $lib,
-                    'client' =>$client,
-                    'docaux' => $docaux,
-                  ]);
-              }*/
+             
            
             } 
             else {
@@ -509,9 +489,9 @@ class DoclabController extends Controller
     }
 
 
-     public function actionReport($codcli) {
+    public function actionReport($codcli) {
 
-     $filename = "reporte_".$codcli.".pdf";
+    $filename = "reporte_".$codcli.".pdf";
     $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
 
       if(file_exists($filepath))

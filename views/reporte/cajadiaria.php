@@ -9,11 +9,13 @@ use kartik\select2\Select2;
 use kartik\datecontrol\DateControl;
 use kartik\daterange\DateRangePicker;
 use documento_salud\models\CajaDiaraFiltro;
-
+use documento_salud\assets\CajaDiariaAsset;
 
 /* @var $this yii\web\View */
 /* @var $searchModel archivos_hc\models\PedidosFiltro */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
+CajaDiariaAsset::register($this);
 
 $this->title = 'Caja Diaria';
 $this->params['breadcrumbs'][] = $this->title;
@@ -31,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row">
                 <div class="col-md-6"> 
-<!-- 'addAriaAttributes' => false, -->
-                    <?= $form->field($searchModel, 'dia',[  'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+<!--  -->
+                    <?= $form->field($searchModel, 'dia',[ 'addAriaAttributes' => false, 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'dd/MM/yyyy',
@@ -59,8 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php ActiveForm::end(); ?>
 
     </div>
-
-    
+       
 
 <?php 
    if (!$filtro){  ?>
@@ -148,6 +149,24 @@ $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
 echo "<b> Total: ".$resta."<b>";
 
 ?>
+
+<div class="form-group im-centered">
+        <div class="row ">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportcajadiaria', 'nombre' => $searchModel->dia], [
+             'class'=>'btn btn-info',
+             'id' => 'btn_imprimir',
+             'target'=> '_blank',
+             'data-toggle'=>'tooltip',
+             'title'=> 'Imprimir']);?>
+
+               
+            </div>
+                        
+
+        </div>
+    </div>
 
 
 <?php } ?>

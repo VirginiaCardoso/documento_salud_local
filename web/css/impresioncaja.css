@@ -1,0 +1,6 @@
+.textocajero {
+    border-collapse: collapse;
+}
+.textocajero th, td {
+    border: 1px solid black;
+}

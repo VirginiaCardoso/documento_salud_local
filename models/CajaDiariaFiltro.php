@@ -118,6 +118,32 @@ class CajaDiariaFiltro extends \yii\db\ActiveRecord
             ];
     }
 
+
+    public function buscarFecha($fecha)
+    {
+        $query = Libretas::find()
+                ->joinWith('devolu');
+
+        // add conditions that should always apply here
+         
+      if (isset($fecha)) {
+            // $nvodia = \DateTime::createFromFormat('Y-m-d',  $this->dia);
+            // $fecha_inicio_format = $nueva_inicio->format('Y-m-d');  
+         //   $nvodia =  $nvodia->format('Y-m-d');      
+             $query->andFilterWhere(['=', 'LI_FECPED',$fecha]);
+         }
+
+        $query->orderBy([
+            'LI_NRO' => SORT_DESC
+        ]);
+
+       $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+
+        return $dataProvider;
+    }
     
 
       

@@ -113,9 +113,6 @@ footer span {
     background-color: #555;
 }
 
-
-
-
 .div_footer{
     text-align:center; 
     color:black; 
@@ -239,7 +236,6 @@ a.glyphicon {
     margin-left: 14px;
 }
 
-
 .form-horizontal .control-label {
     text-align: left;
 }
@@ -250,9 +246,6 @@ a.glyphicon {
     color: black;
 }
 
-.form-horizontal .control-label {
-    text-align: left;
-}
 
 /**paneles expandibles */
 .panel-heading a:after {

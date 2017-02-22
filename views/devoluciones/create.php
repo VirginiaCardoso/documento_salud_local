@@ -108,21 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <input type="text" class="form-control" id="fecha" readonly="true" value = <?= "'".Yii::$app->formatter->asDate($model->DE_FECHA, 'php:d-m-Y')."'" ?>>
 
             </div>
-         <!--  <div class="col-md-6"> 
-			<?= $form->field($model, 'DE_FECHA',['horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), ['readonly' => true,
-	            'type'=>DateControl::FORMAT_DATE,
-
-	            'ajaxConversion'=>false,
-	            'options' => [
-	                'removeButton' => false,
-	                'pluginOptions' => [
-	                    'autoclose' => true
-	                ]
-	            ]
-	        ]);
-	    	?>
-
-	    	</div>-->
+        
 
         </div>
         <br>
