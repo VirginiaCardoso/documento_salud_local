@@ -4,6 +4,7 @@ namespace documento_salud\controllers;
 
 use Yii;
 use documento_salud\models\CajaDiariaFiltro;
+use documento_salud\models\ResumenMensual;
 
 
 use yii\web\Controller;
@@ -39,6 +40,54 @@ class ReporteController extends Controller
      * @return mixed
      */
     public function actionCajadiaria()
+    {
+        $searchModel = new CajaDiariaFiltro();
+       
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        if  ($searchModel->load(Yii::$app->request->get())){
+            $filtro = false;
+        }else{
+            $filtro = true;
+        }
+      
+
+        return $this->render('cajadiaria', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'filtro' => $filtro,
+        ]);
+    }
+
+        /**
+     * Lists all Eventos models.
+     * @return mixed
+     */
+    public function actionResumenmensual()
+    {
+        $searchModel = new ResumenMensual();
+       
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        if  ($searchModel->load(Yii::$app->request->get())){
+            $filtro = false;
+        }else{
+            $filtro = true;
+        }
+      
+
+        return $this->render('resumenmensual', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'filtro' => $filtro,
+        ]);
+    }
+
+            /**
+     * Lists all Eventos models.
+     * @return mixed
+     */
+    public function actionResumenrecaudacion()
     {
         $searchModel = new CajaDiariaFiltro();
        
@@ -128,34 +177,18 @@ class ReporteController extends Controller
       header('Content-Type: application/pdf');
       //----------------------------------------------------
       $searchModel = new CajaDiariaFiltro();
+
       $time = strtotime($nomb);
-
        $searchModel->dia = date('Y-m-d',$time);
-       //var_dump(Yii::$app->request->queryParams);
-        $dataProvider = $searchModel->buscarFecha(date('Y-m-d',$time));
-      //  var_dump($dataProvider);
-        //if  ($searchModel->load(Yii::$app->request->get())){
-            $filtro = false;
-        //}else{
-       //     $filtro = true;
-       // }
-      
-
+       $dataProvider = $searchModel->buscarFecha(date('Y-m-d',$time));
 
         $content =  $this->renderPartial('cajadiariaimprimir', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
-      
-      
-      //-----------------------------------------------
-    /* $content =$this->renderPartial('impresioncajadiaria', ['model' => $model,
-            'client' => $cliente,
-            'lib' => $lib,]); //"DOCUMENTO DEL SALUD LABORAL".$codcli;//$this->renderPartial('impresion', ['model' => $model]);
-      */
-     $filename = $nomb.".pdf";
-  //  $filepath = Yii::$app->params['local_path']['path_documento_salud']
-    $filepath = Yii::$app->params['path_documento_salud'].'/caja_diaria/';//.$filename;
+
+    $filename = $nomb.".pdf";
+    $filepath = Yii::$app->params['path_documento_salud'].'/caja_diaria/';
 
       if (!file_exists($filepath)) {
           mkdir($filepath, 0777, true);
