@@ -32,9 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
             ]); ?>
 
             <div class="row">
-                <div class="col-md-6"> 
+                <div class="col-md-8"> 
 <!-- 'addAriaAttributes' => false, -->
-                    <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+                    <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'MM/yyyy',
