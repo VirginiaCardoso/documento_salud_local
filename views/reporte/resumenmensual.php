@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'options' => [
 
                     'removeButton' => false,
-                    'options' => ['placeholder' => 'Seleccione un mes ...'],
+                    'options' => ['placeholder' => 'Seleccione un mes y año ...'],
                     'pluginOptions' => [
                         'autoclose' => true,
                         'startView'=>'months',
@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        // 'format' => 'MM-yyyy',
                     ]
                 ]
-            ]);?> 
+            ])->label('Mes y Año');?> 
                 </div>       
        
                 </div>
