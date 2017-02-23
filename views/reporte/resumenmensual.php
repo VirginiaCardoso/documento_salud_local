@@ -17,7 +17,7 @@ use documento_salud\assets\CajaDiariaAsset;
 
 CajaDiariaAsset::register($this);
 
-$this->title = 'Caja Diaria';
+$this->title = 'Resumen Mensual';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="cajadiaria-index">
@@ -26,30 +26,34 @@ $this->params['breadcrumbs'][] = $this->title;
    <div class="cajadiaria-search">
 
             <?php $form = ActiveForm::begin([
-                'action' => ['cajadiaria'],
+                'action' => ['resumenmensual'],
                 'method' => 'get',
                'layout' => 'horizontal',
             ]); ?>
 
             <div class="row">
                 <div class="col-md-6"> 
-<!--  'addAriaAttributes' => false, -->
-                    <?= $form->field($searchModel, 'dia',[ 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+<!-- 'addAriaAttributes' => false, -->
+                    <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
-                'displayFormat' => 'dd/MM/yyyy',
+                'displayFormat' => 'MM/yyyy',
                 'options' => [
+
                     'removeButton' => false,
-                    'options' => ['placeholder' => 'Seleccione una fecha ...'],
+                    'options' => ['placeholder' => 'Seleccione un mes ...'],
                     'pluginOptions' => [
-                        'autoclose' => true
+                        'autoclose' => true,
+                        'startView'=>'months',
+                        'minViewMode'=>'months',
+                       // 'format' => 'MM-yyyy',
                     ]
                 ]
             ]);?> 
                 </div>       
        
                 </div>
-      
+
 
            
             <div class="row">
@@ -68,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="form-group">
     
-        <?= Html::a('Volver',['cajadiaria'],array('class'=>'btn btn-primary', 'id'=>'botonVolver'));?>
+        <?= Html::a('Volver',['resumenmensual'],array('class'=>'btn btn-primary', 'id'=>'botonVolver'));?>
     </div>
 
     
@@ -77,13 +81,14 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php  Pjax::begin(); 
 
  ?>
+<h3>MES <?= Html::encode( date('m/Y', strtotime($searchModel->mes))) ?></h3>
 
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
                      
         'columns' => [
-            [
+           /* [
                 'label' => 'Anulada',
                 'value'=> function($model) {
                     if ($model->LI_ANULADA==0)
@@ -92,9 +97,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         return "SI";
                 },
             ],
-            'LI_NRO',
+            'LI_NRO',*/
             'LI_FECPED:date',
-            'LI_HORA',
+        /*    'LI_HORA',
             [
                 'label' => 'Cliente',
                 'value'=> function($model) {
@@ -104,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return "";
                 },
             ],
-           [
+         */  [
                 'label' => 'Tipo de trámite',
                 'value'=> function($model) {
                     if ($model->lITPOSER!=null)
@@ -113,7 +118,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return "";
                 },
             ],
-             [
+           /*  [
                 'label' => 'Importe',
                 'value'=> function($model) {
                     if ($model->LI_IMPORTE!=null) {
@@ -123,18 +128,24 @@ $this->params['breadcrumbs'][] = $this->title;
                     else
                         return "0.00";
                 },
-            ],           
+            ],    */     
              [
-                'label' => 'Devoluciones',
+                'label' => 'Cantidad',
                 'value'=> function($model) {
-                    if ($model->devolu!=null) {
-                      //  $subdevol = $subdevol + $model->devolu->DE_IMPORT;
-                        return $model->devolu->DE_IMPORT;
-                    }
-                    else
-                        return "0.00";
+                    
+                        return $model->cant;
+                    
                 },
             ],
+            [
+                'label' => 'Recaudación',
+                'value'=> function($model) {
+                    
+                        return $model->recau;
+                    
+                },
+            ], 
+            
         ],
     ]); ?>
 
@@ -144,13 +155,13 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row ">
         <div >
             <?php
-            $subvalores = $searchModel->calcularImporte($searchModel->dia);
+         /*   $subvalores = $searchModel->calcularImporte($searchModel->dia);
             echo "<b>Sub- Totales </b><br>";
             echo "Importes: ".$subvalores['subimporte']." $ <br>";
             echo "Devoluciones: ".$subvalores['subdevol']." $ <br><br>";
             
             $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
-            echo "<b> Total: ".$resta." $<b><br><br>";
+            echo "<b> Total: ".$resta." $<b><br><br>";*/
 
             ?>
         </div>
@@ -159,7 +170,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row ">
             <!-- <div class="col-md-3"></div> -->
             <div class="col-md-10">
-                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportcajadiaria', 'nombre' => $searchModel->dia], [
+                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportmensual', 'nombre' => $searchModel->mes], [
              'class'=>'btn btn-info',
              'id' => 'btn_imprimir',
              'target'=> '_blank',

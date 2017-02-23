@@ -29,6 +29,9 @@ use Yii;
 class Libretas extends \yii\db\ActiveRecord
 {
     public $descConvenio;
+    public $cant;
+    public $recau;
+
     /**
      * @inheritdoc
      */
