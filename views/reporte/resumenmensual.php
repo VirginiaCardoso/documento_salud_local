@@ -8,14 +8,13 @@ use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
 use kartik\datecontrol\DateControl;
 use kartik\daterange\DateRangePicker;
-use documento_salud\models\CajaDiaraFiltro;
-use documento_salud\assets\CajaDiariaAsset;
+use documento_salud\assets\ReporteAsset;
 
 /* @var $this yii\web\View */
 /* @var $searchModel archivos_hc\models\PedidosFiltro */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-CajaDiariaAsset::register($this);
+ReporteAsset::register($this);
 
 $this->title = 'Resumen Mensual';
 $this->params['breadcrumbs'][] = $this->title;
@@ -33,8 +32,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row">
                 <div class="col-md-6"> 
-<!--  -->
-                    <?= $form->field($searchModel, 'mes',[ 'addAriaAttributes' => false,'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+<!-- 'addAriaAttributes' => false, -->
+                    <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'MM/yyyy',
@@ -83,7 +82,7 @@ $this->params['breadcrumbs'][] = $this->title;
  ?>
 <h3>MES <?= Html::encode( date('m/Y', strtotime($searchModel->mes))) ?></h3>
 <?php 
-var_dump($dataProvider);
+//var_dump($dataProvider);
 ?>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -92,18 +91,9 @@ var_dump($dataProvider);
         'columns' => [
 
             'LI_FECPED:date',
+             
              [
-                'label' => 'Tipo trámite (Convenio)',
-                'value'=> function($model) {
-                    if ($model->lITPOSER!=null)
-                        return $model->lITPOSER->TS_DESC;
-                    else
-                        return "";
-                },
-            ],
-    
-             [
-                'label' => 'Cantidad',
+                'label' => 'Cantidad Convenio',
                 'value'=> function($model) {
                     
                         return $model->cant;
@@ -111,10 +101,36 @@ var_dump($dataProvider);
                 },
             ],
             [
-                'label' => 'Recaudación',
+                'label' => 'Recaudación Convenio',
                 'value'=> function($model) {
                     
                         return $model->recau;
+                    
+                },
+            ],
+          
+    
+             [
+                'label' => 'Cantidad Particular',
+                'value'=> function($model) {
+                    
+                        return $model->cant2;
+                    
+                },
+            ],
+            [
+                'label' => 'Recaudación Particular',
+                'value'=> function($model) {
+                    
+                        return $model->recau2;
+                    
+                },
+            ],
+            [
+                'label' => 'Recaudación ',
+                'value'=> function($model) {
+                    
+                        return $model->totalrecau;
                     
                 },
             ],
@@ -146,7 +162,7 @@ var_dump($dataProvider);
             <div class="col-md-10">
                 <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportmensual', 'nombre' => $searchModel->mes], [
              'class'=>'btn btn-info',
-             'id' => 'btn_imprimir',
+             'id' => 'btn_imprimir_men',
              'target'=> '_blank',
              'data-toggle'=>'tooltip',
              'title'=> 'Imprimir']);?>

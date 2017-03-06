@@ -35,6 +35,7 @@ class Libretas extends \yii\db\ActiveRecord
     public $cant2;
     public $recau2;
     public $tipo2;
+    public $totalrecau;
 
     /**
      * @inheritdoc

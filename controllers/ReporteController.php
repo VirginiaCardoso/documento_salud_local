@@ -214,5 +214,95 @@ class ReporteController extends Controller
 
     }
 
+    public function actionReportreportemensual($nombre) {
+      //  $time = strtotime($nombre);
+
+     //  $nomb = date('Y-m-d',$time);
+    $filename = $nombre.".pdf";
+  //  $filepath = Yii::$app->params['local_path']['path_documento_salud']
+    $filepath = Yii::$app->params['path_documento_salud'].'/resumen_mensual/'.$filename;
+      if(file_exists($filepath))
+      {
+          // Set up PDF headers
+          header('Content-type: application/pdf');
+          header('Content-Disposition: inline; filename="' . $filename . '"');
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: ' . filesize($filepath));
+          header('Accept-Ranges: bytes');
+
+          // Render the file
+         readfile($filepath);
+      }
+      else
+      {
+         // PDF doesn't exist so throw an error or something
+        print_r("No existe el archivo PDF.");
+      }
+    }
+
+
+    public function actionImprimirreportemensual($mes,$anio) {
+
+      $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        
+        try {
+
+          $this->generarPdfReporteMensual($mes,$anio);  
+          $transaction->commit();
+          
+          return \yii\helpers\Json::encode( $model->errors );
+
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
+            return \yii\helpers\Json::encode( $e->getMessage());
+        }
+      
+    }
+
+     private function generarPdfReporteMensual($mes,$anio){
+      header('Content-Type: application/pdf');
+      //----------------------------------------------------
+      $searchModel = new ResumenMensual();
+      //var_dump($nomb);
+      $nomb = $anio."/".$mes;
+     // $time = strtotime($nomb);
+      
+       $searchModel->mes = $nomb;//date('Y-m-d',$time);
+       $dataProvider = $searchModel->buscarMes($mes,$anio);
+
+        $content =  $this->renderPartial('resumenmensualimprimir', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+
+    $filename = $nomb.".pdf";
+    $filepath = Yii::$app->params['path_documento_salud'].'/resumen_mensual/';
+
+      if (!file_exists($filepath)) {
+          mkdir($filepath, 0777, true);
+      }
+
+      $nombre = $filepath."/".$filename;
+
+      $pdf = new Pdf([
+          'mode' => Pdf::MODE_UTF8,
+          'format' => Pdf::FORMAT_A4, 
+          'orientation' => Pdf::ORIENT_PORTRAIT, 
+          'filename' => $nombre,
+          'destination' => Pdf::DEST_FILE, 
+          'content' => $content,
+          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+          'cssInline' => ' .kv-grid-table tr th {font-size:11px}, .kv-grid-table tr td {font-size:12px}', 
+          'options' => ['title' => 'Documento Salud Laboral'],
+      ]);//.kv-grid-table  thead tr th
+      
+     return $pdf->render();
+
+    }
+
 
 }
