@@ -33,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="row">
                 <div class="col-md-6"> 
-<!-- 'addAriaAttributes' => false, -->
-                    <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
+<!--  -->
+                    <?= $form->field($searchModel, 'mes',[ 'addAriaAttributes' => false,'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'MM/yyyy',
@@ -82,35 +82,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
  ?>
 <h3>MES <?= Html::encode( date('m/Y', strtotime($searchModel->mes))) ?></h3>
-
+<?php 
+var_dump($dataProvider);
+?>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
                      
         'columns' => [
-           /* [
-                'label' => 'Anulada',
-                'value'=> function($model) {
-                    if ($model->LI_ANULADA==0)
-                        return "NO";
-                    else
-                        return "SI";
-                },
-            ],
-            'LI_NRO',*/
+
             'LI_FECPED:date',
-        /*    'LI_HORA',
-            [
-                'label' => 'Cliente',
-                'value'=> function($model) {
-                    if ($model->lICOCLI!=null)
-                        return $model->lICOCLI->CL_APENOM;
-                    else
-                        return "";
-                },
-            ],
-         */  [
-                'label' => 'Tipo de trámite',
+             [
+                'label' => 'Tipo trámite (Convenio)',
                 'value'=> function($model) {
                     if ($model->lITPOSER!=null)
                         return $model->lITPOSER->TS_DESC;
@@ -118,17 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         return "";
                 },
             ],
-           /*  [
-                'label' => 'Importe',
-                'value'=> function($model) {
-                    if ($model->LI_IMPORTE!=null) {
-                       // $subimporte = $subimporte + $model->LI_IMPORTE;
-                        return $model->LI_IMPORTE;
-                    }
-                    else
-                        return "0.00";
-                },
-            ],    */     
+    
              [
                 'label' => 'Cantidad',
                 'value'=> function($model) {
@@ -144,8 +117,9 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $model->recau;
                     
                 },
-            ], 
-            
+            ],
+           
+        
         ],
     ]); ?>
 

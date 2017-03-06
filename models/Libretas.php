@@ -32,6 +32,10 @@ class Libretas extends \yii\db\ActiveRecord
     public $cant;
     public $recau;
 
+    public $cant2;
+    public $recau2;
+    public $tipo2;
+
     /**
      * @inheritdoc
      */
@@ -122,6 +126,11 @@ class Libretas extends \yii\db\ActiveRecord
         return $this->hasOne(Devoluciones::className(), ['DE_NROTRA' => 'LI_NRO']);
     }
 
+    public function getLibretas() {
+    return $this->hasOne(self::classname(), ['LI_FECPED' => 'LI_FECPED'])->
+                from(self::tableName() . ' AS lib2');
+}
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -166,5 +175,11 @@ class Libretas extends \yii\db\ActiveRecord
         return $this->hasOne(TpoSer::className(), ['TS_COD' => 'LI_TPOSER']);
     }
 
- 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTIPO2()
+    {
+        return $this->hasOne(TpoSer::className(), ['TS_COD' => 'tipo2']);
+    }
 }

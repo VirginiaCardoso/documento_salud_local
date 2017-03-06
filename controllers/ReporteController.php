@@ -68,6 +68,7 @@ class ReporteController extends Controller
         $searchModel = new ResumenMensual();
        
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       // $dataProvider2 = $searchModel->search2(Yii::$app->request->queryParams);
         
         if  ($searchModel->load(Yii::$app->request->get())){
             $filtro = false;
@@ -79,6 +80,7 @@ class ReporteController extends Controller
         return $this->render('resumenmensual', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+         //   'dataProvider2' => $dataProvider2,
             'filtro' => $filtro,
         ]);
     }
