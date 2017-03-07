@@ -49,7 +49,7 @@ $dataProvider->sort = false;
             'LI_FECPED:date',
              
              [
-                'label' => 'Cantidad Convenio',
+                'label' => 'Cant. Convenio',
                 'value'=> function($model) {
                     
                         return $model->cant;
@@ -57,7 +57,7 @@ $dataProvider->sort = false;
                 },
             ],
             [
-                'label' => 'Recaudación Convenio',
+                'label' => 'Recaud. Convenio',
                 'value'=> function($model) {
                     
                         return $model->recau;
@@ -67,7 +67,7 @@ $dataProvider->sort = false;
           
     
              [
-                'label' => 'Cantidad Particular',
+                'label' => 'Cant. Particular',
                 'value'=> function($model) {
                     
                         return $model->cant2;
@@ -75,7 +75,7 @@ $dataProvider->sort = false;
                 },
             ],
             [
-                'label' => 'Recaudación Particular',
+                'label' => 'Recaud. Particular',
                 'value'=> function($model) {
                     
                         return $model->recau2;
@@ -98,3 +98,27 @@ $dataProvider->sort = false;
 <?php Pjax::end();  
 ?>
 </div>
+<table class="pie" style="width:100%" border="0" cellspacing="0">
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td align="right"  >
+            <?php
+
+                $sep = explode("/",$searchModel->mes);
+                $anioval = $sep[0];
+                $mesval = $sep[1];
+                $resultados = $searchModel->calcularImportes($mesval, $anioval);
+                echo "<p style='font-size:12px;'>";
+                echo "Cantidad Convenio: <b>".$resultados['cantConv']."  </b><br>";
+                echo "Recaudación Convenio: <b>".$resultados['recauConv']." $ </b><br><br>";
+                echo "Cantidad Particular: <b>".$resultados['cantPart']."  </b><br>";
+                echo "Recaudación Particular: <b>".$resultados['recauPart']." $ </b><br><br>";
+                echo "<b>Recaudación Total: <b>".$resultados['recauTot']." $</b><br><br></p>";
+
+            ?>
+        </td>
+    </tr>
+</table>

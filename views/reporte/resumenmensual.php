@@ -42,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione un mes y año ...'],
                     'pluginOptions' => [
-                        'autoclose' => true,
+                        'autoclose' => false,
                         'startView'=>'months',
                         'minViewMode'=>'months',
-                       // 'format' => 'MM-yyyy',
+                        'format' => 'MM-yyyy',
                     ]
                 ]
             ])->label('Mes y Año');?> 
@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'LI_FECPED:date',
              
              [
-                'label' => 'Cantidad Convenio',
+                'label' => 'Cant. Convenio',
                 'value'=> function($model) {
                     
                         return $model->cant;
@@ -101,7 +101,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label' => 'Recaudación Convenio',
+                'label' => 'Recaud. Convenio',
                 'value'=> function($model) {
                     
                         return $model->recau;
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
           
     
              [
-                'label' => 'Cantidad Particular',
+                'label' => 'Cant. Particular',
                 'value'=> function($model) {
                     
                         return $model->cant2;
@@ -119,7 +119,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
             ],
             [
-                'label' => 'Recaudación Particular',
+                'label' => 'Recaud. Particular',
                 'value'=> function($model) {
                     
                         return $model->recau2;
@@ -143,24 +143,35 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="pull-right">
     <div class="row ">
-        <div >
+       
             <?php
-         /*   $subvalores = $searchModel->calcularImporte($searchModel->dia);
-            echo "<b>Sub- Totales </b><br>";
-            echo "Importes: ".$subvalores['subimporte']." $ <br>";
-            echo "Devoluciones: ".$subvalores['subdevol']." $ <br><br>";
-            
-            $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
-            echo "<b> Total: ".$resta." $<b><br><br>";*/
+
+            $sep = explode("-",$searchModel->mes);
+   
+            $anioval = $sep[0];
+             //  var_dump($anio)
+               $mesval = $sep[1];
+
+            $resultados = $searchModel->calcularImportes($mesval, $anioval);
+         /*   $subvalores = $searchModel->calcularImporte($searchModel->dia);*/
+           echo "Cantidad Convenio: ".$resultados['cantConv']."  <br>";
+            echo "Recaudación Convenio: ".$resultados['recauConv']." $ <br><br>";
+            echo "Cantidad Particular: ".$resultados['cantPart']."  <br>";
+            echo "Recaudación Particular: ".$resultados['recauPart']." $ <br><br>";
+            echo "<b>Recaudación Total: ".$resultados['recauTot']." $<b><br><br>";
 
             ?>
         </div>
-    </div>
+    
+<?php
 
+
+    $filename = $anioval."_".$mesval;
+?>
         <div class="row ">
             <!-- <div class="col-md-3"></div> -->
             <div class="col-md-10">
-                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportmensual', 'nombre' => $searchModel->mes], [
+                <?= Html::a('<i class="fa glyphicon glyphicon-print"></i> Imprimir' ,  ['reportmensual', 'nombre' => $filename], [
              'class'=>'btn btn-info',
              'id' => 'btn_imprimir_men',
              'target'=> '_blank',
@@ -169,7 +180,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
                
             </div>
-                        
+            
 
         </div>
     </div>

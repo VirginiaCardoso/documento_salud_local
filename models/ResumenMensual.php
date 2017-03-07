@@ -71,6 +71,34 @@ class ResumenMensual extends \yii\db\ActiveRecord
             'query' => $query,
         ]);
 
+       /*  $result= $query->asArray()->all();
+
+        $cantConv = 0;
+        $cantPart = 0;
+        $recauConv  = 0;
+        $recauPart  = 0;
+        $recauTot  = 0;
+
+        print_r($result);
+
+        foreach ($result as $fila){
+            $cantConv= $cantConv + $fila['cant'];
+            $cantPart= $cantPart + $fila['cant2'];
+            $recauConv= $recauConv + $fila['recau'];
+            $recauPart= $recauPart + $fila['recau2'];
+            $recauTot= $recauTot + $fila['totalrecau'];
+        }
+
+        return [
+            'dataProvider' => $dataProvider,
+            'cantConv' => $cantConv,
+            'cantPart' => $cantPart,
+            'recauConv' => $recauConv,
+            'recauPart' => $recauPart,
+            'recauTot' => $recauTot,
+
+        ];
+*/
 
         return $dataProvider;
     }
@@ -87,15 +115,17 @@ class ResumenMensual extends \yii\db\ActiveRecord
 
       //  $this->load($params);
         //$mes = date('Y', strtotime($mes));
-          var_dump("mes ".$mesval); 
-          var_dump("año ".$anioval); 
-          $mes = strtotime($anioval)."/".strtotime($mesval);
-           var_dump("mes unid".$mes); 
+        //  var_dump("mes ".$mesval); 
+      //    var_dump("año ".$anioval); 
+
+          $mes = $anioval."/".$mesval."/01";
+
+          // var_dump($mes); 
         $start_date= date('Y-m-01', strtotime($mes));
         //  var_dump($start_date);
             // Last day of the month.
         $end_date = date('Y-m-t', strtotime($mes));
-      //  var_dump($end_date);
+       // var_dump($end_date);
         $query = Libretas::find();
         $query->sql =  "SELECT libretas.LI_FECPED,libretas.LI_TPOSER,COUNT(*) as cant, sum(libretas.LI_IMPORTE) as recau, lib2.fecha2,lib2.tipo2, lib2.cant2, lib2.recau2, (sum(libretas.LI_IMPORTE)+lib2.recau2) as totalrecau  FROM libretas INNER JOIN ( SELECT LI_FECPED as fecha2 ,LI_TPOSER as tipo2 ,COUNT(*) as cant2, sum(LI_IMPORTE) as recau2 FROM libretas WHERE LI_TPOSER = 05 OR LI_TPOSER= 06 OR LI_TPOSER = 07 GROUP BY LI_FECPED) as lib2 ON libretas.LI_FECPED= lib2.fecha2 WHERE (libretas.LI_TPOSER = 01 OR libretas.LI_TPOSER = 02 OR libretas.LI_TPOSER = 03) AND (libretas.LI_FECPED BETWEEN '".$start_date."' AND '".$end_date."' )  GROUP BY libretas.LI_FECPED ";
   
@@ -114,26 +144,41 @@ class ResumenMensual extends \yii\db\ActiveRecord
  * @param  [type] $fecha [description]
  * @return [type]        [description]
  */
-    public function calcularImporte($fecha){
-        $result = Libretas::find()
-        ->select(['libretas.LI_NRO','libretas.LI_IMPORTE', 'devolu.DE_IMPORT'])
-
-                ->joinWith('devolu');
-        $result->andFilterWhere(['=', 'LI_FECPED',$fecha]);  
-
+    public function calcularImportes($mesval,$anioval){
+        
+       $mes = $anioval."/".$mesval."/01";
+       $start_date= date('Y-m-01', strtotime($mes));
+        
+       $end_date = date('Y-m-t', strtotime($mes));
+       
+       $result = Libretas::find();
+       $result->sql =  "SELECT libretas.LI_FECPED,libretas.LI_TPOSER,COUNT(*) as cant, sum(libretas.LI_IMPORTE) as recau, lib2.fecha2,lib2.tipo2, lib2.cant2, lib2.recau2, (sum(libretas.LI_IMPORTE)+lib2.recau2) as totalrecau  FROM libretas INNER JOIN ( SELECT LI_FECPED as fecha2 ,LI_TPOSER as tipo2 ,COUNT(*) as cant2, sum(LI_IMPORTE) as recau2 FROM libretas WHERE LI_TPOSER = 05 OR LI_TPOSER= 06 OR LI_TPOSER = 07 GROUP BY LI_FECPED) as lib2 ON libretas.LI_FECPED= lib2.fecha2 WHERE (libretas.LI_TPOSER = 01 OR libretas.LI_TPOSER = 02 OR libretas.LI_TPOSER = 03) AND (libretas.LI_FECPED BETWEEN '".$start_date."' AND '".$end_date."' )  GROUP BY libretas.LI_FECPED ";
+  
         $result= $result->asArray()->all();
 
-        $subimporte = 0;
-        $subdevol = 0;
+         $cantConv = 0;
+        $cantPart = 0;
+        $recauConv  = 0;
+        $recauPart  = 0;
+        $recauTot  = 0;
+
+      //  print_r($result);
 
         foreach ($result as $fila){
-            $subimporte= $subimporte + $fila['LI_IMPORTE'];
-            $subdevol= $subdevol + $fila['DE_IMPORT'];
+            $cantConv= $cantConv + $fila['cant'];
+            $cantPart= $cantPart + $fila['cant2'];
+            $recauConv= $recauConv + $fila['recau'];
+            $recauPart= $recauPart + $fila['recau2'];
+            $recauTot= $recauTot + $fila['totalrecau'];
         }
 
         return [
-            'subimporte' => $subimporte,
-            'subdevol' => $subdevol,
+            'cantConv' => $cantConv,
+            'cantPart' => $cantPart,
+            'recauConv' => $recauConv,
+            'recauPart' => $recauPart,
+            'recauTot' => $recauTot,
+
         ];
 
     }
@@ -148,32 +193,6 @@ class ResumenMensual extends \yii\db\ActiveRecord
             ];
     }
 
-
-    public function buscarFecha($fecha)
-    {
-        $query = Libretas::find()
-                ->joinWith('devolu');
-
-        // add conditions that should always apply here
-         
-      if (isset($fecha)) {
-            // $nvodia = \DateTime::createFromFormat('Y-m-d',  $this->dia);
-            // $fecha_inicio_format = $nueva_inicio->format('Y-m-d');  
-         //   $nvodia =  $nvodia->format('Y-m-d');      
-             $query->andFilterWhere(['=', 'LI_FECPED',$fecha]);
-         }
-
-        $query->orderBy([
-            'LI_NRO' => SORT_DESC
-        ]);
-
-       $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-
-        return $dataProvider;
-    }
     
 
       

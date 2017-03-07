@@ -128,11 +128,12 @@ $dataProvider->sort = false;
         <td align="right"  >
             <?php
             $subvalores = $searchModel->calcularImporte($searchModel->dia);
+            echo "<p style='font-size:12px;'>";
             echo "<b>Sub- Totales </b><br>";
-            echo "Importes: ".$subvalores['subimporte']." $ <br>";
-            echo "Devoluciones: ".$subvalores['subdevol']." $ <br><br>";
+            echo "Importes: <b>".$subvalores['subimporte']." $ </b><br>";
+            echo "Devoluciones: <b>".$subvalores['subdevol']." $ </b><br><br>";
             $resta = floatval($subvalores['subimporte'])- floatval($subvalores['subdevol']);
-            echo "<b> Total: ".$resta." $<b>";
+            echo "<b> Total: ".$resta." $</b></p>";
 
             ?>
         </td>

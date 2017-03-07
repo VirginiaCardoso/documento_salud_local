@@ -56,6 +56,7 @@ class ReporteController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'filtro' => $filtro,
+
         ]);
     }
 
@@ -67,8 +68,9 @@ class ReporteController extends Controller
     {
         $searchModel = new ResumenMensual();
        
+      //  $resultados = $searchModel->search(Yii::$app->request->queryParams);
+      //  $dataProvider = $resultados['dataProvider'];
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       // $dataProvider2 = $searchModel->search2(Yii::$app->request->queryParams);
         
         if  ($searchModel->load(Yii::$app->request->get())){
             $filtro = false;
@@ -82,6 +84,12 @@ class ReporteController extends Controller
             'dataProvider' => $dataProvider,
          //   'dataProvider2' => $dataProvider2,
             'filtro' => $filtro,
+         /*   'cantConv' => $resultados['cantConv'],
+            'cantPart' => $resultados['cantPart'],
+            'recauConv' => $resultados['recauConv'],
+            'recauPart' => $resultados['recauPart'],
+            'recauTot' => $resultados['recauTot'],*/
+
         ]);
     }
 
@@ -206,7 +214,7 @@ class ReporteController extends Controller
           'destination' => Pdf::DEST_FILE, 
           'content' => $content,
           'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-          'cssInline' => ' .kv-grid-table tr th {font-size:11px}, .kv-grid-table tr td {font-size:12px}', 
+          'cssInline' => ' .kv-grid-table tr th {font-size:10px}, .kv-grid-table tr td {font-size:11px}', 
           'options' => ['title' => 'Documento Salud Laboral'],
       ]);//.kv-grid-table  thead tr th
       
@@ -214,13 +222,23 @@ class ReporteController extends Controller
 
     }
 
-    public function actionReportreportemensual($nombre) {
+    public function actionReportmensual($nombre) {
       //  $time = strtotime($nombre);
 
      //  $nomb = date('Y-m-d',$time);
+    //  var_dump("nomb ".$nombre);
+     // $sep = explode("-",$nombre);
+   
+ //  $anioval = $sep[0];
+   //var_dump($anio)
+ //  $mesval = $sep[1];
+
     $filename = $nombre.".pdf";
+
   //  $filepath = Yii::$app->params['local_path']['path_documento_salud']
     $filepath = Yii::$app->params['path_documento_salud'].'/resumen_mensual/'.$filename;
+
+    var_dump($filename);
       if(file_exists($filepath))
       {
           // Set up PDF headers
@@ -268,10 +286,10 @@ class ReporteController extends Controller
       //----------------------------------------------------
       $searchModel = new ResumenMensual();
       //var_dump($nomb);
-      $nomb = $anio."/".$mes;
+      $nomb = $anio."_".$mes;
      // $time = strtotime($nomb);
       
-       $searchModel->mes = $nomb;//date('Y-m-d',$time);
+       $searchModel->mes = $anio."/".$mes."/01";//date('Y-m-d',$time);
        $dataProvider = $searchModel->buscarMes($mes,$anio);
 
         $content =  $this->renderPartial('resumenmensualimprimir', [
@@ -296,7 +314,7 @@ class ReporteController extends Controller
           'destination' => Pdf::DEST_FILE, 
           'content' => $content,
           'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-          'cssInline' => ' .kv-grid-table tr th {font-size:11px}, .kv-grid-table tr td {font-size:12px}', 
+          'cssInline' => ' .kv-grid-table tr th {font-size:10px}, .kv-grid-table tr td {font-size:11px}', 
           'options' => ['title' => 'Documento Salud Laboral'],
       ]);//.kv-grid-table  thead tr th
       
