@@ -17,7 +17,7 @@ use kartik\datecontrol\DateControl;
             'type'=>DateControl::FORMAT_DATE,
 
             'ajaxConversion'=>false,
-            'options' => [
+            'widgetOptions' => [
                 'removeButton' => false,
                 'pluginOptions' => [
                     'autoclose' => true

@@ -71,7 +71,7 @@ Pjax::begin();
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
                 'displayFormat' => 'dd/MM/yyyy',
-                'options' => [
+                'widgetOptions' => [
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione una fecha ...'],
                     'pluginOptions' => [

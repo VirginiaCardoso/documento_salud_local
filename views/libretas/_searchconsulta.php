@@ -35,7 +35,7 @@ LibretasAsset::register($this);
             <?= $form->field($model, 'LI_FECPED',['horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-4']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
-                'options' => [
+                'widgetOptions' => [
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione una fecha ...'],
                     'pluginOptions' => [

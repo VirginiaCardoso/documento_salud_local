@@ -35,17 +35,19 @@ $this->params['breadcrumbs'][] = $this->title;
 <!-- 'addAriaAttributes' => false, -->
                     <?= $form->field($searchModel, 'mes',[ 'horizontalCssClasses' => ['label' => 'col-md-4', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
-                'ajaxConversion'=>false,
+                'ajaxConversion'=>true,
+               // 'autoWidget' => false,
                 'displayFormat' => 'MM/yyyy',
-                'options' => [
+                'saveFormat' => 'yyyy-MM',
+                'widgetOptions' => [
 
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione un mes y año ...'],
                     'pluginOptions' => [
-                        'autoclose' => false,
+                        'autoclose' => true,
                         'startView'=>'months',
                         'minViewMode'=>'months',
-                        'format' => 'MM-yyyy',
+                       // 'format' => 'MM-yyyy',
                     ]
                 ]
             ])->label('Mes y Año');?> 

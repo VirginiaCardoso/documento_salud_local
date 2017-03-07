@@ -37,8 +37,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= $form->field($searchModel, 'dia',[ 'horizontalCssClasses' => ['label' => 'col-md-2', 'wrapper' => 'col-md-6']])->widget(DateControl::classname(), [
                 'type'=>DateControl::FORMAT_DATE,
                 'ajaxConversion'=>false,
+                // 'autoWidget' => false,
                 'displayFormat' => 'dd/MM/yyyy',
-                'options' => [
+                'widgetOptions' => [
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione una fecha ...'],
                     'pluginOptions' => [
