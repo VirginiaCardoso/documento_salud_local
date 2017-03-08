@@ -94,8 +94,10 @@ class ResumenRecaudacion extends \yii\db\ActiveRecord
         /*
         SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE libretas.LI_TPOSER = 03  AND (libretas.LI_FECPED BETWEEN '2017-01-01' AND '2017-02-25' )AND libretas.LI_ANULADA=1
          */
+        $des =   date('Y-m-d', strtotime($this->desde));
+        $has =   date('Y-m-d', strtotime($this->hasta));
         $query3 = Libretas::find();
-        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 05 OR libretas.LI_TPOSER = 01)  AND (libretas.LI_FECPED BETWEEN '".$this->desde."' AND '".$this->hasta."' ) AND libretas.LI_ANULADA=1"; 
+        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 05 OR libretas.LI_TPOSER = 01)  AND (libretas.LI_FECPED BETWEEN '".$des."' AND '".$has."' ) AND libretas.LI_ANULADA=1"; 
 
         $result3= $query3->asArray()->all();
 
@@ -119,8 +121,10 @@ class ResumenRecaudacion extends \yii\db\ActiveRecord
         /*
         SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE libretas.LI_TPOSER = 03  AND (libretas.LI_FECPED BETWEEN '2017-01-01' AND '2017-02-25' )AND libretas.LI_ANULADA=1
          */
+        $des =   date('Y-m-d', strtotime($this->desde));
+        $has =   date('Y-m-d', strtotime($this->hasta));
         $query3 = Libretas::find();
-        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 06 OR libretas.LI_TPOSER = 02)  AND (libretas.LI_FECPED BETWEEN '".$this->desde."' AND '".$this->hasta."' ) AND libretas.LI_ANULADA=1"; 
+        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 06 OR libretas.LI_TPOSER = 02)  AND (libretas.LI_FECPED BETWEEN '".$des."' AND '".$has."' ) AND libretas.LI_ANULADA=1"; 
 
         $result3= $query3->asArray()->all();
 
@@ -145,8 +149,10 @@ class ResumenRecaudacion extends \yii\db\ActiveRecord
         /*
         SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE libretas.LI_TPOSER = 03  AND (libretas.LI_FECPED BETWEEN '2017-01-01' AND '2017-02-25' )AND libretas.LI_ANULADA=1
          */
+        $des =   date('Y-m-d', strtotime($this->desde));
+        $has =   date('Y-m-d', strtotime($this->hasta));
         $query3 = Libretas::find();
-        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 07 OR libretas.LI_TPOSER = 03)  AND (libretas.LI_FECPED BETWEEN '".$this->desde."' AND '".$this->hasta."' ) AND libretas.LI_ANULADA=1"; 
+        $query3->sql =  "SELECT COUNT(*) as cantanul, sum(libretas.LI_IMPORTE) as recauanul  FROM libretas WHERE (libretas.LI_TPOSER = 07 OR libretas.LI_TPOSER = 03)  AND (libretas.LI_FECPED BETWEEN '".$des."' AND '".$has."' ) AND libretas.LI_ANULADA=1"; 
 
         $result3= $query3->asArray()->all();
 
