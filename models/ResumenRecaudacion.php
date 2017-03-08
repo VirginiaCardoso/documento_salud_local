@@ -70,7 +70,7 @@ class ResumenRecaudacion extends \yii\db\ActiveRecord
 
         /*SELECT sum(devolu.DE_IMPORT) as dev FROM devolu INNER JOIN libretas ON libretas.LI_NRO = devolu.DE_NROTRA WHERE libretas.LI_TPOSER = 05 AND (libretas.LI_FECPED BETWEEN '2017-01-01' AND '2017-02-25' )*/
         $query2 = Devoluciones::find();
-        $query2->sql =  "SELECT sum(devolu.DE_IMPORT) as dev FROM devolu INNER JOIN libretas ON libretas.LI_NRO = devolu.DE_NROTRA WHERE libretas.LI_TPOSER = ".$tposerv."  AND (libretas.LI_FECPED BETWEEN '".$this->desde."' AND '".$this->hasta."' )AND libretas.LI_ANULADA=0"; 
+        $query2->sql =  "SELECT sum(devolu.DE_IMPORT) as dev FROM devolu INNER JOIN libretas ON libretas.LI_NRO = devolu.DE_NROTRA WHERE libretas.LI_TPOSER = ".$tposerv."  AND (libretas.LI_FECPED BETWEEN '".$des."' AND '".$has."' )AND libretas.LI_ANULADA=0"; 
 
         $result2= $query2->asArray()->all();
 
