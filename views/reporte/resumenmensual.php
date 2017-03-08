@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                // 'autoWidget' => false,
                 'displayFormat' => 'MM/yyyy',
                 'saveFormat' => 'yyyy-MM',
+                'disabled' => !$filtro,
                 'widgetOptions' => [
 
                     'removeButton' => false,

@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'ajaxConversion'=>false,
                 // 'autoWidget' => false,
                 'displayFormat' => 'dd/MM/yyyy',
+                'disabled' => !$filtro,
                 'widgetOptions' => [
                     'removeButton' => false,
                     'options' => ['placeholder' => 'Seleccione una fecha ...'],

@@ -5,7 +5,7 @@ namespace documento_salud\controllers;
 use Yii;
 use documento_salud\models\CajaDiariaFiltro;
 use documento_salud\models\ResumenMensual;
-
+use documento_salud\models\ResumenRecaudacion;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -99,22 +99,46 @@ class ReporteController extends Controller
      */
     public function actionResumenrecaudacion()
     {
-        $searchModel = new CajaDiariaFiltro();
+        $searchModel = new ResumenRecaudacion();
        
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+       // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        $searchModel->desde =date ( 'd-m-Y' , strtotime ( '-1 month' , strtotime ( date('d-m-Y') ) ) );//'2016-08-11';
+        $searchModel->hasta = date('d-m-Y');// '2016-08-24';
+
         
         if  ($searchModel->load(Yii::$app->request->get())){
             $filtro = false;
         }else{
             $filtro = true;
         }
-      
+        
 
-        return $this->render('cajadiaria', [
+        $nuevas_part = $searchModel->calcularValores(05);
+        $nuevas_conv = $searchModel->calcularValores(01);
+        $nuevas_anul = $searchModel->calcularAnuladasNuevas();
+        $renov_part = $searchModel->calcularValores(06);
+        $renov_conv = $searchModel->calcularValores(02);
+        $renov_anul = $searchModel->calcularAnuladasRenov();  
+        $vencidas_part = $searchModel->calcularValores(07);
+        $vencidas_conv = $searchModel->calcularValores(03);
+        $vencidas_anul = $searchModel->calcularAnuladasVencidas();       
+
+        return $this->render('resumenrecaudacion', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
             'filtro' => $filtro,
+            'nuevas_part' => $nuevas_part,
+            'nuevas_conv' => $nuevas_conv,
+            'nuevas_anul'=> $nuevas_anul,
+            'renov_part' => $renov_part,
+            'renov_conv' => $renov_conv,
+            'renov_anul'=> $renov_anul,
+            'vencidas_part' => $vencidas_part,
+            'vencidas_conv' => $vencidas_conv,
+            'vencidas_anul'=> $vencidas_anul,
+
         ]);
+
     }
 
     
@@ -223,16 +247,7 @@ class ReporteController extends Controller
     }
 
     public function actionReportmensual($nombre) {
-      //  $time = strtotime($nombre);
-
-     //  $nomb = date('Y-m-d',$time);
-    //  var_dump("nomb ".$nombre);
-     // $sep = explode("-",$nombre);
-   
- //  $anioval = $sep[0];
-   //var_dump($anio)
- //  $mesval = $sep[1];
-
+     
     $filename = $nombre.".pdf";
 
   //  $filepath = Yii::$app->params['local_path']['path_documento_salud']
@@ -315,6 +330,121 @@ class ReporteController extends Controller
           'content' => $content,
           'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
           'cssInline' => ' .kv-grid-table tr th {font-size:10px}, .kv-grid-table tr td {font-size:11px}', 
+          'options' => ['title' => 'Documento Salud Laboral'],
+      ]);//.kv-grid-table  thead tr th
+      
+     return $pdf->render();
+
+    }
+
+    public function actionReportrecaudacion($nombre) {
+     
+    $filename = $nombre.".pdf";
+
+  //  $filepath = Yii::$app->params['local_path']['path_documento_salud']
+    $filepath = Yii::$app->params['path_documento_salud'].'/resumen_recaudacion/'.$filename;
+
+  //  var_dump($filename);
+      if(file_exists($filepath))
+      {
+          // Set up PDF headers
+          header('Content-type: application/pdf');
+          header('Content-Disposition: inline; filename="' . $filename . '"');
+          header('Content-Transfer-Encoding: binary');
+          header('Content-Length: ' . filesize($filepath));
+          header('Accept-Ranges: bytes');
+
+          // Render the file
+         readfile($filepath);
+      }
+      else
+      {
+         // PDF doesn't exist so throw an error or something
+        print_r("No existe el archivo PDF.");
+      }
+    }
+
+
+    public function actionImprimirreporterecaudacion($desde,$hasta) {
+
+      $connection = \Yii::$app->db;
+        $transaction = $connection->beginTransaction();
+        
+        try {
+
+          $this->generarPdfReporteRecaudacion($desde,$hasta);  
+          $transaction->commit();
+          
+          return \yii\helpers\Json::encode( $model->errors );
+
+        }
+        catch (\Exception $e) {
+            $transaction->rollBack();
+            Yii::$app->getSession()->setFlash('error', $e->getMessage());
+                    
+            return \yii\helpers\Json::encode( $e->getMessage());
+        }
+      
+    }
+
+     private function generarPdfReporteRecaudacion($desde,$hasta){
+      header('Content-Type: application/pdf');
+      //----------------------------------------------------
+     
+      //var_dump($nomb);
+      $nomb = $desde."_".$hasta;
+     // $time = strtotime($nomb);
+      
+        $searchModel = new ResumenRecaudacion();
+       
+        $searchModel->desde =$desde;//'2016-08-11';
+        $searchModel->hasta = $hasta;// '2016-08-24';
+      
+        $nuevas_part = $searchModel->calcularValores(05);
+        $nuevas_conv = $searchModel->calcularValores(01);
+        $nuevas_anul = $searchModel->calcularAnuladasNuevas();
+        $renov_part = $searchModel->calcularValores(06);
+        $renov_conv = $searchModel->calcularValores(02);
+        $renov_anul = $searchModel->calcularAnuladasRenov();  
+        $vencidas_part = $searchModel->calcularValores(07);
+        $vencidas_conv = $searchModel->calcularValores(03);
+        $vencidas_anul = $searchModel->calcularAnuladasVencidas();       
+ 
+         $content =  $this->renderPartial('resumenrecaudacionimprimir', [
+            'searchModel' => $searchModel,
+            'nuevas_part' => $nuevas_part,
+            'nuevas_conv' => $nuevas_conv,
+            'nuevas_anul'=> $nuevas_anul,
+            'renov_part' => $renov_part,
+            'renov_conv' => $renov_conv,
+            'renov_anul'=> $renov_anul,
+            'vencidas_part' => $vencidas_part,
+            'vencidas_conv' => $vencidas_conv,
+            'vencidas_anul'=> $vencidas_anul,
+
+        ]);
+
+    $filename = $nomb.".pdf";
+   
+    $filepath = Yii::$app->params['path_documento_salud'].'/resumen_recaudacion/';
+
+      if (!file_exists($filepath)) {
+          mkdir($filepath, 0777, true);
+      }
+
+      $nombre = $filepath."/".$filename;
+
+      $pdf = new Pdf([
+          'mode' => Pdf::MODE_UTF8,
+          'format' => Pdf::FORMAT_A4, 
+          'orientation' => Pdf::ORIENT_PORTRAIT, 
+          'filename' => $nombre,
+          'destination' => Pdf::DEST_FILE, 
+          'content' => $content,
+          'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+          'cssInline' => ' .kv-grid-table tr th {font-size:10px}, .kv-grid-table tr td {font-size:11px}, .table-borde2 tr td {
+    border: 0px  #f9f9f9;
+}', 
           'options' => ['title' => 'Documento Salud Laboral'],
       ]);//.kv-grid-table  thead tr th
       
