@@ -133,7 +133,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $nuevas_part['recau']+$nuevas_conv['recau']; ?> </b>
+                                <b> $ <?=  $nuevas_part['recau']+$nuevas_conv['recau']-$nuevas_part['dev']-$nuevas_conv['dev']; ?> </b>
                             </td>
                         </tr>
                         <tr>
@@ -231,7 +231,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $renov_part['recau']+$renov_conv['recau']; ?> </b>
+                                <b> $ <?= $renov_part['recau']+$renov_conv['recau']-$renov_part['dev']-$renov_conv['dev']; ?> </b>
                             </td>
                         </tr>
                         <tr>
@@ -329,7 +329,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $vencidas_part['recau']+$vencidas_conv['recau']; ?> </b>
+                                <b> $ <?= $vencidas_part['recau']+$vencidas_conv['recau']-$vencidas_part['dev']-$vencidas_conv['dev']; ?> </b>
                             </td>
                         </tr>
                         <tr>
@@ -365,7 +365,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $nuevas_part['recau']+$renov_part['recau']+$vencidas_part['recau']; ?> </b>
+                                <b> $ <?= $nuevas_part['recau']+$renov_part['recau']+$vencidas_part['recau']-$nuevas_part['dev']-$renov_part['dev']-$vencidas_part['dev'];  ?> </b>
                             </td>
                         </tr>
                         <tr>
@@ -384,7 +384,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $nuevas_conv['recau']+$renov_conv['recau']+$vencidas_conv['recau']; ?> </b>
+                                <b> $ <?= $nuevas_conv['recau']+$renov_conv['recau']+$vencidas_conv['recau']-$nuevas_conv['dev']-$renov_conv['dev']-$vencidas_conv['dev'];  ?> </b>
                             </td>
                         </tr>
                         <tr>
@@ -422,7 +422,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <table style="width:100%" border="0"  class=" table-borde2 ">
                         <tr>
                             <td>
-                                <b> $ <?= $nuevas_part['recau']+$renov_part['recau']+$vencidas_part['recau']+$nuevas_conv['recau']+$renov_conv['recau']+$vencidas_conv['recau']; ?> </b>
+                                <b> $ <?= $nuevas_part['recau']+$renov_part['recau']+$vencidas_part['recau']+$nuevas_conv['recau']+$renov_conv['recau']+$vencidas_conv['recau']-$nuevas_part['dev']-$renov_part['dev']-$vencidas_part['dev']-$nuevas_conv['dev']-$renov_conv['dev']-$vencidas_conv['dev']; ?> </b>
                             </td>
                         </tr>
                         <tr>
