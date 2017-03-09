@@ -1,9 +1,9 @@
 <?php
-use smu\models\GrupoIntranet;
-use smu\models\PermisoIntranet;
-use smu\models\PermisoPorGrupo;
-use smu\models\AmpliacionPermisoIntranet;
-use smu\models\RestriccionPermisoIntranet;
+use documento_salud\models\GrupoIntranet;
+use documento_salud\models\PermisoIntranet;
+use documento_salud\models\PermisoPorGrupo;
+use documento_salud\models\AmpliacionPermisoIntranet;
+use documento_salud\models\RestriccionPermisoIntranet;
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -11,10 +11,10 @@ use yii\widgets\Pjax;
 use kartik\dialog\Dialog;
 use kartik\select2\Select2;
 
-use smu\assets\LargeLayoutAsset;
-use smu\assets\PermisosAsset;
+use documento_salud\assets\LargeLayoutAsset;
+use documento_salud\assets\PermisosAsset;
 
-LargeLayoutAsset::register($this);
+//LargeLayoutAsset::register($this);
 PermisosAsset::register($this);
 
 echo Dialog::widget();

@@ -19,7 +19,7 @@ use kartik\mpdf\Pdf;
  */
 class ReporteController extends Controller
 {
-      public $CodController="008";
+      public $CodController="016";
     /**
      * @inheritdoc
      */

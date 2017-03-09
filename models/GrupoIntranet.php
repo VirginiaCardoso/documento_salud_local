@@ -29,6 +29,12 @@ class GrupoIntranet extends \yii\db\ActiveRecord
         return Yii::$app->get('dbdocsl');
     }
 
+     
+    public static function databaseName()
+    {
+        return 'docsl';
+    }
+
     /**
      * @inheritdoc
      */

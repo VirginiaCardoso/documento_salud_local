@@ -15,6 +15,7 @@ use yii\filters\VerbFilter;
  */
 class DevolucionesController extends Controller
 {
+  public $CodController = '004'; 
     /**
      * @inheritdoc
      */

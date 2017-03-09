@@ -1,0 +1,14 @@
+.wrap>.container {
+	width: 100%;
+	min-height: 100%;
+}
+
+.tbl-reportes > thead > tr > th,
+.tbl-reportes > tbody > tr > th, 
+.tbl-reportes > tfoot > tr > th, 
+.tbl-reportes > thead > tr > td, 
+.tbl-reportes > tbody > tr > td, 
+.tbl-reportes > tfoot > tr > td {
+    padding: 0 3px !important;
+    font-size: 12px;
+}

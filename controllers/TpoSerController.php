@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class TpoSerController extends Controller
 {
+    public $CodController = '017'; 
     /**
      * @inheritdoc
      */

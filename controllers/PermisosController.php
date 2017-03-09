@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
 
 class PermisosController extends Controller
 {
-    public $CodController = '200';
+    public $CodController = '014';
     /**
      * @inheritdoc
      */
@@ -71,7 +71,7 @@ class PermisosController extends Controller
             $insertar = array_diff($permisosNuevos, $permisosAnteriores);
             $eliminar = array_diff($permisosAnteriores, $permisosNuevos);
 
-            $dbTrans = Yii::$app->db->beginTransaction();
+            $dbTrans = \Yii::$app->dbdocsl->beginTransaction();
             $validateOK = true;
             // Inserción de permisos
             foreach ($insertar as $privilegio) {

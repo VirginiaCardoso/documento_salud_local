@@ -15,6 +15,7 @@ use yii\helpers\Json;
  */
 class Pato_opcController extends Controller
 {
+    public $CodController = '013'; 
     /**
      * @inheritdoc
      */

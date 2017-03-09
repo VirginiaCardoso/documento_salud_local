@@ -26,6 +26,7 @@ use dosamigos\qrcode\QrCode;
  */
 class DoclabController extends Controller
 {
+  public $CodController = '007'; 
     /**
      * @inheritdoc
      */

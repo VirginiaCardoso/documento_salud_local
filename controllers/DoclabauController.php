@@ -18,6 +18,7 @@ use yii\filters\VerbFilter;
  */
 class DoclabauController extends Controller
 {
+    public $CodController = '006'; 
     /**
      * @inheritdoc
      */

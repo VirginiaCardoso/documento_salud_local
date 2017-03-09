@@ -18,7 +18,7 @@ use yii\filters\VerbFilter;
 class PoolLabController extends Controller
 {
 
-
+    public $CodController = '015'; 
      const SIN_EXTRACC = '#DB5653'; //color gris para los anulados
      const CON_EXTRACC = '#3C9DFF'; //color gris para los anulados
      

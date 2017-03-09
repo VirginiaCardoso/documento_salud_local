@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class DiasNoLaborablesController extends Controller
 {
+    public $CodController = '005'; 
     /**
      * @inheritdoc
      */

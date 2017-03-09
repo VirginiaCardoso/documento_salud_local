@@ -16,6 +16,7 @@ use yii\helpers\Json;
  */
 class Ocupa_2Controller extends Controller
 {
+    public $CodController = '010'; 
     /**
      * @inheritdoc
      */

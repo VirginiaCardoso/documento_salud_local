@@ -14,6 +14,7 @@ use yii\filters\VerbFilter;
  */
 class ConveniosController extends Controller
 {
+    public $CodController = '003'; 
     /**
      * @inheritdoc
      */

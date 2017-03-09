@@ -23,6 +23,7 @@ use yii\helpers\Json;
  */
 class LibretasController extends Controller
 {
+    public $CodController = '009'; 
 
     const ANULADOS = '#C0C0C0'; //color gris para los anulados
      

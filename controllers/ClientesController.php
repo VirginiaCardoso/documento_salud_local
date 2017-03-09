@@ -18,6 +18,8 @@ use yii\helpers\Json;
  */
 class ClientesController extends Controller
 {
+    public $CodController = '002'; 
+
     /**
      * @inheritdoc
      */

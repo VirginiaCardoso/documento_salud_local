@@ -15,7 +15,7 @@ use yii\filters\VerbFilter;
  */
 class GrupoIntranetController extends Controller
 {
-    public $CodController = '201';
+    public $CodController = '008';
     /**
      * @inheritdoc
      */
