@@ -104,7 +104,16 @@ if (Yii::$app->session->hasFlash('error')) {
             ],
             ['label' => 'Configuración',  'items' =>
                 [   
-                    ['label' => 'Usuarios', 'url' => '#'],
+                    ['label' => 'Usuarios', 'items' => [
+                    ['label' => 'Administración de Permisos', 'items' => [
+                        ['label' => 'Administrar Grupos', 'url' => ['/grupo-intranet/index']],
+                        ['label' => 'Permisos Grupos', 'url' => ['/permisos/permisos-grupos']],
+                        ['label' => 'Administrar Usuarios', 'url' => ['/permisos/administrar-usuarios']],
+                        ['label' => 'Restricciones', 'url' => '#'],
+                        ['label' => 'Permisos Extra', 'url' => '#'],
+                    ]],
+                    ['label' => 'Cambio de clave', 'url' => '#']
+                ]],
                     ['label' => 'Catálogos',   'items' =>
                         [
                             ['label' => 'Convenios', 'url' => ['/convenios/']],
