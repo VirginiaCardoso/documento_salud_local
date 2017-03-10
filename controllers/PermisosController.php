@@ -24,7 +24,7 @@ class PermisosController extends Controller
      */
     public function behaviors()
     {
-       /* return [
+        return [
             'access' => [
                 'class' => AccessControl::classname(),
                 'rules' => [
@@ -48,7 +48,8 @@ class PermisosController extends Controller
                     ]
                 ]
             ]
-        ];*/
+        ];/*
+        
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -56,7 +57,7 @@ class PermisosController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ];*/
     }
 
     public function actionPermisosGrupos()
