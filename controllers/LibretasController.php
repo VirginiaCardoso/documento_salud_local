@@ -14,7 +14,7 @@ use documento_salud\controllers\DiasNoLaborablesController;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-//use yii\filters\VerbFilter;
+use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\db\Query;
 use yii\helpers\Json;
@@ -35,15 +35,15 @@ class LibretasController extends Controller
      */
     public function behaviors()
     {
-        /*return [
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];*/
-         return [
+        ];
+        /* return [
             'access' => [
                 'class' => AccessControl::classname(),
                 'rules' => [
@@ -57,17 +57,10 @@ class LibretasController extends Controller
                                 return Yii::$app->user->identity->habilitado($action);
                             }
                     ],
-                    // Estos son todos las acciones secundarias
-                  /*  [
-                        // acciones via ajax
-                        'allow' => true,
-                        'roles' => ['@'],
-                        'actions' => [ 'get-grupo-usuario', 'get-permisos-por-grupo', 'get-permisos-no-asignados-por-grupo',
-                        ]
-                    ]*/
+                   
                 ]
             ]
-        ];
+        ];*/
     }
 
     /**
