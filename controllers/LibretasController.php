@@ -9,11 +9,13 @@ use documento_salud\models\Clientes;
 use documento_salud\models\ClientesSearch;
 use documento_salud\models\TpoSer;
 use documento_salud\models\PoolLab;
+
 use documento_salud\controllers\DiasNoLaborablesController;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+//use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 use yii\db\Query;
 use yii\helpers\Json;
 
@@ -33,13 +35,38 @@ class LibretasController extends Controller
      */
     public function behaviors()
     {
-        return [
+        /*return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
+        ];*/
+         return [
+            'access' => [
+                'class' => AccessControl::classname(),
+                'rules' => [
+                    [
+                        // acciones publicos para las cuales definimos permisos en las tablas
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'actions' => ['index', 'create', 'view', 'update', 'delete','estado','registrar-consulta-medica','consulta-medica','vista-anular'],
+                        'matchCallback' => 
+                            function ($rule, $action) {
+                                return Yii::$app->user->identity->habilitado($action);
+                            }
+                    ],
+                    // Estos son todos las acciones secundarias
+                  /*  [
+                        // acciones via ajax
+                        'allow' => true,
+                        'roles' => ['@'],
+                        'actions' => [ 'get-grupo-usuario', 'get-permisos-por-grupo', 'get-permisos-no-asignados-por-grupo',
+                        ]
+                    ]*/
+                ]
+            ]
         ];
     }
 
