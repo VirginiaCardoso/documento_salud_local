@@ -21,7 +21,7 @@ class GrupoIntranetController extends Controller
      */
     public function behaviors()
     {
-      /* return [
+       return [
             'access' => [
                 'class' => AccessControl::classname(),
                 'rules' => [
@@ -45,16 +45,16 @@ class GrupoIntranetController extends Controller
                     ]
                 ]
             ]
-        ];*/
+        ];
         
-        return [
+      /*  return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
             ],
-        ];
+        ];*/
     }
 
     /**
