@@ -87,6 +87,7 @@ class DoclabauSearch extends Doclabau
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['DO_VISITA' => SORT_DESC]],
         ]);
 
         $this->load($params);
@@ -103,9 +104,9 @@ class DoclabauSearch extends Doclabau
         ]);
 */
        // $query->andFilterWhere(['like', 'DO_CODLIB', $this->DO_CODLIB])
-        $query->andFilterWhere(['like', 'DO_CODCLI', $cliente]);
-          /*  ->andFilterWhere(['like', 'DO_PESO', $this->DO_PESO])
-            ->andFilterWhere(['like', 'DO_TENAR1', $this->DO_TENAR1])
+        $query->andFilterWhere(['like', 'DO_CODCLI', $cliente])
+            ->andWhere(['not', ['DO_VISITA' => null]]);
+         /*   ->andFilterWhere(['like', 'DO_TENAR1', $this->DO_TENAR1])
             ->andFilterWhere(['like', 'DO_TENAR2', $this->DO_TENAR2])
             ->andFilterWhere(['like', 'DO_COLEST', $this->DO_COLEST])
             ->andFilterWhere(['like', 'DO_GLUCO', $this->DO_GLUCO])
@@ -122,4 +123,16 @@ class DoclabauSearch extends Doclabau
         return $dataProvider;
    }
 
+    public function searchSincompletar($cliente)
+    {
+       $model = Doclabau::find()
+            ->where(['DO_CODCLI' => $cliente])
+                    ->andWhere(['DO_VISITA' => null]) 
+                    ->orderBy(['DO_CODLIB' => SORT_DESC])
+                    ->one();
+       return $model;
+
+                        
+
+    }
 }

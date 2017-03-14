@@ -755,7 +755,7 @@ class DoclabController extends Controller
 
       
       if (!$lib->save(false)){
-        Yii::$app->getSession()->setFlash('error', "Error al querer emitir Docuemnto y generar fecha de vencimiento del trámite");
+        Yii::$app->getSession()->setFlash('error', "Error al querer emitir Documento y generar fecha de vencimiento del trámite");
       }
       else { 
 
@@ -791,7 +791,9 @@ class DoclabController extends Controller
 
 
 public function actionQrcode($nrodoc) {
-   $filename = "virtual_".$codcli.".pdf";
+   $filename = "virtual_".$nrodoc.".pdf";
+    $lib = Libretas::findOne($nrodoc);
+      $codcli = $lib->LI_COCLI;
     $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
 
    // $link ='http://www.hmabb.gob.ar';

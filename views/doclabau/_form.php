@@ -38,7 +38,9 @@ DoclabauAsset::register($this);
                     </div>
         </div>
          <div class="col-md-2 pull-right"> 
-                <?= Html::a('Historial Visitas' , ['doclabau/index', 'codcli'=>$lib->LI_COCLI], ['class'=>'btn btn-info']);?>
+            <?php if($from==0) {
+                echo Html::a('Historial Visitas' , ['doclabau/index', 'codcli'=>$lib->LI_COCLI], ['class'=>'btn btn-info']);
+            } ?>
             </div>   
     </div>
     <br>

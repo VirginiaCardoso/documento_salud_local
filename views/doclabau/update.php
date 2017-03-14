@@ -5,10 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model documento_salud\models\Doclabau */
 
-$this->title = 'Update Doclabau: ' . $model->DO_CODLIB;
-$this->params['breadcrumbs'][] = ['label' => 'Doclabaus', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->DO_CODLIB, 'url' => ['view', 'id' => $model->DO_CODLIB]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Actualizar ';
+$this->params['breadcrumbs'][] = ['label' => 'Historial de visitas', 'url' => ['doclabau/index', 'codcli' => $model->DO_CODCLI]];
+$this->params['breadcrumbs'][] = 'Actualizar';
 ?>
 <div class="doclabau-update">
 
@@ -16,6 +15,11 @@ $this->params['breadcrumbs'][] = 'Update';
 
     <?= $this->render('_form', [
         'model' => $model,
+                'lib' => $lib,
+                'anterior' => $anterior,
+                'doc' => $doc,
+                'client' => $client,
+                'from' => 1,
     ]) ?>
 
 </div>

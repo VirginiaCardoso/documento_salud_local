@@ -42,12 +42,14 @@ class DoclabauController extends Controller
     {
         $searchModel = new DoclabauSearch();
         $dataProvider = $searchModel->searchHistorial(Yii::$app->request->queryParams, $codcli);
+        $ultima = $searchModel->searchSincompletar($codcli);
 
         $cli = Clientes::findOne($codcli);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'cli' => $cli,
+            'ultima' =>$ultima,
         ]);
     }
 
@@ -179,12 +181,34 @@ class DoclabauController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->DO_VISITA = date('Y-m-d');
+        $lib = Libretas::findOne($id);
+        $cocli = $lib->LI_COCLI;
+        $client = Clientes::findOne($cocli);
+        $codanterior = Doclabau::getLastDoclabau($cocli, $id);
+           if ($codanterior){
+            $anterior = Doclabau::findOne($codanterior);
+            $anterior->tension=$anterior->DO_TENAR1."/".$anterior->DO_TENAR2;
+           }
+           else {
+                $anterior = null;
+           }
+        $doc = Doclab::findOne($cocli);
+        if ($doc){
+            $model->talla = $doc->DO_TALLA;
+        }
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->DO_CODLIB]);
+            
+            return $this->redirect(['view', 'id' => $id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'lib' => $lib,
+                'anterior' => $anterior,
+                'doc' => $doc,
+                'client' => $client,
             ]);
         }
     }

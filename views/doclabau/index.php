@@ -17,6 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]);." (".$cli->CL_COD.")"  ?>
     <h3><?= $cli->CL_APENOM ?> </h3> 
     <br>
+    <?php 
+    //muestro el boton para nueva visita si es que ya se creo el nuevo doc lab 
+    if (isset($ultima)){ ?>
+        <p>
+        <?= Html::a('Nueva Visita' , ['doclabau/create', 'id'=>$ultima->DO_CODLIB], ['class'=>'btn btn-primary']);?>
+        </p>
+        <?php
+    }
+    ?>
+   
 <?php Pjax::begin(); ?>    <?= GridView::widget([
         'dataProvider' => $dataProvider,
        // 'filterModel' => $searchModel,
@@ -50,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
              [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => ' {view}',],
+                'template' => ' {view} {update}',],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>
