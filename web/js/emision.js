@@ -4,6 +4,7 @@ $(document).ready(function(){
   
 }); 
 
+
 function cargarEmision(e,datum) {
 	//$('#btGenerar').show();
 	// $('#resumen').show();
