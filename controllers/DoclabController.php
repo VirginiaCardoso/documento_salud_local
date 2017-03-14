@@ -790,8 +790,8 @@ class DoclabController extends Controller
     }
 
 
-public function actionQrcode($codcli) {
-   $filename = "reporte_".$codcli.".pdf";
+public function actionQrcode($nrodoc) {
+   $filename = "virtual_".$codcli.".pdf";
     $filepath = Yii::$app->params['path_clientes'].$codcli.'/reporte/'.$filename;
 
    // $link ='http://www.hmabb.gob.ar';

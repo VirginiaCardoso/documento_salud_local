@@ -32,7 +32,7 @@ function cargarEmision(e,datum) {
                document.getElementById("btGenerar").href =ref+'&nrodoc='+data['lib'].LI_NRO;
 
                cod = document.getElementById("codigoqr").src
-                document.getElementById("codigoqr").src =cod+'&codcli='+data['lib'].LI_COCLI;
+                document.getElementById("codigoqr").src =cod+'&nrodoc='+data['lib'].LI_NRO;
                	 alert(document.getElementById("codigoqr").src);
                 },
             error: function () {
