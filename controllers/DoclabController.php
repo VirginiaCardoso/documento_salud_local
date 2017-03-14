@@ -797,7 +797,7 @@ public function actionQrcode($codcli) {
    // $link ='http://www.hmabb.gob.ar';
   // $u = 'http://'.$link;
   //  $bookmark = new BookMark(['title' => 'Certificado Documento Salud Laboral', 'url' => $u]);
-   return QrCode::jpg($filepath);
+   return QrCode::png($filepath);
    // return QrCode::png($bookmark->url);
     // you could also use the following
     // return return QrCode::png($mailTo);

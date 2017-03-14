@@ -29,7 +29,10 @@ function cargarEmision(e,datum) {
 
                 ref = document.getElementById("btGenerar").href
                document.getElementById("btGenerar").href =ref+'&nrodoc='+data['lib'].LI_NRO;
-            //   	 alert(document.getElementById("pic").src);
+
+               cod = document.getElementById("codigoqr").src
+                document.getElementById("codigoqr").src =cod+'&codcli='+data['lib'].LI_COCLI;
+               	 alert(document.getElementById("codigoqr").src);
                 },
             error: function () {
                 
