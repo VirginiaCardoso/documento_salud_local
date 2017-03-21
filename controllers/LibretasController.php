@@ -502,13 +502,13 @@ class LibretasController extends Controller
         ]);
     }
 */
-    public function actionQrcode() {
+ /*   public function actionQrcode() {
     $vcard = new BookMark(['title' => 'nombre', 'url'  => 'http://localhost/www/intranet/modulos/documento_salud/web/index.php?r=libretas%2Fview&id=000000000252']);
     return QrCode::png($vcard->getText());
     // you could also use the following
     // return return QrCode::png($mailTo);
 }
-
+*/
 
 public function actionRegistraratenc() {
       

@@ -181,7 +181,7 @@ class DoclabauController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $model->DO_VISITA = date('Y-m-d');
+        $model->DO_VISITA = date('Y-m-d');//actualizo la fecha de la visita si es que se realiza una modificacion
         $lib = Libretas::findOne($id);
         $cocli = $lib->LI_COCLI;
         $client = Clientes::findOne($cocli);
