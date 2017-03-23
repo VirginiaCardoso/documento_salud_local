@@ -63,7 +63,7 @@ if (Yii::$app->session->hasFlash('error')) {
              Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
                     'Cerrar Sesión (' . Yii::$app->user->identity->LE_APENOM . ')',
-                    ['class' => 'btn btn-link']
+                    ['class' => 'btn btn-link menu-login','style'=>'float:right;color:white;']
                 )
                 . Html::endForm();
         }
